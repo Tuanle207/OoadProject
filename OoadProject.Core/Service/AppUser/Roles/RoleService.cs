@@ -3,7 +3,7 @@ using OoadProject.Data.Repository;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OoadProject.ViewModel.AppUser.Roles
+namespace OoadProject.Core.Service.AppUser.Roles
 {
     public class RoleService
     {

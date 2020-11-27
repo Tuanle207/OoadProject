@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OoadProject", "OoadProject\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OoadProject.Data", "OoadProject.Data\OoadProject.Data.csproj", "{48A0B0D5-D932-4884-A12A-A3DEF56D0D90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OoadProject.ViewModel", "OoadProject.ViewModel\OoadProject.ViewModel.csproj", "{202F787A-00A2-4A57-A463-13146F267AFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OoadProject.Core", "OoadProject.Core\OoadProject.Core.csproj", "{202F787A-00A2-4A57-A463-13146F267AFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OoadProject.Core.Test", "OoadProject.Core.Test\OoadProject.Core.Test.csproj", "{910DA87F-54BC-4C51-B87F-49BAC8A1D45F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,11 +29,15 @@ Global
 		{202F787A-00A2-4A57-A463-13146F267AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{202F787A-00A2-4A57-A463-13146F267AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{202F787A-00A2-4A57-A463-13146F267AFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{910DA87F-54BC-4C51-B87F-49BAC8A1D45F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{910DA87F-54BC-4C51-B87F-49BAC8A1D45F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{910DA87F-54BC-4C51-B87F-49BAC8A1D45F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{910DA87F-54BC-4C51-B87F-49BAC8A1D45F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C1AF9538-586F-48A8-81E7-E766F62ABB92}
+		SolutionGuid = {4EC15A5D-D7FB-4124-B7A3-A0E384C3E537}
 	EndGlobalSection
 EndGlobal
