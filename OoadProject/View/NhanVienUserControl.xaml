@@ -60,13 +60,13 @@
         <ListView Grid.Row="1" Grid.ColumnSpan="4" Margin="33,10.4,27,49.6" Background="#FFD43434">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="STT" Width="*"></GridViewColumn>
-                    <GridViewColumn Header="Tên nhân viên" Width="3*"></GridViewColumn>
-                    <GridViewColumn Header="Chức vụ" Width="2*"></GridViewColumn>
-                    <GridViewColumn Header="Ngày vào làm" Width="2*"></GridViewColumn>
-                    <GridViewColumn Header="Số điện thoại" Width="2*"></GridViewColumn>
-                    <GridViewColumn Header="Ngày sinh" Width="2*"></GridViewColumn>
-                    <GridViewColumn Header="Địa chỉ" Width="3*"></GridViewColumn>
+                    <GridViewColumn Header="STT" Width="74"></GridViewColumn>
+                    <GridViewColumn Header="Tên nhân viên" Width="222"></GridViewColumn>
+                    <GridViewColumn Header="Chức vụ" Width="148"></GridViewColumn>
+                    <GridViewColumn Header="Ngày vào làm" Width="148"></GridViewColumn>
+                    <GridViewColumn Header="Số điện thoại" Width="148"></GridViewColumn>
+                    <GridViewColumn Header="Ngày sinh" Width="148"></GridViewColumn>
+                    <GridViewColumn Header="Địa chỉ" Width="222"></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
