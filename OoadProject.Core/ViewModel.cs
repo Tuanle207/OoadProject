@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace OoadProject.ViewModel
+namespace OoadProject.Core
 {
     public class ViewModel
     {

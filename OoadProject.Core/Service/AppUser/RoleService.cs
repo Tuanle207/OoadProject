@@ -18,6 +18,7 @@ namespace OoadProject.Core.Service.AppUser.Roles
         {
             return _roleRepository.Create(role);
         }
+
         public IEnumerable<Role> GetAllRoles()
         {
             return _roleRepository.GetAll();
