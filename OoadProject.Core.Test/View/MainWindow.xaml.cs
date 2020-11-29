@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace OoadProject.View
+namespace OoadProject.Core.Test.View
 {
     /// <summary>
-    /// Interaction logic for NhanVienUserControl.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class NhanVienUserControl : UserControl
+    public partial class MainWindow : Window
     {
-        public NhanVienUserControl()
+        public MainWindow()
         {
             InitializeComponent();
         }

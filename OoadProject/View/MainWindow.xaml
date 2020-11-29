@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OoadProject.View"
         mc:Ignorable="d"
-        DataContext="{StaticResource RoleViewModel}"
         Title="MainWindow" Height="700" Width="1200">
+<<<<<<< HEAD
     <Grid>
         <ListView ItemsSource="{Binding Roles}" HorizontalAlignment="Left" Height="185" Margin="210,65,0,0" VerticalAlignment="Top" Width="335">
             <ListView.View>
@@ -24,4 +24,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="215,319,0,0" TextWrapping="Wrap" Text="Description" VerticalAlignment="Top"/>
         
     </Grid>
+=======
+    
+>>>>>>> befdb4c53689df635490f85e6bb976d4a8465949
 </Window>
