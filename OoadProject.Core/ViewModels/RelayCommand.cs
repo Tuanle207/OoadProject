@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace OoadProject.Core
+namespace OoadProject.Core.ViewModels
 {
     public class RelayCommand<T> : ICommand
     {

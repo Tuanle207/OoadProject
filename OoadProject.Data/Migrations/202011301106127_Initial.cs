@@ -38,10 +38,61 @@
                         InvoiceId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Products", t => t.ProductId, cascadeDelete: true)
                 .ForeignKey("dbo.Invoices", t => t.InvoiceId, cascadeDelete: true)
+                .ForeignKey("dbo.Products", t => t.ProductId, cascadeDelete: true)
                 .Index(t => t.ProductId)
                 .Index(t => t.InvoiceId);
+            
+            CreateTable(
+                "dbo.Invoices",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        CustomerId = c.Int(nullable: false),
+                        UserId = c.Int(nullable: false),
+                        CreationTime = c.DateTime(nullable: false),
+                        Total = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
+                .Index(t => t.CustomerId)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.Users",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        RoleId = c.Int(nullable: false),
+                        Dob = c.DateTime(nullable: false),
+                        PhoneNumber = c.String(),
+                        Address = c.String(),
+                        CreationTime = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Roles", t => t.RoleId, cascadeDelete: true)
+                .Index(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.Roles",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Description = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Permissions",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Products",
@@ -71,58 +122,6 @@
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Description = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Invoices",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        CustomerId = c.Int(nullable: false),
-                        UserId = c.Int(nullable: false),
-                        CreationTime = c.DateTime(nullable: false),
-                        Total = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
-                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
-                .Index(t => t.CustomerId)
-                .Index(t => t.UserId);
-            
-            CreateTable(
-                "dbo.Users",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        MyProperty = c.Int(nullable: false),
-                        RoleId = c.Int(nullable: false),
-                        Dob = c.DateTime(nullable: false),
-                        PhoneNumber = c.String(),
-                        Address = c.String(),
-                        CreationTime = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Roles", t => t.RoleId, cascadeDelete: true)
-                .Index(t => t.RoleId);
-            
-            CreateTable(
-                "dbo.Roles",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Description = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Permissions",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -253,15 +252,15 @@
             DropForeignKey("dbo.OrderProducts", "OrderId", "dbo.Orders");
             DropForeignKey("dbo.Orders", "UserId", "dbo.Users");
             DropForeignKey("dbo.OrderProducts", "ProductId", "dbo.Products");
+            DropForeignKey("dbo.InvoiceProducts", "ProductId", "dbo.Products");
+            DropForeignKey("dbo.Products", "ManufacturerId", "dbo.Manufacturers");
+            DropForeignKey("dbo.Products", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.InvoiceProducts", "InvoiceId", "dbo.Invoices");
             DropForeignKey("dbo.Invoices", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.Invoices", "UserId", "dbo.Users");
             DropForeignKey("dbo.Users", "RoleId", "dbo.Roles");
             DropForeignKey("dbo.RolePermissions", "PermissionId", "dbo.Permissions");
             DropForeignKey("dbo.RolePermissions", "RoleId", "dbo.Roles");
-            DropForeignKey("dbo.InvoiceProducts", "ProductId", "dbo.Products");
-            DropForeignKey("dbo.Products", "ManufacturerId", "dbo.Manufacturers");
-            DropForeignKey("dbo.Products", "CategoryId", "dbo.Categories");
             DropIndex("dbo.RolePermissions", new[] { "PermissionId" });
             DropIndex("dbo.RolePermissions", new[] { "RoleId" });
             DropIndex("dbo.WarrantyOrders", new[] { "CustomerId" });
@@ -274,11 +273,11 @@
             DropIndex("dbo.Orders", new[] { "UserId" });
             DropIndex("dbo.OrderProducts", new[] { "OrderId" });
             DropIndex("dbo.OrderProducts", new[] { "ProductId" });
+            DropIndex("dbo.Products", new[] { "ManufacturerId" });
+            DropIndex("dbo.Products", new[] { "CategoryId" });
             DropIndex("dbo.Users", new[] { "RoleId" });
             DropIndex("dbo.Invoices", new[] { "UserId" });
             DropIndex("dbo.Invoices", new[] { "CustomerId" });
-            DropIndex("dbo.Products", new[] { "ManufacturerId" });
-            DropIndex("dbo.Products", new[] { "CategoryId" });
             DropIndex("dbo.InvoiceProducts", new[] { "InvoiceId" });
             DropIndex("dbo.InvoiceProducts", new[] { "ProductId" });
             DropTable("dbo.RolePermissions");
@@ -289,12 +288,12 @@
             DropTable("dbo.Providers");
             DropTable("dbo.Orders");
             DropTable("dbo.OrderProducts");
+            DropTable("dbo.Manufacturers");
+            DropTable("dbo.Products");
             DropTable("dbo.Permissions");
             DropTable("dbo.Roles");
             DropTable("dbo.Users");
             DropTable("dbo.Invoices");
-            DropTable("dbo.Manufacturers");
-            DropTable("dbo.Products");
             DropTable("dbo.InvoiceProducts");
             DropTable("dbo.Customers");
             DropTable("dbo.Categories");

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OoadProject.Core.Service.AppProduct
+namespace OoadProject.Core.Services.AppProduct
 {
     public class InvoiceService
     {

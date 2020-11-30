@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OoadProject.Data.Entity.AppProduct;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,23 @@ namespace OoadProject.Core.ViewModels.Home.Dto
     {
         public int Id { get; set; }
         public DateTime CreationTime { get; set; }
-        public int CreatedUser { get; set; }
+        public string CreatedUser { get; set; }
         public string ProviderName { get; set; }
         public string Status { get; set; }
+
+        public static string MapEnumToStatus(OrderStatus status)
+        {
+            switch (status)
+            {
+                case OrderStatus.WaitForSent:
+                    return "Đang chờ gửi";
+                case OrderStatus.Sent:
+                    return "Đã gửi";
+                case OrderStatus.Done:
+                    return "Đã hoàn thành";
+                default:
+                    return "Không xác định";
+            }
+        }
     }
 }

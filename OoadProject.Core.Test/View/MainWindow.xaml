@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OoadProject.Core.Test.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{StaticResource HomeViewModel}">
     <Grid>
-        
+        <ListView ItemsSource="{Binding ProcessingOrders}" HorizontalAlignment="Left" Height="185" Margin="210,65,0,0" VerticalAlignment="Top" Width="335">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Mã số" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                    <GridViewColumn Header="Ngày đặt hàng" DisplayMemberBinding="{Binding CreationTime}"></GridViewColumn>
+                    <GridViewColumn Header="Người đặt hàng" DisplayMemberBinding="{Binding CreatedUser}"></GridViewColumn>
+                    <GridViewColumn Header="Nhà cung cấp" DisplayMemberBinding="{Binding ProviderName}"></GridViewColumn>
+                    <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding Status}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
