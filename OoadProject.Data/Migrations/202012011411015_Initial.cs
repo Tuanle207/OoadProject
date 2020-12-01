@@ -106,7 +106,7 @@
                         PriceIn = c.Int(nullable: false),
                         PriceOut = c.Int(nullable: false),
                         WarrantyPeriod = c.Int(),
-                        ReturnRate = c.Int(),
+                        ReturnRate = c.Single(),
                         Status = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)

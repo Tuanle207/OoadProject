@@ -8,29 +8,49 @@ namespace OoadProject.Data.Repository
 {
     public class InvoiceRepository
     {
-        public IEnumerable<InvoiceProduct> GetInvoiceProductsByDay(DateTime day)
+        public int GetSalesByDay(DateTime day)
         {
             using (var ctx = new AppDbContext())
             {
-                var list = ctx.InvoiceProducts
-                    .Where(ip => ip.Invoice.CreationTime.Equals(day))
-                    .Include(ip => ip.Product).ToList();
+                var query = ctx.InvoiceProducts
+                    .Where(ip => DbFunctions.TruncateTime(ip.Invoice.CreationTime) == day.Date);
 
-                return list;
+                return query.Any() ? query.Sum(ip => ip.Number): 0;
             }
         }
 
-        public IEnumerable<InvoiceProduct> GetInvoiceProductsByMonth(DateTime day)
+        public int GetSalesByMonth(DateTime day)
         {
             using (var ctx = new AppDbContext())
             {
-                var list = ctx.InvoiceProducts
-                    .Where(ip => ip.Invoice.CreationTime.Equals(day))
-                    .Include(ip => ip.Product).ToList();
+                var query = ctx.InvoiceProducts
+                    .Where(ip => ip.Invoice.CreationTime.Month == day.Month);
 
-                return list;
+                return query.Any() ? query.Sum(ip => ip.Number) : 0;
             }
 
+        }
+
+        public int GetRevenueByDay(DateTime day)
+        {
+            using (var ctx = new AppDbContext())
+            {
+                var query = ctx.Invoices
+                    .Where(i => DbFunctions.TruncateTime(i.CreationTime) == day.Date);
+
+                return query.Any() ? query.Sum(i => i.Total) : 0;
+            }
+        }
+
+        public int GetRevenueByMonth(DateTime day)
+        {
+            using (var ctx = new AppDbContext())
+            {
+                var query = ctx.Invoices
+                    .Where(i => i.CreationTime.Month == day.Month);
+
+                return query.Any() ? query.Sum(i => i.Total) : 0;
+            }
         }
 
     }
