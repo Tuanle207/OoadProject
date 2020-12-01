@@ -7,21 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         DataContext="{StaticResource HomeViewModel}">
-    <StackPanel>
-        <StackPanel>
-            <TextBlock>Hôm nay</TextBlock>
-            <TextBlock>Doanh số</TextBlock>
-            <TextBlock Text="{Binding TodayRevenue.Sales}"></TextBlock>
-            <TextBlock>Doanh thu</TextBlock>
-            <TextBlock Text="{Binding TodayRevenue.Revenue}"></TextBlock>
-        </StackPanel>
-        <StackPanel>
-            <TextBlock>Tháng này</TextBlock>
-            <TextBlock>Doanh số</TextBlock>
-            <TextBlock Text="{Binding MonthRevenue.Sales}"></TextBlock>
-            <TextBlock>Doanh thu</TextBlock>
-            <TextBlock Text="{Binding MonthRevenue.Revenue}"></TextBlock>
-        </StackPanel>
-        
-    </StackPanel>
+    <Grid>
+        <ListView ItemsSource="{Binding HotProducts}" HorizontalAlignment="Left" Height="185" Margin="210,65,0,0" VerticalAlignment="Top" Width="335">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Tên sản phẩm" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                    <GridViewColumn Header="Hãng sản xuất" DisplayMemberBinding="{Binding ManufacturerName}"></GridViewColumn>
+                    <GridViewColumn Header="Doanh số" DisplayMemberBinding="{Binding Sales}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
 </Window>

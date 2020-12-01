@@ -15,11 +15,13 @@ namespace OoadProject.Core.ViewModels.Home
         // private service fields
         private readonly OrderService _orderService;
         private readonly InvoiceService _invoiceService;
+        private readonly ProductService _productService;
 
         // private data fields
         private ObservableCollection<ProcessingOrderDto> _processingOrders;
         private RevenueDto _todayRevenue;
         private RevenueDto _monthRevenue;
+        public ObservableCollection<HotProductDto> _hotProducts;
 
         // public properties
         public ObservableCollection<ProcessingOrderDto> ProcessingOrders
@@ -51,6 +53,16 @@ namespace OoadProject.Core.ViewModels.Home
             }
         }
 
+        public ObservableCollection<HotProductDto> HotProducts
+        {
+            get => _hotProducts;
+            set
+            {
+                _hotProducts = value;
+                OnPropertyChanged();
+            }
+        }
+
         // public command properties
 
 
@@ -60,11 +72,13 @@ namespace OoadProject.Core.ViewModels.Home
             // init services
             _orderService = new OrderService();
             _invoiceService = new InvoiceService();
+            _productService = new ProductService();
 
             // init data
             ProcessingOrders = new ObservableCollection<ProcessingOrderDto>(_orderService.GetProcessingOrders());
             TodayRevenue = _invoiceService.GetRevenue(DateTime.Now, TimeType.Day);
             MonthRevenue = _invoiceService.GetRevenue(DateTime.Now, TimeType.Month);
+            HotProducts = new ObservableCollection<HotProductDto>(_productService.GetHotProducts(DateTime.Now));
 
         }
     }

@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Mapper\AppMapperProfile.cs" />
     <Compile Include="Mapper\AutoMapper.cs" />
+    <Compile Include="Services\AppProduct\ProductService.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\AppProduct\InvoiceService.cs" />
     <Compile Include="Services\AppProduct\OrderService.cs" />

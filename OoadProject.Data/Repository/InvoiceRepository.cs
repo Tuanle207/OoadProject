@@ -24,7 +24,7 @@ namespace OoadProject.Data.Repository
             using (var ctx = new AppDbContext())
             {
                 var query = ctx.InvoiceProducts
-                    .Where(ip => ip.Invoice.CreationTime.Month == day.Month);
+                    .Where(ip => ip.Invoice.CreationTime.Month == day.Month && ip.Invoice.CreationTime.Year == day.Year);
 
                 return query.Any() ? query.Sum(ip => ip.Number) : 0;
             }
@@ -47,7 +47,7 @@ namespace OoadProject.Data.Repository
             using (var ctx = new AppDbContext())
             {
                 var query = ctx.Invoices
-                    .Where(i => i.CreationTime.Month == day.Month);
+                    .Where(i => i.CreationTime.Month == day.Month && i.CreationTime.Year == day.Year);
 
                 return query.Any() ? query.Sum(i => i.Total) : 0;
             }

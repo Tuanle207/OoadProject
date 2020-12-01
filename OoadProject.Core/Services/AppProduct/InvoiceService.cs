@@ -28,7 +28,6 @@ namespace OoadProject.Core.Services.AppProduct
             if (type == TimeType.Day)
             { // Get revenue of the day
 
-
                 // 1. Get sales number
                 dto.Sales = _invoiceRepository.GetSalesByDay(dateTime);
 
@@ -47,23 +46,5 @@ namespace OoadProject.Core.Services.AppProduct
             return dto;
         }
 
-        /// <summary>
-        /// Get list of hot products in a period of time
-        /// </summary>
-        /// <param name="dateTime"></param>
-        /// <param name="type">Day or Month or Year?</param>
-        /// <returns></returns>
-        public IEnumerable<HotProductDto> getHotProducts(DateTime dateTime, TimeType type = TimeType.Month)
-        {
-            if (type == TimeType.Day)
-            {
-
-            }
-            else
-            {
-
-            }
-            return null;
-        }
     }
 }
