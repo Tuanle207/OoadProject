@@ -7,13 +7,13 @@ namespace OoadProject.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class Correct_Product_Property_Data_Type : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Correct_Product_Property_Data_Type));
         
         string IMigrationMetadata.Id
         {
-            get { return "202011221614223_Initial"; }
+            get { return "202012011416138_Correct_Product_Property_Data_Type"; }
         }
         
         string IMigrationMetadata.Source

@@ -3,7 +3,7 @@ using OoadProject.Data.Repository;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OoadProject.Core.Service.AppUser.Roles
+namespace OoadProject.Core.Services.AppUser
 {
     public class RoleService
     {
@@ -18,6 +18,7 @@ namespace OoadProject.Core.Service.AppUser.Roles
         {
             return _roleRepository.Create(role);
         }
+
         public IEnumerable<Role> GetAllRoles()
         {
             return _roleRepository.GetAll();

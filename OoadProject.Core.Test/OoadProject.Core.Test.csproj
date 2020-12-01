@@ -99,6 +99,11 @@
       <Name>OoadProject.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="EntityFramework">
+      <Version>6.4.4</Version>
+    </PackageReference>
+  </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Page Include="DataContext.xaml">

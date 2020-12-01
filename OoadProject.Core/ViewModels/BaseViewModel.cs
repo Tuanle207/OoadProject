@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace OoadProject.ViewModel
+namespace OoadProject.Core.ViewModels
 {
-    public class ViewModel
+    public class BaseViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

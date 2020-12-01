@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OoadProject.Core.Test.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{StaticResource HomeViewModel}">
     <Grid>
-        
+        <ListView ItemsSource="{Binding HotProducts}" HorizontalAlignment="Left" Height="185" Margin="210,65,0,0" VerticalAlignment="Top" Width="335">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Tên sản phẩm" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                    <GridViewColumn Header="Hãng sản xuất" DisplayMemberBinding="{Binding ManufacturerName}"></GridViewColumn>
+                    <GridViewColumn Header="Doanh số" DisplayMemberBinding="{Binding Sales}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
