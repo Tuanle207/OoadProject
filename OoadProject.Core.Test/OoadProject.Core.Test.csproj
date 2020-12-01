@@ -104,6 +104,7 @@
       <Version>6.4.4</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="DataContext.xaml">
       <SubType>Designer</SubType>

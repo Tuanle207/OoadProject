@@ -42,30 +42,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mapper\AppMapperProfile.cs" />
-    <Compile Include="Mapper\AutoMapper.cs" />
-    <Compile Include="Services\AppProduct\ProductService.cs" />
-    <Compile Include="Services\BaseService.cs" />
-    <Compile Include="Services\AppProduct\InvoiceService.cs" />
-    <Compile Include="Services\AppProduct\OrderService.cs" />
-    <Compile Include="Services\AppUser\RoleService.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\RelayCommand.cs" />
-    <Compile Include="Services\TimeType.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\Home\Dto\HotProductDto.cs" />
-    <Compile Include="ViewModels\Home\Dto\ProcessingOrderDto.cs" />
-    <Compile Include="ViewModels\Home\Dto\RevenueDto.cs" />
-    <Compile Include="ViewModels\Home\HomeViewModel.cs" />
+    <Compile Include="**\*.cs"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="obj\**\*.cs" />
+    <Compile Remove="obj\**\*.cs" />
+    <EmbeddedResource Remove="obj\**\*.cs" />
+    <None Remove="obj\**\*.cs" />
+  </ItemGroup>
+    <ItemGroup>
+    <Content Remove="bin\**\*.cs" />
+    <Compile Remove="bin\**\*.cs" />
+    <EmbeddedResource Remove="bin\**\*.cs" />
+    <None Remove="bin\**\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OoadProject.Data\OoadProject.Data.csproj">
       <Project>{48a0b0d5-d932-4884-a12a-a3def56d0d90}</Project>
       <Name>OoadProject.Data</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\AppCustomer\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper">

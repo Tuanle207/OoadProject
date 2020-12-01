@@ -1,5 +1,4 @@
-﻿using OoadProject.Data.Entity.AppCustomer;
-using OoadProject.Data.Repository.AggregateDto;
+﻿using OoadProject.Data.Repository.AggregateDto;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
