@@ -74,6 +74,9 @@
     <Compile Include="View\AddStaffWindow.xaml.cs">
       <DependentUpon>AddStaffWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ManagementOrderUserControl.xaml.cs">
+      <DependentUpon>ManagementOrderUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\NhanVienUserControl.xaml.cs">
       <DependentUpon>NhanVienUserControl.xaml</DependentUpon>
     </Compile>
@@ -100,6 +103,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ManagementOrderUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\NhanVienUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
