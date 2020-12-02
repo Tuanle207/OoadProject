@@ -76,6 +76,15 @@
                             <DataGridTextColumn Header="Tên sản phẩm"/>
                             <DataGridTextColumn Header="Giá bán"/>
                             <DataGridTextColumn Header="Số lượng"/>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Button Content="+"  ToolTip="Thêm số lượng sản phẩm"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>
