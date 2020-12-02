@@ -77,6 +77,9 @@
     <Compile Include="View\NhanVienUserControl.xaml.cs">
       <DependentUpon>NhanVienUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SellUserControl.xaml.cs">
+      <DependentUpon>SellUserControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="DataContext.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -98,6 +101,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\NhanVienUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SellUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
