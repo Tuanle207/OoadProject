@@ -6,7 +6,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:OoadProject.View"
              mc:Ignorable="d" 
-             d:DesignHeight="650" d:DesignWidth="1100" Background="#fff">
+             d:DesignHeight="650" d:DesignWidth="1100" Background="#fff"
+             DataContext="{StaticResource UserViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -57,16 +58,16 @@
                 <materialDesign:PackIcon VerticalAlignment="Center" Kind="AccountLock" Width="35" Height="35"/>
             </StackPanel>
         </Button>
-        <ListView Grid.Row="1" Grid.ColumnSpan="4" Margin="33,10.4,27,49.6" Background="#FFD43434">
+        <ListView ItemsSource="{Binding Users}" Grid.Row="1" Grid.ColumnSpan="4" Margin="33,10.4,27,49.6" Background="#FFD43434">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="STT" Width="74"></GridViewColumn>
-                    <GridViewColumn Header="Tên nhân viên" Width="222"></GridViewColumn>
-                    <GridViewColumn Header="Chức vụ" Width="148"></GridViewColumn>
-                    <GridViewColumn Header="Ngày vào làm" Width="148"></GridViewColumn>
-                    <GridViewColumn Header="Số điện thoại" Width="148"></GridViewColumn>
-                    <GridViewColumn Header="Ngày sinh" Width="148"></GridViewColumn>
-                    <GridViewColumn Header="Địa chỉ" Width="222"></GridViewColumn>
+                    <GridViewColumn Header="STT" DisplayMemberBinding="{Binding Id}" Width="74"></GridViewColumn>
+                    <GridViewColumn Header="Tên nhân viên" DisplayMemberBinding="{Binding Name}" Width="222"></GridViewColumn>
+                    <GridViewColumn Header="Chức vụ" DisplayMemberBinding="{Binding Role.Name}" Width="148"></GridViewColumn>
+                    <GridViewColumn Header="Ngày vào làm" DisplayMemberBinding="{Binding CreationTime}" Width="148"></GridViewColumn>
+                    <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding PhoneNumber}" Width="148"></GridViewColumn>
+                    <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding Dob}" Width="148"></GridViewColumn>
+                    <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding Address}" Width="222"></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

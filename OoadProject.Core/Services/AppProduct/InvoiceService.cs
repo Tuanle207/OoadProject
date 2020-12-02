@@ -1,4 +1,4 @@
-﻿using OoadProject.Core.ViewModels.Home.Dto;
+﻿using OoadProject.Core.ViewModels.Home.Dtos;
 using OoadProject.Data.Repository;
 using System;
 using System.Collections.Generic;

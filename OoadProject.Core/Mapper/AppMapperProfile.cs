@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using OoadProject.Core.ViewModels.Home.Dto;
+using OoadProject.Core.ViewModels.Home.Dtos;
 using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Repository.AggregateDto;
 using System;
