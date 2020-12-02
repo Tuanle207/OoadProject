@@ -71,8 +71,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\AddOrderScreen.xaml.cs">
+      <DependentUpon>AddOrderScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddStaffWindow.xaml.cs">
       <DependentUpon>AddStaffWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditOrderScreen.xaml.cs">
+      <DependentUpon>EditOrderScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ListOrderUserControl.xaml.cs">
+      <DependentUpon>ListOrderUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManagementOrderUserControl.xaml.cs">
       <DependentUpon>ManagementOrderUserControl.xaml</DependentUpon>
@@ -87,7 +96,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AddOrderScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddStaffWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditOrderScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ListOrderUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

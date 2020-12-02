@@ -24,5 +24,41 @@ namespace OoadProject.View
         {
             InitializeComponent();
         }
+
+        private void btnDatHang_GotFocus(object sender, RoutedEventArgs e)
+        {
+            btnDatHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#808080");
+            btnNhapHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
+            btnDSNhapHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
+        }
+
+        private void btnNhapHang_GotFocus(object sender, RoutedEventArgs e)
+        {
+            btnDatHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
+            btnNhapHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#808080");
+            btnDSNhapHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
+        }
+
+        private void btnDSNhapHang_GotFocus(object sender, RoutedEventArgs e)
+        {
+            btnDatHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
+            btnNhapHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
+            btnDSNhapHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#808080");
+        }
+
+        private void btnDatHang_Click(object sender, RoutedEventArgs e)
+        {
+            if (viewControl.Name != "ListOrderUserControl")
+            {
+                viewControl.Content = new ListOrderUserControl();
+                viewControl.Name = "ListOrderUserControl";
+            }
+        }
+
+        private void uscListOrder_Loaded(object sender, RoutedEventArgs e)
+        {
+            viewControl.Name = "ListOrderUserControl";
+            viewControl.Content = new ListOrderUserControl();
+        }
     }
 }
