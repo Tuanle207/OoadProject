@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace OoadProject.Core.ViewModels
 {
-    public class BaseViewModel
+    public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

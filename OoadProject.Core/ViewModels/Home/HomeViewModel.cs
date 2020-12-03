@@ -1,6 +1,6 @@
 ﻿using OoadProject.Core.Services;
 using OoadProject.Core.Services.AppProduct;
-using OoadProject.Core.ViewModels.Home.Dto;
+using OoadProject.Core.ViewModels.Home.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,7 +23,7 @@ namespace OoadProject.Core.ViewModels.Home
         private RevenueDto _monthRevenue;
         public ObservableCollection<HotProductDto> _hotProducts;
 
-        // public properties
+        // public data properties
         public ObservableCollection<ProcessingOrderDto> ProcessingOrders
         {
             get => _processingOrders;

@@ -1,4 +1,4 @@
-﻿using OoadProject.Core.ViewModels.Home.Dto;
+﻿using OoadProject.Core.ViewModels.Home.Dtos;
 using OoadProject.Data.Repository;
 using System;
 using System.Collections.Generic;
@@ -27,7 +27,7 @@ namespace OoadProject.Core.Services.AppProduct
         {
             if (type == TimeType.Month)
             {
-                return Mapper.Map<IEnumerable<HotProductDto>>(_productRepository.GetProductOrderBySales(dateTime));
+                return Mapper.Map<IEnumerable<HotProductDto>>(_productRepository.GetProductsOrderBySales(dateTime));
             }
 
             return null;

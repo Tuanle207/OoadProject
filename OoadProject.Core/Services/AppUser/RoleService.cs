@@ -23,5 +23,10 @@ namespace OoadProject.Core.Services.AppUser
         {
             return _roleRepository.GetAll();
         }
+
+        public IEnumerable<string> GetAllRolesNames()
+        {
+            return _roleRepository.GetAllRolesName();
+        }
     }
 }

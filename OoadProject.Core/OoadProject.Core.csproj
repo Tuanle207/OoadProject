@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="**\*.cs"/>
+    <Compile Include="**\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="obj\**\*.cs" />
@@ -50,7 +50,7 @@
     <EmbeddedResource Remove="obj\**\*.cs" />
     <None Remove="obj\**\*.cs" />
   </ItemGroup>
-    <ItemGroup>
+  <ItemGroup>
     <Content Remove="bin\**\*.cs" />
     <Compile Remove="bin\**\*.cs" />
     <EmbeddedResource Remove="bin\**\*.cs" />

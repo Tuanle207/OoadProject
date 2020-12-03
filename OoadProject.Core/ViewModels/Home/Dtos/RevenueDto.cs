@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OoadProject.Core.ViewModels.Home.Dto
+namespace OoadProject.Core.ViewModels.Home.Dtos
 {
     public class RevenueDto
     {

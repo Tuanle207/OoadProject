@@ -10,7 +10,7 @@ namespace OoadProject.Data.Repository
 {
     public class ProductRepository
     {
-        public IEnumerable<ProductAggregateDto> GetProductOrderBySales(DateTime day, int limit = 10)
+        public IEnumerable<ProductAggregateDto> GetProductsOrderBySales(DateTime day, int limit = 10)
         {
             using (var ctx = new AppDbContext())
             {

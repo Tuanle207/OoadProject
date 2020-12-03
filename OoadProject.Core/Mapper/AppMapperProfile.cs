@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
-using OoadProject.Core.ViewModels.Home.Dto;
+using OoadProject.Core.ViewModels.Home.Dtos;
+using OoadProject.Core.ViewModels.Users.Dtos;
 using OoadProject.Data.Entity.AppProduct;
+using OoadProject.Data.Entity.AppUser;
 using OoadProject.Data.Repository.AggregateDto;
 using System;
 using System.Collections.Generic;
@@ -29,6 +31,12 @@ namespace OoadProject.Core
                     opt.MapFrom(src => src.Product.Manufacturer.Name))
                 .ForMember(dest => dest.Sales, opt =>
                     opt.MapFrom(src => src.SalesNo));
+
+            CreateMap<UserForCreationDto, User>()
+                .ForMember(dest => dest.Role, opt =>
+                    opt.Ignore())
+                .ForMember(dest => dest.RoleId, opt =>
+                    opt.Ignore());
         }
     }
 }
