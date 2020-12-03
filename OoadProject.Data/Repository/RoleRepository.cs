@@ -24,5 +24,24 @@ namespace OoadProject.Data.Repository
                 return roles;
             }
         }
+
+        public IEnumerable<string> GetAllRolesName()
+        {
+            using (var ctx = new AppDbContext())
+            {
+                var roles = ctx.Roles.ToList();
+                var rolesNames = roles.Select(r => r.Name);
+                return rolesNames;
+            }
+        }
+
+        public Role GetRoleByName(string name)
+        {
+            using (var ctx = new AppDbContext())
+            {
+                var role = ctx.Roles.Where(r => r.Name == name).FirstOrDefault();
+                return role;
+            }
+        }
     }
 }

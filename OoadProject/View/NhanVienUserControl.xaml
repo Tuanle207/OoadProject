@@ -43,7 +43,8 @@
         <Button
             Grid.Column="2" Width="220" Height="60"
             materialDesign:ButtonAssist.CornerRadius="10"
-            ToolTip="MaterialDesignRaisedButton with Round Corners">
+            ToolTip="MaterialDesignRaisedButton with Round Corners"
+            Command="{Binding DeleteUser}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Xoá nhân viên" VerticalAlignment="Center" FontSize="16" Margin="0 0 30 0"/>
                 <materialDesign:PackIcon VerticalAlignment="Center" Kind="AccountOff" Width="35" Height="35"/>
@@ -58,7 +59,7 @@
                 <materialDesign:PackIcon VerticalAlignment="Center" Kind="AccountLock" Width="35" Height="35"/>
             </StackPanel>
         </Button>
-        <ListView ItemsSource="{Binding Users}" Grid.Row="1" Grid.ColumnSpan="4" Margin="33,10.4,27,49.6" Background="#FFD43434">
+        <ListView ItemsSource="{Binding Users}" SelectedItem="{Binding ChosenUser}" Grid.Row="1" Grid.ColumnSpan="4" Margin="33,10.4,27,49.6" Background="#FFD43434">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="STT" DisplayMemberBinding="{Binding Id}" Width="74"></GridViewColumn>
