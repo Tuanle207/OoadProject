@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace OoadProject.View
 {
     /// <summary>
-    /// Interaction logic for ListOrderUserControl.xaml
+    /// Interaction logic for EditOrderWindow.xaml
     /// </summary>
-    public partial class ListOrderUserControl : UserControl
+    public partial class EditOrderWindow : Window
     {
-        public ListOrderUserControl()
+        public EditOrderWindow()
         {
             InitializeComponent();
         }
@@ -30,18 +29,6 @@ namespace OoadProject.View
             ScrollViewer scv = (ScrollViewer)sender;
             scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
             e.Handled = true;
-        }
-
-        private void btnAddOrder_Click(object sender, RoutedEventArgs e)
-        {
-            AddOrderWindow w = new AddOrderWindow();
-            w.ShowDialog();
-        }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            EditOrderWindow w = new EditOrderWindow();
-            w.ShowDialog();
         }
     }
 }

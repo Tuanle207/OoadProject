@@ -71,14 +71,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="View\AddOrderScreen.xaml.cs">
-      <DependentUpon>AddOrderScreen.xaml</DependentUpon>
+    <Compile Include="View\AddOrderWindow.xaml.cs">
+      <DependentUpon>AddOrderWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AddStaffWindow.xaml.cs">
       <DependentUpon>AddStaffWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditOrderScreen.xaml.cs">
-      <DependentUpon>EditOrderScreen.xaml</DependentUpon>
+    <Compile Include="View\EditOrderWindow.xaml.cs">
+      <DependentUpon>EditOrderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ImportItemsUserControl.xaml.cs">
+      <DependentUpon>ImportItemsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ListImportedItemUserControl.xaml.cs">
+      <DependentUpon>ListImportedItemUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ListOrderUserControl.xaml.cs">
       <DependentUpon>ListOrderUserControl.xaml</DependentUpon>
@@ -96,7 +102,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddOrderScreen.xaml">
+    <Page Include="View\AddOrderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -104,7 +110,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditOrderScreen.xaml">
+    <Page Include="View\EditOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ImportItemsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ListImportedItemUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

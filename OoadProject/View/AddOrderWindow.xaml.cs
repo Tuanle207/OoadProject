@@ -17,9 +17,9 @@ namespace OoadProject.View
     /// <summary>
     /// Interaction logic for AddOrderScreen.xaml
     /// </summary>
-    public partial class AddOrderScreen : Window
+    public partial class AddOrderWindow : Window
     {
-        public AddOrderScreen()
+        public AddOrderWindow()
         {
             InitializeComponent();
         }
