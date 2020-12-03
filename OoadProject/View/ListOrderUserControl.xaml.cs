@@ -34,13 +34,13 @@ namespace OoadProject.View
 
         private void btnAddOrder_Click(object sender, RoutedEventArgs e)
         {
-            AddOrderScreen w = new AddOrderScreen();
+            AddOrderWindow w = new AddOrderWindow();
             w.ShowDialog();
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            EditOrderScreen w = new EditOrderScreen();
+            EditOrderWindow w = new EditOrderWindow();
             w.ShowDialog();
         }
     }

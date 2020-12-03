@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace OoadProject.View
 {
     /// <summary>
-    /// Interaction logic for EditOrderScreen.xaml
+    /// Interaction logic for ListImportedItemUserControl.xaml
     /// </summary>
-    public partial class EditOrderScreen : Window
+    public partial class ListImportedItemUserControl : UserControl
     {
-        public EditOrderScreen()
+        public ListImportedItemUserControl()
         {
             InitializeComponent();
         }

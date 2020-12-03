@@ -58,7 +58,25 @@ namespace OoadProject.View
         private void uscListOrder_Loaded(object sender, RoutedEventArgs e)
         {
             viewControl.Name = "ListOrderUserControl";
-            viewControl.Content = new ListOrderUserControl();
+            viewControl.Content = new ListOrderUserControl();            
+        }
+
+        private void btnNhapHang_Click(object sender, RoutedEventArgs e)
+        {
+            if (viewControl.Name != "ImportItemsUserControl")
+            {
+                viewControl.Content = new ImportItemsUserControl();
+                viewControl.Name = "ImportItemsUserControl";
+            }
+        }
+
+        private void btnDSNhapHang_Click(object sender, RoutedEventArgs e)
+        {
+            if (viewControl.Name != "ListImportedItemUserControl")
+            {
+                viewControl.Content = new ListImportedItemUserControl();
+                viewControl.Name = "ListImportedItemUserControl";
+            }
         }
     }
 }
