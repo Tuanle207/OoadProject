@@ -99,7 +99,7 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.Int(nullable: false),
+                        Name = c.String(),
                         CategoryId = c.Int(nullable: false),
                         ManufacturerId = c.Int(nullable: false),
                         Number = c.Int(nullable: false),
