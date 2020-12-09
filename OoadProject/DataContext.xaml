@@ -2,6 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:OoadProject" 
                     xmlns:vm="clr-namespace:OoadProject.Core.ViewModels.Users;assembly=OoadProject.Core">
-    <vm:UserViewModel x:Key="UserViewModel"></vm:UserViewModel>
+    <!--<vm:UserViewModel x:Key="UserViewModel"></vm:UserViewModel>-->
 
 </ResourceDictionary>
