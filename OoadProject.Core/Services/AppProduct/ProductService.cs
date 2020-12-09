@@ -36,9 +36,18 @@ namespace OoadProject.Core.Services.AppProduct
             return null;
         }
 
-        public PaginatedList<Product> GetProductsForOrderCreation(int page = 1, int limit = 10)
+        public PaginatedList<ProductForOrderCreationDto> GetProductsForOrderCreation(int page = 1, int limit = 4)
         {
-            return _productRepository.GetProducts(page, limit);
+            var rawProducts = _productRepository.GetProducts(page, limit);
+
+            var productsForReturn = new PaginatedList<ProductForOrderCreationDto>
+            (
+                Mapper.Map<List<ProductForOrderCreationDto>>(rawProducts.Data),
+                rawProducts.TotalRecords,
+                rawProducts.CurrentPage,
+                rawProducts.PageRecords
+            );
+            return productsForReturn;
         }
     }
 }

@@ -4,8 +4,9 @@ using System.Linq;
 
 namespace OoadProject.Shared.Pagination
 {
-    public class PaginatedList<T> : List<T> where T: class
+    public class PaginatedList<T> where T: class
     {
+        public List<T> Data { get; set; }
         public int CurrentPage { get; set; }
         public int TotalPages { get; set; }
         public int PageRecords { get; set; }
@@ -18,7 +19,8 @@ namespace OoadProject.Shared.Pagination
             CurrentPage = pageNumer;
             TotalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
 
-            this.AddRange(items);
+            Data = new List<T>();
+            Data.AddRange(items);
         }
 
         public static PaginatedList<T> Create(IQueryable<T> query, int pageNumber, int pageSize)

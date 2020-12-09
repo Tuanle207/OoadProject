@@ -36,15 +36,16 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid>
-                                            <Button Content="+"  ToolTip="Thêm vào đơn hàng"/>
+                                            <Button  Content="+" Command="{Binding Path=DataContext.AddItem, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" CommandParameter="{Binding}" ToolTip="Thêm vào đơn hàng"/>
                                         </Grid>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTextColumn Header="Mã sản phẩm" Binding="{Binding Id}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding Name}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Loại sản phẩm" Binding="{Binding Category.Name}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Nhà sản xuất" Binding="{Binding Manufacturer.Name}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Loại sản phẩm" Binding="{Binding CategoryName}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nhà sản xuất" Binding="{Binding ManufacturerName}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Số lượng" Binding="{Binding Number}"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>
@@ -58,9 +59,9 @@
                 <Grid Grid.Column="1">
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                         <Button x:Name="btnPrev" Height="20" Foreground="Black" Background="#FF47608E" Padding="10 0 10 2" Margin="0 0 20 0" Command="{Binding GoPrevPage}">&lt;</Button>
-                        <TextBlock Height="20" Text="1"></TextBlock>
+                        <TextBlock Height="20" Text="{Binding CurrentPage}"></TextBlock>
                         <TextBlock Height="20">/</TextBlock>
-                        <TextBlock Height="20" Text="2"></TextBlock>
+                        <TextBlock Height="20" Text="{Binding TotalPages}"></TextBlock>
                         <Button x:Name="btnNext" Height="20" Foreground="Black" Background="#FF47608E" Padding="10 0 10 2" Margin="20 0 0 0" Command="{Binding GoNextPage}">&gt;</Button>
                     </StackPanel>
                 </Grid>
@@ -77,14 +78,14 @@
             </TextBlock>
             <materialDesign:Card Grid.Row="1"  Margin="5 5 5 5" BorderThickness="0" VerticalAlignment="Stretch">
                 <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                    <DataGrid Background="#FFE3F0FF" Grid.Column="1"  SelectionMode="Single"
+                    <DataGrid ItemsSource="{Binding SelectedProducts}" Background="#FFE3F0FF" Grid.Column="1"  SelectionMode="Single"
                           AutoGenerateColumns="False" IsReadOnly="True" BorderThickness="1">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid>
-                                            <Button Content="-" ToolTip="Giảm số lượng sản phẩm"/>
+                                            <Button Content="-" Command="{Binding Path=DataContext.RemoveItem, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" CommandParameter="{Binding}"  ToolTip="Giảm số lượng sản phẩm"/>
                                         </Grid>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -93,24 +94,15 @@
                                 <DataGridTemplateColumn.CellTemplate >
                                     <DataTemplate>
                                         <Grid>
-                                            <Button Content="+" ToolTip="Tăng số lượng sản phẩm"/>
+                                            <Button Content="+" Command="{Binding Path=DataContext.AddItem, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" CommandParameter="{Binding}"  ToolTip="Tăng số lượng sản phẩm"/>
                                         </Grid>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Tên sản phẩm"/>
-                            <DataGridTextColumn Header="Loại sản phẩm"/>
-                            <DataGridTextColumn Header="Số lượng"/>
-                            <DataGridTextColumn Header="Giá"/>
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Button Content="+"  ToolTip="Thêm số lượng sản phẩm"/>
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Loại sản phẩm" Binding="{Binding CategoryName}"/>
+                            <DataGridTextColumn Header="Giá" Binding="{Binding PriceOut}"/>
+                            <DataGridTextColumn Header="Số lượng" Binding="{Binding SelectedNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>

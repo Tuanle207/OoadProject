@@ -1,4 +1,5 @@
 ﻿using OoadProject.Core.ViewModels.Home.Dtos;
+using OoadProject.Core.ViewModels.Orders.Dtos;
 using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Repository;
 using System;
@@ -33,6 +34,11 @@ namespace OoadProject.Core.Services.AppProduct
             var dataForReturn = Mapper.Map<IEnumerable<ProcessingOrderDto>>(processingOrders);
 
             return dataForReturn;
+        }
+
+        public SelectingProductDto SelectProduct(ProductForOrderCreationDto product)
+        {
+            return Mapper.Map<SelectingProductDto>(product);
         }
 
     }
