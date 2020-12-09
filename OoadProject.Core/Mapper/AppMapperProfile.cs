@@ -1,14 +1,10 @@
 ﻿using AutoMapper;
 using OoadProject.Core.ViewModels.Home.Dtos;
+using OoadProject.Core.ViewModels.Orders.Dtos;
 using OoadProject.Core.ViewModels.Users.Dtos;
 using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Entity.AppUser;
 using OoadProject.Data.Repository.AggregateDto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OoadProject.Core
 {
@@ -37,6 +33,12 @@ namespace OoadProject.Core
                     opt.Ignore())
                 .ForMember(dest => dest.RoleId, opt =>
                     opt.Ignore());
+
+            CreateMap<Product, ProductForOrderCreationDto>()
+                .ForMember(dest => dest.CategoryName, opt =>
+                    opt.MapFrom(src => src.Category.Name))
+                .ForMember(dest => dest.ManufacturerName, opt =>
+                    opt.MapFrom(src => src.Manufacturer.Name));
         }
     }
 }

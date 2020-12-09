@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OoadProject.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="Thêm đơn hàng" Height="600" Width="1000">
+        Title="Thêm đơn hàng" Height="600" Width="1000"
+        DataContext="{StaticResource OrderCreationViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -28,7 +29,7 @@
             </Grid>
             <materialDesign:Card Grid.Row="1"  Margin="5 5 5 5" BorderThickness="0" VerticalAlignment="Stretch">
                 <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                    <DataGrid Background="#FFE3F0FF"  SelectionMode="Single"
+                    <DataGrid ItemsSource="{Binding Products}" Background="#FFE3F0FF"  SelectionMode="Single"
                           AutoGenerateColumns="False" IsReadOnly="True" Grid.ColumnSpan="1" BorderThickness="1">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn>
@@ -40,10 +41,10 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Mã sản phẩm"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Tên sản phẩm"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Loại sản phẩm"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Nhà sản xuất"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Mã sản phẩm" Binding="{Binding Id}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding Name}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Loại sản phẩm" Binding="{Binding Category.Name}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nhà sản xuất" Binding="{Binding Manufacturer.Name}"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>
@@ -56,11 +57,11 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="1">
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        <Button x:Name="btnPrev" Height="20" Foreground="Black" Background="#FF47608E" Padding="10 0 10 2" Margin="0 0 20 0" >&lt;</Button>
+                        <Button x:Name="btnPrev" Height="20" Foreground="Black" Background="#FF47608E" Padding="10 0 10 2" Margin="0 0 20 0" Command="{Binding GoPrevPage}">&lt;</Button>
                         <TextBlock Height="20" Text="1"></TextBlock>
                         <TextBlock Height="20">/</TextBlock>
                         <TextBlock Height="20" Text="2"></TextBlock>
-                        <Button x:Name="btnNext" Height="20" Foreground="Black" Background="#FF47608E" Padding="10 0 10 2" Margin="20 0 0 0">&gt;</Button>
+                        <Button x:Name="btnNext" Height="20" Foreground="Black" Background="#FF47608E" Padding="10 0 10 2" Margin="20 0 0 0" Command="{Binding GoNextPage}">&gt;</Button>
                     </StackPanel>
                 </Grid>
             </Grid>

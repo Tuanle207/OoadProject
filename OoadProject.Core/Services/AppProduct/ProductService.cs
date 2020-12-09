@@ -1,5 +1,8 @@
 ﻿using OoadProject.Core.ViewModels.Home.Dtos;
+using OoadProject.Core.ViewModels.Orders.Dtos;
+using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Repository;
+using OoadProject.Shared.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +34,11 @@ namespace OoadProject.Core.Services.AppProduct
             }
 
             return null;
+        }
+
+        public PaginatedList<Product> GetProductsForOrderCreation(int page = 1, int limit = 10)
+        {
+            return _productRepository.GetProducts(page, limit);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using OoadProject.Data.Repository.AggregateDto;
+﻿using OoadProject.Data.Entity.AppProduct;
+using OoadProject.Data.Repository.AggregateDto;
+using OoadProject.Shared.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -42,6 +44,21 @@ namespace OoadProject.Data.Repository
                 }
 
                 return dataForReturn.OrderByDescending(x => x.SalesNo).ToList();
+            }
+        }
+
+        public PaginatedList<Product> GetProducts(int page, int limit)
+        {
+            using (var ctx = new AppDbContext())
+            {
+                var query = ctx.Products
+                    .Include(p => p.Category)
+                    .Include(p => p.Manufacturer)
+                    .OrderBy(p => p.Name);
+                
+                var products = PaginatedList<Product>.Create(query, page, limit);
+                
+                return products;
             }
         }
     }
