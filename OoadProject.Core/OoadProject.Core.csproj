@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{48A0B0D5-D932-4884-A12A-A3DEF56D0D90}</ProjectGuid>
+    <ProjectGuid>{202F787A-00A2-4A57-A463-13146F267AFE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OoadProject.Data</RootNamespace>
-    <AssemblyName>OoadProject.Data</AssemblyName>
+    <RootNamespace>OoadProject.Core</RootNamespace>
+    <AssemblyName>OoadProject.Core</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,17 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202012011411015_Initial.designer.cs">
-      <DependentUpon>202012011411015_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012011416138_Correct_Product_Property_Data_Type.cs" />
-    <Compile Include="Migrations\202012011416138_Correct_Product_Property_Data_Type.designer.cs">
-      <DependentUpon>202012011416138_Correct_Product_Property_Data_Type.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="**\*.cs"/>
+    <Compile Include="**\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="obj\**\*.cs" />
@@ -65,20 +56,16 @@
     <EmbeddedResource Remove="bin\**\*.cs" />
     <None Remove="bin\**\*.cs" />
   </ItemGroup>
-
-
   <ItemGroup>
-    <PackageReference Include="EntityFramework">
-      <Version>6.4.4</Version>
-    </PackageReference>
+    <ProjectReference Include="..\OoadProject.Data\OoadProject.Data.csproj">
+      <Project>{48a0b0d5-d932-4884-a12a-a3def56d0d90}</Project>
+      <Name>OoadProject.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202012011411015_Initial.resx">
-      <DependentUpon>202012011411015_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012011416138_Correct_Product_Property_Data_Type.resx">
-      <DependentUpon>202012011416138_Correct_Product_Property_Data_Type.cs</DependentUpon>
-    </EmbeddedResource>
+    <PackageReference Include="AutoMapper">
+      <Version>10.1.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

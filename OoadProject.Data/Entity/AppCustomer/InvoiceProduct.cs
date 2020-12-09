@@ -9,5 +9,6 @@ namespace OoadProject.Data.Entity.AppCustomer
         public int InvoiceId { get; set; }
 
         public Product Product { get; set; }
+        public Invoice Invoice { get; set; }
     }
 }

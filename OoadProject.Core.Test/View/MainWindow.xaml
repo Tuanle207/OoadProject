@@ -1,0 +1,21 @@
+﻿<Window x:Class="OoadProject.Core.Test.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OoadProject.Core.Test.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{StaticResource HomeViewModel}">
+    <Grid>
+        <ListView ItemsSource="{Binding HotProducts}" HorizontalAlignment="Left" Height="185" Margin="210,65,0,0" VerticalAlignment="Top" Width="335">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Tên sản phẩm" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                    <GridViewColumn Header="Hãng sản xuất" DisplayMemberBinding="{Binding ManufacturerName}"></GridViewColumn>
+                    <GridViewColumn Header="Doanh số" DisplayMemberBinding="{Binding Sales}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
