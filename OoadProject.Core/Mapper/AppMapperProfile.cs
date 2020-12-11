@@ -41,6 +41,16 @@ namespace OoadProject.Core
                     opt.MapFrom(src => src.Manufacturer.Name));
 
             CreateMap<ProductForOrderCreationDto, SelectingProductDto>();
+
+            CreateMap<OrderForCreationDto, Order>()
+                .ForMember(dest => dest.Status, opt =>
+                    opt.MapFrom(src => (int)OrderStatus.WaitForSent));
+
+            CreateMap<SelectingProductDto, OrderProduct>()
+                .ForMember(dest => dest.ProductId, opt =>
+                    opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Number, opt =>
+                    opt.MapFrom(src => src.SelectedNumber));
         }
     }
 }

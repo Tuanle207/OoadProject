@@ -1,14 +1,12 @@
 ﻿using OoadProject.Core.Services.AppProduct;
+using OoadProject.Core.Services.AppUser;
 using OoadProject.Core.ViewModels.Orders.Dtos;
 using OoadProject.Data.Entity.AppProduct;
-using OoadProject.Shared.Pagination;
+using OoadProject.Data.Entity.AppUser;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace OoadProject.Core.ViewModels.Orders
@@ -18,15 +16,24 @@ namespace OoadProject.Core.ViewModels.Orders
         // private service fields
         private readonly ProductService _productService;
         private readonly OrderService _orderService;
+        private readonly UserService _userService;
+        private readonly ProviderService _providerService;
 
         // private data fields
         private List<ProductForOrderCreationDto> _loadedProducts;
         private List<bool> _loaded;
         private int _pageSize;
+
         private ObservableCollection<ProductForOrderCreationDto> _products;
         private int _currentPage;
         private int _totalPages;
         private ObservableCollection<SelectingProductDto> _selectedProducts;
+        private OrderForCreationDto _order;
+        
+        private ObservableCollection<User> _users;
+        private User _selectingUser;
+        private ObservableCollection<Provider> _providers;
+        private Provider _selectingProvider;
 
         // public data properties
         public ObservableCollection<ProductForOrderCreationDto> Products
@@ -52,12 +59,36 @@ namespace OoadProject.Core.ViewModels.Orders
             }
         }
 
+        public OrderForCreationDto Order { get => _order; set { _order = value; OnPropertyChanged(); }}
+
+        public ObservableCollection<User> Users
+        {
+            get => _users;
+            set
+            {
+                _users = value;
+                OnPropertyChanged();
+            }
+        }
+        public User SelectingUser { get => _selectingUser; set { _selectingUser = value; OnPropertyChanged(); } }
+        public ObservableCollection<Provider> Providers
+        {
+            get => _providers;
+            set
+            {
+                _providers = value;
+                OnPropertyChanged();
+            }
+        }
+        public Provider SelectingProvider { get => _selectingProvider; set { _selectingProvider = value; OnPropertyChanged(); } }
+
         // public command properties
 
         public ICommand GoNextPage { get; set; }
         public ICommand GoPrevPage { get; set; }
         public ICommand AddItem { get; set; }
         public ICommand RemoveItem { get; set; }
+        public ICommand SaveOrderInfo { get; set; }
 
 
 
@@ -67,6 +98,9 @@ namespace OoadProject.Core.ViewModels.Orders
             // service
             _productService = new ProductService();
             _orderService = new OrderService();
+            _userService = new UserService();
+            _providerService = new ProviderService();
+
 
             // data
             var pagedList = _productService.GetProductsForOrderCreation();
@@ -82,6 +116,13 @@ namespace OoadProject.Core.ViewModels.Orders
             _loaded[0] = true;
 
             SelectedProducts = new ObservableCollection<SelectingProductDto>();
+
+            Users = new ObservableCollection<User>(_userService.GetUsers());
+            Providers = new ObservableCollection<Provider>(_providerService.GetProviders());
+            SelectingUser = Users.Count > 0 ? Users[0] : null;
+            SelectingProvider = Providers.Count > 0 ? Providers[0] : null;
+            Order = new OrderForCreationDto { CreationTime = DateTime.Now };
+
 
 
             // Command
@@ -162,7 +203,7 @@ namespace OoadProject.Core.ViewModels.Orders
                     else
                         SelectedProducts.Add(_orderService.SelectProduct(product));
 
-                    product.Number--;
+                    //product.Number--;
 
                 }
             });
@@ -175,9 +216,27 @@ namespace OoadProject.Core.ViewModels.Orders
                 if (selectedProduct.SelectedNumber == 0)
                     SelectedProducts.Remove(selectedProduct);
 
-                _loadedProducts.Where(sp => sp.Id == selectedProduct.Id).FirstOrDefault().Number++;
+                //_loadedProducts.Where(sp => sp.Id == selectedProduct.Id).FirstOrDefault().Number++;
             });
 
+
+            SaveOrderInfo = new RelayCommand<object>(
+            p => 
+            {
+                if (SelectingUser == null || SelectingProvider == null || SelectedProducts.Count == 0)
+                    return false;
+                return true;
+            },
+            p =>
+            {
+                if (p != null && (bool)p)
+                {
+                    Order.ProviderId = SelectingProvider.Id;
+                    Order.UserId = SelectingUser.Id;
+                    _orderService.AddNewOrder(Order, SelectedProducts);
+                }
+               
+            });
         }
     }
 }

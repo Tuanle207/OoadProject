@@ -133,29 +133,18 @@
                         <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,22,0,21">
                             Nhân viên:
                         </TextBlock>
-                        <ComboBox Grid.Row="0" Grid.Column="1" Foreground="Black" Margin="10" FontSize="16" Height="Auto" VerticalContentAlignment="Center" Padding="5 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                        <ComboBox ItemsSource="{Binding Users}" SelectedItem="{Binding SelectingUser, Mode=OneWayToSource}" DisplayMemberPath="Name" Grid.Row="0" Grid.Column="1" Foreground="Black" Margin="10" FontSize="16" Height="Auto" VerticalContentAlignment="Center" Padding="5 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                         </ComboBox>
                         <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="-20,22,0,21">
                             Nhà cung cấp:
                         </TextBlock>
-                        <ComboBox Grid.Row="1" Grid.Column="1" Foreground="Black" Margin="10" FontSize="16" Height="Auto" VerticalContentAlignment="Center" Padding="5 0"  Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                        <ComboBox ItemsSource="{Binding Providers}" SelectedItem="{Binding SelectingProvider, Mode=OneWayToSource}" DisplayMemberPath="Name" Grid.Row="1" Grid.Column="1" Foreground="Black" Margin="10" FontSize="16" Height="Auto" VerticalContentAlignment="Center" Padding="5 0"  Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                         </ComboBox>
                         <TextBlock Grid.Row="0" Grid.Column="2" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,22,0,21">
                             Ngày tạo đơn:
                         </TextBlock>
-                        <DatePicker Grid.Row="0" Grid.Column="3" Foreground="Black" Height="Auto" Margin="5" VerticalContentAlignment="Center" Padding="5 0" FontSize="16">
+                        <DatePicker SelectedDate="{Binding Order.CreationTime}" Grid.Row="0" Grid.Column="3" Foreground="Black" Height="Auto" Margin="5" VerticalContentAlignment="Center" Padding="5 0" FontSize="16">
                         </DatePicker>
-                        <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,22,0,21">
-                            Trạng thái:
-                        </TextBlock>
-                        <TextBox Grid.Row="1" Grid.Column="3" Foreground="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2 15 2 15" BorderThickness="1"
-                        TextAlignment="Left" VerticalContentAlignment="Center">
-                            <TextBox.Resources>
-                                <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                </Style>
-                            </TextBox.Resources>
-                        </TextBox>
 
                     </Grid>
 
@@ -165,9 +154,9 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Foreground="Black" FontWeight="Bold" Background="Red" Content="Hủy bỏ" VerticalAlignment="Center"  Height="40" Width="110">
+                    <Button Click="btnClose_Click" x:Name="btnClose" Grid.Column="0" Foreground="Black" FontWeight="Bold" Background="Red" Content="Hủy bỏ" VerticalAlignment="Center"  Height="40" Width="110">
                     </Button>
-                    <Button Grid.Column="1" Foreground="Black" FontWeight="Bold" Background="Green" Content="Xác nhận" VerticalAlignment="Center"  Height="40" Width="110">
+                    <Button Click="btnSave_Click" Command="{Binding SaveOrderInfo}" x:Name="btnSave" Grid.Column="1" Foreground="Black" FontWeight="Bold" Background="Green" Content="Xác nhận" VerticalAlignment="Center"  Height="40" Width="110">
                     </Button>
                 </Grid>
             </Grid>

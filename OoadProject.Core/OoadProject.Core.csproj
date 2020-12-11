@@ -43,27 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mapper\AppMapperProfile.cs" />
-    <Compile Include="Mapper\AutoMapper.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\AppProduct\InvoiceService.cs" />
-    <Compile Include="Services\AppProduct\OrderService.cs" />
-    <Compile Include="Services\AppProduct\ProductService.cs" />
-    <Compile Include="Services\AppUser\RoleService.cs" />
-    <Compile Include="Services\AppUser\UserService.cs" />
-    <Compile Include="Services\BaseService.cs" />
-    <Compile Include="Services\TimeType.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\Home\Dtos\HotProductDto.cs" />
-    <Compile Include="ViewModels\Home\Dtos\ProcessingOrderDto.cs" />
-    <Compile Include="ViewModels\Home\Dtos\RevenueDto.cs" />
-    <Compile Include="ViewModels\Home\HomeViewModel.cs" />
-    <Compile Include="ViewModels\Orders\Dtos\ProductForOrderCreation.cs" />
-    <Compile Include="ViewModels\Orders\Dtos\SelectingProductDto.cs" />
-    <Compile Include="ViewModels\Orders\OrderCreationViewModel.cs" />
-    <Compile Include="ViewModels\RelayCommand.cs" />
-    <Compile Include="ViewModels\Users\Dtos\UserForCreationDto.cs" />
-    <Compile Include="ViewModels\Users\UserViewModel.cs" />
+    <Compile Include="**\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="obj\**\*.cs" />
