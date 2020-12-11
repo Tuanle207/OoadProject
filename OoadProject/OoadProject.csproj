@@ -74,6 +74,8 @@
     <Compile Include="View\*.xaml.cs" DependentUpon="%(Filename)" />
     <Compile Include="View\WarrantyOrderUserControl.xaml.cs">
       <DependentUpon>WarrantyOrderUserControl.xaml</DependentUpon>
+    <Compile Include="View\ListWarrantyOrderUserControl.xaml.cs">
+      <DependentUpon>ListWarrantyOrderUserControl.xaml</DependentUpon>
     </Compile>
     <Page Include="DataContext.xaml">
       <SubType>Designer</SubType>
@@ -88,6 +90,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\WarrantyOrderUserControl.xaml">
+    <Page Include="View\ListWarrantyOrderUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
