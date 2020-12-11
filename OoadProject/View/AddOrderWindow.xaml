@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OoadProject.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="Thêm đơn hàng" Height="600" Width="1000">
+        Title="Thêm đơn hàng" Height="600" Width="1000"
+        DataContext="{StaticResource OrderCreationViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -28,22 +29,23 @@
             </Grid>
             <materialDesign:Card Grid.Row="1"  Margin="5 5 5 5" BorderThickness="0" VerticalAlignment="Stretch">
                 <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                    <DataGrid Background="#FFE3F0FF"  SelectionMode="Single"
+                    <DataGrid ItemsSource="{Binding Products}" Background="#FFE3F0FF"  SelectionMode="Single"
                           AutoGenerateColumns="False" IsReadOnly="True" Grid.ColumnSpan="1" BorderThickness="1">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid>
-                                            <Button Content="+"  ToolTip="Thêm vào đơn hàng"/>
+                                            <Button  Content="+" Command="{Binding Path=DataContext.AddItem, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" CommandParameter="{Binding}" ToolTip="Thêm vào đơn hàng"/>
                                         </Grid>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Mã sản phẩm"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Tên sản phẩm"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Loại sản phẩm"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Nhà sản xuất"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Mã sản phẩm" Binding="{Binding Id}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding Name}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Loại sản phẩm" Binding="{Binding CategoryName}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nhà sản xuất" Binding="{Binding ManufacturerName}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Số lượng" Binding="{Binding Number}"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>
@@ -56,11 +58,11 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="1">
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        <Button x:Name="btnPrev" Height="20" Foreground="Black" Background="#FF47608E" Padding="10 0 10 2" Margin="0 0 20 0" >&lt;</Button>
-                        <TextBlock Height="20" Text="1"></TextBlock>
+                        <Button x:Name="btnPrev" Height="20" Foreground="Black" Background="#FF47608E" Padding="10 0 10 2" Margin="0 0 20 0" Command="{Binding GoPrevPage}">&lt;</Button>
+                        <TextBlock Height="20" Text="{Binding CurrentPage}"></TextBlock>
                         <TextBlock Height="20">/</TextBlock>
-                        <TextBlock Height="20" Text="2"></TextBlock>
-                        <Button x:Name="btnNext" Height="20" Foreground="Black" Background="#FF47608E" Padding="10 0 10 2" Margin="20 0 0 0">&gt;</Button>
+                        <TextBlock Height="20" Text="{Binding TotalPages}"></TextBlock>
+                        <Button x:Name="btnNext" Height="20" Foreground="Black" Background="#FF47608E" Padding="10 0 10 2" Margin="20 0 0 0" Command="{Binding GoNextPage}">&gt;</Button>
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -76,14 +78,14 @@
             </TextBlock>
             <materialDesign:Card Grid.Row="1"  Margin="5 5 5 5" BorderThickness="0" VerticalAlignment="Stretch">
                 <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                    <DataGrid Background="#FFE3F0FF" Grid.Column="1"  SelectionMode="Single"
+                    <DataGrid ItemsSource="{Binding SelectedProducts}" Background="#FFE3F0FF" Grid.Column="1"  SelectionMode="Single"
                           AutoGenerateColumns="False" IsReadOnly="True" BorderThickness="1">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid>
-                                            <Button Content="-" ToolTip="Giảm số lượng sản phẩm"/>
+                                            <Button Content="-" Command="{Binding Path=DataContext.RemoveItem, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" CommandParameter="{Binding}"  ToolTip="Giảm số lượng sản phẩm"/>
                                         </Grid>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -92,24 +94,15 @@
                                 <DataGridTemplateColumn.CellTemplate >
                                     <DataTemplate>
                                         <Grid>
-                                            <Button Content="+" ToolTip="Tăng số lượng sản phẩm"/>
+                                            <Button Content="+" Command="{Binding Path=DataContext.AddItem, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" CommandParameter="{Binding}"  ToolTip="Tăng số lượng sản phẩm"/>
                                         </Grid>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Tên sản phẩm"/>
-                            <DataGridTextColumn Header="Loại sản phẩm"/>
-                            <DataGridTextColumn Header="Số lượng"/>
-                            <DataGridTextColumn Header="Giá"/>
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Button Content="+"  ToolTip="Thêm số lượng sản phẩm"/>
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Loại sản phẩm" Binding="{Binding CategoryName}"/>
+                            <DataGridTextColumn Header="Giá" Binding="{Binding PriceOut}"/>
+                            <DataGridTextColumn Header="Số lượng" Binding="{Binding SelectedNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>
@@ -140,29 +133,18 @@
                         <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,22,0,21">
                             Nhân viên:
                         </TextBlock>
-                        <ComboBox Grid.Row="0" Grid.Column="1" Foreground="Black" Margin="10" FontSize="16" Height="Auto" VerticalContentAlignment="Center" Padding="5 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                        <ComboBox ItemsSource="{Binding Users}" SelectedItem="{Binding SelectingUser, Mode=OneWayToSource}" DisplayMemberPath="Name" Grid.Row="0" Grid.Column="1" Foreground="Black" Margin="10" FontSize="16" Height="Auto" VerticalContentAlignment="Center" Padding="5 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                         </ComboBox>
                         <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="-20,22,0,21">
                             Nhà cung cấp:
                         </TextBlock>
-                        <ComboBox Grid.Row="1" Grid.Column="1" Foreground="Black" Margin="10" FontSize="16" Height="Auto" VerticalContentAlignment="Center" Padding="5 0"  Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                        <ComboBox ItemsSource="{Binding Providers}" SelectedItem="{Binding SelectingProvider, Mode=OneWayToSource}" DisplayMemberPath="Name" Grid.Row="1" Grid.Column="1" Foreground="Black" Margin="10" FontSize="16" Height="Auto" VerticalContentAlignment="Center" Padding="5 0"  Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                         </ComboBox>
                         <TextBlock Grid.Row="0" Grid.Column="2" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,22,0,21">
                             Ngày tạo đơn:
                         </TextBlock>
-                        <DatePicker Grid.Row="0" Grid.Column="3" Foreground="Black" Height="Auto" Margin="5" VerticalContentAlignment="Center" Padding="5 0" FontSize="16">
+                        <DatePicker SelectedDate="{Binding Order.CreationTime}" Grid.Row="0" Grid.Column="3" Foreground="Black" Height="Auto" Margin="5" VerticalContentAlignment="Center" Padding="5 0" FontSize="16">
                         </DatePicker>
-                        <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,22,0,21">
-                            Trạng thái:
-                        </TextBlock>
-                        <TextBox Grid.Row="1" Grid.Column="3" Foreground="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2 15 2 15" BorderThickness="1"
-                        TextAlignment="Left" VerticalContentAlignment="Center">
-                            <TextBox.Resources>
-                                <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                </Style>
-                            </TextBox.Resources>
-                        </TextBox>
 
                     </Grid>
 
@@ -172,9 +154,9 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Foreground="Black" FontWeight="Bold" Background="Red" Content="Hủy bỏ" VerticalAlignment="Center"  Height="40" Width="110">
+                    <Button Click="btnClose_Click" x:Name="btnClose" Grid.Column="0" Foreground="Black" FontWeight="Bold" Background="Red" Content="Hủy bỏ" VerticalAlignment="Center"  Height="40" Width="110">
                     </Button>
-                    <Button Grid.Column="1" Foreground="Black" FontWeight="Bold" Background="Green" Content="Xác nhận" VerticalAlignment="Center"  Height="40" Width="110">
+                    <Button Click="btnSave_Click" Command="{Binding SaveOrderInfo}" x:Name="btnSave" Grid.Column="1" Foreground="Black" FontWeight="Bold" Background="Green" Content="Xác nhận" VerticalAlignment="Center"  Height="40" Width="110">
                     </Button>
                 </Grid>
             </Grid>

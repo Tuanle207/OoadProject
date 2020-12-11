@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OoadProject.Data", "OoadPro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OoadProject.Core", "OoadProject.Core\OoadProject.Core.csproj", "{202F787A-00A2-4A57-A463-13146F267AFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OoadProject.Core.Test", "OoadProject.Core.Test\OoadProject.Core.Test.csproj", "{910DA87F-54BC-4C51-B87F-49BAC8A1D45F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OoadProject.Shared", "OoadProject.Shared\OoadProject.Shared.csproj", "{A8DF545F-CB3F-4692-85E7-F756DBDE83F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{202F787A-00A2-4A57-A463-13146F267AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{202F787A-00A2-4A57-A463-13146F267AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{202F787A-00A2-4A57-A463-13146F267AFE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{910DA87F-54BC-4C51-B87F-49BAC8A1D45F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{910DA87F-54BC-4C51-B87F-49BAC8A1D45F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{910DA87F-54BC-4C51-B87F-49BAC8A1D45F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{910DA87F-54BC-4C51-B87F-49BAC8A1D45F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8DF545F-CB3F-4692-85E7-F756DBDE83F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8DF545F-CB3F-4692-85E7-F756DBDE83F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8DF545F-CB3F-4692-85E7-F756DBDE83F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8DF545F-CB3F-4692-85E7-F756DBDE83F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,7 @@ using System.Data.Entity;
 
 namespace OoadProject.Data.Repository
 {
-    public class OrderRepository
+    public class OrderRepository : BaseRepository<Order>
     {
         public IEnumerable<Order> GetOrders(List<OrderStatus> status = null, int? limit = null)
         {
@@ -28,5 +28,7 @@ namespace OoadProject.Data.Repository
                 return orders;
             }
         }
+
+
     }
 }
