@@ -37,7 +37,46 @@ namespace OoadProject.View
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            mainController.Content = new ItemManagerScreen();
+            mainControl.Content = new HomeScreen();
+        }
+
+        private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
+            {
+                case "ItemHome":
+                    lbTitle.Content = "TRANG CHỦ";
+                    mainControl.Content = new HomeScreen();
+                    break;
+                case "ItemSell":
+                    this.lbTitle.Content = "BÁN HÀNG";
+                    mainControl.Content = new SellUserControl();
+                    break;
+                case "ItemProduct":
+                    this.lbTitle.Content = "QUẢN LÝ SẢN PHẨM";
+                    mainControl.Content = new ItemManagerScreen();
+                    break;
+                case "ItemImportProduct":
+                    this.lbTitle.Content = "QUẢN LÝ ĐƠN ĐẶT HÀNG";
+                    mainControl.Content = new ManagementOrderUserControl();
+                    break;
+                case "ItemWarranty":
+                    this.lbTitle.Content = "BẢO HÀNH SẢN PHẨM";
+                    mainControl.Content = new WarrantyOrderUserControl();
+                    break;
+                case "ItemStaff":
+                    this.lbTitle.Content = "QUẢN LÝ NHÂN VIÊN";
+                    mainControl.Content = new NhanVienUserControl();
+                    break;
+                case "ItemReport":
+                    this.lbTitle.Content = "BÁO CÁO THỐNG KÊ";
+                    mainControl.Content = new ReportUserControl();
+                    break;
+                case "ItemSetting":
+                    this.lbTitle.Content = "THAY ĐỔI CÁC THAM SỐ";
+                    mainControl.Content = new SettingUserControl();
+                    break;
+            }
         }
     }
 }

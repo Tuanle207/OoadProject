@@ -149,6 +149,9 @@
     <Compile Include="View\ProviderUserControl.xaml.cs">
       <DependentUpon>ProviderUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ReportUserControl.xaml.cs">
+      <DependentUpon>ReportUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SellUserControl.xaml.cs">
       <DependentUpon>SellUserControl.xaml</DependentUpon>
     </Compile>
@@ -278,6 +281,10 @@
     <Page Include="View\ProviderUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ReportUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SellUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
