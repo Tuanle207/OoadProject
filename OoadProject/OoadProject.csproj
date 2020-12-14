@@ -71,8 +71,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
     <Compile Include="View\AddCategoryProductWindow.xaml.cs">
       <DependentUpon>AddCategoryProductWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddItemScreen.xaml.cs">
+      <DependentUpon>AddItemScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AddManufactureWindow.xaml.cs">
       <DependentUpon>AddManufactureWindow.xaml</DependentUpon>
@@ -89,11 +107,20 @@
     <Compile Include="View\CategoryProductUserControl.xaml.cs">
       <DependentUpon>CategoryProductUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditItemScreen.xaml.cs">
+      <DependentUpon>EditItemScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EditOrderWindow.xaml.cs">
       <DependentUpon>EditOrderWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\HomeScreen.xaml.cs">
+      <DependentUpon>HomeScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ImportItemsUserControl.xaml.cs">
       <DependentUpon>ImportItemsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ItemManagerScreen.xaml.cs">
+      <DependentUpon>ItemManagerScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ListImportedItemUserControl.xaml.cs">
       <DependentUpon>ListImportedItemUserControl.xaml</DependentUpon>
@@ -140,15 +167,35 @@
     <Compile Include="View\WarrantyOrderUserControl.xaml.cs">
       <DependentUpon>WarrantyOrderUserControl.xaml</DependentUpon>
     </Compile>
-    <Page Include="DataContext.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OoadProject.Data\OoadProject.Data.csproj">
+      <Project>{48a0b0d5-d932-4884-a12a-a3def56d0d90}</Project>
+      <Name>OoadProject.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OoadProject.Core\OoadProject.Core.csproj">
+      <Project>{202f787a-00a2-4a57-a463-13146f267afe}</Project>
+      <Name>OoadProject.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Page Include="View\AddCategoryProductWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AddItemScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -172,11 +219,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\EditItemScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\EditOrderWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\HomeScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\ImportItemsUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ItemManagerScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -240,43 +299,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OoadProject.Data\OoadProject.Data.csproj">
-      <Project>{48a0b0d5-d932-4884-a12a-a3def56d0d90}</Project>
-      <Name>OoadProject.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OoadProject.Core\OoadProject.Core.csproj">
-      <Project>{202f787a-00a2-4a57-a463-13146f267afe}</Project>
-      <Name>OoadProject.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
