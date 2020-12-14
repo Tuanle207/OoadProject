@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OoadProject.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        DataContext="{StaticResource RoleViewModel}"
-        Title="MainWindow" Height="700" Width="1200" AllowsTransparency="True" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None" Loaded="Window_Loaded">
+        Title="MainWindow" Height="700" Width="1200" AllowsTransparency="True" ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -17,7 +17,7 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
-        <Label Content="TRANG CHỦ" FontSize="20" Grid.Column="0" Grid.ColumnSpan="3" FontFamily="Roboto" Background="#b2b2b2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label x:Name="lbTitle" Content="TRANG CHỦ" FontSize="20" Grid.Column="0" Grid.ColumnSpan="3" FontFamily="Roboto" Background="#b2b2b2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Button x:Name="btnMinimize" Grid.Column="1" Background="Transparent" BorderThickness="0" Height="Auto" Click="btnMinimize_Click">
             <materialDesign:PackIcon Kind="WindowMinimize" VerticalAlignment="Center" Height="24" Width="24"/>
         </Button>
@@ -29,10 +29,37 @@
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Background="#ee1313">
-                
-            </StackPanel>
-            <UserControl x:Name="mainController" Grid.Column="1"/>
+            <materialDesign:Card Grid.Column="0" Background="#E6E6E6" BorderThickness="0" VerticalAlignment="Stretch">
+                <ListView x:Name="ListViewMenu" Foreground="Black"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          SelectionChanged="ListViewMenu_SelectionChanged">
+                    <ListViewItem x:Name="ItemHome" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="Home" Width="80" Height="50" />
+                        </ListViewItem>
+                    <ListViewItem x:Name="ItemSell" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="CartPlus" Width="80" Height="50" />
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemProduct" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="TreasureChest" Width="80" Height="50" />
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemImportProduct" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="ArrowDownBoldBox" Width="80" Height="50" />
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemWarranty" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="PlusBox" Width="80" Height="50" />
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemStaff" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="AccountCircle" Width="80" Height="50" />
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemReport" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="ChartLineVariant" Width="80" Height="50" />
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemSetting" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="Settings" Width="80" Height="50" />
+                    </ListViewItem>
+                </ListView>
+            </materialDesign:Card>
+            <UserControl x:Name="mainControl" Grid.Column="1"/>
         </Grid>
     </Grid>
 </Window>
