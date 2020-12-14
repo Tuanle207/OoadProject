@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OoadProject.Data.Entity.AppCustomer;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OoadProject.Data.Repository
 {
-    public class InvoiceRepository
+    public class InvoiceRepository : BaseRepository<Invoice>
     {
         public int GetSalesByDay(DateTime day)
         {

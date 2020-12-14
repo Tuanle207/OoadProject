@@ -1,5 +1,6 @@
 ﻿using OoadProject.Core.ViewModels.Home.Dtos;
 using OoadProject.Core.ViewModels.Orders.Dtos;
+using OoadProject.Core.ViewModels.Sells.Dtos;
 using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Repository;
 using OoadProject.Shared.Pagination;
@@ -43,6 +44,20 @@ namespace OoadProject.Core.Services.AppProduct
             var productsForReturn = new PaginatedList<ProductForOrderCreationDto>
             (
                 Mapper.Map<List<ProductForOrderCreationDto>>(rawProducts.Data),
+                rawProducts.TotalRecords,
+                rawProducts.CurrentPage,
+                rawProducts.PageRecords
+            );
+            return productsForReturn;
+        }
+
+        public PaginatedList<ProductForSellDto> GetProductsForSell(int page = 1, int limit = 4)
+        {
+            var rawProducts = _productRepository.GetProducts(page, limit);
+
+            var productsForReturn = new PaginatedList<ProductForSellDto>
+            (
+                Mapper.Map<List<ProductForSellDto>>(rawProducts.Data),
                 rawProducts.TotalRecords,
                 rawProducts.CurrentPage,
                 rawProducts.PageRecords

@@ -137,8 +137,8 @@ namespace OoadProject.Core.ViewModels.Orders
                     var start = (CurrentPage - 1) * _pageSize;
                     var end = start + _pageSize;
 
-                    for (var i = 0; i < _loadedProducts.Count; i++)
-                        if (i >= start && i < end)
+                    for (var i = start; i < _loadedProducts.Count; i++)
+                        if (i < end)
                             Products.Add(_loadedProducts[i]);
                 }
                 else
@@ -161,8 +161,7 @@ namespace OoadProject.Core.ViewModels.Orders
                 var start = (CurrentPage - 1) * _pageSize;
                 var end = start + _pageSize;
 
-                for (var i = 0; i < _loadedProducts.Count; i++)
-                    if (i >= start && i < end)
+                for (var i = start; i < end; i++)
                         Products.Add(_loadedProducts[i]);
             });
 

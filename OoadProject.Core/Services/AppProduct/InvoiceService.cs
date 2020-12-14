@@ -1,4 +1,6 @@
 ﻿using OoadProject.Core.ViewModels.Home.Dtos;
+using OoadProject.Core.ViewModels.Sells.Dtos;
+using OoadProject.Data.Entity.AppCustomer;
 using OoadProject.Data.Repository;
 using System;
 using System.Collections.Generic;
@@ -11,10 +13,14 @@ namespace OoadProject.Core.Services.AppProduct
     public class InvoiceService
     {
         private readonly InvoiceRepository _invoiceRepository;
+        private readonly CustomerRepository _customerRepository;
+        private readonly InvoiceProductRepository _invoiceProductRepository;
 
         public InvoiceService()
         {
             _invoiceRepository = new InvoiceRepository();
+            _customerRepository = new CustomerRepository();
+            _invoiceProductRepository = new InvoiceProductRepository();
         }
 
         /// <summary>
@@ -44,6 +50,49 @@ namespace OoadProject.Core.Services.AppProduct
             }
 
             return dto;
+        }
+
+        public void AddInvoice(InvoiceForCreationDto invoice, List<SelectingProductForSellDto> products)
+        {
+            // 1. add custom?
+            var phoneNumber = invoice.PhoneNumber;
+
+            // check if it's existing?
+            var customer = _customerRepository.GetCustomByPhoneNumber(phoneNumber);
+            var customerId = -1;
+
+            if (customer == null)
+            {
+                customer = new Customer { Name = invoice.CustomerName, PhoneNumber = phoneNumber };
+                var storedCustomer = _customerRepository.Create(customer);
+                customerId = storedCustomer.Id;
+            }
+            else
+            {
+                customerId = customer.Id;
+            }
+
+            // 2. add invoice
+            var storedInvoice = _invoiceRepository.Create(new Invoice
+            {
+                CustomerId = customerId,
+                UserId = 1, /// phai fix lai!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
+                CreationTime = DateTime.Now,
+                Total = invoice.Total
+            }); ;
+
+            // 3. add invoice's products
+            foreach (var product in products)
+            {
+                var invoiceProduct = new InvoiceProduct
+                {
+                    ProductId = product.Id,
+                    Number = product.SelectedNumber,
+                    InvoiceId = storedInvoice.Id
+                };
+
+                _invoiceProductRepository.Create(invoiceProduct);
+            }
         }
 
     }
