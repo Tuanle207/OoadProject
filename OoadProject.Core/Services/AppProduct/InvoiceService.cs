@@ -31,7 +31,7 @@ namespace OoadProject.Core.Services.AppProduct
                 // 1. Get sales number
                 dto.Sales = _invoiceRepository.GetSalesByDay(dateTime);
 
-                // 2. Get all Invoices
+                // 2. Get revenue
                 dto.Revenue = _invoiceRepository.GetRevenueByDay(dateTime);
             }
             else  // Get revenue of the month
@@ -39,7 +39,7 @@ namespace OoadProject.Core.Services.AppProduct
                 // 1. Get sales number
                 dto.Sales = _invoiceRepository.GetSalesByMonth(dateTime);
 
-                // 2. Get all Invoices
+                // 2. Get revenue
                 dto.Revenue = _invoiceRepository.GetRevenueByMonth(dateTime);
             }
 

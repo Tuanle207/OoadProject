@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -60,6 +61,10 @@
     <ProjectReference Include="..\OoadProject.Data\OoadProject.Data.csproj">
       <Project>{48a0b0d5-d932-4884-a12a-a3def56d0d90}</Project>
       <Name>OoadProject.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OoadProject.Shared\OoadProject.Shared.csproj">
+      <Project>{a8df545f-cb3f-4692-85e7-f756dbde83f4}</Project>
+      <Name>OoadProject.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

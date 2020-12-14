@@ -71,12 +71,76 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="View\*.xaml.cs" DependentUpon="%(Filename)" />
+    <Compile Include="View\AddCategoryProductWindow.xaml.cs">
+      <DependentUpon>AddCategoryProductWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddManufactureWindow.xaml.cs">
+      <DependentUpon>AddManufactureWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddOrderWindow.xaml.cs">
+      <DependentUpon>AddOrderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddProviderWindow.xaml.cs">
+      <DependentUpon>AddProviderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddStaffWindow.xaml.cs">
+      <DependentUpon>AddStaffWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CategoryProductUserControl.xaml.cs">
+      <DependentUpon>CategoryProductUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditOrderWindow.xaml.cs">
+      <DependentUpon>EditOrderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ImportItemsUserControl.xaml.cs">
+      <DependentUpon>ImportItemsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ListImportedItemUserControl.xaml.cs">
+      <DependentUpon>ListImportedItemUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ListOrderUserControl.xaml.cs">
+      <DependentUpon>ListOrderUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ListWarrantyOrderUserControl.xaml.cs">
+      <DependentUpon>ListWarrantyOrderUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManagementOrderUserControl.xaml.cs">
+      <DependentUpon>ManagementOrderUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManufactureUserControl.xaml.cs">
+      <DependentUpon>ManufactureUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NhanVienUserControl.xaml.cs">
+      <DependentUpon>NhanVienUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ParameterUserControl.xaml.cs">
+      <DependentUpon>ParameterUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProviderUserControl.xaml.cs">
+      <DependentUpon>ProviderUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SellUserControl.xaml.cs">
+      <DependentUpon>SellUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingUserControl.xaml.cs">
+      <DependentUpon>SettingUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ThemNhanVienWindow.xaml.cs">
+      <DependentUpon>ThemNhanVienWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UpdateInfoStaffWindow.xaml.cs">
+      <DependentUpon>UpdateInfoStaffWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UpdatePasswordWindow.xaml.cs">
+      <DependentUpon>UpdatePasswordWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WarrantyOrderUserControl.xaml.cs">
+      <DependentUpon>WarrantyOrderUserControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="DataContext.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\*.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -84,6 +148,98 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AddCategoryProductWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AddManufactureWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AddOrderWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AddProviderWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AddStaffWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CategoryProductUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditOrderWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ImportItemsUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ListImportedItemUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ListOrderUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ListWarrantyOrderUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ManagementOrderUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ManufactureUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\NhanVienUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ParameterUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ProviderUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SellUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SettingUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ThemNhanVienWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\UpdateInfoStaffWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\UpdatePasswordWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\WarrantyOrderUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

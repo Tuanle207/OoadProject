@@ -1,5 +1,8 @@
 ﻿using OoadProject.Core.ViewModels.Home.Dtos;
+using OoadProject.Core.ViewModels.Orders.Dtos;
+using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Repository;
+using OoadProject.Shared.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +34,20 @@ namespace OoadProject.Core.Services.AppProduct
             }
 
             return null;
+        }
+
+        public PaginatedList<ProductForOrderCreationDto> GetProductsForOrderCreation(int page = 1, int limit = 4)
+        {
+            var rawProducts = _productRepository.GetProducts(page, limit);
+
+            var productsForReturn = new PaginatedList<ProductForOrderCreationDto>
+            (
+                Mapper.Map<List<ProductForOrderCreationDto>>(rawProducts.Data),
+                rawProducts.TotalRecords,
+                rawProducts.CurrentPage,
+                rawProducts.PageRecords
+            );
+            return productsForReturn;
         }
     }
 }
