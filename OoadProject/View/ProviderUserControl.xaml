@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OoadProject.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="590" d:DesignWidth="1100">
+             d:DesignHeight="590" d:DesignWidth="1100"
+             DataContext="{StaticResource ProviderViewModel}" >
     <Grid Width="650" Height="400">
         <Grid.RowDefinitions>
             <RowDefinition Height=" 4*"/>
@@ -13,14 +14,14 @@
         </Grid.RowDefinitions>
         <materialDesign:Card Grid.Row="0" Margin="10">
             <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                <ListView>
+                <ListView ItemsSource="{Binding Providers}" SelectedItem="{Binding ChosenProvider}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Mã NCC"></GridViewColumn>
-                            <GridViewColumn Header="Tên NCC"></GridViewColumn>
-                            <GridViewColumn Header="Số điện thoại"></GridViewColumn>
-                            <GridViewColumn Header="Email"></GridViewColumn>
-                            <GridViewColumn Header="Địa chỉ"></GridViewColumn>
+                            <GridViewColumn Header="Mã NCC" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                            <GridViewColumn Header="Tên NCC" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                            <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding PhoneNumber}"></GridViewColumn>
+                            <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"></GridViewColumn>
+                            <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding Address}"></GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -34,7 +35,7 @@
                     <ColumnDefinition Width="2*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="btnAddProvider" Click="btnAddProvider_Click" Foreground="Black" Background="Green" Grid.Column="0" Height="40" Width="150"  HorizontalContentAlignment="Center" Margin="10" Content="Thêm mới" HorizontalAlignment="Center"></Button>
-                <Button Foreground="Black" Background="Red" Grid.Column="2" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Xóa" HorizontalAlignment="Center"></Button>
+                <Button Command="{Binding DeleteProvider}" Foreground="Black" Background="Red" Grid.Column="2" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Xóa" HorizontalAlignment="Center"></Button>
             </Grid>
         </Grid>
     </Grid>
