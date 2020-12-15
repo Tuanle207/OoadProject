@@ -4,10 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OoadProject.View"
+        xmlns:vm="clr-namespace:OoadProject.Core.ViewModels;assembly=OoadProject.Core"
         mc:Ignorable="d" ShowInTaskbar="False"
         WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow"
         Background="#FFBFD4FF"
-        Title="Thêm nhà cung cấp" Height="420" Width="400">
+        Title="Thêm nhà cung cấp" Height="420" Width="400"
+        DataContext="{StaticResource ProviderViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -21,42 +23,87 @@
             <ColumnDefinition Width="1.5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Content="Tên NCC:" VerticalContentAlignment="Center" FontSize="15" Padding="10"/>
-        <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" FontSize="16" Padding="2" BorderThickness="1" >
+        <TextBox x:Name="Name" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" FontSize="16" Padding="2" BorderThickness="1" >
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>
                     <Setter Property="Background" Value="#FFE3F0FF"/>
                 </Style>
             </TextBox.Resources>
+            <TextBox.Text>
+                <Binding Path="NewProvider.Name" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vm:NameValidation></vm:NameValidation>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
         </TextBox>
         <Label Grid.Row="1" Grid.Column="0" Content="Số điện thoại:" VerticalContentAlignment="Center" FontSize="15" Padding="10"/>
-        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" FontSize="16" Padding="2" BorderThickness="1" >
+        <TextBox x:Name="PhoneNumber" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" FontSize="16" Padding="2" BorderThickness="1" >
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>
                     <Setter Property="Background" Value="#FFE3F0FF"/>
                 </Style>
             </TextBox.Resources>
+            <TextBox.Text>
+                <Binding Path="NewProvider.PhoneNumber" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vm:PhoneNumberValidation></vm:PhoneNumberValidation>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
         </TextBox>
         <Label Grid.Row="2" Grid.Column="0" Content="Email:" VerticalContentAlignment="Center" FontSize="15" Padding="10"/>
-        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" FontSize="16" Padding="2" BorderThickness="1" >
+        <TextBox x:Name="Email" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" FontSize="16" Padding="2" BorderThickness="1" >
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>
                     <Setter Property="Background" Value="#FFE3F0FF"/>
                 </Style>
             </TextBox.Resources>
+            <TextBox.Text>
+                <Binding Path="NewProvider.Email" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vm:EmailValidation></vm:EmailValidation>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
         </TextBox>
         <Label Grid.Row="3" Grid.Column="0" Content="Địa chỉ:" VerticalContentAlignment="Center" FontSize="15" Padding="10"/>
-        <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" FontSize="16" Padding="2" BorderThickness="1" >
+        <TextBox x:Name="Address" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" FontSize="16" Padding="2" BorderThickness="1" >
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>
                     <Setter Property="Background" Value="#FFE3F0FF"/>
                 </Style>
             </TextBox.Resources>
+            <TextBox.Text>
+                <Binding Path="NewProvider.Address" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vm:AddressValidation></vm:AddressValidation>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
         </TextBox>
-        <Button Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Height="45" Margin="0 40 0 0" Content="Thêm mới" Background="Green" BorderThickness="0"></Button>
+        <Button x:Name="btnAddProvider" Command="{Binding AddProvider}" Click="btnAddProvider_Click" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Height="45" Margin="0 40 0 0" Content="Thêm mới" Background="Green" BorderThickness="0">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="IsEnabled" Value="False" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Name}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=PhoneNumber}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Email}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Address}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Window>
 
