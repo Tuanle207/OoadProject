@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace OoadProject.Data.Repository
 {
-    public class ProviderRepository:BaseRepository<Provider>
+    public class ManufacturerRepository : BaseRepository<Manufacturer>
     {
-        public IEnumerable<Provider> GetProviders()
+        public IEnumerable<Manufacturer> GetManufacturers()
         {
             using (var ctx = new AppDbContext())
             {
-                return ctx.Providers.ToList();
+                return ctx.Manufacturers.ToList();
             }
         }
     }

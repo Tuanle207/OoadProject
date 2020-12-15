@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using OoadProject.Core.ViewModels.Home.Dtos;
 using OoadProject.Core.ViewModels.Orders.Dtos;
-using OoadProject.Core.ViewModels.Providers.Dtos;
+using OoadProject.Core.ViewModels.Settings.Dtos;
 using OoadProject.Core.ViewModels.Sells.Dtos;
 using OoadProject.Core.ViewModels.Users.Dtos;
 using OoadProject.Data.Entity.AppProduct;
@@ -66,6 +66,9 @@ namespace OoadProject.Core
 
             //Provider
             CreateMap<ProviderForCreationDto, Provider>();
+
+            //Manufacturer
+            CreateMap<ManufacturerForCreationDto, Manufacturer>();
         }
     }
 }

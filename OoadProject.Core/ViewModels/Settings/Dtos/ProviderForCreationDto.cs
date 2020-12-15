@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OoadProject.Core.ViewModels.Providers.Dtos
+namespace OoadProject.Core.ViewModels.Settings.Dtos
 {
     public class ProviderForCreationDto:BaseViewModel
     {
