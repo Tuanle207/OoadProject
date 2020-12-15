@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OoadProject.Core.ViewModels.Users.Dtos
 {
-    public class UserForCreationDto : BaseViewModel
+    public class UserForCreationDto : BaseDto
     {
         private string _name;
         private string _role;

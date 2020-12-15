@@ -131,6 +131,9 @@
     <Compile Include="View\ListWarrantyOrderUserControl.xaml.cs">
       <DependentUpon>ListWarrantyOrderUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -157,9 +160,6 @@
     </Compile>
     <Compile Include="View\SettingUserControl.xaml.cs">
       <DependentUpon>SettingUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ThemNhanVienWindow.xaml.cs">
-      <DependentUpon>ThemNhanVienWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UpdateInfoStaffWindow.xaml.cs">
       <DependentUpon>UpdateInfoStaffWindow.xaml</DependentUpon>
@@ -258,6 +258,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -294,10 +298,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ThemNhanVienWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\UpdateInfoStaffWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -310,6 +310,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Asset\home.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

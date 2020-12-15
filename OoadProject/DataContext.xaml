@@ -2,9 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:OoadProject" 
                     xmlns:vm="clr-namespace:OoadProject.Core.ViewModels.Users;assembly=OoadProject.Core" 
-                    xmlns:vm1="clr-namespace:OoadProject.Core.ViewModels.Orders;assembly=OoadProject.Core" xmlns:vm2="clr-namespace:OoadProject.Core.ViewModels.Sells;assembly=OoadProject.Core">
+                    xmlns:vm1="clr-namespace:OoadProject.Core.ViewModels.Orders;assembly=OoadProject.Core" 
+                    xmlns:vm2="clr-namespace:OoadProject.Core.ViewModels.Sells;assembly=OoadProject.Core">
     <vm:UserViewModel x:Key="UserViewModel"></vm:UserViewModel>
+    <vm:LoginViewModel x:Key="LoginViewModel"></vm:LoginViewModel>
     <vm1:OrderCreationViewModel x:Key="OrderCreationViewModel"></vm1:OrderCreationViewModel>
     <vm2:SellViewModel x:Key="SellViewModel"></vm2:SellViewModel>
+    
 
 </ResourceDictionary>

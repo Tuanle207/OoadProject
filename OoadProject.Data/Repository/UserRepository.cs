@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OoadProject.Data.Repository
 {
-    public class UserRepository
+    public class UserRepository : BaseRepository<User>
     {
         public IEnumerable<User> GetAllUsers()
         {
@@ -19,35 +19,11 @@ namespace OoadProject.Data.Repository
             }
         }
 
-        public User CreateUser(User user)
+        public User GetUserByEmail(string email)
         {
             using (var ctx = new AppDbContext())
             {
-                var storedUser = ctx.Users.Add(user);
-                ctx.SaveChanges();
-                return storedUser;
-            }
-        }
-
-        public bool UpdateUser(User user)
-        {
-            using (var ctx = new AppDbContext())
-            {
-                var storedUser = ctx.Users.Where(u => u.Id == user.Id).FirstOrDefault();
-                ctx.Entry(storedUser).CurrentValues.SetValues(user);
-                ctx.SaveChanges();
-                return true;
-            }
-        }
-
-        public bool DeleteUser(int id)
-        {
-            using (var ctx = new AppDbContext())
-            {
-                var storedUser = ctx.Users.Where(u => u.Id == id).FirstOrDefault();
-                ctx.Users.Remove(storedUser);
-                ctx.SaveChanges();
-                return true;
+                return ctx.Users.Where(u => u.Email == email).FirstOrDefault();
             }
         }
     }

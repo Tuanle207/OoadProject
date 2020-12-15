@@ -25,6 +25,19 @@ namespace OoadProject.Core.Services.AppUser
             return _userRepository.GetAllUsers();
         }
 
+        public User Login(LoginDto loginDto)
+        {
+            // get user with email
+            var user = _userRepository.GetUserByEmail(loginDto.Email);
+
+            // compare password?
+            if (user.Password != loginDto.Password)
+                throw new ArgumentException("Email hoặc mật khẩu không chính xác");
+
+            // ok?
+            return user;
+        }
+
         public User AddUser(UserForCreationDto user)
         {
             var newUser = Mapper.Map<User>(user);
@@ -33,12 +46,12 @@ namespace OoadProject.Core.Services.AppUser
 
             newUser.RoleId = role.Id;
 
-            return _userRepository.CreateUser(newUser);
+            return _userRepository.Create(newUser);
         }
 
         public bool DeleteUser(User user)
         {
-            return _userRepository.DeleteUser(user.Id);
+            return _userRepository.Delete(user.Id);
         }
     }
 }

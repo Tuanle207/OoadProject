@@ -1,5 +1,7 @@
 ﻿
 using AutoMapper;
+using OoadProject.Core.AppSession;
+using OoadProject.Data.Entity.AppUser;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
