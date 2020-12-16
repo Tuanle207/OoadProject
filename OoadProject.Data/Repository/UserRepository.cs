@@ -23,7 +23,10 @@ namespace OoadProject.Data.Repository
         {
             using (var ctx = new AppDbContext())
             {
-                return ctx.Users.Where(u => u.Email == email).FirstOrDefault();
+                return ctx.Users
+                    .Where(u => u.Email == email)
+                    .Include(u => u.Role)
+                    .FirstOrDefault();
             }
         }
     }

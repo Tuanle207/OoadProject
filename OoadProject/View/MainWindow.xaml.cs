@@ -125,5 +125,11 @@ namespace OoadProject.View
         {
             _mouseDown = false;
         }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            (new LoginWindow()).Show();
+            this.Close();
+        }
     }
 }

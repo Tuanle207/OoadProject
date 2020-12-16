@@ -36,7 +36,8 @@
             </StackPanel>
         </Grid>
         <Button x:Name="btnLogin" Command="{Binding Login}" Click="btnLogin_Click" Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,65" Content="LOGIN"/>
+        <Button x:Name="btnAfterLogin" Command="{Binding ReloadUsername}" Visibility="Hidden" />
         <TextBlock MouseDown="TextBlock_MouseDown" Text="Thoát" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="30" Foreground="Gray" Cursor="Hand"/>
-        <Image Source="../Asset/home.png" Width="100" Height="100" VerticalAlignment="Top" Margin="30"/>
+        <!--<Image Source="../Asset/home.png" Width="100" Height="100" VerticalAlignment="Top" Margin="30"/>-->
     </Grid>
 </Window>
