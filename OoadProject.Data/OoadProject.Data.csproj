@@ -59,9 +59,9 @@
     <Compile Include="Entity\AppUser\Role.cs" />
     <Compile Include="Entity\AppUser\User.cs" />
     <Compile Include="Entity\Others\Parameter.cs" />
-    <Compile Include="Migrations\202012161415000_Initial.cs" />
-    <Compile Include="Migrations\202012161415000_Initial.designer.cs">
-      <DependentUpon>202012161415000_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202012161540144_Initial.cs" />
+    <Compile Include="Migrations\202012161540144_Initial.designer.cs">
+      <DependentUpon>202012161540144_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,8 +83,8 @@
     <Content Remove="obj\**\*.cs" />
     <Compile Remove="obj\**\*.cs" />
     <EmbeddedResource Remove="obj\**\*.cs" />
-    <EmbeddedResource Include="Migrations\202012161415000_Initial.resx">
-      <DependentUpon>202012161415000_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202012161540144_Initial.resx">
+      <DependentUpon>202012161540144_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <None Remove="obj\**\*.cs" />
   </ItemGroup>
