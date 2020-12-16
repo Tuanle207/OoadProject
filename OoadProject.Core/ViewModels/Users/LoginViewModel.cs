@@ -31,7 +31,7 @@ namespace OoadProject.Core.ViewModels.Users
         {
             _userService = new UserService();
 
-            LoginDto = new LoginDto();
+            LoginDto = new LoginDto { Email = "letgo237@gmail.com", Password = "test1234" };
 
             Login = new RelayCommand<object>
             (

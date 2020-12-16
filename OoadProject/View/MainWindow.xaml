@@ -21,29 +21,9 @@
         <Label x:Name="lbTitle" MouseMove="lbTitle_MouseMove" MouseDown="lbTitle_MouseDown" MouseUp="lbTitle_MouseUp" Content="TRANG CHỦ" FontSize="20" Grid.Column="0" Grid.ColumnSpan="3" FontFamily="Roboto" Background="#b2b2b2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Button x:Name="btnMinimize" Grid.Column="1" Background="Transparent" BorderThickness="0" Height="Auto" Click="btnMinimize_Click">
             <materialDesign:PackIcon Kind="WindowMinimize" VerticalAlignment="Center" Height="20" Width="20"/>
-            <Button.Resources>
-                <Style x:Name="actionBtn" TargetType="Button">
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True" >
-                            <Setter Property="Background" Value="Green" />
-                            <Setter Property="Cursor" Value="Hand" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Resources>
         </Button>
         <Button x:Name="btnClose" Grid.Column="2" Background="#ffb396" Height="Auto" BorderThickness="0" Click="btnClose_Click">
             <materialDesign:PackIcon Kind="WindowClose" VerticalAlignment="Center" Width="20" Height="20"/>
-            <Button.Resources>
-                <Style x:Name="actionBtn" TargetType="Button">
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True" >
-                            <Setter Property="Background" Value="#ff4646" />
-                            <Setter Property="Cursor" Value="Hand" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Resources>
         </Button>
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>

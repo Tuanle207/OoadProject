@@ -61,7 +61,7 @@ namespace OoadProject.View
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            mainControl.Content = new HomeScreen();
+            mainControl.Content = _homeScreen;
         }
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)

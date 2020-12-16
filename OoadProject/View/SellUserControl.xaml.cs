@@ -40,6 +40,8 @@ namespace OoadProject.View
             if (result == MessageBoxResult.OK && command.CanExecute(null))
             {
                 command.Execute(true);
+                var commandReloadHomeScreen = btnReloadHomeScreen.Command;
+                if (commandReloadHomeScreen.CanExecute(null)) commandReloadHomeScreen.Execute(null);
             }
             else if (result != MessageBoxResult.OK && command.CanExecute(null))
             {
@@ -59,6 +61,24 @@ namespace OoadProject.View
             else if (result != MessageBoxResult.OK && command.CanExecute(null))
             {
                 command.Execute(false);
+            }
+        }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.Key == Key.Enter)
+            {
+                var command = btnGetCustomer.Command;
+                try
+                {
+                    if (command.CanExecute(null))
+                        command.Execute(null);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
     }
