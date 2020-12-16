@@ -12,8 +12,8 @@ namespace OoadProject.Core.ViewModels
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            string name = (string)value;
-            if (value == null || name.Trim().Length == 0)
+            string description = (string)value;
+            if (value == null || description.Trim().Length == 0)
             {
                 return new ValidationResult(false, "Vui lòng nhập mô tả");
             }

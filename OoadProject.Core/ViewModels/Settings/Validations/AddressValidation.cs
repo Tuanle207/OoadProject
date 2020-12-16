@@ -9,20 +9,20 @@ using System.Windows.Controls;
 
 namespace OoadProject.Core.ViewModels
 {
-    public class AddressValidation:ValidationRule
+    public class AddressValidation : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             try
             {
-                string email = (string)value;
+                string address = (string)value;
                 // Check empty string?
-                if (value == null || email.Trim().Length == 0)
+                if (value == null || address.Trim().Length == 0)
                 {
                     return new ValidationResult(false, "Vui lòng nhập địa chỉ");
                 }
                 // No. character must be equal or greater than 6.
-                if (email.Length < 6)
+                if (address.Length < 6)
                 {
                     return new ValidationResult(false, "Địa chỉ phải có ít nhất 6 kí tự");
                 }

@@ -69,6 +69,9 @@ namespace OoadProject.Core
 
             //Manufacturer
             CreateMap<ManufacturerForCreationDto, Manufacturer>();
+
+            //Category
+            CreateMap<CategoryForCreationDto, Category>();
         }
     }
 }

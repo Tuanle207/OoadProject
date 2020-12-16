@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OoadProject.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="590" d:DesignWidth="1100">
+             d:DesignHeight="590" d:DesignWidth="1100"
+             DataContext="{StaticResource CategoryViewModel}">
     <Grid Width="600" Height="400">
         <Grid.RowDefinitions>
             <RowDefinition Height=" 4*"/>
@@ -13,13 +14,13 @@
         </Grid.RowDefinitions>
         <materialDesign:Card Grid.Row="0" Margin="10">
             <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                <ListView>
+                <ListView ItemsSource="{Binding Categories}" SelectedItem="{Binding ChosenCategory}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Mã loại mặt hàng"></GridViewColumn>
-                            <GridViewColumn Header="Tên loại mặt hàng"></GridViewColumn>
-                            <GridViewColumn Header="Mô tả"></GridViewColumn>
-                            <GridViewColumn Header="Tỉ lệ lợi nhuận(%)"></GridViewColumn>
+                            <GridViewColumn Header="Mã loại mặt hàng" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                            <GridViewColumn Header="Tên loại mặt hàng" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                            <GridViewColumn Header="Mô tả" DisplayMemberBinding="{Binding Description}"></GridViewColumn>
+                            <GridViewColumn Header="Tỉ lệ lợi nhuận(%)" DisplayMemberBinding="{Binding ReturnRate}"></GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -32,8 +33,8 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="2*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnAddCategoryProduct" Foreground="Black" Background="Green" Grid.Column="0" Height="40" Width="150" Click="btnAddCategoryProduct_Click"  HorizontalContentAlignment="Center" Margin="10" Content="Thêm mới" HorizontalAlignment="Center"></Button>
-                <Button Foreground="Black" Background="Red" Grid.Column="2" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Xóa" HorizontalAlignment="Center"></Button>
+                <Button Command="{Binding PrepareAddCategory}" x:Name="btnAddCategoryProduct" Foreground="Black" Background="Green" Grid.Column="0" Height="40" Width="150" Click="btnAddCategoryProduct_Click"  HorizontalContentAlignment="Center" Margin="10" Content="Thêm mới" HorizontalAlignment="Center"></Button>
+                <Button Command="{Binding DeleteCategory}" Foreground="Black" Background="Red" Grid.Column="2" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Xóa" HorizontalAlignment="Center"></Button>
             </Grid>
         </Grid>
     </Grid>
