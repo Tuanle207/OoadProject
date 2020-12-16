@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OoadProject.View" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:vm4="clr-namespace:OoadProject.Core.ViewModels.Sells.Validation;assembly=OoadProject.Core"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:Sells="clr-namespace:OoadProject.Core.ViewModels.Sells;assembly=OoadProject.Core"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1100"
              DataContext="{StaticResource SellViewModel}">
@@ -216,7 +217,7 @@
                             <TextBox.Text>
                                 <Binding Path="Invoice.PhoneNumber" UpdateSourceTrigger="PropertyChanged" >
                                     <Binding.ValidationRules>
-                                        <vm4:PhoneNumberValidation />
+                                        <Sells:PhoneNumberValidation />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -235,7 +236,7 @@
                             <TextBox.Text>
                                 <Binding Path="Invoice.CustomerName" UpdateSourceTrigger="PropertyChanged" >
                                     <Binding.ValidationRules>
-                                        <vm4:CustomerNameValidation />
+                                        <Sells:CustomerNameValidation />
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>

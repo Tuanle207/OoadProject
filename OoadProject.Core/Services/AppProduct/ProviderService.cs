@@ -1,4 +1,5 @@
-﻿using OoadProject.Data.Entity.AppProduct;
+﻿using OoadProject.Core.ViewModels.Settings.Dtos;
+using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Repository;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,18 @@ namespace OoadProject.Core.Services.AppProduct
         public IEnumerable<Provider> GetProviders()
         {
             return _providerRepository.GetProviders();
+        }
+
+        public Provider AddProvider(ProviderForCreationDto provider)
+        {
+            var newProvider = Mapper.Map<Provider>(provider);
+
+            return _providerRepository.Create(newProvider);
+        }
+
+        public bool DeleteProvider(Provider provider)
+        {
+            return _providerRepository.Delete(provider.Id);
         }
     }
 }

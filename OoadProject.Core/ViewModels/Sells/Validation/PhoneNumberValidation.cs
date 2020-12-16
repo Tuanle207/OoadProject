@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace OoadProject.Core.ViewModels.Sells.Validation
+namespace OoadProject.Core.ViewModels.Sells
 {
     public class PhoneNumberValidation : ValidationRule
     {

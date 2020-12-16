@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace OoadProject.Data.Repository
 {
-    public class ProviderRepository:BaseRepository<Provider>
+    public class CategoryRepository : BaseRepository<Category>
     {
-        public IEnumerable<Provider> GetProviders()
+        public IEnumerable<Category> GetCategories()
         {
             using (var ctx = new AppDbContext())
             {
-                return ctx.Providers.ToList();
+                return ctx.Categories.ToList();
             }
         }
     }

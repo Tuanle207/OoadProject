@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using OoadProject.Core.ViewModels.Home.Dtos;
 using OoadProject.Core.ViewModels.Orders.Dtos;
+using OoadProject.Core.ViewModels.Settings.Dtos;
 using OoadProject.Core.ViewModels.Sells.Dtos;
 using OoadProject.Core.ViewModels.Users.Dtos;
 using OoadProject.Data.Entity.AppProduct;
@@ -62,6 +63,15 @@ namespace OoadProject.Core
             CreateMap<ProductForSellDto, SelectingProductForSellDto>()
                 .ForMember(dest => dest.SelectedNumber, opt =>
                     opt.MapFrom(src => 1));
+
+            //Provider
+            CreateMap<ProviderForCreationDto, Provider>();
+
+            //Manufacturer
+            CreateMap<ManufacturerForCreationDto, Manufacturer>();
+
+            //Category
+            CreateMap<CategoryForCreationDto, Category>();
         }
     }
 }

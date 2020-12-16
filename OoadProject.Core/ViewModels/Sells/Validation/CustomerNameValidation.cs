@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace OoadProject.Core.ViewModels.Sells.Validation
+namespace OoadProject.Core.ViewModels.Sells
 {
     public class CustomerNameValidation : ValidationRule
     {
