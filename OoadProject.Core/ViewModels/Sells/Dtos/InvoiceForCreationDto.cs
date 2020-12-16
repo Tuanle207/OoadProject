@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OoadProject.Core.ViewModels.Sells.Dtos
 {
-    public class InvoiceForCreationDto : BaseViewModel
+    public class InvoiceForCreationDto : BaseDto
     {
         private string _customerName;
         private string _phoneNumber;

@@ -65,6 +65,8 @@
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
+                        Email = c.String(),
+                        Password = c.String(),
                         RoleId = c.Int(nullable: false),
                         Dob = c.DateTime(nullable: false),
                         PhoneNumber = c.String(),
@@ -173,7 +175,7 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.Int(nullable: false),
+                        Key = c.String(),
                         Value = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);

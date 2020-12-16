@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1200" AllowsTransparency="True" ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen" WindowStyle="None" Loaded="Window_Loaded">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -17,12 +18,12 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="lbTitle" Content="TRANG CHỦ" FontSize="20" Grid.Column="0" Grid.ColumnSpan="3" FontFamily="Roboto" Background="#b2b2b2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label x:Name="lbTitle" MouseMove="lbTitle_MouseMove" MouseDown="lbTitle_MouseDown" MouseUp="lbTitle_MouseUp" Content="TRANG CHỦ" FontSize="20" Grid.Column="0" Grid.ColumnSpan="3" FontFamily="Roboto" Background="#b2b2b2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Button x:Name="btnMinimize" Grid.Column="1" Background="Transparent" BorderThickness="0" Height="Auto" Click="btnMinimize_Click">
-            <materialDesign:PackIcon Kind="WindowMinimize" VerticalAlignment="Center" Height="24" Width="24"/>
+            <materialDesign:PackIcon Kind="WindowMinimize" VerticalAlignment="Center" Height="20" Width="20"/>
         </Button>
-        <Button x:Name="btnClose" Grid.Column="2" Background="#ee1313" Height="Auto" BorderThickness="0" Click="btnClose_Click">
-            <materialDesign:PackIcon Kind="WindowClose" VerticalAlignment="Center" Width="24" Height="24"/>
+        <Button x:Name="btnClose" Grid.Column="2" Background="#ffb396" Height="Auto" BorderThickness="0" Click="btnClose_Click">
+            <materialDesign:PackIcon Kind="WindowClose" VerticalAlignment="Center" Width="20" Height="20"/>
         </Button>
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
@@ -35,7 +36,7 @@
                           SelectionChanged="ListViewMenu_SelectionChanged">
                     <ListViewItem x:Name="ItemHome" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="Home" Width="80" Height="50" />
-                        </ListViewItem>
+                    </ListViewItem>
                     <ListViewItem x:Name="ItemSell" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="CartPlus" Width="80" Height="50" />
                     </ListViewItem>

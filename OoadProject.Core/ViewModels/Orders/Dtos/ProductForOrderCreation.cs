@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OoadProject.Core.ViewModels.Orders.Dtos
 {
-    public class ProductForOrderCreationDto : BaseViewModel
+    public class ProductForOrderCreationDto : BaseDto
     {
         public int _number;
 

@@ -1,15 +1,21 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:OoadProject" 
-                    xmlns:vm="clr-namespace:OoadProject.Core.ViewModels.Users;assembly=OoadProject.Core" 
-                    xmlns:vm1="clr-namespace:OoadProject.Core.ViewModels.Orders;assembly=OoadProject.Core" xmlns:vm2="clr-namespace:OoadProject.Core.ViewModels.Sells;assembly=OoadProject.Core"
-                    xmlns:vm3="clr-namespace:OoadProject.Core.ViewModels.Providers;assembly=OoadProject.Core" xmlns:vm4="clr-namespace:OoadProject.Core.ViewModels.Manufacturers;assembly=OoadProject.Core" xmlns:vm5="clr-namespace:OoadProject.Core.ViewModels.Categories;assembly=OoadProject.Core">
-    <vm:UserViewModel x:Key="UserViewModel"></vm:UserViewModel>
-    <vm1:OrderCreationViewModel x:Key="OrderCreationViewModel"></vm1:OrderCreationViewModel>
-    <vm2:SellViewModel x:Key="SellViewModel"></vm2:SellViewModel>
+                    xmlns:Orders="clr-namespace:OoadProject.Core.ViewModels.Orders;assembly=OoadProject.Core"
+                    xmlns:Home="clr-namespace:OoadProject.Core.ViewModels.Home;assembly=OoadProject.Core" 
+                    xmlns:vm3="clr-namespace:OoadProject.Core.ViewModels.Providers;assembly=OoadProject.Core" 
+                    xmlns:vm4="clr-namespace:OoadProject.Core.ViewModels.Manufacturers;assembly=OoadProject.Core" 
+                    xmlns:vm5="clr-namespace:OoadProject.Core.ViewModels.Categories;assembly=OoadProject.Core"
+                    xmlns:Sells="clr-namespace:OoadProject.Core.ViewModels.Sells;assembly=OoadProject.Core"
+                    xmlns:Users="clr-namespace:OoadProject.Core.ViewModels.Users;assembly=OoadProject.Core" >
+    <Users:UserViewModel x:Key="UserViewModel" />
+    <Users:LoginViewModel x:Key="LoginViewModel" />
+    <Orders:OrderCreationViewModel x:Key="OrderCreationViewModel" />
+    <Sells:SellViewModel x:Key="SellViewModel" />
+    <Home:HomeViewModel x:Key="HomeViewModel" />
+    
     <vm3:ProviderViewModel x:Key="ProviderViewModel"></vm3:ProviderViewModel>
     <vm4:ManufacturerViewModel x:Key="ManufacturerViewModel"></vm4:ManufacturerViewModel>
     <vm5:CategoryViewModel x:Key="CategoryViewModel"></vm5:CategoryViewModel>
-    
 
 </ResourceDictionary>

@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace OoadProject.Core.ViewModels.Home
 {
@@ -21,7 +22,7 @@ namespace OoadProject.Core.ViewModels.Home
         private ObservableCollection<ProcessingOrderDto> _processingOrders;
         private RevenueDto _todayRevenue;
         private RevenueDto _monthRevenue;
-        public ObservableCollection<HotProductDto> _hotProducts;
+        private ObservableCollection<HotProductDto> _hotProducts;
 
         // public data properties
         public ObservableCollection<ProcessingOrderDto> ProcessingOrders
@@ -64,7 +65,7 @@ namespace OoadProject.Core.ViewModels.Home
         }
 
         // public command properties
-
+        public ICommand ReloadData { get; set; }
 
 
         public HomeViewModel()
@@ -74,12 +75,22 @@ namespace OoadProject.Core.ViewModels.Home
             _invoiceService = new InvoiceService();
             _productService = new ProductService();
 
+            LoadData();
+
+            ReloadData = new RelayCommand<object>
+            (
+                p => true,
+                p => LoadData()
+            );
+        }
+
+        private void LoadData()
+        {
             // init data
             ProcessingOrders = new ObservableCollection<ProcessingOrderDto>(_orderService.GetProcessingOrders());
             TodayRevenue = _invoiceService.GetRevenue(DateTime.Now, TimeType.Day);
             MonthRevenue = _invoiceService.GetRevenue(DateTime.Now, TimeType.Month);
             HotProducts = new ObservableCollection<HotProductDto>(_productService.GetHotProducts(DateTime.Now));
-
         }
     }
 }

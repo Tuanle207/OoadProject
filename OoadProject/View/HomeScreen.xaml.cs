@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OoadProject.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,23 +25,16 @@ namespace OoadProject.View
         {
             InitializeComponent();
         }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void ListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            List<Item> list = new List<Item>();
-            string[] a = { "1", "11/11/2020", "Lê Anh Tuấn", "Đã gửi" };
-            string[] b = { "2", "19/11/2020", "Nguyễn Xuân Tú", "Đang chờ xử lý" };
-            string[] c = { "3", "20/12/2020", "Nguyễn Thanh Tuấn", "Đã xử lý" };
-            list.Add(new Item() { stt = 1, date = new DateTime(2020, 11, 11), name = "Lê Anh Tuấn", status = "Đã gửi" }); 
-            lvDonDatHang.ItemsSource = list;
+            ListBox listBox = sender as ListBox;
+            ScrollViewer scrollviewer = Helper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
+            if (e.Delta > 0)
+                scrollviewer.LineLeft();
+            else
+                scrollviewer.LineRight();
+            e.Handled = true;
         }
     }
 
-    class Item
-    {
-        public int stt { get; set; }
-        public DateTime date { get; set; }
-        public string name { get; set; }
-        public string status { get; set; }
-    }
 }
