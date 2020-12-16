@@ -46,6 +46,7 @@
     <Compile Include="Mapper\AppMapperProfile.cs" />
     <Compile Include="Mapper\AutoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AppProduct\CategoryService.cs" />
     <Compile Include="Services\AppProduct\InvoiceService.cs" />
     <Compile Include="Services\AppProduct\ManufacturerService.cs" />
     <Compile Include="Services\AppProduct\OrderService.cs" />
@@ -70,16 +71,18 @@
     <Compile Include="ViewModels\Sells\Dtos\RuleValidation.cs" />
     <Compile Include="ViewModels\Sells\Dtos\SelectingProductForSellDto.cs" />
     <Compile Include="ViewModels\Sells\SellViewModel.cs" />
+    <Compile Include="ViewModels\Settings\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\Settings\Dtos\CategoryForCreationDto.cs" />
     <Compile Include="ViewModels\Settings\Dtos\ManufacturerForCreationDto.cs" />
     <Compile Include="ViewModels\Settings\Dtos\ProviderForCreationDto.cs" />
     <Compile Include="ViewModels\Settings\ManufacturerViewModel.cs" />
     <Compile Include="ViewModels\Settings\ProviderViewModel.cs" />
     <Compile Include="ViewModels\Settings\Validations\AddressValidation.cs" />
-    <Compile Include="ViewModels\Settings\Validations\AddressValidation.cs" />
     <Compile Include="ViewModels\Settings\Validations\DescriptionValidation.cs" />
     <Compile Include="ViewModels\Settings\Validations\EmailValidation.cs" />
     <Compile Include="ViewModels\Settings\Validations\NameValidation.cs" />
     <Compile Include="ViewModels\Settings\Validations\PhoneNumberValidation.cs" />
+    <Compile Include="ViewModels\Settings\Validations\ReturnRateValidation.cs" />
     <Compile Include="ViewModels\Users\Dtos\UserForCreationDto.cs" />
     <Compile Include="ViewModels\Users\UserViewModel.cs" />
   </ItemGroup>
