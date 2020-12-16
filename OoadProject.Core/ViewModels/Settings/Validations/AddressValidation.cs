@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace OoadProject.Core.ViewModels
+namespace OoadProject.Core.ViewModels.Settings
 {
     public class AddressValidation : ValidationRule
     {
