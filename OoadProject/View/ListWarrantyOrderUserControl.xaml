@@ -3,10 +3,142 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:OoadProject.View"
+             xmlns:local="clr-namespace:OoadProject.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="650" d:DesignWidth="1100">
+             d:DesignHeight="650" d:DesignWidth="1100"
+             DataContext="{StaticResource WarrantyOrderListViewModel}">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox
+                            IsChecked="{Binding WaitForSent}"
+                            materialDesign:CheckBoxAssist.CheckBoxSize="30">
+                            Đang chờ gửi đi bảo hành
+                        </CheckBox>
+                        <TextBlock Text="{Binding NumberOfWaitForSent}" VerticalAlignment="Center" FontSize="14" FontWeight="Bold" Grid.Column="1" />
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="4*" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox
+                            IsChecked="{Binding Sent}"
+                            materialDesign:CheckBoxAssist.CheckBoxSize="30" Grid.ColumnSpan="2">
+                            Đã gửi đi bảo hành
+                        </CheckBox>
+                        <TextBlock Text="{Binding NumberOfSent}" VerticalAlignment="Center" FontSize="14" FontWeight="Bold" Grid.Column="2" Margin="0,6,0,5" />
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox
+                            IsChecked="{Binding WaitForCustomer}"
+                            materialDesign:CheckBoxAssist.CheckBoxSize="30">
+                            Đang chờ khách hàng nhận
+                        </CheckBox>
+                        <TextBlock Text="{Binding NumberOfWaitForCustomer}" VerticalAlignment="Center" FontSize="14" FontWeight="Bold" Grid.Column="1" />
+                    </Grid>
+
+                </StackPanel>
+            </Grid>
+            <Button x:Name="btnNewWarrantyOrder" Click="btnNewWarrantyOrder_Click" Content="Thêm yêu cầu bảo hành" Grid.Column="1" />
+        </Grid>
+        <materialDesign:Card Grid.Row="1" Margin="5 10 5 5" BorderThickness="0" VerticalAlignment="Stretch" FontSize="10">
+            <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                <DataGrid ItemsSource="{Binding WarrantyOrders}" SelectedItem="{Binding SelectedWarrantyOrder}" Background="#FFE3F0FF"  SelectionMode="Single"
+                          AutoGenerateColumns="False" IsReadOnly="True" Grid.ColumnSpan="1" BorderThickness="1">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã Bảo hành" Binding="{Binding Id}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Ngày yêu cầu" Binding="{Binding CreationTime}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Mã Khách hàng" Binding="{Binding CustomerId}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Tên Khách hàng" Binding="{Binding CustomerName}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Số điện thoại" Binding="{Binding PhoneNumber}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Mã sản phẩm" Binding="{Binding ProductId}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding ProductName}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Tình trạng" Binding="{Binding WarrantyStatus, Converter={StaticResource WarrantyOrderStatusConverter}}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem IsEnabled="{Binding SelectedWarrantyOrder, Mode=OneWay, Converter={StaticResource ContextMenuItemVisibilityConverter}}" Header="Đang chờ gửi" Command="{Binding ChangeStatusToWaitForSent}">
+                                <MenuItem.Icon>
+                                    <materialDesign:PackIcon Kind="Check" Width="Auto" Height="Auto">
+                                        <materialDesign:PackIcon.Visibility>
+                                            <Binding Path="SelectedWarrantyOrder" UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource CheckMenuItemVisibilityConverter}">
+                                                <Binding.ConverterParameter>
+                                                    <sys:Int32>0</sys:Int32>
+                                                </Binding.ConverterParameter>
+                                            </Binding>
+                                        </materialDesign:PackIcon.Visibility>
+                                    </materialDesign:PackIcon>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem IsEnabled="{Binding SelectedWarrantyOrder, Mode=OneWay, Converter={StaticResource ContextMenuItemVisibilityConverter}}" Header="Đã gửi" Command="{Binding ChangeStatusToSent}" >
+                                <MenuItem.Icon>
+                                    <materialDesign:PackIcon Kind="Check" Width="Auto" Height="Auto">
+                                        <materialDesign:PackIcon.Visibility>
+                                            <Binding Path="SelectedWarrantyOrder" UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource CheckMenuItemVisibilityConverter}">
+                                                <Binding.ConverterParameter>
+                                                    <sys:Int32>1</sys:Int32>
+                                                </Binding.ConverterParameter>
+                                            </Binding>
+                                        </materialDesign:PackIcon.Visibility>
+                                    </materialDesign:PackIcon>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem IsEnabled="{Binding SelectedWarrantyOrder, Mode=OneWay, Converter={StaticResource ContextMenuItemVisibilityConverter}}" Header="Đang chờ khách hàng nhận" Command="{Binding ChangeStatusToWaitForCustomer}">
+                                <MenuItem.Icon>
+                                    <materialDesign:PackIcon Kind="Check" Width="Auto" Height="Auto">
+                                        <materialDesign:PackIcon.Visibility>
+                                            <Binding Path="SelectedWarrantyOrder" UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource CheckMenuItemVisibilityConverter}">
+                                                <Binding.ConverterParameter>
+                                                    <sys:Int32>2</sys:Int32>
+                                                </Binding.ConverterParameter>
+                                            </Binding>
+                                        </materialDesign:PackIcon.Visibility>
+                                    </materialDesign:PackIcon>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem IsEnabled="{Binding SelectedWarrantyOrder, Mode=OneWay, Converter={StaticResource ContextMenuItemVisibilityConverter}}" Header="Đã bảo hành xong" Command="{Binding ChangeStatusToDone}">
+                                <MenuItem.Icon>
+                                    <materialDesign:PackIcon Kind="Check" Width="Auto" Height="Auto">
+                                        <materialDesign:PackIcon.Visibility>
+                                            <Binding Path="SelectedWarrantyOrder" UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource CheckMenuItemVisibilityConverter}">
+                                                <Binding.ConverterParameter>
+                                                    <sys:Int32>3</sys:Int32>
+                                                </Binding.ConverterParameter>
+                                            </Binding>
+                                        </materialDesign:PackIcon.Visibility>
+                                    </materialDesign:PackIcon>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+            </ScrollViewer>
+        </materialDesign:Card>
     </Grid>
 </UserControl>
