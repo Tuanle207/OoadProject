@@ -41,19 +41,19 @@
                         <materialDesign:PackIcon Kind="CartPlus" Width="80" Height="50" />
                     </ListViewItem>
                     <ListViewItem x:Name="ItemProduct" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <materialDesign:PackIcon Kind="TreasureChest" Width="80" Height="50" />
+                        <materialDesign:PackIcon Kind="DesktopMac" Width="80" Height="50" />
                     </ListViewItem>
                     <ListViewItem x:Name="ItemImportProduct" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <materialDesign:PackIcon Kind="ArrowDownBoldBox" Width="80" Height="50" />
+                        <materialDesign:PackIcon Kind="ArrowDownBoldHexagonOutline" Width="80" Height="50" />
                     </ListViewItem>
                     <ListViewItem x:Name="ItemWarranty" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <materialDesign:PackIcon Kind="PlusBox" Width="80" Height="50" />
+                        <materialDesign:PackIcon Kind="Security" Width="80" Height="50" />
                     </ListViewItem>
                     <ListViewItem x:Name="ItemStaff" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="AccountCircle" Width="80" Height="50" />
                     </ListViewItem>
                     <ListViewItem x:Name="ItemReport" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <materialDesign:PackIcon Kind="ChartLineVariant" Width="80" Height="50" />
+                        <materialDesign:PackIcon Kind="Finance" Width="80" Height="50" />
                     </ListViewItem>
                     <ListViewItem x:Name="ItemSetting" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="Settings" Width="80" Height="50" />

@@ -5,7 +5,9 @@
                     xmlns:Home="clr-namespace:OoadProject.Core.ViewModels.Home;assembly=OoadProject.Core" 
                     xmlns:Settings="clr-namespace:OoadProject.Core.ViewModels.Settings;assembly=OoadProject.Core" 
                     xmlns:Sells="clr-namespace:OoadProject.Core.ViewModels.Sells;assembly=OoadProject.Core"
-                    xmlns:Users="clr-namespace:OoadProject.Core.ViewModels.Users;assembly=OoadProject.Core" >
+                    xmlns:Users="clr-namespace:OoadProject.Core.ViewModels.Users;assembly=OoadProject.Core"
+                    xmlns:Products="clr-namespace:OoadProject.Core.ViewModels.Products;assembly=OoadProject.Core" >
+
     <Users:UserViewModel x:Key="UserViewModel" />
     <Users:LoginViewModel x:Key="LoginViewModel" />
     <Orders:OrderCreationViewModel x:Key="OrderCreationViewModel" />
@@ -14,5 +16,6 @@
     <Settings:ProviderViewModel x:Key="ProviderViewModel" />
     <Settings:ManufacturerViewModel x:Key="ManufacturerViewModel" />
     <Settings:CategoryViewModel x:Key="CategoryViewModel" />
+    <Products:ProductViewModel x:Key="ProductViewModel"/>
 
 </ResourceDictionary>

@@ -18,18 +18,18 @@ namespace OoadProject.View
     /// <summary>
     /// Interaction logic for ItemManagerScreen.xaml
     /// </summary>
-    public partial class ItemManagerScreen : UserControl
+    public partial class ProductUserControl : UserControl
     {
-        public ItemManagerScreen()
+        public ProductUserControl()
         {
             InitializeComponent();
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            List<MockItem> list = new List<MockItem>();
-            list.Add(new MockItem() { id = 1, type = "Chuot", model = "Samsung", count = 12, cost = 130000, costImport = 120000, ratio = 0.5, timeExpire = 100, name = "SP 1", status = "Dang ban" });
-            lvSP.ItemsSource = list;
+            ScrollViewer scv = (ScrollViewer)sender;
+            scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
+            e.Handled = true;
         }
     }
 

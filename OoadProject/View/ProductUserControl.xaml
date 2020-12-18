@@ -1,0 +1,156 @@
+﻿<UserControl x:Class="OoadProject.View.ProductUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OoadProject.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="1100" Background="White"
+             DataContext="{StaticResource ProductViewModel}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="tbKeyword" Grid.Row="0" Text="{Binding ProductNameKeyword}"
+                    Height="40" VerticalContentAlignment="Center" Padding="15 0 0 0"
+                    materialDesign:HintAssist.Hint="Tìm kiếm theo tên sản phẩm"/>
+        <StackPanel VerticalAlignment="Top" Grid.Row="1">
+            <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}">
+                <StackPanel>
+                    <Expander HorizontalAlignment="Stretch" Header="Tìm kiếm nâng cao">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                                Margin="24,8,24,16">
+                                <TextBlock Text="- Loại linh kiện: " VerticalAlignment="Center" Margin="20 0 5 5" FontSize="15" Foreground="DarkRed"/>
+                                <ListBox Style="{StaticResource MaterialDesignFilterChipAccentListBox}">
+                                    <ListBoxItem>Laptop</ListBoxItem>
+                                    <ListBoxItem IsSelected="True">Bàn phím</ListBoxItem>
+                                    <ListBoxItem>Chuột</ListBoxItem>
+                                    <ListBoxItem>Loa</ListBoxItem>
+                                </ListBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                                Margin="24,8,24,16">
+                                <TextBlock Text="- Hãng sản xuất: " VerticalAlignment="Center" Margin="20 0 5 5" FontSize="15" Foreground="DarkRed"/>
+                                <ListBox Style="{StaticResource MaterialDesignFilterChipAccentListBox}">
+                                    <ListBoxItem>Dell</ListBoxItem>
+                                    <ListBoxItem IsSelected="True">Acer</ListBoxItem>
+                                    <ListBoxItem>Asus</ListBoxItem>
+                                    <ListBoxItem>HP</ListBoxItem>
+                                </ListBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                                Margin="24,8,24,16">
+                                <TextBlock Text="- Nhà cung cấp: " VerticalAlignment="Center" Margin="20 0 5 5" FontSize="15" Foreground="DarkRed"/>
+                                <ListBox Style="{StaticResource MaterialDesignFilterChipAccentListBox}">
+                                    <ListBoxItem>Cửa hàng điện máy Nguyễn Kim</ListBoxItem>
+                                    <ListBoxItem IsSelected="True">Siêu thị thế giới di động</ListBoxItem>
+                                    <ListBoxItem>Đại lý Grymp Shop</ListBoxItem>
+                                    <ListBoxItem>Cửa hàng đại lý máy tính LeNa</ListBoxItem>
+                                    <ListBoxItem>Đại lý Grymp Shop</ListBoxItem>
+                                    <ListBoxItem>Cửa hàng đại lý máy tính LeNa</ListBoxItem>
+                                    <ListBoxItem>Đại lý Grymp Shop</ListBoxItem>
+                                    <ListBoxItem>Cửa hàng đại lý máy tính LeNa</ListBoxItem>
+                                    <ListBoxItem>Đại lý Grymp Shop</ListBoxItem>
+                                    <ListBoxItem>Cửa hàng đại lý máy tính LeNa</ListBoxItem>
+                                </ListBox>
+                            </StackPanel>
+                        </StackPanel>
+                    </Expander>
+                    <Border
+                     Background="{DynamicResource MaterialDesignDivider}"
+                     Height="1"
+                     HorizontalAlignment="Stretch"
+                     SnapsToDevicePixels="True" />
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Height="500" Margin="5 10 5 5" BorderThickness="0" VerticalAlignment="Stretch">
+                <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <DataGrid ItemsSource="{Binding Products}" Background="#FFE3F0FF" SelectionMode="Single"
+                          AutoGenerateColumns="False" IsReadOnly="True" BorderThickness="1">
+                        <DataGrid.Columns>                            
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                            Style="{StaticResource MaterialDesignIconButton}"
+                                            Background="{DynamicResource MaterialDesignTextFieldBoxBackground}"
+                                            Width="32"
+                                            Height="32"
+                                            Command="{Binding Path=DataContext.RemoveMulItems, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" CommandParameter="{Binding}" BorderBrush="{x:Null}" Padding="0" Margin="0" ToolTip="Xóa sản phẩm">
+                                            <materialDesign:PackIcon Kind="Delete" Width="16" Height="16" />
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                            Style="{StaticResource MaterialDesignIconButton}"
+                                            Background="{DynamicResource MaterialDesignTextFieldBoxBackground}"
+                                            Width="32"
+                                            Height="32"
+                                            Command="{Binding Path=DataContext.RemoveMulItems, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" CommandParameter="{Binding}" BorderBrush="{x:Null}" Padding="0" Margin="0" ToolTip="Sửa sản phẩm">
+                                            <materialDesign:PackIcon Kind="Edit" Width="16" Height="16" />
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Mã SP" Binding="{Binding Id}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Tên SP" Binding="{Binding Name}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Phân loại" Binding="{Binding CategoryName}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nhà sản xuất" Binding="{Binding ManufacturerName}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Số lượng" Binding="{Binding Number}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Giá nhập" Binding="{Binding PriceIn}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Giá bán" Binding="{Binding PriceOut}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="TG bảo hành" Binding="{Binding WarrantyPeriod}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="% lợi nhuận" Binding="{Binding ReturnRate}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Tình trạng" Binding="{Binding Status}" ></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+            </materialDesign:Card>
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button Command="{Binding GoPrevPage}" x:Name="btnPrev" Width="30" Height="30" Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                Foreground="Black" Background="#FF47608E" Margin="0 0 20 0" >
+                        <materialDesign:PackIcon Kind="ArrowLeft" Width="20" Height="20" />
+                    </Button>
+                    <TextBlock Height="20" Text="{Binding CurrentPage}"></TextBlock>
+                    <TextBlock FontWeight="Bold" Height="20">/</TextBlock>
+                    <TextBlock Height="20" Text="{Binding TotalPages}"></TextBlock>
+                    <Button Command="{Binding GoNextPage}" x:Name="btnNext" Width="30" Height="30" Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                 Foreground="Black" Background="#FF47608E" Margin="20 0 0 0">
+                        <materialDesign:PackIcon Kind="ArrowRight" Width="20" Height="20" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+    <!--</ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle1}">
+                    <GridViewColumn Header="Mã SP" Width="60" DisplayMemberBinding="{Binding id}"/>
+                    <GridViewColumn Header="Tên SP" Width="80" DisplayMemberBinding="{Binding name}"/>
+                    <GridViewColumn Header="Loại SP" Width="70" DisplayMemberBinding="{Binding type}"/>
+                    <GridViewColumn Header="Hãng SP" Width="70" DisplayMemberBinding="{Binding model}"/>
+                    <GridViewColumn Header="Số lượng" Width="70" DisplayMemberBinding="{Binding count}"/>
+                    <GridViewColumn Header="Giá nhập kho" Width="100" DisplayMemberBinding="{Binding costImport}"/>
+                    <GridViewColumn Header="Giá bán" Width="70" DisplayMemberBinding="{Binding cost}"/>
+                    <GridViewColumn Header="Tỉ suất lãi" Width="80" DisplayMemberBinding="{Binding ratio}"/>
+                    <GridViewColumn Header="Thời gian bảo hành" Width="140" DisplayMemberBinding="{Binding timeExpire}"/>
+                    <GridViewColumn Header="Trạng thái" Width="80" DisplayMemberBinding="{Binding status}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>-->
+</UserControl>

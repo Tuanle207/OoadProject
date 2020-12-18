@@ -7,6 +7,7 @@ using OoadProject.Core.ViewModels.Users.Dtos;
 using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Entity.AppUser;
 using OoadProject.Data.Repository.AggregateDto;
+using OoadProject.Core.ViewModels.Products.Dtos;
 
 namespace OoadProject.Core
 {
@@ -72,6 +73,15 @@ namespace OoadProject.Core
 
             //Category
             CreateMap<CategoryForCreationDto, Category>();
+
+            //Product
+            CreateMap<Product, ProductDisplayDto>()
+                .ForMember(dest => dest.CategoryName, opt =>
+                    opt.MapFrom(src => src.Category.Name))
+                .ForMember(dest => dest.ManufacturerName, opt =>
+                    opt.MapFrom(src => src.Manufacturer.Name))
+                .ForMember(dest => dest.Status, opt =>
+                    opt.MapFrom(src => ProductDisplayDto.MapEnumToStatus((ProductStatus)src.Status)));
         }
     }
 }

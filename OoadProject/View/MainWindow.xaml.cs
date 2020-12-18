@@ -26,7 +26,7 @@ namespace OoadProject.View
 
         private HomeScreen _homeScreen;
         private SellUserControl _sellScreen;
-        private ItemManagerScreen _itemManagementScreen;
+        private ProductUserControl _itemManagementScreen;
         private ManagementOrderUserControl _orderManagementScreen;
         private WarrantyOrderUserControl _warrantyOrderScreen;
         private NhanVienUserControl _userScreen;
@@ -41,7 +41,7 @@ namespace OoadProject.View
 
             _homeScreen = new HomeScreen();
             _sellScreen = new SellUserControl();
-            _itemManagementScreen = new ItemManagerScreen();
+            _itemManagementScreen = new ProductUserControl();
             _orderManagementScreen = new ManagementOrderUserControl();
             _warrantyOrderScreen = new WarrantyOrderUserControl();
             _userScreen = new NhanVienUserControl();
