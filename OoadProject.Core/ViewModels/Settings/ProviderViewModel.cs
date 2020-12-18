@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace OoadProject.Core.ViewModels.Providers
+namespace OoadProject.Core.ViewModels.Settings
 {
     public class ProviderViewModel : BaseViewModel
     {

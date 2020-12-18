@@ -3,9 +3,7 @@
                     xmlns:local="clr-namespace:OoadProject" 
                     xmlns:Orders="clr-namespace:OoadProject.Core.ViewModels.Orders;assembly=OoadProject.Core"
                     xmlns:Home="clr-namespace:OoadProject.Core.ViewModels.Home;assembly=OoadProject.Core" 
-                    xmlns:vm3="clr-namespace:OoadProject.Core.ViewModels.Providers;assembly=OoadProject.Core" 
-                    xmlns:vm4="clr-namespace:OoadProject.Core.ViewModels.Manufacturers;assembly=OoadProject.Core" 
-                    xmlns:vm5="clr-namespace:OoadProject.Core.ViewModels.Categories;assembly=OoadProject.Core"
+                    xmlns:Settings="clr-namespace:OoadProject.Core.ViewModels.Settings;assembly=OoadProject.Core" 
                     xmlns:Sells="clr-namespace:OoadProject.Core.ViewModels.Sells;assembly=OoadProject.Core"
                     xmlns:Users="clr-namespace:OoadProject.Core.ViewModels.Users;assembly=OoadProject.Core" 
                     xmlns:Warranties="clr-namespace:OoadProject.Core.ViewModels.Warranties;assembly=OoadProject.Core">
@@ -17,10 +15,9 @@
     <Home:HomeViewModel x:Key="HomeViewModel" />
     <Warranties:WarrantyOrderCreationViewModel x:Key="WarrantyOrderCreationViewModel" />
     <Warranties:WarrantyOrderListViewModel x:Key="WarrantyOrderListViewModel" />
-
-    <vm3:ProviderViewModel x:Key="ProviderViewModel"></vm3:ProviderViewModel>
-    <vm4:ManufacturerViewModel x:Key="ManufacturerViewModel"></vm4:ManufacturerViewModel>
-    <vm5:CategoryViewModel x:Key="CategoryViewModel"></vm5:CategoryViewModel>
+    <Settings:ProviderViewModel x:Key="ProviderViewModel" />
+    <Settings:ManufacturerViewModel x:Key="ManufacturerViewModel" />
+    <Settings:CategoryViewModel x:Key="CategoryViewModel" />
     
     
     <!-- Converters -->
@@ -28,5 +25,6 @@
     <Warranties:WarrantyOrderStatusConverter x:Key="WarrantyOrderStatusConverter" />
     <Warranties:ContextMenuItemVisibilityConverter x:Key="ContextMenuItemVisibilityConverter" />
     <Warranties:CheckMenuItemVisibilityConverter x:Key="CheckMenuItemVisibilityConverter" />
+    
 
 </ResourceDictionary>
