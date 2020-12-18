@@ -7,6 +7,9 @@ using OoadProject.Core.ViewModels.Users.Dtos;
 using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Entity.AppUser;
 using OoadProject.Data.Repository.AggregateDto;
+using OoadProject.Data.Entity.AppCustomer;
+using OoadProject.Core.ViewModels.Warranties.Dtos;
+using System;
 
 namespace OoadProject.Core
 {
@@ -72,6 +75,44 @@ namespace OoadProject.Core
 
             //Category
             CreateMap<CategoryForCreationDto, Category>();
+
+            CreateMap<InvoiceProduct, ProductForWarrantyDto>()
+                .ForMember(dest => dest.Id, opt =>
+                    opt.MapFrom(src => src.ProductId))
+                .ForMember(dest => dest.Name, opt =>
+                    opt.MapFrom(src => src.Product.Name))
+                .ForMember(dest => dest.ManufacturerName, opt =>
+                    opt.MapFrom(src => src.Product.Manufacturer.Name))
+                .ForMember(dest => dest.InvoiceTime, opt =>
+                    opt.MapFrom(src => src.Invoice.CreationTime))
+                .ForMember(dest => dest.WarrantyTimeRemaining, opt =>
+                    opt.MapFrom(src => ProductForWarrantyDto.CalcWarrantyMonthRemaining(src.Invoice.CreationTime, (int)src.Product.WarrantyPeriod)))
+                .ForMember(dest => dest.CustomerName, opt => 
+                    opt.MapFrom(src => src.Invoice.Customer.Name))
+                .ForMember(dest => dest.PhoneNumber, opt =>
+                    opt.MapFrom(src => src.Invoice.Customer.PhoneNumber))
+                .ForMember(dest => dest.CustomerId, opt =>
+                    opt.MapFrom(src => src.Invoice.CustomerId))
+                .ForMember(dest => dest.InvoiceId, opt =>
+                    opt.MapFrom(src => src.InvoiceId));
+
+            CreateMap<ProductForWarrantyDto, WarrantyOrder>()
+                .ForMember(dest => dest.ProductId, opt =>
+                    opt.MapFrom(src => src.Id));
+
+            CreateMap<WarrantyOrder, ProductForListWarrantyDto>()
+                .ForMember(dest => dest.CustomerName, opt =>
+                    opt.MapFrom(src => src.Customer.Name))
+                .ForMember(dest => dest.PhoneNumber, opt =>
+                    opt.MapFrom(src => src.Customer.PhoneNumber))
+                .ForMember(dest => dest.ProductName, opt =>
+                    opt.MapFrom(src => src.Product.Name))
+                .ForMember(dest => dest.WarrantyStatus, opt =>
+                    opt.MapFrom(src => src.Status));
+
+            CreateMap<ProductForListWarrantyDto, WarrantyOrder>()
+                .ForMember(dest => dest.Status, opt =>
+                    opt.MapFrom(src => src.WarrantyStatus));
         }
     }
 }

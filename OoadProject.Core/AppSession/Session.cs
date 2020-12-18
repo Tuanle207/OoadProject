@@ -22,6 +22,11 @@ namespace OoadProject.Core.AppSession
             }
         }
 
+        public static bool IsLoggedIn()
+        {
+            return _currentUser != null ? true : false;
+        }
+
         public static void SetSessionUser(User user)
         {
             _currentUser = user;

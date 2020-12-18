@@ -7,7 +7,8 @@ namespace OoadProject.Data.Entity.AppCustomer
     {
         WaitForSent,
         Sent,
-        WaitForCustomer
+        WaitForCustomer,
+        Done
     }
 
     public class WarrantyOrder : AppEntity

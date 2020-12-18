@@ -23,9 +23,21 @@ namespace OoadProject.Core.ViewModels.Users
         // data property
         public LoginDto LoginDto { get => _loginDto; set { _loginDto = value; OnPropertyChanged(); } }
 
+        public string UserName
+        {
+            get
+            {
+                if (!Session.IsLoggedIn())
+                    return null;
+                return Session.CurrentUser.Name;
+            }
+        }
+
 
         // command
         public ICommand Login { get; set; }
+        public ICommand Logout { get; set; }
+        public ICommand ReloadUsername { get; set; }
 
         public LoginViewModel()
         {
@@ -45,6 +57,28 @@ namespace OoadProject.Core.ViewModels.Users
                         LoginDto = new LoginDto();
                     }
                 } 
+            );
+
+            Logout = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    if (p != null && (bool)p == true)
+                    {
+                        Session.SetSessionUser(null);
+                    }
+                }
+            );
+
+            ReloadUsername = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    var x = UserName;
+                    OnPropertyChanged(nameof(UserName));
+                }
             );
         }
     }

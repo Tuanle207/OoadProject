@@ -28,7 +28,7 @@ namespace OoadProject.View
         private SellUserControl _sellScreen;
         private ItemManagerScreen _itemManagementScreen;
         private ManagementOrderUserControl _orderManagementScreen;
-        private WarrantyOrderUserControl _warrantyOrderScreen;
+        private ListWarrantyOrderUserControl _warrantyOrderScreen;
         private NhanVienUserControl _userScreen;
         private ReportUserControl _reportScreen;
         private SettingUserControl _settingScreen;
@@ -43,7 +43,7 @@ namespace OoadProject.View
             _sellScreen = new SellUserControl();
             _itemManagementScreen = new ItemManagerScreen();
             _orderManagementScreen = new ManagementOrderUserControl();
-            _warrantyOrderScreen = new WarrantyOrderUserControl();
+            _warrantyOrderScreen = new ListWarrantyOrderUserControl();
             _userScreen = new NhanVienUserControl();
             _reportScreen = new ReportUserControl();
             _settingScreen = new SettingUserControl();
@@ -124,6 +124,12 @@ namespace OoadProject.View
         private void lbTitle_MouseUp(object sender, MouseEventArgs e)
         {
             _mouseDown = false;
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            (new LoginWindow()).Show();
+            this.Close();
         }
     }
 }

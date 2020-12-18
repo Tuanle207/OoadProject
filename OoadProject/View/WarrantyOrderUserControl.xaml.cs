@@ -18,11 +18,48 @@ namespace OoadProject.View
     /// <summary>
     /// Interaction logic for WarrantyOrderUserControl.xaml
     /// </summary>
-    public partial class WarrantyOrderUserControl : UserControl
+    public partial class WarrantyOrderUserControl : Window
     {
         public WarrantyOrderUserControl()
         {
             InitializeComponent();
+        }
+
+        private void tbPhoneNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                var command = btnGetCustomer.Command;
+                if (command.CanExecute(null))
+                {
+                    command.Execute(null);
+                }
+            }
+        }
+
+        private void btnAddWarrantyOrder_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Xác nhận thêm yêu cầu bảo hành sản phẩm này?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var command = ((Button)sender).Command;
+
+            if (result == MessageBoxResult.OK && command.CanExecute(null))
+            {
+                try
+                {
+                    command.Execute(true);
+                    MessageBox.Show("Thêm yêu cầu bảo hành thành công!");
+                    if (btnReloaWarrantyOrderList.Command.CanExecute(null))
+                        btnReloaWarrantyOrderList.Command.Execute(null);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else if (result != MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(false);
+            }
         }
     }
 }
