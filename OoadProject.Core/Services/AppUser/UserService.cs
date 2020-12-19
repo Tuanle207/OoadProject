@@ -21,6 +21,11 @@ namespace OoadProject.Core.Services.AppUser
             _roleRepository = new RoleRepository();
         }
 
+        public User GetUser(int id)
+        {
+            return _userRepository.Get(id);
+        }
+
         public IEnumerable<User> GetUsers()
         {
             return _userRepository.GetAllUsers();
@@ -39,15 +44,26 @@ namespace OoadProject.Core.Services.AppUser
             return user;
         }
 
-        public User AddUser(UserForCreationDto user)
+        public User AddUser(UserForCreationDto userForCreation)
         {
-            var newUser = Mapper.Map<User>(user);
+            var newUser = Mapper.Map<User>(userForCreation);
 
-            var role = _roleRepository.GetRoleByName(user.Role);
-
+            var role = _roleRepository.GetRoleByName(userForCreation.Role);
             newUser.RoleId = role.Id;
 
             return _userRepository.Create(newUser);
+        }
+
+        public void UpdateUser(UserForCreationDto userForUpdate)
+        {
+
+            var role = _roleRepository.GetRoleByName(userForUpdate.Role);
+
+            var user = Mapper.Map<User>(userForUpdate);
+            user.Id = (int)userForUpdate.Id;
+            user.RoleId = role.Id;
+
+            _userRepository.Update(user);
         }
 
         public bool DeleteUser(User user)

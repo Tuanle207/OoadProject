@@ -9,6 +9,15 @@ namespace OoadProject.Data.Repository
 {
     public class BaseRepository<T> where T : AppEntity
     {
+        public virtual T Get(int id)
+        {
+            using (var ctx = new AppDbContext())
+            {
+                var entity = ctx.Set<T>().Where(e => e.Id == id).FirstOrDefault();
+                return entity;
+            }
+        }
+
         public virtual T Create(T entity)
         {
             using (var ctx = new AppDbContext())

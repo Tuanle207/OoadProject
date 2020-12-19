@@ -27,8 +27,13 @@ namespace OoadProject.View
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
         {
-            var window = new AddStaffWindow();
-            window.ShowDialog();
+            var command = ((Button)sender).Command;
+
+            if (command.CanExecute(null))
+            {
+                command.Execute(true);
+                new AddStaffWindow().ShowDialog();
+            }   
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -58,6 +63,17 @@ namespace OoadProject.View
             else if (result != MessageBoxResult.OK && command.CanExecute(null))
             {
                 command.Execute(false);
+            }
+        }
+
+        private void btnUpdateUser_Click(object sender, RoutedEventArgs e)
+        {
+            var command = ((Button)sender).Command;
+
+            if (command.CanExecute(null))
+            {
+                command.Execute(true); 
+                new UpdateInfoStaffWindow().ShowDialog();
             }
         }
     }

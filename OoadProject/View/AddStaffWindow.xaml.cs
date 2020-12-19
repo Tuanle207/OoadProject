@@ -32,7 +32,6 @@ namespace OoadProject.View
             if (result == MessageBoxResult.OK && command.CanExecute(null))
             {
                 command.Execute(true);
-                if (btnAfrerAdd.Command.CanExecute(null)) btnAfrerAdd.Command.Execute(null);
                 MessageBox.Show("Thêm nhân viên mới thành công!");
                 this.Close();
             }

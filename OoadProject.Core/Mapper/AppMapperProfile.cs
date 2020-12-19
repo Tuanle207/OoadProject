@@ -37,7 +37,13 @@ namespace OoadProject.Core
                 .ForMember(dest => dest.Role, opt =>
                     opt.Ignore())
                 .ForMember(dest => dest.RoleId, opt =>
+                    opt.Ignore())
+                .ForMember(dest => dest.Id, opt =>
                     opt.Ignore());
+
+            CreateMap<User, UserForCreationDto>()
+                .ForMember(dest => dest.Role, opt =>
+                    opt.MapFrom(src => src.Role.Name));
 
             CreateMap<Product, ProductForOrderCreationDto>()
                 .ForMember(dest => dest.CategoryName, opt =>
