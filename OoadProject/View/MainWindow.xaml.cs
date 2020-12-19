@@ -131,5 +131,10 @@ namespace OoadProject.View
             (new LoginWindow()).Show();
             this.Close();
         }
+
+        private void btnUpdatePassword_Click(object sender, RoutedEventArgs e)
+        {
+            new UpdatePasswordWindow().ShowDialog();
+        }
     }
 }

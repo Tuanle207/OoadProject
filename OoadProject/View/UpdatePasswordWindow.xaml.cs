@@ -23,5 +23,37 @@ namespace OoadProject.View
         {
             InitializeComponent();
         }
+
+        private void currPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            tbCurrentPassword.Text = pbCurrentPassword.Password;
+        }
+
+        private void newPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            tbNewPassword.Text = pbNewPassword.Password;
+        }
+
+        private void confirmPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            tbPasswordConfirm.Text = pbPasswordConfirm.Password;
+        }
+
+        private void btnChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Xác nhận đổi mật khẩu?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var command = ((Button)sender).Command;
+
+            if (result == MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(true);
+                this.Close();
+                MessageBox.Show("Đổi mật khẩu thành công!");
+            }
+            else if (result != MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(false);
+            }
+        }
     }
 }

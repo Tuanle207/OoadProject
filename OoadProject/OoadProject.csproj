@@ -73,6 +73,7 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\BindingProxy.cs" />
     <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -305,7 +306,7 @@
     </Page>
     <Page Include="View\UpdatePasswordWindow.xaml">
       <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\WarrantyOrderUserControl.xaml">
       <SubType>Designer</SubType>

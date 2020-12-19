@@ -32,7 +32,7 @@ namespace OoadProject.Core.Services.AppUser
             var user = _userRepository.GetUserByEmail(loginDto.Email);
 
             // compare password?
-            if (!Session.ComparePassword(loginDto.Password, user.Password))
+            if (user == null || !Session.ComparePassword(loginDto.Password, user.Password))
                 throw new ArgumentException("Email hoặc mật khẩu không chính xác");
 
             // ok?
@@ -73,6 +73,12 @@ namespace OoadProject.Core.Services.AppUser
 
             return newPassword;
 
+        }
+
+        public void UpdateUserPassword(UserForPasswordUpdateDto userForPasswordUpdate)
+        {
+            var hashedPassword = Session.HashPassword(userForPasswordUpdate.Password);
+            _userRepository.UpdateUserPassword(userForPasswordUpdate.Id, hashedPassword);
         }
     }
 }
