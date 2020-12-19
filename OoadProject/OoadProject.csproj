@@ -144,8 +144,8 @@
     <Compile Include="View\ManufactureUserControl.xaml.cs">
       <DependentUpon>ManufactureUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\NhanVienUserControl.xaml.cs">
-      <DependentUpon>NhanVienUserControl.xaml</DependentUpon>
+    <Compile Include="View\StaffUserControl.xaml.cs">
+      <DependentUpon>StaffUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ParameterUserControl.xaml.cs">
       <DependentUpon>ParameterUserControl.xaml</DependentUpon>
@@ -275,7 +275,7 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="View\NhanVienUserControl.xaml">
+    <Page Include="View\StaffUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>

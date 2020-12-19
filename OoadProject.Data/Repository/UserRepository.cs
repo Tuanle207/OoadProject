@@ -29,5 +29,20 @@ namespace OoadProject.Data.Repository
                     .FirstOrDefault();
             }
         }
+
+        public void UpdateUserPassword(int userId, string hashedPassword)
+        {
+            using (var ctx = new AppDbContext())
+            {
+                var user = ctx.Users.Where(u => u.Id == userId).FirstOrDefault();
+                if (user != null)
+                {
+                    user.Password = hashedPassword;
+                    ctx.SaveChanges();
+                }
+                else
+                    throw new Exception("Người dùng này không tồn tại!");
+            }
+        }
     }
 }

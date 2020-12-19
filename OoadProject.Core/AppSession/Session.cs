@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,18 +35,22 @@ namespace OoadProject.Core.AppSession
 
         public static string HashPassword(string password)
         {
-
-            return "hassedPassword";
+            UnicodeEncoding uEncode = new UnicodeEncoding();
+            byte[] bytPassword = uEncode.GetBytes(password);
+            SHA512Managed sha = new SHA512Managed();
+            byte[] hash = sha.ComputeHash(bytPassword);
+            return Convert.ToBase64String(hash);
         }
 
         public static string GetNewPassword()
         {
-            return "new Password";
+            return new Random().Next(1000, 9999).ToString();
         }
 
         public static bool ComparePassword(string candidatePassword, string userPassword)
         {
-            if (candidatePassword == userPassword)
+            var hashedCandidatePassword = HashPassword(candidatePassword);
+            if (hashedCandidatePassword == userPassword)
                 return true;
             return false;
         }

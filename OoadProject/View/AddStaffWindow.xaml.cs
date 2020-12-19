@@ -26,7 +26,19 @@ namespace OoadProject.View
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            var result = MessageBox.Show("Xác nhận thêm nhân viên mới?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var command = ((Button)sender).Command;
+
+            if (result == MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(true);
+                if (btnAfrerAdd.Command.CanExecute(null)) btnAfrerAdd.Command.Execute(null);
+                this.Close();
+            }
+            else if (result != MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(false);
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace OoadProject.Core.ViewModels.Users
@@ -65,6 +66,8 @@ namespace OoadProject.Core.ViewModels.Users
         // public command properties
         public ICommand SaveEditingUser { get; set; }
         public ICommand DeleteUser { get; set; }
+        public ICommand ReloadUsers { get; set; }
+        public ICommand GrantNewPassword { get; set; }
 
         public UserViewModel()
         {
@@ -80,7 +83,8 @@ namespace OoadProject.Core.ViewModels.Users
                 p => true,
                 p =>
                 {
-                    _userService.AddUser(EditingUser);
+                    if (p != null && (bool)p == true)
+                        _userService.AddUser(EditingUser);
                 }
             );
 
@@ -89,8 +93,34 @@ namespace OoadProject.Core.ViewModels.Users
                 p => ChosenUser == null ? false : true,
                 p =>
                 {
-                    _userService.DeleteUser(ChosenUser);
+                    if (p != null && (bool)p == true)
+                    {
+                        _userService.DeleteUser(ChosenUser);
+                        Users = new ObservableCollection<User>(_userService.GetUsers());
+                    }
+                       
+                }
+            );
+
+            ReloadUsers = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
                     Users = new ObservableCollection<User>(_userService.GetUsers());
+                }
+            );
+
+            GrantNewPassword = new RelayCommand<object>
+            (
+                p => ChosenUser != null,
+                p =>
+                {
+                    if (p != null && (bool)p == true)
+                    {
+                        var newUserPassword = _userService.GetNewPassword(ChosenUser.Id);
+                        MessageBox.Show($"Mật khẩu mới của nhân viên {ChosenUser.Name} là {newUserPassword} !");
+                    }
                 }
             );
         }
