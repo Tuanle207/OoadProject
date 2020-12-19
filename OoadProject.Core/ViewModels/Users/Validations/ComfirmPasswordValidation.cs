@@ -13,7 +13,7 @@ namespace OoadProject.Core.ViewModels.Users
     {
         public static readonly DependencyProperty comparePasswordProperty =
              DependencyProperty.Register("ComparePassword", typeof(string),
-             typeof(ComfirmPasswordValidationWrapper), new FrameworkPropertyMetadata());
+                typeof(ComfirmPasswordValidationWrapper), new FrameworkPropertyMetadata());
 
         public string ComparePassword
         {
@@ -21,14 +21,15 @@ namespace OoadProject.Core.ViewModels.Users
             set { SetValue(comparePasswordProperty, value); }
         }
     }
+
     public class ComfirmPasswordValidation : ValidationRule
     {
         public ComfirmPasswordValidationWrapper Wrapper { get; set; }
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            String password = Wrapper.ComparePassword;
-            String comfirmPassword = (string)value;
+            var password = Wrapper.ComparePassword;
+            var comfirmPassword = (string)value;
             if (comfirmPassword == "")
             {
                 return new ValidationResult(false, "Vui lòng xác nhận mật khẩu");

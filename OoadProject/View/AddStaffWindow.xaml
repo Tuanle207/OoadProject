@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-
         xmlns:local="clr-namespace:OoadProject.View" 
         xmlns:Users="clr-namespace:OoadProject.Core.ViewModels.Users;assembly=OoadProject.Core"
         mc:Ignorable="d"
-        Title="AddStaffWindow" Height="400" Width="800"
+        Title="Thêm nhân viên" Height="400" Width="800"
+        WindowStartupLocation="CenterScreen"
         DataContext="{StaticResource UserViewModel}">
     <Grid>
         <Grid.RowDefinitions>
@@ -47,7 +47,7 @@
         <StackPanel Grid.Column="1" Grid.Row="2">
             <TextBlock Text="Email" FontWeight="Bold" Margin="0 0 0 8" FontSize="15"></TextBlock>
             <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="0 0 10 0">
-                <TextBox x:Name="tbEmail" BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Địa chỉ" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
+                <TextBox x:Name="tbEmail" BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Email" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
                     <TextBox.Text>
                         <Binding Path="EditingUser.Email" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -83,6 +83,5 @@
                 </Style>
             </Button.Style>-->
         </Button>
-        <Button x:Name="btnAfrerAdd" DataContext="{StaticResource UserViewModel}" Command="{Binding ReloadUsers}" Visibility="Hidden" />
     </Grid>
 </Window>

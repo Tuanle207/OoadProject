@@ -23,5 +23,22 @@ namespace OoadProject.View
         {
             InitializeComponent();
         }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Xác nhận lưu thông tin nhân viên?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var command = ((Button)sender).Command;
+
+            if (result == MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(true);
+                MessageBox.Show("Lưu thông tin thành công!");
+                this.Close();
+            }
+            else if (result != MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(false);
+            }
+        }
     }
 }

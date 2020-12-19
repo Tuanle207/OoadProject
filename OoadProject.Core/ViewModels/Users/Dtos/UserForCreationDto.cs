@@ -8,6 +8,7 @@ namespace OoadProject.Core.ViewModels.Users.Dtos
 {
     public class UserForCreationDto : BaseDto
     {
+        private int? _id;
         private string _name;
         private string _role;
         private DateTime _dob;
@@ -16,6 +17,7 @@ namespace OoadProject.Core.ViewModels.Users.Dtos
         private DateTime _creationTime;
         private string _email;
 
+        public int? Id { get => _id; set { _id = value; OnPropertyChanged(); } }
         public string Name { get => _name; set { _name = value; OnPropertyChanged(); } }
         public string Role { get => _role; set { _role = value; OnPropertyChanged(); } }
         public DateTime Dob { get => _dob; set { _dob = value; OnPropertyChanged(); } }

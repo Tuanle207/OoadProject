@@ -68,6 +68,8 @@ namespace OoadProject.Core.ViewModels.Users
         public ICommand DeleteUser { get; set; }
         public ICommand ReloadUsers { get; set; }
         public ICommand GrantNewPassword { get; set; }
+        public ICommand PrepareForCreateUser { get; set; }
+        public ICommand PrepareForUpdateUser { get; set; }
 
         public UserViewModel()
         {
@@ -84,7 +86,14 @@ namespace OoadProject.Core.ViewModels.Users
                 p =>
                 {
                     if (p != null && (bool)p == true)
-                        _userService.AddUser(EditingUser);
+                    {
+                        if (EditingUser.Id == null)
+                            _userService.AddUser(EditingUser);
+                        else
+                            _userService.UpdateUser(EditingUser);
+
+                        Users = new ObservableCollection<User>(_userService.GetUsers());
+                    }
                 }
             );
 
@@ -102,15 +111,6 @@ namespace OoadProject.Core.ViewModels.Users
                 }
             );
 
-            ReloadUsers = new RelayCommand<object>
-            (
-                p => true,
-                p =>
-                {
-                    Users = new ObservableCollection<User>(_userService.GetUsers());
-                }
-            );
-
             GrantNewPassword = new RelayCommand<object>
             (
                 p => ChosenUser != null,
@@ -121,6 +121,24 @@ namespace OoadProject.Core.ViewModels.Users
                         var newUserPassword = _userService.GetNewPassword(ChosenUser.Id);
                         MessageBox.Show($"Mật khẩu mới của nhân viên {ChosenUser.Name} là {newUserPassword} !");
                     }
+                }
+            );
+
+            PrepareForCreateUser = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    EditingUser = new UserForCreationDto { CreationTime = DateTime.Now, Dob = new DateTime(2000, 1, 1) };
+                }
+            );
+
+            PrepareForUpdateUser = new RelayCommand<object>
+            (
+                p => ChosenUser != null,
+                p =>
+                {
+                    EditingUser = Mapper.Map<UserForCreationDto>(ChosenUser);
                 }
             );
         }
