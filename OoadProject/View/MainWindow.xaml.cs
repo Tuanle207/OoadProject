@@ -29,7 +29,7 @@ namespace OoadProject.View
         private ItemManagerScreen _itemManagementScreen;
         private ManagementOrderUserControl _orderManagementScreen;
         private ListWarrantyOrderUserControl _warrantyOrderScreen;
-        private NhanVienUserControl _userScreen;
+        private StaffUserControl _userScreen;
         private ReportUserControl _reportScreen;
         private SettingUserControl _settingScreen;
 
@@ -44,7 +44,7 @@ namespace OoadProject.View
             _itemManagementScreen = new ItemManagerScreen();
             _orderManagementScreen = new ManagementOrderUserControl();
             _warrantyOrderScreen = new ListWarrantyOrderUserControl();
-            _userScreen = new NhanVienUserControl();
+            _userScreen = new StaffUserControl();
             _reportScreen = new ReportUserControl();
             _settingScreen = new SettingUserControl();
         }
@@ -130,6 +130,11 @@ namespace OoadProject.View
         {
             (new LoginWindow()).Show();
             this.Close();
+        }
+
+        private void btnUpdatePassword_Click(object sender, RoutedEventArgs e)
+        {
+            new UpdatePasswordWindow().ShowDialog();
         }
     }
 }

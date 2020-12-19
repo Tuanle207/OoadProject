@@ -19,6 +19,7 @@ namespace OoadProject.Core.ViewModels.Users
 
         // data field
         private LoginDto _loginDto;
+        private UserForPasswordUpdateDto _userForPasswordUpdate;
 
         // data property
         public LoginDto LoginDto { get => _loginDto; set { _loginDto = value; OnPropertyChanged(); } }
@@ -33,17 +34,30 @@ namespace OoadProject.Core.ViewModels.Users
             }
         }
 
+        public UserForPasswordUpdateDto UserForPasswordUpdate
+        {
+            get => _userForPasswordUpdate;
+            set
+            {
+                _userForPasswordUpdate = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         // command
         public ICommand Login { get; set; }
         public ICommand Logout { get; set; }
         public ICommand ReloadUsername { get; set; }
+        public ICommand UpdatePassword { get; set; }
 
         public LoginViewModel()
         {
             _userService = new UserService();
 
-            LoginDto = new LoginDto { Email = "letgo237@gmail.com", Password = "test1234" };
+            LoginDto = new LoginDto { Email = "letgo237@gmail.com", Password = "1248" };
+            UserForPasswordUpdate = new UserForPasswordUpdateDto();
+
 
             Login = new RelayCommand<object>
             (
@@ -78,6 +92,19 @@ namespace OoadProject.Core.ViewModels.Users
                 {
                     var x = UserName;
                     OnPropertyChanged(nameof(UserName));
+                }
+            );
+
+            UpdatePassword = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    if (p != null && (bool)p)
+                    {
+                        UserForPasswordUpdate.Id = CurrentUser.Id;
+                        _userService.UpdateUserPassword(UserForPasswordUpdate);
+                    }
                 }
             );
         }
