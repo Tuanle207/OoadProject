@@ -32,7 +32,7 @@ namespace OoadProject.Core.Services.AppUser
             var user = _userRepository.GetUserByEmail(loginDto.Email);
 
             // compare password?
-            if (user.Password != loginDto.Password)
+            if (!Session.ComparePassword(loginDto.Password, user.Password))
                 throw new ArgumentException("Email hoặc mật khẩu không chính xác");
 
             // ok?

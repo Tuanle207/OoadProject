@@ -68,5 +68,34 @@ namespace OoadProject.View
         {
             pwdTb.Text = pwdBox.Password;
         }
+
+        private void tbLoginInfo_KeyDown(object sender, KeyEventArgs e)
+        {
+           if (e.Key == Key.Enter)
+           {
+                var command = btnLogin.Command;
+
+                if (command.CanExecute(null))
+                {
+                    try
+                    {
+                        Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait; // set the cursor to loading spinner
+                        command.Execute(true);
+                        _mainWindow.Show();
+                        btnAfterLogin.Command.Execute(null);
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow; // set the cursor back to arrow
+                    }
+                }
+           }
+        }
     }
 }
