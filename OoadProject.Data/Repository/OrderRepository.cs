@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
+using System;
+using OoadProject.Shared.Dtos;
 
 namespace OoadProject.Data.Repository
 {
     public class OrderRepository : BaseRepository<Order>
     {
-        public IEnumerable<Order> GetOrders(List<OrderStatus> status = null, int? limit = null)
+        public IEnumerable<Order> GetOrders(List<OrderStatus> status, int limit)
         {
             using (var ctx = new AppDbContext())
             {
@@ -17,10 +19,7 @@ namespace OoadProject.Data.Repository
                 {
                     query = query.Where(o => status.Contains((OrderStatus)o.Status));
                 }
-                if (limit != null)
-                {
-                    query = query.Take((int)limit);
-                }
+                query = query.Take(limit);
 
                 query = query.Include(o => o.CreationUser).Include(o => o.Provider);
                 var orders = query.ToList();
@@ -29,6 +28,38 @@ namespace OoadProject.Data.Repository
             }
         }
 
+        public IEnumerable<Order> GetOrdersWithFilter(List<OrderStatus> status, int limit, DateRangeDto dateRange)
+        {
+            using (var ctx = new AppDbContext())
+            {
+                var query = ctx.Orders.AsQueryable();
+                
+                if (dateRange != null)
+                {
+                    query = query.Where(o => dateRange.StartDate <= o.CreationTime && o.CreationTime <= dateRange.EndDate);
+                }
 
+                if (status != null)
+                {
+                    query = query.Where(o => status.Contains((OrderStatus)o.Status));
+                }
+                query = query.Take(limit);
+
+                query = query.Include(o => o.CreationUser).Include(o => o.Provider);
+                var orders = query.ToList();
+
+                return orders;
+            }
+        }
+
+        public void UpdateOrderStatusById(int orderId, OrderStatus status)
+        {
+            using (var ctx = new AppDbContext())
+            {
+                var order = ctx.Orders.Where(o => o.Id == orderId).FirstOrDefault();
+                order.Status = (int)status;
+                ctx.SaveChanges();
+            }
+        }
     }
 }

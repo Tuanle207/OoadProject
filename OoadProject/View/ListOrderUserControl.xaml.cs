@@ -43,5 +43,26 @@ namespace OoadProject.View
             EditOrderWindow w = new EditOrderWindow();
             w.ShowDialog();
         }
+
+        private void itemWaitForSent_Click(object sender, RoutedEventArgs e)
+        {
+            var command = itemWaitForSent.Command;
+            if (command.CanExecute(null))
+                command.Execute(0);
+        }
+
+        private void itemSent_Click(object sender, RoutedEventArgs e)
+        {
+            var command = itemSent.Command;
+            if (command.CanExecute(null))
+                command.Execute(1);
+        }
+
+        private void itemDone_Click(object sender, RoutedEventArgs e)
+        {
+            var command = itemDone.Command;
+            if (command.CanExecute(null))
+                command.Execute(2);
+        }
     }
 }

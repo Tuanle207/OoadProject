@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:OoadProject.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:OoadProject.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="590" d:DesignWidth="1100" >
+             d:DesignHeight="590" d:DesignWidth="1100" 
+             DataContext="{StaticResource OrderViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"></ColumnDefinition>
@@ -15,33 +16,79 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="9*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid x:Name="gridOrder" Grid.Row="0" Grid.Column="0" Background="#FF6E85B6" Margin="2 2 2 2">
-                <TextBlock Margin="5" Text="Nhập từ khóa..." FontSize="12"
-                    Foreground="#000"
-                    Visibility="{Binding ElementName=tbKeyword, Path=Text.IsEmpty,
-                              Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <TextBox Name="tbKeyword" Background="Transparent" FontSize="14" Margin="2 2 2 2" BorderThickness="0"/>
-            </Grid>
-            <Button Grid.Row="0" Grid.Column="1" Name="btnAddOrder" Click="btnAddOrder_Click"  Height="Auto" BorderThickness="0" Background="Green" Margin="2 2 2 2">
-                <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="-5 0 -5 0">
-                    <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 0 0" Width="20" Height="20"/>
-                    <Label Content="Tạo đơn hàng" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 -8 0"/>
-                </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+
+            <Menu Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <MenuItem Height="40" Header="Tùy chọn" Background="#70af85" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="Cog" />
+                    </MenuItem.Icon>
+                    <MenuItem Header="Đơn hàng đang chờ gửi" x:Name="itemWaitForSent" Click="itemWaitForSent_Click" Command="{Binding ToggleCheckOption}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Check">
+                                <materialDesign:PackIcon.Visibility>
+                                    <Binding Path="WaitForSent" Converter="{StaticResource CheckOrderOptionsVisibilityConverter}"/>
+                                </materialDesign:PackIcon.Visibility>
+                            </materialDesign:PackIcon>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Đơn hàng đã gửi"  x:Name="itemSent" Click="itemSent_Click" Command="{Binding ToggleCheckOption}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Check" >
+                                <materialDesign:PackIcon.Visibility>
+                                    <Binding Path="Sent" Converter="{StaticResource CheckOrderOptionsVisibilityConverter}"/>
+                                </materialDesign:PackIcon.Visibility>
+                            </materialDesign:PackIcon>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Đơn hàng đã xử lí" x:Name="itemDone" Click="itemDone_Click" Command="{Binding ToggleCheckOption}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Check" >
+                                <materialDesign:PackIcon.Visibility>
+                                    <Binding Path="Done" Converter="{StaticResource CheckOrderOptionsVisibilityConverter}"/>
+                                </materialDesign:PackIcon.Visibility>
+                            </materialDesign:PackIcon>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+
+            <DatePicker
+                SelectedDate="{Binding DateFrom}"
+                Width="100"
+                Margin="40 0 0 0"
+                VerticalAlignment="Center"
+                materialDesign:HintAssist.Hint="Từ ngày"
+                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+            <materialDesign:PackIcon Kind="ChevronRight" Width="100" Height="30" VerticalAlignment="Bottom"/>
+            <DatePicker
+                SelectedDate="{Binding DateTo}"
+                Width="100"
+                materialDesign:HintAssist.Hint="Đến ngày"
+                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+            <Button
+                Command="{Binding SearchWithFilter}"
+                Style="{StaticResource MaterialDesignIconForegroundButton}"
+                ToolTip="Tra cứu"
+                Background="{DynamicResource MaterialDesignTextFieldBoxBackground}"
+                Margin="20 0 0 0"
+                VerticalAlignment="Bottom">
+                <materialDesign:PackIcon Kind="Magnify" Width="16" Height="16"/>
             </Button>
-        </Grid>
+
+        </StackPanel>
         <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140*"/>
+                <ColumnDefinition Width="471*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <materialDesign:Card Grid.Row="0" Background="#FFE3F0FF"  Margin="0,5,2,0" BorderThickness="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
                 <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                    <ListView x:Name="ListOrder" >
+                    <ListView x:Name="ListOrder" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder}">
                         <ListView.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Sửa thông tin" Click="MenuItem_Click">
@@ -54,21 +101,61 @@
                                         <materialDesign:PackIcon Kind="Delete" Width="Auto" Height="Auto"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
+                                <Separator Height="4" />
+                                <MenuItem IsEnabled="{Binding SelectedOrder, Mode=OneWay, Converter={StaticResource ContextMenuItemVisibilityConverter}}" Header="Đang chờ gửi" Command="{Binding ChangeStatusToWaitForSent}">
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="Check" Width="Auto" Height="Auto">
+                                            <materialDesign:PackIcon.Visibility>
+                                                <Binding Path="SelectedOrder" UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource OrderCheckMenuItemVisibilityConverter}">
+                                                    <Binding.ConverterParameter>
+                                                        <sys:Int32>0</sys:Int32>
+                                                    </Binding.ConverterParameter>
+                                                </Binding>
+                                            </materialDesign:PackIcon.Visibility>
+                                        </materialDesign:PackIcon>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem IsEnabled="{Binding SelectedOrder, Mode=OneWay, Converter={StaticResource ContextMenuItemVisibilityConverter}}" Header="Đã gửi" Command="{Binding ChangeStatusToSent}" >
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="Check" Width="Auto" Height="Auto">
+                                            <materialDesign:PackIcon.Visibility>
+                                                <Binding Path="SelectedOrder" UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource OrderCheckMenuItemVisibilityConverter}">
+                                                    <Binding.ConverterParameter>
+                                                        <sys:Int32>1</sys:Int32>
+                                                    </Binding.ConverterParameter>
+                                                </Binding>
+                                            </materialDesign:PackIcon.Visibility>
+                                        </materialDesign:PackIcon>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem IsEnabled="{Binding SelectedOrder, Mode=OneWay, Converter={StaticResource ContextMenuItemVisibilityConverter}}" Header="Đã xử lí" Command="{Binding ChangeStatusToDone}">
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="Check" Width="Auto" Height="Auto">
+                                            <materialDesign:PackIcon.Visibility>
+                                                <Binding Path="SelectedOrder" UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource OrderCheckMenuItemVisibilityConverter}">
+                                                    <Binding.ConverterParameter>
+                                                        <sys:Int32>2</sys:Int32>
+                                                    </Binding.ConverterParameter>
+                                                </Binding>
+                                            </materialDesign:PackIcon.Visibility>
+                                        </materialDesign:PackIcon>
+                                    </MenuItem.Icon>
+                                </MenuItem>
                             </ContextMenu>
                         </ListView.ContextMenu>
                         <ListView.View >
                             <GridView>
-                                <GridViewColumn Header="Mã ĐH"></GridViewColumn>
-                                <GridViewColumn Header="Thời gian tạo"></GridViewColumn>
-                                <GridViewColumn Header="Người tạo đơn" ></GridViewColumn>
-                                <GridViewColumn Header="Nhà cung cấp"></GridViewColumn>
-                                <GridViewColumn Header="Tình trạng" ></GridViewColumn>
+                                <GridViewColumn Header="Mã ĐH" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                                <GridViewColumn Header="Tạo lúc" DisplayMemberBinding="{Binding CreationTime}"></GridViewColumn>
+                                <GridViewColumn Header="Người tạo" DisplayMemberBinding="{Binding CreationUser}"></GridViewColumn>
+                                <GridViewColumn Header="Nhà cung cấp" DisplayMemberBinding="{Binding ProviderName}"></GridViewColumn>
+                                <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding Status, Converter={StaticResource OrderStatusConverter}}"></GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
                 </ScrollViewer>
             </materialDesign:Card>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
@@ -76,31 +163,49 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="1">
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        <Button x:Name="btnPrev" Height="20" Foreground="Black" Background="#FF47608E" Padding="10 0 10 2" Margin="0 0 20 0" >&lt;</Button>
+                        <Button Command="{Binding GoPrevPage}" x:Name="btnPrev" Width="30" Height="30" Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                Foreground="Black" Background="#FF47608E" Margin="0 0 20 0" >
+                            <materialDesign:PackIcon Kind="ArrowLeft" Width="20" Height="20" />
+                        </Button>
                         <TextBlock Height="20" Text="1"></TextBlock>
                         <TextBlock Height="20">/</TextBlock>
                         <TextBlock Height="20" Text="2"></TextBlock>
-                        <Button x:Name="btnNext" Height="20" Foreground="Black" Background="#FF47608E" Padding="10 0 10 2" Margin="20 0 0 0">&gt;</Button>
+                        <Button Command="{Binding GoNextPage}" x:Name="btnNext" Width="30" Height="30" Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                 Foreground="Black" Background="#FF47608E" Margin="20 0 0 0">
+                            <materialDesign:PackIcon Kind="ArrowRight" Width="20" Height="20" />
+                        </Button>
                     </StackPanel>
                 </Grid>
             </Grid>
         </Grid>
         <TextBlock Grid.Row="0" Grid.Column="1" Margin="10 0 0 0" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center">
-                Danh sách chi tiết đơn hàng
+                Chi tiết đơn hàng
         </TextBlock>
-        <materialDesign:Card Grid.Row="1" Grid.Column="1" Background="#FFE3F0FF"  Margin="10 5 2 0" BorderThickness="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-            <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                <ListView x:Name="ListDetailOrder" >                    
-                    <ListView.View >
-                        <GridView>
-                            <GridViewColumn Header="Mã SP"></GridViewColumn>
-                            <GridViewColumn Header="Tên SP"></GridViewColumn>
-                            <GridViewColumn Header="Loại SP" ></GridViewColumn>
-                            <GridViewColumn Header="Số lượng"></GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </ScrollViewer>
-        </materialDesign:Card>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <materialDesign:Card Background="#FFE3F0FF"  Margin="10 5 2 0" BorderThickness="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
+                <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                    <ListView x:Name="ListDetailOrder" ItemsSource="{Binding OrderProducts}" >
+                        <ListView.View >
+                            <GridView>
+                                <GridViewColumn Header="Mã SP" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                                <GridViewColumn Header="Tên SP" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                                <GridViewColumn Header="Loại SP" DisplayMemberBinding="{Binding CategoryName}"></GridViewColumn>
+                                <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding Number}"></GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </materialDesign:Card>
+            <Button Grid.Row="1" HorizontalAlignment="Right" Name="btnAddOrder" Click="btnAddOrder_Click" Width="200" Height="Auto" BorderThickness="0" Background="Green" Margin="2 2 2 2">
+                <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="-5 0 -5 0">
+                    <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 10 0" Width="20" Height="20"/>
+                    <Label Content="Tạo đơn hàng mới" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 -8 0"/>
+                </StackPanel>
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>

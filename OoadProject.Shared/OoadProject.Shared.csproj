@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\DateRangeDto.cs" />
     <Compile Include="Pagination\PaginatedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

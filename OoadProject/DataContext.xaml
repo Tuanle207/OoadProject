@@ -11,6 +11,7 @@
     <Users:UserViewModel x:Key="UserViewModel" />
     <Users:LoginViewModel x:Key="LoginViewModel" />
     <Orders:OrderCreationViewModel x:Key="OrderCreationViewModel" />
+    <Orders:OrderViewModel x:Key="OrderViewModel" />
     <Sells:SellViewModel x:Key="SellViewModel" />
     <Home:HomeViewModel x:Key="HomeViewModel" />
     <Warranties:WarrantyOrderCreationViewModel x:Key="WarrantyOrderCreationViewModel" />
@@ -25,6 +26,9 @@
     <Warranties:WarrantyOrderStatusConverter x:Key="WarrantyOrderStatusConverter" />
     <Warranties:ContextMenuItemVisibilityConverter x:Key="ContextMenuItemVisibilityConverter" />
     <Warranties:CheckMenuItemVisibilityConverter x:Key="CheckMenuItemVisibilityConverter" />
-    
+    <Orders:OrderStatusConverter x:Key="OrderStatusConverter" />
+    <Orders:CheckOrderOptionsVisibilityConverter x:Key="CheckOrderOptionsVisibilityConverter" />
+    <Orders:OrderCheckMenuItemVisibilityConverter x:Key="OrderCheckMenuItemVisibilityConverter" />
+
 
 </ResourceDictionary>

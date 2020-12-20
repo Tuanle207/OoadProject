@@ -2,6 +2,7 @@
 using OoadProject.Core.ViewModels.Orders.Dtos;
 using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Repository;
+using OoadProject.Shared.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace OoadProject.Core.Services.AppProduct
         /// Get processing orders includes all except for completed order (status done)
         /// </summary>
         /// <param name="limit">Limit number or order loaded</param>
-        public IEnumerable<ProcessingOrderDto> GetProcessingOrders(int? limit = null)
+        public IEnumerable<ProcessingOrderDto> GetProcessingOrders(int limit = 5)
         {
             var processingOrders = _orderRepository.GetOrders(
                 new List<OrderStatus>
@@ -59,5 +60,21 @@ namespace OoadProject.Core.Services.AppProduct
 
         }
 
+        public IEnumerable<OrderForListDto> GetOrders(List<OrderStatus> filter, DateRangeDto dateRange)
+        {
+            var orders =_orderRepository.GetOrdersWithFilter(filter, 10, dateRange);
+            return Mapper.Map<IEnumerable<OrderForListDto>>(orders);
+        }
+
+        public IEnumerable<ProductForOrderListDto> GetOrderProducts(int id)
+        {
+            var orderProducts = _orderProductRepository.GetOrderProductsByOrderId(id);
+            return Mapper.Map<IEnumerable<ProductForOrderListDto>>(orderProducts);
+        }
+
+        public void UpdateOrderStatus(int orderId, OrderStatus status)
+        {
+            _orderRepository.UpdateOrderStatusById(orderId, status);
+        }
     }
 }
