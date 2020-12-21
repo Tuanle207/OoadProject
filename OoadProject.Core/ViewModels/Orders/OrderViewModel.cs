@@ -53,6 +53,7 @@ namespace OoadProject.Core.ViewModels.Orders
         public ICommand ChangeStatusToWaitForSent { get; set; }
         public ICommand ChangeStatusToSent { get; set; }
         public ICommand ChangeStatusToDone { get; set; }
+        public ICommand DeleteOrder { get; set; }
 
         public OrderViewModel()
         {
@@ -152,6 +153,23 @@ namespace OoadProject.Core.ViewModels.Orders
                     }
                 }
             );
+
+            DeleteOrder = new RelayCommand<object>
+            (
+                p => SelectedOrder != null,
+                p =>
+                {
+                    if (p != null && (bool)p)
+                    {
+                        if (SelectedOrder.Status == (int)OrderStatus.Sent || SelectedOrder.Status == (int)OrderStatus.Done)
+                            throw new Exception("Không thể xóa phiếu đặt hàng đã gửi hoặc đã hoàn thành!");
+
+                        _orderService.DeleleOrder(SelectedOrder.Id);
+                        Orders.Remove(SelectedOrder);
+                        SelectedOrder = null;
+                    }
+                }
+            );
         }
 
         private void LoadOrdersWithFilter()
@@ -165,6 +183,8 @@ namespace OoadProject.Core.ViewModels.Orders
             // datetime filter
             var dateRange = new DateRangeDto { StartDate = DateFrom, EndDate = DateTo };
             Orders = new ObservableCollection<OrderForListDto>(_orderService.GetOrders(filter, dateRange));
+
+            OrderProducts = new ObservableCollection<ProductForOrderListDto>();
         }
 
         private void LoadOrderProducts()

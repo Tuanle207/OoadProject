@@ -7,11 +7,11 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             DataContext="{StaticResource ReceiptViewModel}">
+             DataContext="{StaticResource ReceiptCreationViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"></ColumnDefinition>
-            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -42,7 +42,7 @@
             </Button>
 
         </StackPanel>
-        <materialDesign:Card Grid.Row="1" Background="#FFE3F0FF"  Margin="0,5,2,0" BorderThickness="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
+        <materialDesign:Card Grid.Row="1" Background="#FFE3F0FF"  Margin="0,5,2,0" BorderThickness="0" VerticalAlignment="Stretch">
             <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
                 <ListView x:Name="ListOrder" ItemsSource="{Binding SentOrders}" SelectedItem="{Binding SelectedOrder}" >
                     <ListView.View >
@@ -63,13 +63,14 @@
                 <ColumnDefinition Width="0.8*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Margin="10 0 0 0" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center">
-                Danh sách chi tiết đơn hàng
+                Chi tiết nhập hàng
             </TextBlock>
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
+                <RowDefinition Height="100" />
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
             <materialDesign:Card Grid.Row="0" Background="#FFE3F0FF"  Margin="10 5 2 0" BorderThickness="0" VerticalAlignment="Stretch" Grid.ColumnSpan="3">
@@ -121,12 +122,36 @@
                     </ListView>
                 </ScrollViewer>
             </materialDesign:Card>
-            <Grid Grid.Row="1">
+            <materialDesign:Card Grid.Row="1" Background="#FFE3F0FF"  Margin="10 10 0 20" BorderThickness="0" VerticalAlignment="Stretch" Grid.ColumnSpan="3">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Margin="10 0 0 0" Grid.Row="0" Grid.Column="0" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                            Tổng giá trị:
+                    </TextBlock>
+                    <TextBox Text="{Binding Total, Mode=OneWay}" IsReadOnly="True"
+                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                      Grid.Column="1" Height="40" Margin="10 0 10 15" HorizontalContentAlignment="Center" />
+                    <TextBlock Grid.Row="0" Grid.Column="2" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,22,0,21">
+                            Ngày nhập:
+                    </TextBlock>
+                    <DatePicker IsEnabled="False" SelectedDate="{Binding DateCreation, Mode=OneWay}" Grid.Row="0" Grid.Column="3" Foreground="Black" Height="Auto" Margin="5 5 5 10" VerticalContentAlignment="Center" Padding="5 0" FontSize="16">
+                    </DatePicker>
+                </Grid>
+            </materialDesign:Card>
+            <Grid Grid.Row="2" Margin="0 0 0 10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Command="{Binding ReloadData}" Grid.Column="0" HorizontalAlignment="Left" Width="150" Height="Auto" BorderThickness="0" Background="Red" Margin="15 2 2 2">
+                <Button Command="{Binding RestoreData}" Grid.Column="0" HorizontalAlignment="Left" Width="150" Height="Auto" BorderThickness="0" Background="Red" Margin="15 2 2 2">
                     <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="-5 0 -5 0">
                         <Label Content="Nhập lại" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" />
                     </StackPanel>

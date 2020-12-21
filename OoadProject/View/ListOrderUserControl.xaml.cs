@@ -34,15 +34,16 @@ namespace OoadProject.View
 
         private void btnAddOrder_Click(object sender, RoutedEventArgs e)
         {
-            AddOrderWindow w = new AddOrderWindow();
-            w.ShowDialog();
+            var command = ((Button)sender).Command;
+            if (command.CanExecute(null))
+            {
+                command.Execute(true);
+                var window = new AddOrderWindow();
+                window.ShowDialog();
+            }
+            
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            EditOrderWindow w = new EditOrderWindow();
-            w.ShowDialog();
-        }
 
         private void itemWaitForSent_Click(object sender, RoutedEventArgs e)
         {
@@ -77,12 +78,45 @@ namespace OoadProject.View
 
         private void menuItemUpdate_Click(object sender, RoutedEventArgs e)
         {
+            var command = ((MenuItem)sender).Command;
+            if (command.CanExecute(null))
+            {
+                int id;
+                if (Int32.TryParse(tbSelectedId.Text, out id))
+                {
+                    try
+                    {
+                        command.Execute(id);
 
+                        EditOrderWindow w = new EditOrderWindow();
+                        w.ShowDialog();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Không thể thực hiện thao tác này", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
         }
 
         private void menuItemDelete_Click(object sender, RoutedEventArgs e)
         {
+            var result = MessageBox.Show("Xác nhận xóa đơn đặt hàng?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var command = ((MenuItem)sender).Command;
 
+            if (result == MessageBoxResult.OK && command.CanExecute(null))
+            {
+                try
+                {
+                    command.Execute(true);
+
+                    MessageBox.Show("Xóa thành công!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Không thể thực hiện thao tác này", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

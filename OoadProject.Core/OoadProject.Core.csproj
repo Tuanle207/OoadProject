@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -41,80 +41,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppSession\Session.cs" />
-    <Compile Include="Mapper\AppMapperProfile.cs" />
-    <Compile Include="Mapper\AutoMapper.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\AppProduct\CategoryService.cs" />
-    <Compile Include="Services\AppProduct\CustomerService.cs" />
-    <Compile Include="Services\AppProduct\InvoiceService.cs" />
-    <Compile Include="Services\AppProduct\ManufacturerService.cs" />
-    <Compile Include="Services\AppProduct\OrderService.cs" />
-    <Compile Include="Services\AppProduct\ProductService.cs" />
-    <Compile Include="Services\AppProduct\ProviderService.cs" />
-    <Compile Include="Services\AppProduct\ReceiptService.cs" />
-    <Compile Include="Services\AppProduct\WarrantyService.cs" />
-    <Compile Include="Services\AppUser\RoleService.cs" />
-    <Compile Include="Services\AppUser\UserService.cs" />
-    <Compile Include="Services\BaseService.cs" />
-    <Compile Include="Services\TimeType.cs" />
-    <Compile Include="ViewModels\BaseDto.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\Home\Dtos\HotProductDto.cs" />
-    <Compile Include="ViewModels\Home\Dtos\ProcessingOrderDto.cs" />
-    <Compile Include="ViewModels\Home\Dtos\RevenueDto.cs" />
-    <Compile Include="ViewModels\Home\HomeViewModel.cs" />
-    <Compile Include="ViewModels\Orders\Converters\CheckOrderOptionsVisibilityConverter.cs" />
-    <Compile Include="ViewModels\Orders\Converters\OrderCheckMenuItemVisibilityConverter.cs" />
-    <Compile Include="ViewModels\Orders\Converters\OrderStatusConverter.cs" />
-    <Compile Include="ViewModels\Orders\Dtos\OrderForCreationDto.cs" />
-    <Compile Include="ViewModels\Orders\Dtos\OrderForListDto.cs" />
-    <Compile Include="ViewModels\Orders\Dtos\ProductForOrderCreation.cs" />
-    <Compile Include="ViewModels\Orders\Dtos\ProductForOrderListDto.cs" />
-    <Compile Include="ViewModels\Orders\Dtos\ProductForReceiptCreation.cs" />
-    <Compile Include="ViewModels\Orders\Dtos\SelectingProductDto.cs" />
-    <Compile Include="ViewModels\Orders\OrderCreationViewModel.cs" />
-    <Compile Include="ViewModels\Orders\OrderViewModel.cs" />
-    <Compile Include="ViewModels\Orders\ReceiptViewModel.cs" />
-    <Compile Include="ViewModels\RelayCommand.cs" />
-    <Compile Include="ViewModels\Sells\Dtos\InvoiceForCreationDto.cs" />
-    <Compile Include="ViewModels\Sells\Dtos\ProductForSellDto.cs" />
-    <Compile Include="ViewModels\Sells\Dtos\SelectingProductForSellDto.cs" />
-    <Compile Include="ViewModels\Sells\SellViewModel.cs" />
-    <Compile Include="ViewModels\Sells\Validation\CustomerNameValidation.cs" />
-    <Compile Include="ViewModels\Sells\Validation\PhoneNumberValidation.cs" />
-    <Compile Include="ViewModels\Settings\CategoryViewModel.cs" />
-    <Compile Include="ViewModels\Settings\Dtos\CategoryForCreationDto.cs" />
-    <Compile Include="ViewModels\Settings\Dtos\ManufacturerForCreationDto.cs" />
-    <Compile Include="ViewModels\Settings\Dtos\ProviderForCreationDto.cs" />
-    <Compile Include="ViewModels\Settings\ManufacturerViewModel.cs" />
-    <Compile Include="ViewModels\Settings\ProviderViewModel.cs" />
-    <Compile Include="ViewModels\Settings\Validations\AddressValidation.cs" />
-    <Compile Include="ViewModels\Settings\Validations\DescriptionValidation.cs" />
-    <Compile Include="ViewModels\Settings\Validations\EmailValidation.cs" />
-    <Compile Include="ViewModels\Settings\Validations\NameValidation.cs" />
-    <Compile Include="ViewModels\Settings\Validations\PhoneNumberValidation.cs" />
-    <Compile Include="ViewModels\Settings\Validations\ReturnRateValidation.cs" />
-    <Compile Include="ViewModels\Users\Dtos\LoginDto.cs" />
-    <Compile Include="ViewModels\Users\Dtos\UserForCreationDto.cs" />
-    <Compile Include="ViewModels\Users\Dtos\UserForPasswordUpdateDto.cs" />
-    <Compile Include="ViewModels\Users\LoginViewModel.cs" />
-    <Compile Include="ViewModels\Users\UserViewModel.cs" />
-    <Compile Include="ViewModels\Users\Validations\ComfirmPasswordValidation.cs" />
-    <Compile Include="ViewModels\Users\Validations\EmailForUpdateValidation.cs" />
-    <Compile Include="ViewModels\Users\Validations\PasswordValidation.cs" />
-    <Compile Include="ViewModels\Users\Validations\UserEmailValidation.cs" />
-    <Compile Include="ViewModels\Warranties\Converters\CheckMenuItemVisibilityConverter.cs" />
-    <Compile Include="ViewModels\Warranties\Converters\ContextMenuItemVisibilityConverter.cs" />
-    <Compile Include="ViewModels\Warranties\Converters\WarrantyListVisibilityConverter.cs" />
-    <Compile Include="ViewModels\Warranties\Converters\WarrantyOrderStatusConverter.cs" />
-    <Compile Include="ViewModels\Warranties\Dtos\ProductForListWarrantyDto.cs" />
-    <Compile Include="ViewModels\Warranties\Dtos\ProductForWarrantyDto.cs" />
-    <Compile Include="ViewModels\Warranties\WarrantyOrderCreationViewModel.cs" />
-    <Compile Include="ViewModels\Warranties\WarrantyOrderListViewModel.cs" />
+    <Compile Include="**\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="obj\**\*.cs" />

@@ -13,6 +13,7 @@
     <Orders:OrderCreationViewModel x:Key="OrderCreationViewModel" />
     <Orders:OrderViewModel x:Key="OrderViewModel" />
     <Orders:ReceiptViewModel x:Key="ReceiptViewModel" />
+    <Orders:ReceiptCreationViewModel x:Key="ReceiptCreationViewModel" />
     <Sells:SellViewModel x:Key="SellViewModel" />
     <Home:HomeViewModel x:Key="HomeViewModel" />
     <Warranties:WarrantyOrderCreationViewModel x:Key="WarrantyOrderCreationViewModel" />

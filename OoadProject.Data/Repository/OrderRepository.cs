@@ -61,5 +61,15 @@ namespace OoadProject.Data.Repository
                 ctx.SaveChanges();
             }
         }
+
+        public void UpdateProviderById(int orderId, int providerId)
+        {
+            using (var ctx = new AppDbContext())
+            {
+                var order = ctx.Orders.Where(o => o.Id == orderId).FirstOrDefault();
+                order.ProviderId = providerId;
+                ctx.SaveChanges();
+            }
+        }
     }
 }

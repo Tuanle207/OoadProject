@@ -203,12 +203,14 @@
                         Id = c.Int(nullable: false, identity: true),
                         UserId = c.Int(nullable: false),
                         CreationTime = c.DateTime(nullable: false),
-                        OrderId = c.Int(nullable: false),
+                        OrderId = c.Int(),
                         Total = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
+                .ForeignKey("dbo.Orders", t => t.OrderId)
+                .Index(t => t.UserId)
+                .Index(t => t.OrderId);
             
             CreateTable(
                 "dbo.WarrantyOrders",
@@ -250,6 +252,7 @@
             DropForeignKey("dbo.WarrantyOrders", "InvoiceId", "dbo.Invoices");
             DropForeignKey("dbo.WarrantyOrders", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.ReceiptProducts", "ReceiptId", "dbo.Receipts");
+            DropForeignKey("dbo.Receipts", "OrderId", "dbo.Orders");
             DropForeignKey("dbo.Receipts", "UserId", "dbo.Users");
             DropForeignKey("dbo.ReceiptProducts", "ProductId", "dbo.Products");
             DropForeignKey("dbo.Orders", "ProviderId", "dbo.Providers");
@@ -270,6 +273,7 @@
             DropIndex("dbo.WarrantyOrders", new[] { "CustomerId" });
             DropIndex("dbo.WarrantyOrders", new[] { "InvoiceId" });
             DropIndex("dbo.WarrantyOrders", new[] { "ProductId" });
+            DropIndex("dbo.Receipts", new[] { "OrderId" });
             DropIndex("dbo.Receipts", new[] { "UserId" });
             DropIndex("dbo.ReceiptProducts", new[] { "ReceiptId" });
             DropIndex("dbo.ReceiptProducts", new[] { "ProductId" });

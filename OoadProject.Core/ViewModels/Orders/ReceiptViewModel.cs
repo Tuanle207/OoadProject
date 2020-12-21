@@ -16,35 +16,37 @@ namespace OoadProject.Core.ViewModels.Orders
     public class ReceiptViewModel : BaseViewModel
     {
         // service
-        private readonly OrderService _orderService;
         private readonly ReceiptService _receiptService;
 
-        // private fields
-        private ObservableCollection<OrderForListDto> _sentOrders;
-        private OrderForListDto _selectedOrder;
+        // private field
+        private ObservableCollection<ReceiptForListDto> _receipts;
+        private ReceiptForListDto _selectedReceipt;
         private ObservableCollection<ProductForReceiptCreation> _receiptProducts;
         private DateTime _dateFrom;
         private DateTime _dateTo;
 
         // public property
-        public ObservableCollection<OrderForListDto> SentOrders { 
-            get => _sentOrders; 
-            set 
-            { 
-                _sentOrders = value; 
-                OnPropertyChanged(); 
-            } 
-        }
-        public OrderForListDto SelectedOrder
+        public ObservableCollection<ReceiptForListDto> Receipts
         {
-            get => _selectedOrder;
+            get => _receipts;
             set
             {
-                _selectedOrder = value;
-                if (_selectedOrder != null) InitializeReceiptProduct();
+                _receipts = value;
                 OnPropertyChanged();
             }
         }
+
+        public ReceiptForListDto SelectedReceipt
+        {
+            get => _selectedReceipt;
+            set
+            {
+                _selectedReceipt = value;
+                if (_selectedReceipt != null) InitializeReceiptProduct();
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<ProductForReceiptCreation> ReceiptProducts
         {
             get => _receiptProducts;
@@ -58,16 +60,11 @@ namespace OoadProject.Core.ViewModels.Orders
         public DateTime DateTo { get => _dateTo; set { _dateTo = value; OnPropertyChanged(); } }
 
         // command
-        public ICommand SaveReceipt { get; set; }
-        public ICommand ReloadData { get; set; }
         public ICommand SearchWithFilter { get; set; }
-        public ICommand AddItem { get; set; }
-        public ICommand RemoveItem { get; set; }
 
         public ReceiptViewModel()
         {
             // serivce
-            _orderService = new OrderService();
             _receiptService = new ReceiptService();
 
             // data
@@ -76,23 +73,6 @@ namespace OoadProject.Core.ViewModels.Orders
             DateTo = DateTime.Now;
 
             // command
-            SaveReceipt = new RelayCommand<object>
-            (
-                p => SelectedOrder != null && ReceiptProducts != null && ReceiptProducts.Count > 0,
-                p =>
-                {
-                    _receiptService.AddNewReceipt(SelectedOrder, ReceiptProducts);
-                    InitialData(null);
-                    MessageBox.Show("Nhập hàng thành công!");
-                }
-            );
-
-            ReloadData = new RelayCommand<object>
-            (
-                p => true,
-                p => InitialData(null)
-            );
-
             SearchWithFilter = new RelayCommand<object>
             (
                 p => true,
@@ -104,46 +84,20 @@ namespace OoadProject.Core.ViewModels.Orders
                         EndDate = DateTo
                     };
                     InitialData(dateRange);
-
                 }
             );
-
-            AddItem = new RelayCommand<object>
-            (
-                p => true,
-                p =>
-                {
-                    var selectedProduct = (ProductForReceiptCreation)p;
-                    selectedProduct.Number++;
-                }
-            );
-
-            RemoveItem = new RelayCommand<object>
-            (
-                p => p != null && ((ProductForReceiptCreation)p).Number > 0,
-                p => 
-                {
-                    var selectedProduct = (ProductForReceiptCreation)p;
-                    selectedProduct.Number--;
-                    if (selectedProduct.Number == 0)
-                        ReceiptProducts.Remove(selectedProduct);
-                }
-            );
-
         }
 
         private void InitializeReceiptProduct()
         {
             ReceiptProducts = new ObservableCollection<ProductForReceiptCreation>(
-                _orderService.GetOrderProducts<ProductForReceiptCreation>(SelectedOrder.Id));
+                _receiptService.GetReceiptProducts(SelectedReceipt.Id));
         }
 
         private void InitialData(DateRangeDto dateRange)
         {
-            var filter = new List<OrderStatus>() { OrderStatus.Sent };
-            SentOrders = new ObservableCollection<OrderForListDto>(_orderService.GetOrders(filter, dateRange));
-
-            SelectedOrder = null;
+            Receipts = new ObservableCollection<ReceiptForListDto>(_receiptService.GetAllReceipts(dateRange));
+            SelectedReceipt = null;
 
             ReceiptProducts = new ObservableCollection<ProductForReceiptCreation>();
         }

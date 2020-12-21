@@ -2,6 +2,7 @@
 using OoadProject.Core.ViewModels.Orders.Dtos;
 using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Repository;
+using OoadProject.Shared.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,13 +32,15 @@ namespace OoadProject.Core.Services.AppProduct
             var total = 0;
             foreach (var item in receiptProducts) total += item.PriceIn;
 
-            var storedReceipt = _receipRepository.Create(new Receipt
+            var receipt = new Receipt
             {
                 OrderId = order.Id,
-                CreationTime = DateTime.Now,
+                CreationTime = DateTime.Now.Date,
                 UserId = Session.CurrentUser.Id,
                 Total = total
-            });
+            };
+            receipt.OrderId = order.Id;
+            var storedReceipt = _receipRepository.Create(receipt);
 
             // Add Receipt product and update product's information (priceIn, priceOut, Number)
             foreach (var item in receiptProducts)
@@ -53,6 +56,18 @@ namespace OoadProject.Core.Services.AppProduct
 
             // Update corresponding order status to done
             _orderRepository.UpdateOrderStatusById(order.Id, OrderStatus.Done);
+        }
+
+        public IEnumerable<ProductForReceiptCreation> GetReceiptProducts(int id)
+        {
+            var receipt = _receiptProductRepository.GetAllByReceiptId(id);
+            return Mapper.Map<IEnumerable<ProductForReceiptCreation>>(receipt);
+        }
+
+        public IEnumerable<ReceiptForListDto> GetAllReceipts(DateRangeDto dateRange)
+        {
+            var receipt = _receipRepository.GetAll(dateRange);
+            return Mapper.Map <IEnumerable<ReceiptForListDto>>(receipt);
         }
     }
 }

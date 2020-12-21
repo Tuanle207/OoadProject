@@ -33,13 +33,14 @@ namespace OoadProject.View
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("Xác nhận lưu?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var result = MessageBox.Show("Xác nhận thêm đơn đặt hàng mới?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
             var command = ((Button)sender).Command;
 
             if (result == MessageBoxResult.OK && command.CanExecute(null))
             {
                 command.Execute(true);
                 this.Close();
+                MessageBox.Show("Thêm thành công!");
             }
             else if (result != MessageBoxResult.OK && command.CanExecute(null))
             {
@@ -53,6 +54,21 @@ namespace OoadProject.View
             if (result == MessageBoxResult.OK)
             {
                 this.Close();
+            }
+        }
+
+        private void btnResetInput_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Xác nhận nhập lại từ đầu?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var command = ((Button)sender).Command;
+
+            if (result == MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(true);
+            }
+            else if (result != MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(false);
             }
         }
     }

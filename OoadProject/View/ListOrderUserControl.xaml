@@ -91,12 +91,12 @@
                     <ListView x:Name="ListOrder" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder}">
                         <ListView.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Sửa thông tin" x:Name="menuItemUpdate" Click="menuItemUpdate_Click">
+                                <MenuItem Header="Sửa thông tin đơn đặt hàng" x:Name="menuItemUpdate" Click="menuItemUpdate_Click" DataContext="{StaticResource OrderCreationViewModel}" Command="{Binding LoadDataForUpdation}">
                                     <MenuItem.Icon>
                                         <materialDesign:PackIcon Kind="ContentDuplicate" Width="Auto" Height="Auto"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Header="Xóa đơn hàng" x:Name="menuItemDelete" Click="menuItemDelete_Click" >
+                                <MenuItem Header="Xóa đơn đặt hàng" x:Name="menuItemDelete" Click="menuItemDelete_Click" Command="{Binding DeleteOrder}" >
                                     <MenuItem.Icon>
                                         <materialDesign:PackIcon Kind="Delete" Width="Auto" Height="Auto"/>
                                     </MenuItem.Icon>
@@ -200,13 +200,14 @@
                     </ListView>
                 </ScrollViewer>
             </materialDesign:Card>
-            <Button Grid.Row="1" HorizontalAlignment="Right" Name="btnAddOrder" Click="btnAddOrder_Click" Width="200" Height="Auto" BorderThickness="0" Background="Green" Margin="2 2 2 2">
+            <Button Grid.Row="1" HorizontalAlignment="Right" Name="btnAddOrder" DataContext="{StaticResource OrderCreationViewModel}" Click="btnAddOrder_Click" Command="{Binding LoadDataForCreation}" Width="200" Height="Auto" BorderThickness="0" Background="Green" Margin="2 2 2 2">
                 <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="-5 0 -5 0">
                     <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 10 0" Width="20" Height="20"/>
                     <Label Content="Tạo đơn hàng mới" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 -8 0"/>
                 </StackPanel>
             </Button>
-            <Button x:Name="btnReloadReceiptUI" DataContext="{StaticResource ReceiptViewModel}" Command="{Binding ReloadData}" Visibility="Hidden" />
+            <Button x:Name="btnReloadReceiptUI" DataContext="{StaticResource ReceiptCreationViewModel}" Command="{Binding ReloadData}" Visibility="Hidden" />
+            <TextBlock x:Name="tbSelectedId" Visibility="Hidden" Text="{Binding SelectedOrder.Id}" />
         </Grid>
     </Grid>
 </UserControl>

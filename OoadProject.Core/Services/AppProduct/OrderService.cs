@@ -5,6 +5,7 @@ using OoadProject.Data.Repository;
 using OoadProject.Shared.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,6 +76,34 @@ namespace OoadProject.Core.Services.AppProduct
         public void UpdateOrderStatus(int orderId, OrderStatus status)
         {
             _orderRepository.UpdateOrderStatusById(orderId, status);
+        }
+
+        public T GetOrderById<T>(int orderId)
+        {
+            var order = _orderRepository.Get(orderId);
+            return Mapper.Map<T>(order);
+        }
+
+        public void UpdateOrderInfo(OrderForCreationDto input, ObservableCollection<SelectingProductDto> selectedProducts)
+        {
+            // save order
+            _orderRepository.UpdateProviderById(input.Id, input.ProviderId);
+
+            // delete all old order's products
+            _orderProductRepository.DeleteAllByOrderId(input.Id);
+
+            // save all new order's products
+            var orderProducts = Mapper.Map<IList<OrderProduct>>(selectedProducts);
+            for (var i = 0; i < orderProducts.Count(); i++)
+            {
+                orderProducts[i].OrderId = input.Id;
+                _orderProductRepository.Create(orderProducts[i]);
+            }
+        }
+
+        public void DeleleOrder(int orderId)
+        {
+            _orderRepository.Delete(orderId);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -41,54 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppDbContext.cs" />
-    <Compile Include="Entity\AppCustomer\Customer.cs" />
-    <Compile Include="Entity\AppCustomer\Invoice.cs" />
-    <Compile Include="Entity\AppCustomer\InvoiceProduct.cs" />
-    <Compile Include="Entity\AppCustomer\WarrantyOrder.cs" />
-    <Compile Include="Entity\AppEntity.cs" />
-    <Compile Include="Entity\AppProduct\Category.cs" />
-    <Compile Include="Entity\AppProduct\Manufacturer.cs" />
-    <Compile Include="Entity\AppProduct\Order.cs" />
-    <Compile Include="Entity\AppProduct\OrderProduct.cs" />
-    <Compile Include="Entity\AppProduct\Product.cs" />
-    <Compile Include="Entity\AppProduct\Provider.cs" />
-    <Compile Include="Entity\AppProduct\Receipt.cs" />
-    <Compile Include="Entity\AppProduct\ReceiptProduct.cs" />
-    <Compile Include="Entity\AppUser\Permission.cs" />
-    <Compile Include="Entity\AppUser\Role.cs" />
-    <Compile Include="Entity\AppUser\User.cs" />
-    <Compile Include="Entity\Others\Parameter.cs" />
-    <Compile Include="Migrations\202012202333469_Initial.cs" />
-    <Compile Include="Migrations\202012202333469_Initial.designer.cs">
-      <DependentUpon>202012202333469_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\AggregateDto\ProductAggregateDto.cs" />
-    <Compile Include="Repository\BaseRepository.cs" />
-    <Compile Include="Repository\CategoryRepository.cs" />
-    <Compile Include="Repository\CustomerRepository.cs" />
-    <Compile Include="Repository\InvoiceProductRepository.cs" />
-    <Compile Include="Repository\InvoiceRepository.cs" />
-    <Compile Include="Repository\ManufacturerRepository.cs" />
-    <Compile Include="Repository\OrderProductRepository.cs" />
-    <Compile Include="Repository\OrderRepository.cs" />
-    <Compile Include="Repository\ProductRepository.cs" />
-    <Compile Include="Repository\ProviderRepository.cs" />
-    <Compile Include="Repository\RoleRepository.cs" />
-    <Compile Include="Repository\UserRepository.cs" />
-    <Compile Include="Repository\WarrantyOrderRepository.cs" />
-    <Compile Include="Repository\ReceiptRepository.cs" />
-    <Compile Include="Repository\ReceiptProductRepository.cs" />
+    <Compile Include="**\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="obj\**\*.cs" />
     <Compile Remove="obj\**\*.cs" />
     <EmbeddedResource Remove="obj\**\*.cs" />
-    <EmbeddedResource Include="Migrations\202012202333469_Initial.resx">
-      <DependentUpon>202012202333469_Initial.cs</DependentUpon>
-    </EmbeddedResource>
     <None Remove="obj\**\*.cs" />
   </ItemGroup>
   <ItemGroup>
