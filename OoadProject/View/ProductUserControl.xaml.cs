@@ -31,6 +31,39 @@ namespace OoadProject.View
             scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
             e.Handled = true;
         }
+
+        private void AdvancedSearch_Expanded(object sender, RoutedEventArgs e)
+        {
+            ListProduct.Height = 400;
+        }
+
+        private void AdvancedSearch_Collapsed(object sender, RoutedEventArgs e)
+        {
+            ListProduct.Height = 500;
+        }
+
+        private void btnAddProduct_Click(object sender, RoutedEventArgs e)
+        {
+            var command = ((Button)sender).Command;
+
+            if (command.CanExecute(null))
+            {
+                command.Execute(true);
+                new AddProductWindow().ShowDialog();
+            }
+        }
+
+
+        private void btnUpdateProduct_Click(object sender, RoutedEventArgs e)
+        {
+            var command = ((Button)sender).Command;
+
+            if (command.CanExecute(null))
+            {
+                command.Execute(true);
+                new EditProductWindow().ShowDialog();
+            }
+        }
     }
 
     class MockItem

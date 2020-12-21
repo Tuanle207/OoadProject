@@ -90,14 +90,14 @@
     <Compile Include="View\AddCategoryProductWindow.xaml.cs">
       <DependentUpon>AddCategoryProductWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AddItemScreen.xaml.cs">
-      <DependentUpon>AddItemScreen.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\AddManufactureWindow.xaml.cs">
       <DependentUpon>AddManufactureWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AddOrderWindow.xaml.cs">
       <DependentUpon>AddOrderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddProductWindow.xaml.cs">
+      <DependentUpon>AddProductWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AddProviderWindow.xaml.cs">
       <DependentUpon>AddProviderWindow.xaml</DependentUpon>
@@ -113,6 +113,9 @@
     </Compile>
     <Compile Include="View\EditOrderWindow.xaml.cs">
       <DependentUpon>EditOrderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditProductWindow.xaml.cs">
+      <DependentUpon>EditProductWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HomeScreen.xaml.cs">
       <DependentUpon>HomeScreen.xaml</DependentUpon>
@@ -203,10 +206,6 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="View\AddItemScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
     <Page Include="View\AddManufactureWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
@@ -214,6 +213,10 @@
     <Page Include="View\AddOrderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="View\AddProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddProviderWindow.xaml">
       <SubType>Designer</SubType>
@@ -234,6 +237,10 @@
     <Page Include="View\EditOrderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="View\EditProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\HomeScreen.xaml">
       <SubType>Designer</SubType>

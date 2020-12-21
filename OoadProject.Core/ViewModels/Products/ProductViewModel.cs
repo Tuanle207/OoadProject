@@ -1,11 +1,13 @@
 ﻿using OoadProject.Core.Services.AppProduct;
 using OoadProject.Core.ViewModels.Products.Dtos;
+using OoadProject.Data.Entity.AppProduct;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace OoadProject.Core.ViewModels.Products
@@ -14,11 +16,19 @@ namespace OoadProject.Core.ViewModels.Products
     {
         // private service fields
         private readonly ProductService _productService;
+        private readonly ManufacturerService _manufacturerService;
+        private readonly CategoryService _categoryService;
 
         // private data fields
         private List<ProductDisplayDto> _loadedProducts;
         private List<bool> _loadedPages;
         private ObservableCollection<ProductDisplayDto> _products;
+        private ObservableCollection<Manufacturer> _manufacturers;
+        private ProductDisplayDto _selectedProduct;
+        private ObservableCollection<Category> _categories;
+        private ProductForCreationDto _newProduct;
+        private Manufacturer _selectedManufacturer;
+        private Category _selectedCategory;
         private int _currentPage;
         private int _totalPages;
         private int _pageSize;
@@ -35,6 +45,61 @@ namespace OoadProject.Core.ViewModels.Products
                 OnPropertyChanged();
             }
         }
+        public ProductForCreationDto NewProduct
+        {
+            get => _newProduct;
+            set
+            {
+                _newProduct = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ProductDisplayDto SelectedProduct
+        {
+            get => _selectedProduct;
+            set
+            {
+                _selectedProduct = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<Manufacturer> Manufacturers
+        {
+            get => _manufacturers;
+            set
+            {
+                _manufacturers = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<Category> Categories
+        {
+            get => _categories;
+            set
+            {
+                _categories = value;
+                OnPropertyChanged();
+            }
+        }
+        public Manufacturer SelectedManufacturer
+        {
+            get => _selectedManufacturer;
+            set
+            {
+                _selectedManufacturer = value;
+                OnPropertyChanged();
+            }
+        }
+        public Category SelectedCategory
+        {
+            get => _selectedCategory;
+            set
+            {
+                _selectedCategory = value;
+                OnPropertyChanged();
+            }
+        }
         public int CurrentPage { get => _currentPage; set { _currentPage = value; OnPropertyChanged(); } }
         public int TotalPages { get => _totalPages; set { _totalPages = value; OnPropertyChanged(); } }
 
@@ -45,33 +110,34 @@ namespace OoadProject.Core.ViewModels.Products
             {
                 _productNameKeyword = value;
                 OnPropertyChanged();
-                ReloadProducts();
+                LoadListProducts();
             }
         }
 
         // public command properties
         public ICommand GoNextPage { get; set; }
         public ICommand GoPrevPage { get; set; }
+        public ICommand AddProduct { get; set; }
+        public ICommand UpdateProduct { get; set; }
+        public ICommand ReloadProducts { get; set; }
+        public ICommand PrepareAddProduct { get; set; }
+        public ICommand PrepareUpdateProduct { get; set; }
 
         public ProductViewModel()
         {
             // service
             _productService = new ProductService();
+            _manufacturerService = new ManufacturerService();
+            _categoryService = new CategoryService();
+            NewProduct = new ProductForCreationDto();
+
 
             // data
-            var pagedList = _productService.GetProductsForDisplayProduct();
-            Products = new ObservableCollection<ProductDisplayDto>(pagedList.Data);
-            CurrentPage = pagedList.CurrentPage;
-            TotalPages = pagedList.TotalPages;
-            _pageSize = pagedList.PageRecords;
+            LoadListProducts();
+            Manufacturers = new ObservableCollection<Manufacturer>(_manufacturerService.GetManufacturers());
+            Categories = new ObservableCollection<Category>(_categoryService.GetCategories());
 
-            _loadedProducts = new List<ProductDisplayDto>(pagedList.Data);
-            _loadedPages = new List<bool>(TotalPages);
-            for (int i = 0; i < TotalPages; i++)
-                _loadedPages.Add(false);
-            _loadedPages[0] = true;
-
-            // command
+            // command            
             GoNextPage = new RelayCommand<object>
             (
                 p => CurrentPage < TotalPages,
@@ -127,12 +193,85 @@ namespace OoadProject.Core.ViewModels.Products
 
                 }
             );
+            PrepareAddProduct = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    Manufacturers = new ObservableCollection<Manufacturer>(_manufacturerService.GetManufacturers());
+                    Categories = new ObservableCollection<Category>(_categoryService.GetCategories());
+                    NewProduct = new ProductForCreationDto();
+                }
+            );
+            AddProduct = new RelayCommand<object>
+            (
+                p => 
+                {
+                    if (SelectedCategory == null || SelectedManufacturer == null)
+                        return false;
+                    return true;
+                },
+                p =>
+                {
+                    if (p != null && (bool)p == true)  
+                    {
+                        NewProduct.CategoryId = SelectedCategory.Id;
+                        NewProduct.ManufacturerId = SelectedManufacturer.Id;
+                        _productService.AddProduct(NewProduct);
+                        MessageBox.Show("Thêm sản phẩm thành công");
+                    }
 
+                }
+            );
+
+            PrepareUpdateProduct = new RelayCommand<object>
+            (
+                p =>
+                {
+                    if (SelectedProduct == null) return false;
+                    return true;
+                },
+                p =>
+                {
+                    Manufacturers = new ObservableCollection<Manufacturer>(_manufacturerService.GetManufacturers());
+                    Categories = new ObservableCollection<Category>(_categoryService.GetCategories());
+                    SelectedManufacturer = Manufacturers.Where(m => m.Id == SelectedProduct.ManufacturerId).FirstOrDefault();
+                    SelectedCategory = Categories.Where(c => c.Id == SelectedProduct.CategoryId).FirstOrDefault();                    
+                }
+            );
+            UpdateProduct = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    MessageBox.Show(SelectedProduct.CheckReturnRateChange);
+                    //_productService.UpdateProduct(SelectedProduct);
+                   // MessageBox.Show("Sửa sản phẩm thành công");
+
+                }
+            );
+            ReloadProducts = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    LoadListProducts();
+                }
+            );
         }
-
-        private void ReloadProducts()
+        private void LoadListProducts()
         {
-            // 
+            var pagedList = _productService.GetProductsForDisplayProduct();
+            Products = new ObservableCollection<ProductDisplayDto>(pagedList.Data);
+            CurrentPage = pagedList.CurrentPage;
+            TotalPages = pagedList.TotalPages;
+            _pageSize = pagedList.PageRecords;
+
+            _loadedProducts = new List<ProductDisplayDto>(pagedList.Data);
+            _loadedPages = new List<bool>(TotalPages);
+            for (int i = 0; i < TotalPages; i++)
+                _loadedPages.Add(false);
+            _loadedPages[0] = true;
         }
     }
 

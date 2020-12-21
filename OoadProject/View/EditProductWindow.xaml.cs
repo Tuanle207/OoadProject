@@ -15,13 +15,25 @@ using System.Windows.Shapes;
 namespace OoadProject.View
 {
     /// <summary>
-    /// Interaction logic for AddItemScreen.xaml
+    /// Interaction logic for EditProductWindow.xaml
     /// </summary>
-    public partial class AddItemScreen : Window
+    public partial class EditProductWindow : Window
     {
-        public AddItemScreen()
+        private bool isLoaded;
+        public EditProductWindow()
         {
+            isLoaded = true;
             InitializeComponent();
+        }
+
+        private void ReTurnRate_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (isLoaded)
+            {
+                isLoaded = false;
+                return;
+            }
+            tbCheckReturnRateChange.Text = "changed";
         }
     }
 }

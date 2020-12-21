@@ -6,31 +6,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace OoadProject.Core.ViewModels.Settings
+namespace OoadProject.Core.ViewModels.Products
 {
-    public class ReturnRateValidation : ValidationRule
+    public class IntValidation : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            float returnRate = 0;
+            float number = 0;
 
             try
             {
                 if (((string)value).Length > 0)
-                    returnRate = float.Parse((String)value);
+                    number = Int32.Parse((String)value);
                 else
                 {
-                    return new ValidationResult(false, "Vui lòng nhập tỉ suất lợi nhuận");
+                    return new ValidationResult(false, "Vui lòng nhập!");
                 }
             }
             catch (Exception)
             {
-                return new ValidationResult(false, "Tỉ suất lợi nhuận không hợp lệ");
+                return new ValidationResult(false, "Nội dung không hợp lệ");
             }
 
-            if (returnRate < 0)
+            if (number <= 0)
             {
-                return new ValidationResult(false, "Tỉ suất lợi nhuận phải là số dương");
+                return new ValidationResult(false, "Nội dung phải là số dương");
             }
             return ValidationResult.ValidResult;
         }

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:OoadProject.View"
         xmlns:vm="clr-namespace:OoadProject.Core.ViewModels.Settings;assembly=OoadProject.Core"
         mc:Ignorable="d"  ShowInTaskbar="False"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow"
         Background="#FFBFD4FF"
         Title="Thêm hãng sản xuất" Height="280" Width="400"
@@ -29,7 +30,7 @@
                 </Style>
             </TextBox.Resources>
             <TextBox.Text>
-                <Binding Path="NewManufacturer.Description" UpdateSourceTrigger="PropertyChanged" >
+                <Binding Path="NewManufacturer.Name" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource" >
                     <Binding.ValidationRules>
                         <vm:NameValidation></vm:NameValidation>
                     </Binding.ValidationRules>
@@ -45,17 +46,26 @@
                 </Style>
             </TextBox.Resources>
             <TextBox.Text>
-                <Binding Path="NewManufacturer.Name" UpdateSourceTrigger="PropertyChanged" >
+                <Binding Path="NewManufacturer.Description" UpdateSourceTrigger="PropertyChanged" >
                     <Binding.ValidationRules>
                         <vm:DescriptionValidation></vm:DescriptionValidation>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
-        </TextBox>        
-        <Button x:Name="btnAddManufacturer" Command="{Binding AddManufacturer}" Click="btnAddManufacturer_Click" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Height="45" Margin="0 30 0 0" Content="Thêm mới" Background="Green" BorderThickness="0">
+        </TextBox>
+        <Button x:Name="btnAddManufacturer" materialDesign:ButtonAssist.CornerRadius="20"  Command="{Binding AddManufacturer}"  Click="btnAddManufacturer_Click" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Height="45" Margin="0 30 0 0" Content="Thêm mới">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="IsEnabled" Value="False" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="22.5" Background="White" BorderBrush="#ccc" BorderThickness="0,1,1,0" >
+                                    <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
                     <Style.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -63,6 +73,15 @@
                                 <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Description}" Value="False"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="IsEnabled" Value="True"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border CornerRadius="22.5" Background="Green" BorderBrush="#ccc" BorderThickness="0,1,1,0" >
+                                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
                         </MultiDataTrigger>
                     </Style.Triggers>
                 </Style>

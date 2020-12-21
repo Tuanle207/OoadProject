@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OoadProject.Data.Repository
 {
-    public class ProductRepository
+    public class ProductRepository : BaseRepository<Product>
     {
         public IEnumerable<ProductAggregateDto> GetProductsOrderBySales(DateTime day, int limit = 10)
         {

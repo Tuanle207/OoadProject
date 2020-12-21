@@ -81,7 +81,8 @@ namespace OoadProject.Core.ViewModels.Settings
                 p => true,
                 p =>
                 {
-                    NewManufacturer = new ManufacturerForCreationDto { };
+                    NewManufacturer = new ManufacturerForCreationDto { Name = null, Description = null };
+
                 }
              );
 

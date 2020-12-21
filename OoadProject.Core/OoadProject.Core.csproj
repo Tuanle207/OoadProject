@@ -69,7 +69,11 @@
     <Compile Include="ViewModels\Orders\Dtos\SelectingProductDto.cs" />
     <Compile Include="ViewModels\Orders\OrderCreationViewModel.cs" />
     <Compile Include="ViewModels\Products\Dtos\ProductDisplayDto.cs" />
+    <Compile Include="ViewModels\Products\Dtos\ProductForCreationDto.cs" />
     <Compile Include="ViewModels\Products\ProductViewModel.cs" />
+    <Compile Include="ViewModels\Products\Validations\IntValidation.cs" />
+    <Compile Include="ViewModels\Products\Validations\NameValidation.cs" />
+    <Compile Include="ViewModels\Products\Validations\ReturnRateValidation.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\Sells\Dtos\InvoiceForCreationDto.cs" />
     <Compile Include="ViewModels\Sells\Dtos\ProductForSellDto.cs" />

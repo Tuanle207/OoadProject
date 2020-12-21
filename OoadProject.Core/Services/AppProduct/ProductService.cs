@@ -2,6 +2,7 @@
 using OoadProject.Core.ViewModels.Orders.Dtos;
 using OoadProject.Core.ViewModels.Products.Dtos;
 using OoadProject.Core.ViewModels.Sells.Dtos;
+using OoadProject.Data;
 using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Repository;
 using OoadProject.Shared.Pagination;
@@ -16,10 +17,12 @@ namespace OoadProject.Core.Services.AppProduct
     public class ProductService : BaseService
     {
         private readonly ProductRepository _productRepository;
+        private readonly CategoryRepository _categoryRepository;
 
         public ProductService()
         {
             _productRepository = new ProductRepository();
+            _categoryRepository = new CategoryRepository();
         }
 
         /// <summary>
@@ -66,7 +69,7 @@ namespace OoadProject.Core.Services.AppProduct
             return productsForReturn;
         }
 
-        public PaginatedList<ProductDisplayDto> GetProductsForDisplayProduct(int page = 1, int limit = 6)
+        public PaginatedList<ProductDisplayDto> GetProductsForDisplayProduct(int page = 1, int limit = 9)
         {
             var rawProducts = _productRepository.GetProducts(page, limit);
 
@@ -78,6 +81,31 @@ namespace OoadProject.Core.Services.AppProduct
                 rawProducts.PageRecords
             );
             return productsForReturn;
+        }
+
+        public Product AddProduct(ProductForCreationDto product)
+        {
+            var newProduct = Mapper.Map<Product>(product);
+            if (newProduct.ReturnRate != null)
+                newProduct.PriceOut = (int)Math.Round(newProduct.PriceIn * (1 + (float)newProduct.ReturnRate/100)/1000)*1000;
+            else
+            {
+                var category = _categoryRepository.Get(product.CategoryId);
+                newProduct.PriceOut = (int)Math.Round(newProduct.PriceIn * (1 + (float)category.ReturnRate / 100) / 1000) * 1000;
+            }    
+                
+
+            return _productRepository.Create(newProduct);
+        }
+
+        public bool UpdateProduct(ProductDisplayDto product)
+        {
+            return true;
+        }
+
+        public bool DeleteProduct(Product product)
+        {
+            return _productRepository.Delete(product.Id);
         }
     }
 }

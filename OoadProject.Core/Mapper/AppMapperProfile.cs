@@ -76,12 +76,14 @@ namespace OoadProject.Core
 
             //Product
             CreateMap<Product, ProductDisplayDto>()
-                .ForMember(dest => dest.CategoryName, opt =>
-                    opt.MapFrom(src => src.Category.Name))
-                .ForMember(dest => dest.ManufacturerName, opt =>
-                    opt.MapFrom(src => src.Manufacturer.Name))
                 .ForMember(dest => dest.Status, opt =>
-                    opt.MapFrom(src => ProductDisplayDto.MapEnumToStatus((ProductStatus)src.Status)));
+                    opt.MapFrom(src => ProductDisplayDto.MapEnumToStatus((ProductStatus)src.Status)))
+                .ForMember(dest => dest.ReturnRate, opt =>
+                    opt.MapFrom(src => src.ReturnRate == null ? src.Category.ReturnRate : src.ReturnRate));
+
+            CreateMap<ProductForCreationDto, Product>();
+
+
         }
     }
 }
