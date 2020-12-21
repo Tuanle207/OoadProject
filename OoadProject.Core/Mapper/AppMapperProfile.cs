@@ -79,6 +79,23 @@ namespace OoadProject.Core
                 .ForMember(dest => dest.SelectedNumber, opt =>
                     opt.MapFrom(src => 1));
 
+            // Product for receipt
+            CreateMap<OrderProduct, ProductForReceiptCreation>()
+                .ForMember(dest => dest.Id, opt =>
+                    opt.MapFrom(src => src.ProductId))
+                .ForMember(dest => dest.Name, opt =>
+                    opt.MapFrom(src => src.Product.Name))
+                .ForMember(dest => dest.CategoryName, opt =>
+                    opt.MapFrom(src => src.Product.Category.Name))
+                .ForMember(dest => dest.PriceIn, opt =>
+                    opt.MapFrom(src => src.Product.PriceIn));
+            CreateMap<ProductForReceiptCreation, ReceiptProduct>()
+                .ForMember(dest => dest.ProductId, opt =>
+                    opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.ReceiptId, opt =>
+                    opt.Ignore());
+
+
             // Provider
             CreateMap<ProviderForCreationDto, Provider>();
 

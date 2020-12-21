@@ -19,7 +19,7 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
 
             <Menu Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                <MenuItem Height="40" Header="Tùy chọn" Background="#70af85" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                <MenuItem Height="40" Header="Lọc" Background="#70af85" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon Kind="Cog" />
                     </MenuItem.Icon>
@@ -91,18 +91,18 @@
                     <ListView x:Name="ListOrder" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder}">
                         <ListView.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Sửa thông tin" Click="MenuItem_Click">
+                                <MenuItem Header="Sửa thông tin" x:Name="menuItemUpdate" Click="menuItemUpdate_Click">
                                     <MenuItem.Icon>
                                         <materialDesign:PackIcon Kind="ContentDuplicate" Width="Auto" Height="Auto"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Header="Xóa đơn hàng" >
+                                <MenuItem Header="Xóa đơn hàng" x:Name="menuItemDelete" Click="menuItemDelete_Click" >
                                     <MenuItem.Icon>
                                         <materialDesign:PackIcon Kind="Delete" Width="Auto" Height="Auto"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
                                 <Separator Height="4" />
-                                <MenuItem IsEnabled="{Binding SelectedOrder, Mode=OneWay, Converter={StaticResource ContextMenuItemVisibilityConverter}}" Header="Đang chờ gửi" Command="{Binding ChangeStatusToWaitForSent}">
+                                <MenuItem IsEnabled="{Binding SelectedOrder, Mode=OneWay, Converter={StaticResource ContextMenuItemVisibilityConverter}}" Header="Đang chờ gửi" Command="{Binding ChangeStatusToWaitForSent}" Click="menuItemChangeStatus">
                                     <MenuItem.Icon>
                                         <materialDesign:PackIcon Kind="Check" Width="Auto" Height="Auto">
                                             <materialDesign:PackIcon.Visibility>
@@ -115,7 +115,7 @@
                                         </materialDesign:PackIcon>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem IsEnabled="{Binding SelectedOrder, Mode=OneWay, Converter={StaticResource ContextMenuItemVisibilityConverter}}" Header="Đã gửi" Command="{Binding ChangeStatusToSent}" >
+                                <MenuItem IsEnabled="{Binding SelectedOrder, Mode=OneWay, Converter={StaticResource ContextMenuItemVisibilityConverter}}" Header="Đã gửi" Command="{Binding ChangeStatusToSent}" Click="menuItemChangeStatus" >
                                     <MenuItem.Icon>
                                         <materialDesign:PackIcon Kind="Check" Width="Auto" Height="Auto">
                                             <materialDesign:PackIcon.Visibility>
@@ -128,7 +128,7 @@
                                         </materialDesign:PackIcon>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem IsEnabled="{Binding SelectedOrder, Mode=OneWay, Converter={StaticResource ContextMenuItemVisibilityConverter}}" Header="Đã xử lí" Command="{Binding ChangeStatusToDone}">
+                                <MenuItem IsEnabled="{Binding SelectedOrder, Mode=OneWay, Converter={StaticResource ContextMenuItemVisibilityConverter}}" Header="Đã xử lí" Command="{Binding ChangeStatusToDone}" Click="menuItemChangeStatus">
                                     <MenuItem.Icon>
                                         <materialDesign:PackIcon Kind="Check" Width="Auto" Height="Auto">
                                             <materialDesign:PackIcon.Visibility>
@@ -206,6 +206,7 @@
                     <Label Content="Tạo đơn hàng mới" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 -8 0"/>
                 </StackPanel>
             </Button>
+            <Button x:Name="btnReloadReceiptUI" DataContext="{StaticResource ReceiptViewModel}" Command="{Binding ReloadData}" Visibility="Hidden" />
         </Grid>
     </Grid>
 </UserControl>

@@ -64,5 +64,25 @@ namespace OoadProject.View
             if (command.CanExecute(null))
                 command.Execute(2);
         }
+
+        private void menuItemChangeStatus(object sender, RoutedEventArgs e)
+        {
+            var command = ((MenuItem)sender).Command;
+            if (command.CanExecute(null))
+            {
+                command.Execute(true);
+                btnReloadReceiptUI.Command.Execute(null);
+            }
+        }
+
+        private void menuItemUpdate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void menuItemDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

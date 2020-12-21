@@ -12,6 +12,7 @@
     <Users:LoginViewModel x:Key="LoginViewModel" />
     <Orders:OrderCreationViewModel x:Key="OrderCreationViewModel" />
     <Orders:OrderViewModel x:Key="OrderViewModel" />
+    <Orders:ReceiptViewModel x:Key="ReceiptViewModel" />
     <Sells:SellViewModel x:Key="SellViewModel" />
     <Home:HomeViewModel x:Key="HomeViewModel" />
     <Warranties:WarrantyOrderCreationViewModel x:Key="WarrantyOrderCreationViewModel" />
@@ -19,8 +20,8 @@
     <Settings:ProviderViewModel x:Key="ProviderViewModel" />
     <Settings:ManufacturerViewModel x:Key="ManufacturerViewModel" />
     <Settings:CategoryViewModel x:Key="CategoryViewModel" />
-    
-    
+
+
     <!-- Converters -->
     <Warranties:WarrantyListVisibilityConverter x:Key="WarrantyListVisibilityConverter" />
     <Warranties:WarrantyOrderStatusConverter x:Key="WarrantyOrderStatusConverter" />

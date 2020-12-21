@@ -66,10 +66,10 @@ namespace OoadProject.Core.Services.AppProduct
             return Mapper.Map<IEnumerable<OrderForListDto>>(orders);
         }
 
-        public IEnumerable<ProductForOrderListDto> GetOrderProducts(int id)
+        public IEnumerable<T> GetOrderProducts<T>(int id)
         {
             var orderProducts = _orderProductRepository.GetOrderProductsByOrderId(id);
-            return Mapper.Map<IEnumerable<ProductForOrderListDto>>(orderProducts);
+            return Mapper.Map<IEnumerable<T>>(orderProducts);
         }
 
         public void UpdateOrderStatus(int orderId, OrderStatus status)

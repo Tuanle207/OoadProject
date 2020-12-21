@@ -61,23 +61,17 @@ namespace OoadProject.Core.ViewModels.Orders
             _orderService = new OrderService();
 
             // data
-            var filter = new List<OrderStatus>()
-            {
-                OrderStatus.WaitForSent,
-                OrderStatus.Sent,
-                OrderStatus.Done
-            };
-            Orders = new ObservableCollection<OrderForListDto>(_orderService.GetOrders(filter, null));
-            SelectedOrder = null;
-            OrderProducts = new ObservableCollection<ProductForOrderListDto>();
-
-            WaitForSent = true;
-            Sent = true;
-            Done = true;
-
+            
             DateFrom = DateTime.Now.AddMonths(-3);
             DateTo = DateTime.Now;
 
+            WaitForSent = true;
+            Sent = false;
+            Done = false;
+
+            LoadOrdersWithFilter();
+            SelectedOrder = null;
+            OrderProducts = new ObservableCollection<ProductForOrderListDto>();
 
             // command
             ToggleCheckOption = new RelayCommand<object>
@@ -91,17 +85,22 @@ namespace OoadProject.Core.ViewModels.Orders
                         switch (checkOption)
                         {
                             case OrderStatus.Sent:
-                                Sent = !Sent;
+                                Sent = true;
+                                WaitForSent = Done = false;
                                 break;
                             case OrderStatus.WaitForSent:
-                                WaitForSent = !WaitForSent;
+                                WaitForSent = true;
+                                Sent = Done = false;
                                 break;
                             case OrderStatus.Done:
-                                Done = !Done;
+                                Done = true;
+                                WaitForSent = Sent = false;
                                 break;
                             default:
                                 break;
                         }
+
+                        LoadOrdersWithFilter();
                     }
                 }
             );
@@ -120,8 +119,11 @@ namespace OoadProject.Core.ViewModels.Orders
                 p => SelectedOrder != null,
                 p =>
                 {
-                    SelectedOrder.Status = (int)OrderStatus.WaitForSent;
-                    _orderService.UpdateOrderStatus(SelectedOrder.Id, OrderStatus.WaitForSent);
+                    if (p != null && (bool)p)
+                    {
+                        SelectedOrder.Status = (int)OrderStatus.WaitForSent;
+                        _orderService.UpdateOrderStatus(SelectedOrder.Id, OrderStatus.WaitForSent);
+                    }
                 }
             );
 
@@ -130,8 +132,11 @@ namespace OoadProject.Core.ViewModels.Orders
                 p => SelectedOrder != null,
                 p =>
                 {
-                    SelectedOrder.Status = (int)OrderStatus.Sent;
-                    _orderService.UpdateOrderStatus(SelectedOrder.Id, OrderStatus.Sent);
+                    if (p != null && (bool)p)
+                    {
+                        SelectedOrder.Status = (int)OrderStatus.Sent;
+                        _orderService.UpdateOrderStatus(SelectedOrder.Id, OrderStatus.Sent);
+                    }
                 }
             );
 
@@ -140,8 +145,11 @@ namespace OoadProject.Core.ViewModels.Orders
                 p => SelectedOrder != null,
                 p =>
                 {
-                    SelectedOrder.Status = (int)OrderStatus.Done;
-                    _orderService.UpdateOrderStatus(SelectedOrder.Id, OrderStatus.Done);
+                    if (p != null && (bool)p)
+                    {
+                        SelectedOrder.Status = (int)OrderStatus.Done;
+                        _orderService.UpdateOrderStatus(SelectedOrder.Id, OrderStatus.Done);
+                    }
                 }
             );
         }
@@ -161,7 +169,8 @@ namespace OoadProject.Core.ViewModels.Orders
 
         private void LoadOrderProducts()
         {
-            OrderProducts = new ObservableCollection<ProductForOrderListDto>(_orderService.GetOrderProducts(SelectedOrder.Id));
+            OrderProducts = new ObservableCollection<ProductForOrderListDto>(
+                _orderService.GetOrderProducts<ProductForOrderListDto>(SelectedOrder.Id));
         }
     }
 }
