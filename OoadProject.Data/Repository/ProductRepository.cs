@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OoadProject.Data.Repository
 {
-    public class ProductRepository
+    public class ProductRepository : BaseRepository<Product>
     {
         public IEnumerable<ProductAggregateDto> GetProductsOrderBySales(DateTime day, int limit = 10)
         {
@@ -44,6 +44,19 @@ namespace OoadProject.Data.Repository
                 }
 
                 return dataForReturn.OrderByDescending(x => x.SalesNo).ToList();
+            }
+        }
+
+        public void UpdateSaleProperty(int id, int number, int priceIn)
+        {
+            using (var ctx = new AppDbContext())
+            {
+                var product = ctx.Products.Where(p => p.Id == id).FirstOrDefault();
+                product.Number += number;
+                product.PriceIn = priceIn;
+                // recalculate the priceOut
+                product.PriceOut = 10 * priceIn;
+                ctx.SaveChanges();
             }
         }
 

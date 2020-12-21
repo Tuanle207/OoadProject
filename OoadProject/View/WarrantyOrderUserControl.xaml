@@ -43,15 +43,8 @@
             </ListView.View>
         </ListView>
         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Không tìm thấy sản phẩm nào!" Grid.Row="1">
-            <!--<TextBlock.Text>
-                <Binding>
-                    
-                </Binding>
-            </TextBlock.Text>-->
             <TextBlock.Visibility>
-                <Binding Path="CustomerProducts" Converter="{StaticResource WarrantyListVisibilityConverter}">
-                    
-                </Binding>
+                <Binding Path="CustomerProducts" Converter="{StaticResource WarrantyListVisibilityConverter}" />
             </TextBlock.Visibility>
         </TextBlock>
         <Button

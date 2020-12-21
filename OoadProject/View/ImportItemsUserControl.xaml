@@ -6,69 +6,56 @@
              xmlns:local="clr-namespace:OoadProject.View" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{StaticResource ReceiptCreationViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"></ColumnDefinition>
-            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="9*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid x:Name="gridOrder" Grid.Row="0" Grid.Column="0" Background="#FF6E85B6" Margin="2 2 2 2">
-            <TextBlock Margin="5" Text="Nhập từ khóa..." FontSize="12"
-                    Foreground="#000"
-                    Visibility="{Binding ElementName=tbKeyword, Path=Text.IsEmpty,
-                              Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox Name="tbKeyword" Background="Transparent" FontSize="14" Margin="2 2 2 2" BorderThickness="0"/>
-        </Grid>
-        <Grid Grid.Row="1" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <materialDesign:Card Grid.Row="0" Background="#FFE3F0FF"  Margin="0,5,2,0" BorderThickness="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
-                <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                    <ListView x:Name="ListOrder" >
-                        <ListView.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Sửa thông tin" Click="MenuItem_Click">
-                                    <MenuItem.Icon>
-                                        <materialDesign:PackIcon Kind="ContentDuplicate" Width="Auto" Height="Auto"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                            </ContextMenu>
-                        </ListView.ContextMenu>
-                        <ListView.View >
-                            <GridView>
-                                <GridViewColumn Header="Mã ĐH"></GridViewColumn>
-                                <GridViewColumn Header="Thời gian tạo"></GridViewColumn>
-                                <GridViewColumn Header="Người tạo đơn" ></GridViewColumn>
-                                <GridViewColumn Header="Nhà cung cấp"></GridViewColumn>
-                                <GridViewColumn Header="Tình trạng" ></GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </ScrollViewer>
-            </materialDesign:Card>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="1">
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        <Button x:Name="btnPrev" Height="20" Foreground="Black" Background="#FF47608E" Padding="10 0 10 2" Margin="0 0 20 0" >&lt;</Button>
-                        <TextBlock Height="20" Text="1"></TextBlock>
-                        <TextBlock Height="20">/</TextBlock>
-                        <TextBlock Height="20" Text="2"></TextBlock>
-                        <Button x:Name="btnNext" Height="20" Foreground="Black" Background="#FF47608E" Padding="10 0 10 2" Margin="20 0 0 0">&gt;</Button>
-                    </StackPanel>
-                </Grid>
-            </Grid>
-        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <DatePicker
+                SelectedDate="{Binding DateFrom}"
+                Width="100"
+                Margin="40 0 0 0"
+                VerticalAlignment="Center"
+                materialDesign:HintAssist.Hint="Từ ngày"
+                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+            <materialDesign:PackIcon Kind="ChevronRight" Width="100" Height="30" VerticalAlignment="Bottom"/>
+            <DatePicker
+                SelectedDate="{Binding DateTo}"
+                Width="100"
+                materialDesign:HintAssist.Hint="Đến ngày"
+                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+            <Button
+                Command="{Binding SearchWithFilter}"
+                Style="{StaticResource MaterialDesignIconForegroundButton}"
+                ToolTip="Tra cứu"
+                Background="{DynamicResource MaterialDesignTextFieldBoxBackground}"
+                Margin="20 0 0 0"
+                VerticalAlignment="Bottom">
+                <materialDesign:PackIcon Kind="Magnify" Width="16" Height="16"/>
+            </Button>
+
+        </StackPanel>
+        <materialDesign:Card Grid.Row="1" Background="#FFE3F0FF"  Margin="0,5,2,0" BorderThickness="0" VerticalAlignment="Stretch">
+            <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                <ListView x:Name="ListOrder" ItemsSource="{Binding SentOrders}" SelectedItem="{Binding SelectedOrder}" >
+                    <ListView.View >
+                        <GridView>
+                            <GridViewColumn Header="Mã ĐH" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                            <GridViewColumn Header="Tạo lúc" DisplayMemberBinding="{Binding CreationTime}"></GridViewColumn>
+                            <GridViewColumn Header="Người tạo" DisplayMemberBinding="{Binding CreationUser}"></GridViewColumn>
+                            <GridViewColumn Header="Nhà cung cấp" DisplayMemberBinding="{Binding ProviderName}"></GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </materialDesign:Card>
         <Grid Grid.Row="0" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.2*"></ColumnDefinition>
@@ -76,32 +63,107 @@
                 <ColumnDefinition Width="0.8*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Margin="10 0 0 0" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center">
-                Danh sách chi tiết đơn hàng
+                Chi tiết nhập hàng
             </TextBlock>
-            <Button Grid.Column="2" Name="btnAcceptOrder"  Height="Auto" BorderThickness="0" Background="Green" Margin="2 2 2 2">
-                <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="-5 0 -5 0">
-                    <materialDesign:PackIcon Kind="DownloadBox"  VerticalAlignment="Center" Foreground="Black" Margin="0 2 0 0" Width="20" Height="20"/>
-                    <Label Content="Nhập hàng" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" />
-                </StackPanel>
-            </Button>
         </Grid>
 
-
-        <materialDesign:Card Grid.Row="1" Grid.Column="1" Background="#FFE3F0FF"  Margin="10 5 2 0" BorderThickness="0" VerticalAlignment="Stretch" Grid.ColumnSpan="3">
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <materialDesign:Card Grid.Row="0" Background="#FFE3F0FF"  Margin="10 5 2 0" BorderThickness="0" VerticalAlignment="Stretch" Grid.ColumnSpan="3">
                 <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                    <ListView x:Name="ListDetailOrder" >
+                    <ListView x:Name="ListDetailOrder" ItemsSource="{Binding ReceiptProducts}" >
                         <ListView.View >
                             <GridView>
-                                <GridViewColumn Header="Mã SP"></GridViewColumn>
-                                <GridViewColumn Header="Tên SP"></GridViewColumn>
-                                <GridViewColumn Header="Loại SP" ></GridViewColumn>
-                                <GridViewColumn Header="Số lượng"></GridViewColumn>
+                                <GridViewColumn>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button
+                                                Style="{StaticResource MaterialDesignIconButton}"
+                                                Background="{DynamicResource MaterialDesignTextFieldBoxBackground}" 
+                                                Width="20"
+                                                Height="20"
+                                                Command="{Binding Path=DataContext.RemoveItem, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" CommandParameter="{Binding}" BorderBrush="{x:Null}" Padding="0" Margin="0" ToolTip="Trả sản phẩm">
+                                                <materialDesign:PackIcon Kind="Minus" Width="10" Height="10" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button 
+                                            Style="{StaticResource MaterialDesignIconButton}"
+                                            Background="{DynamicResource MaterialDesignTextFieldBoxBackground}" 
+                                            Width="20"
+                                            Height="20"
+                                            Command="{Binding Path=DataContext.AddItem, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}}" CommandParameter="{Binding}" BorderBrush="{x:Null}" Padding="0" Margin="0" ToolTip="Thêm số lượng sản phẩm" >
+                                                <materialDesign:PackIcon Kind="Plus"  Width="10" Height="10" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Mã SP" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                                <GridViewColumn Header="Tên SP" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                                <GridViewColumn Header="Loại SP" DisplayMemberBinding="{Binding CategoryName}"></GridViewColumn>
+                                <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding Number}"></GridViewColumn>
+                                <GridViewColumn Header="Giá">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Text="{Binding PriceIn}" Width="100" materialDesign:HintAssist.Hint="Giá" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
                 </ScrollViewer>
-         </materialDesign:Card>
-
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="1" Background="#FFE3F0FF"  Margin="10 10 0 20" BorderThickness="0" VerticalAlignment="Stretch" Grid.ColumnSpan="3">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Margin="10 0 0 0" Grid.Row="0" Grid.Column="0" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                            Tổng giá trị:
+                    </TextBlock>
+                    <TextBox Text="{Binding Total, Mode=OneWay}" IsReadOnly="True"
+                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                      Grid.Column="1" Height="40" Margin="10 0 10 15" HorizontalContentAlignment="Center" />
+                    <TextBlock Grid.Row="0" Grid.Column="2" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,22,0,21">
+                            Ngày nhập:
+                    </TextBlock>
+                    <DatePicker IsEnabled="False" SelectedDate="{Binding DateCreation, Mode=OneWay}" Grid.Row="0" Grid.Column="3" Foreground="Black" Height="Auto" Margin="5 5 5 10" VerticalContentAlignment="Center" Padding="5 0" FontSize="16">
+                    </DatePicker>
+                </Grid>
+            </materialDesign:Card>
+            <Grid Grid.Row="2" Margin="0 0 0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Command="{Binding RestoreData}" Grid.Column="0" HorizontalAlignment="Left" Width="150" Height="Auto" BorderThickness="0" Background="Red" Margin="15 2 2 2">
+                    <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="-5 0 -5 0">
+                        <Label Content="Nhập lại" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" />
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding SaveReceipt}" Grid.Column="1" HorizontalAlignment="Right"  Name="btnAcceptOrder" Grid.Row="1" Width="150" Height="Auto" BorderThickness="0" Background="Green" Margin="2 2 15 2">
+                    <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="-5 0 -5 0">
+                        <materialDesign:PackIcon Kind="DownloadBox"  VerticalAlignment="Center" Foreground="Black" Margin="0 2 0 0" Width="20" Height="20"/>
+                        <Label Content="Nhập hàng" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>
 
