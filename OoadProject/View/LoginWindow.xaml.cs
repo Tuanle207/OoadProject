@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,9 +20,12 @@ namespace OoadProject.View
     /// </summary>
     public partial class LoginWindow : Window
     {
+        private MainWindow _mainWindow;
+
         public LoginWindow()
         {
             InitializeComponent();
+            _mainWindow = new MainWindow();
         }
 
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
@@ -30,6 +34,7 @@ namespace OoadProject.View
             if (result == MessageBoxResult.OK)
             {
                 this.Close();
+                Application.Current.Shutdown();
             }
         }
 
@@ -43,7 +48,8 @@ namespace OoadProject.View
                 {
                     Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait; // set the cursor to loading spinner
                     command.Execute(true);
-                    new MainWindow().Show();
+                    _mainWindow.Show();
+                    btnAfterLogin.Command.Execute(null);
                     this.Close();
                 }
                 catch (Exception ex)
@@ -61,6 +67,35 @@ namespace OoadProject.View
         private void pwdBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             pwdTb.Text = pwdBox.Password;
+        }
+
+        private void tbLoginInfo_KeyDown(object sender, KeyEventArgs e)
+        {
+           if (e.Key == Key.Enter)
+           {
+                var command = btnLogin.Command;
+
+                if (command.CanExecute(null))
+                {
+                    try
+                    {
+                        Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait; // set the cursor to loading spinner
+                        command.Execute(true);
+                        _mainWindow.Show();
+                        btnAfterLogin.Command.Execute(null);
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow; // set the cursor back to arrow
+                    }
+                }
+           }
         }
     }
 }

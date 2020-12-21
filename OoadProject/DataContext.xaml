@@ -6,16 +6,27 @@
                     xmlns:Settings="clr-namespace:OoadProject.Core.ViewModels.Settings;assembly=OoadProject.Core" 
                     xmlns:Sells="clr-namespace:OoadProject.Core.ViewModels.Sells;assembly=OoadProject.Core"
                     xmlns:Users="clr-namespace:OoadProject.Core.ViewModels.Users;assembly=OoadProject.Core"
-                    xmlns:Products="clr-namespace:OoadProject.Core.ViewModels.Products;assembly=OoadProject.Core" >
-
+                    xmlns:Products="clr-namespace:OoadProject.Core.ViewModels.Products;assembly=OoadProject.Core"
+                    xmlns:Warranties="clr-namespace:OoadProject.Core.ViewModels.Warranties;assembly=OoadProject.Core">
+    <!-- ViewModels -->
     <Users:UserViewModel x:Key="UserViewModel" />
     <Users:LoginViewModel x:Key="LoginViewModel" />
     <Orders:OrderCreationViewModel x:Key="OrderCreationViewModel" />
     <Sells:SellViewModel x:Key="SellViewModel" />
     <Home:HomeViewModel x:Key="HomeViewModel" />
+    <Warranties:WarrantyOrderCreationViewModel x:Key="WarrantyOrderCreationViewModel" />
+    <Warranties:WarrantyOrderListViewModel x:Key="WarrantyOrderListViewModel" />
     <Settings:ProviderViewModel x:Key="ProviderViewModel" />
     <Settings:ManufacturerViewModel x:Key="ManufacturerViewModel" />
     <Settings:CategoryViewModel x:Key="CategoryViewModel" />
     <Products:ProductViewModel x:Key="ProductViewModel"/>
+    
+    
+    <!-- Converters -->
+    <Warranties:WarrantyListVisibilityConverter x:Key="WarrantyListVisibilityConverter" />
+    <Warranties:WarrantyOrderStatusConverter x:Key="WarrantyOrderStatusConverter" />
+    <Warranties:ContextMenuItemVisibilityConverter x:Key="ContextMenuItemVisibilityConverter" />
+    <Warranties:CheckMenuItemVisibilityConverter x:Key="CheckMenuItemVisibilityConverter" />
+    
 
 </ResourceDictionary>

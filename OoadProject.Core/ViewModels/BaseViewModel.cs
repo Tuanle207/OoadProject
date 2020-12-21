@@ -28,5 +28,18 @@ namespace OoadProject.Core.ViewModels
                 return _mapper;
             }
         }
+
+        protected User _currentUser;
+        protected User CurrentUser
+        {
+            get
+            {
+                if (_currentUser == null)
+                {
+                    _currentUser = Session.CurrentUser;
+                }
+                return _currentUser;
+            }
+        }
     }
 }
