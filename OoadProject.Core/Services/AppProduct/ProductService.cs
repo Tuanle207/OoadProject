@@ -5,6 +5,7 @@ using OoadProject.Core.ViewModels.Sells.Dtos;
 using OoadProject.Data;
 using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Repository;
+using OoadProject.Shared.Dtos;
 using OoadProject.Shared.Pagination;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace OoadProject.Core.Services.AppProduct
 
         public PaginatedList<ProductForOrderCreationDto> GetProductsForOrderCreation(int page = 1, int limit = 4)
         {
-            var rawProducts = _productRepository.GetProducts(page, limit);
+            var rawProducts = _productRepository.GetProducts(page, limit,null);
 
             var productsForReturn = new PaginatedList<ProductForOrderCreationDto>
             (
@@ -57,7 +58,7 @@ namespace OoadProject.Core.Services.AppProduct
 
         public PaginatedList<ProductForSellDto> GetProductsForSell(int page = 1, int limit = 4)
         {
-            var rawProducts = _productRepository.GetProducts(page, limit);
+            var rawProducts = _productRepository.GetProducts(page, limit, null);
 
             var productsForReturn = new PaginatedList<ProductForSellDto>
             (
@@ -69,9 +70,9 @@ namespace OoadProject.Core.Services.AppProduct
             return productsForReturn;
         }
 
-        public PaginatedList<ProductDisplayDto> GetProductsForDisplayProduct(int page = 1, int limit = 9)
+        public PaginatedList<ProductDisplayDto> GetProductsForDisplayProduct(int page = 1, int limit = 9, ProductFilterDto Filter = null)
         {
-            var rawProducts = _productRepository.GetProducts(page, limit);
+            var rawProducts = _productRepository.GetProducts( page, limit, Filter);
 
             var productsForReturn = new PaginatedList<ProductDisplayDto>
             (
@@ -100,7 +101,18 @@ namespace OoadProject.Core.Services.AppProduct
 
         public bool UpdateProduct(ProductDisplayDto product)
         {
-            return true;
+            var editProduct = Mapper.Map<Product>(product);
+            if (product.CheckReturnRateChange != "changed")
+            {
+                editProduct.ReturnRate = null;
+            }
+            return _productRepository.Update(editProduct);
+        }
+        public bool HidenProduct(ProductDisplayDto product)
+        {
+            var hidenProduct = Mapper.Map<Product>(product);
+            hidenProduct.isDelete = 1;
+            return _productRepository.Update(hidenProduct);
         }
 
         public bool DeleteProduct(Product product)

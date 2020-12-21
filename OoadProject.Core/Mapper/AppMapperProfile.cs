@@ -86,11 +86,13 @@ namespace OoadProject.Core
             //Product
             CreateMap<Product, ProductDisplayDto>()
                 .ForMember(dest => dest.Status, opt =>
-                    opt.MapFrom(src => ProductDisplayDto.MapEnumToStatus((ProductStatus)src.Status)))
+                    opt.MapFrom(src => src.Status))
                 .ForMember(dest => dest.ReturnRate, opt =>
                     opt.MapFrom(src => src.ReturnRate == null ? src.Category.ReturnRate : src.ReturnRate));
 
             CreateMap<ProductForCreationDto, Product>();
+
+            CreateMap<ProductDisplayDto, Product>();
 
 
             CreateMap<InvoiceProduct, ProductForWarrantyDto>()

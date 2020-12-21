@@ -111,14 +111,14 @@
         </StackPanel>
         <!--Button thêm-->
         <Button
-            x:Name="btnEdit"
+            x:Name="btnEdit" Click="btnEdit_Click"
             Grid.Column="1" Grid.Row="5" Width="150" Height="40"
             materialDesign:ButtonAssist.CornerRadius="10"
             ToolTip="MaterialDesignRaisedButton with Round Corners" Margin="104.4,4.6,9.6,0" VerticalAlignment="Top" 
             Command="{Binding UpdateProduct}">
             <TextBlock Text="Sửa sản phẩm" FontSize="15"/>
         </Button>
-        <!--<Button x:Name="btnAfterAdd" Command="{Binding ReloadProducts}" Visibility="Hidden" />-->
+        <Button x:Name="btnAfterEdit" Command="{Binding ReloadProducts}" Visibility="Hidden" />
     </Grid>
 </Window>
 

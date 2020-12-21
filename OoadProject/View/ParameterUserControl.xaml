@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OoadProject.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="590" d:DesignWidth="1100">
+             d:DesignHeight="590" d:DesignWidth="1100"
+             DataContext="{StaticResource ParameterViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -34,28 +35,28 @@
                 <Label Content="Tuổi tối thiểu của nhân viên:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="8"/>
                 <Label Content="Tuổi tối đa của nhân viên:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" FontSize="18" Margin="8"/>
 
-                <TextBox Grid.Row="0" Grid.Column="1" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" BorderThickness="1" Padding="2" >
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding MinInputProductNumber, UpdateSourceTrigger=PropertyChanged}" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" BorderThickness="1" Padding="2" >
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="5"/>
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
-                <TextBox Grid.Row="1" Grid.Column="1" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" BorderThickness="1" Padding="2" >
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding MaxInputProductNumber, UpdateSourceTrigger=PropertyChanged}" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" BorderThickness="1" Padding="2" >
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="5"/>
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
-                <TextBox Grid.Row="2" Grid.Column="1" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" BorderThickness="1" Padding="2" >
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding MinAge, UpdateSourceTrigger=PropertyChanged}" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" BorderThickness="1" Padding="2" >
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="5"/>
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
-                <TextBox Grid.Row="3" Grid.Column="1" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" BorderThickness="1" Padding="2" >
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding MaxAge, UpdateSourceTrigger=PropertyChanged}" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" BorderThickness="1" Padding="2" >
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -64,7 +65,7 @@
                 </TextBox>
             </Grid>
         </materialDesign:Card>
-        <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="150" Height="50" Margin="0 30 0 0" Content="Xác nhận" Background="Green"></Button>
+        <Button Command="{Binding UpdateParameter}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="150" Height="50" Margin="0 30 0 0" Content="Xác nhận" Background="Green"></Button>
     </Grid>
 </UserControl>
 

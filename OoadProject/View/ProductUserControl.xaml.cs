@@ -1,4 +1,7 @@
-﻿using System;
+﻿using OoadProject.Core.ViewModels.Products;
+using OoadProject.Data.Entity.AppProduct;
+using OoadProject.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,19 +67,51 @@ namespace OoadProject.View
                 new EditProductWindow().ShowDialog();
             }
         }
-    }
 
-    class MockItem
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string type { get; set; }
-        public string model { get; set; }
-        public int count { get; set; }
-        public int costImport { get; set; }
-        public int cost { get; set; }
-        public double ratio { get; set; }
-        public int timeExpire { get; set; }
-        public string status { get; set; }
+        private void btnHideProduct_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Xác nhận xóa sản phẩm?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var command = ((Button)sender).Command;
+
+            if (result == MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(true);
+                if (btnAfterDele.Command.CanExecute(null) == true) btnAfterDele.Command.Execute(null);
+            }
+            else if (result != MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(false);
+            }
+        }
+        private void ListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var listBox = sender as ListBox;
+            ScrollViewer scrollviewer = Helper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
+            if (e.Delta > 0)
+                scrollviewer.LineLeft();
+            else
+                scrollviewer.LineRight();
+            e.Handled = true;
+
+        }
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            List<Manufacturer> MySelectedManufacturer = new List<Manufacturer>();
+
+            foreach (Manufacturer item in myListManufacturer.SelectedItems)
+            {
+                MySelectedManufacturer.Add(item);
+            }
+            var DataContext = (ProductViewModel)this.DataContext;
+            DataContext.FilterManufacturer = MySelectedManufacturer;
+
+            List<Category> MySelectedCategory = new List<Category>();
+
+            foreach (Category item in myListCategory.SelectedItems)
+            {
+                MySelectedCategory.Add(item);
+            }
+            DataContext.FilterCategory = MySelectedCategory;
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace OoadProject.Core.ViewModels.Products.Dtos
 {
     public class ProductDisplayDto : BaseDto
     {
+        private int _status { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public int CategoryId { get; set; }
@@ -18,7 +19,7 @@ namespace OoadProject.Core.ViewModels.Products.Dtos
         public int PriceOut { get; set; }
         public int WarrantyPeriod { get; set; }
         public float? ReturnRate { get; set; }
-        public int Status { get; set; }
+        public int Status { get => _status; set { _status = value; OnPropertyChanged(); } }
         public Category Category { get; set; }
         public Manufacturer Manufacturer { get; set; }
         public string CheckReturnRateChange { get; set; }

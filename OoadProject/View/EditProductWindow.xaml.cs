@@ -35,5 +35,22 @@ namespace OoadProject.View
             }
             tbCheckReturnRateChange.Text = "changed";
         }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Xác nhận sửa sản phẩm?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var command = ((Button)sender).Command;
+
+            if (result == MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(true);
+                if (btnAfterEdit.Command.CanExecute(null) == true) btnAfterEdit.Command.Execute(null);
+                this.Close();
+            }
+            else if (result != MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(false);
+            }
+        }
     }
 }

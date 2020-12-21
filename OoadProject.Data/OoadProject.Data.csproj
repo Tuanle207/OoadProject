@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -59,9 +59,9 @@
     <Compile Include="Entity\AppUser\Role.cs" />
     <Compile Include="Entity\AppUser\User.cs" />
     <Compile Include="Entity\Others\Parameter.cs" />
-    <Compile Include="Migrations\202012170740183_Initial.cs" />
-    <Compile Include="Migrations\202012170740183_Initial.designer.cs">
-      <DependentUpon>202012170740183_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202012210455043_Initial.cs" />
+    <Compile Include="Migrations\202012210455043_Initial.designer.cs">
+      <DependentUpon>202012210455043_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,18 +74,19 @@
     <Compile Include="Repository\ManufacturerRepository.cs" />
     <Compile Include="Repository\OrderProductRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
+    <Compile Include="Repository\ParameterRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\ProviderRepository.cs" />
     <Compile Include="Repository\RoleRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
-    <Compile Include="**\*.cs" />
+    <Compile Include="Repository\WarrantyOrderRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="obj\**\*.cs" />
     <Compile Remove="obj\**\*.cs" />
     <EmbeddedResource Remove="obj\**\*.cs" />
-    <EmbeddedResource Include="Migrations\202012170740183_Initial.resx">
-      <DependentUpon>202012170740183_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202012210455043_Initial.resx">
+      <DependentUpon>202012210455043_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <None Remove="obj\**\*.cs" />
   </ItemGroup>
