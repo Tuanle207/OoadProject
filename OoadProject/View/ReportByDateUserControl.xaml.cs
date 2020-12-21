@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace OoadProject.View
 {
     /// <summary>
-    /// Interaction logic for ThemNhanVienWindow.xaml
+    /// Interaction logic for ReportByDateUserControl.xaml
     /// </summary>
-    public partial class ThemNhanVienWindow : Window
+    public partial class ReportByDateUserControl : UserControl
     {
-        public ThemNhanVienWindow()
+        public ReportByDateUserControl()
         {
             InitializeComponent();
         }

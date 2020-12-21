@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace OoadProject.View
 {
     /// <summary>
-    /// Interaction logic for NhanVienUserControl.xaml
+    /// Interaction logic for ReportByMonthUserControl.xaml
     /// </summary>
-    public partial class NhanVienUserControl : UserControl
+    public partial class ReportByMonthUserControl : UserControl
     {
-        public NhanVienUserControl()
+        public ReportByMonthUserControl()
         {
             InitializeComponent();
         }

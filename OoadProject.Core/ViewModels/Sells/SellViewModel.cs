@@ -16,6 +16,7 @@ namespace OoadProject.Core.ViewModels.Sells
         // private service fields
         private readonly ProductService _productService;
         private readonly InvoiceService _invoiceService;
+        private readonly CustomerService _customerService;
 
         // private data fields
         private List<ProductForSellDto> _loadedProducts;
@@ -26,6 +27,7 @@ namespace OoadProject.Core.ViewModels.Sells
         private int _pageSize;
         private ObservableCollection<SelectingProductForSellDto> _selectedProducts;
         private InvoiceForCreationDto _invoice;
+        private string _productNameKeyword;
 
         // public data properties
 
@@ -52,20 +54,33 @@ namespace OoadProject.Core.ViewModels.Sells
 
         public InvoiceForCreationDto Invoice { get => _invoice; set { _invoice = value; OnPropertyChanged(); } }
 
+        public string ProductNameKeyword { 
+            get => _productNameKeyword; 
+            set 
+            { 
+                _productNameKeyword = value;
+                OnPropertyChanged();
+                ReloadProducts();
+            } 
+        }
 
         // public command properties
         public ICommand GoNextPage { get; set; }
         public ICommand GoPrevPage { get; set; }
         public ICommand AddItem { get; set; }
+        public ICommand AddMulItems { get; set; }
         public ICommand RemoveItem { get; set; }
+        public ICommand RemoveMulItems { get; set; }
         public ICommand SaveInvoice { get; set; }
         public ICommand ResetInput { get; set; }
+        public ICommand GetCustomer { get; set; }
 
         public SellViewModel()
         {
             // service
             _productService = new ProductService();
             _invoiceService = new InvoiceService();
+            _customerService = new CustomerService();
 
             // data
             var pagedList = _productService.GetProductsForSell();
@@ -144,65 +159,26 @@ namespace OoadProject.Core.ViewModels.Sells
 
             AddItem = new RelayCommand<object>
             (
-                p =>
-                {
-                    if (p != null)
-                    {
-                        //var selectingProduct = (ProductForSellDto)p;
-                        var type = p.GetType();
-                        if (type == typeof(ProductForSellDto))
-                            return ((ProductForSellDto)p).Number > 0;
-                        else if (type == typeof(SelectingProductForSellDto))
-                        {
-                            var actualProduct = _loadedProducts.Where(pr => pr.Id == ((SelectingProductForSellDto)p).Id).FirstOrDefault();
-                            return actualProduct.Number > 0;
-                        }
-                    }
-                    return false;
-                   
-                },
-                p =>
-                {
-                    var type = p.GetType();
-
-                    // get product id
-                    int productId = -1;
-                    if (type == typeof(ProductForSellDto))
-                        productId = ((ProductForSellDto)p).Id;
-                    else if (type == typeof(SelectingProductForSellDto))
-                        productId = ((SelectingProductForSellDto)p).Id;
-
-                    // add item to selected products
-                    var product = _loadedProducts.Where(sp => sp.Id == productId).FirstOrDefault();
-
-                    var selectedProduct = SelectedProducts.Where(sp => sp.Id == productId).FirstOrDefault();
-                    if (selectedProduct != null)
-                        selectedProduct.SelectedNumber++;
-                    else
-                        SelectedProducts.Add(Mapper.Map<SelectingProductForSellDto>(product));
-                    // decrease product number in products
-                    product.Number--;
-
-                    CalcInvoiceTotal();
-                }
+                p => CanAddMoreItem(p),
+                p => AddMoreItem(p, 1)
             );
+
+            AddMulItems = new RelayCommand<object>
+            (
+                p => CanAddMoreItem(p),
+                p => AddMoreItem(p, 10)
+            ); ;
 
             RemoveItem = new RelayCommand<object>
             (
                 p => true,
-                p =>
-                {
-                    var selectedProduct = p as SelectingProductForSellDto;
+                p => RemoveItems(p, 1)
+            );
 
-                    selectedProduct.SelectedNumber--;
-
-                    _loadedProducts.Where(pr => pr.Id == selectedProduct.Id).FirstOrDefault().Number++;
-
-                    if (selectedProduct.SelectedNumber == 0)
-                        SelectedProducts.Remove(selectedProduct);
-
-                    CalcInvoiceTotal();
-                }
+            RemoveMulItems = new RelayCommand<object>
+            (
+                p => true,
+                p => RemoveItems(p, 10)
             );
 
             SaveInvoice = new RelayCommand<object>
@@ -238,8 +214,86 @@ namespace OoadProject.Core.ViewModels.Sells
 
                 }
             );
+
+            GetCustomer = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    var customer = _customerService.GetCustomer(Invoice.PhoneNumber);
+                    if (customer != null)
+                        Invoice.CustomerName = customer.Name;
+                    else
+                        throw new Exception("Khách hàng với số điện thoại này không tồn tại!");
+                }
+            );
         }
 
+        private bool CanAddMoreItem(object p)
+        {
+            if (p != null)
+            {
+                //var selectingProduct = (ProductForSellDto)p;
+                var type = p.GetType();
+                if (type == typeof(ProductForSellDto))
+                    return ((ProductForSellDto)p).Number > 0;
+                else if (type == typeof(SelectingProductForSellDto))
+                {
+                    var actualProduct = _loadedProducts.Where(pr => pr.Id == ((SelectingProductForSellDto)p).Id).FirstOrDefault();
+                    return actualProduct.Number > 0;
+                }
+            }
+            return false;
+        }
+
+        private void AddMoreItem(object p, int number)
+        {
+            var type = p.GetType();
+
+            // get product id
+            int productId = -1;
+            if (type == typeof(ProductForSellDto))
+                productId = ((ProductForSellDto)p).Id;
+            else if (type == typeof(SelectingProductForSellDto))
+                productId = ((SelectingProductForSellDto)p).Id;
+
+            // find need-selecting products
+            var product = _loadedProducts.Where(sp => sp.Id == productId).FirstOrDefault();
+
+            // calc the max no.items can be added
+            var numberCanBeAdded = number <= product.Number ? number : product.Number;
+
+            // add items to cart
+            var selectedProduct = SelectedProducts.Where(sp => sp.Id == productId).FirstOrDefault();
+            if (selectedProduct != null)
+                selectedProduct.SelectedNumber += numberCanBeAdded;
+            else
+                SelectedProducts.Add(Mapper.Map<SelectingProductForSellDto>(product));
+            
+            // decrease product number in products
+            product.Number -= numberCanBeAdded;
+
+            CalcInvoiceTotal();
+        }
+
+        private void RemoveItems(object p, int number)
+        {
+            var selectedProduct = p as SelectingProductForSellDto;
+
+            // max no.item can be removed
+            var numberCanBeRemoved = number <= selectedProduct.SelectedNumber ? number : selectedProduct.SelectedNumber;
+            
+            // remove items from cart
+            selectedProduct.SelectedNumber -= numberCanBeRemoved;
+
+            // add no.items to products list
+            _loadedProducts.Where(pr => pr.Id == selectedProduct.Id).FirstOrDefault().Number += numberCanBeRemoved;
+
+            if (selectedProduct.SelectedNumber == 0)
+                SelectedProducts.Remove(selectedProduct);
+
+            CalcInvoiceTotal();
+        }
 
         private void CalcInvoiceTotal()
         {
@@ -249,6 +303,11 @@ namespace OoadProject.Core.ViewModels.Sells
                 total += product.PriceOut * product.SelectedNumber;
             }
             Invoice.Total = total;
+        }
+
+        private void ReloadProducts()
+        {
+            // 
         }
 
 

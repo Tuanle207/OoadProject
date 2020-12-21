@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OoadProject.Core.ViewModels.Sells.Dtos
 {
-    public class SelectingProductForSellDto : BaseViewModel
+    public class SelectingProductForSellDto : BaseDto
     {
         public int _selectedNumber;
 
