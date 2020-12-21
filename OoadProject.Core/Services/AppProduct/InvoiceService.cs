@@ -1,4 +1,5 @@
-﻿using OoadProject.Core.ViewModels.Home.Dtos;
+﻿using OoadProject.Core.AppSession;
+using OoadProject.Core.ViewModels.Home.Dtos;
 using OoadProject.Core.ViewModels.Sells.Dtos;
 using OoadProject.Data.Entity.AppCustomer;
 using OoadProject.Data.Repository;
@@ -76,7 +77,7 @@ namespace OoadProject.Core.Services.AppProduct
             var storedInvoice = _invoiceRepository.Create(new Invoice
             {
                 CustomerId = customerId,
-                UserId = 1, /// phai fix lai!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
+                UserId = Session.CurrentUser.Id,
                 CreationTime = DateTime.Now,
                 Total = invoice.Total
             }); ;

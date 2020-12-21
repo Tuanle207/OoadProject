@@ -1,4 +1,4 @@
-﻿using OoadProject.Core.ViewModels.Providers.Dtos;
+﻿using OoadProject.Core.ViewModels.Settings.Dtos;
 using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Repository;
 using System;
@@ -27,12 +27,12 @@ namespace OoadProject.Core.Services.AppProduct
         {
             var newProvider = Mapper.Map<Provider>(provider);
 
-            return _providerRepository.CreateProvider(newProvider);
+            return _providerRepository.Create(newProvider);
         }
 
         public bool DeleteProvider(Provider provider)
         {
-            return _providerRepository.DeleteProvider(provider.Id);
+            return _providerRepository.Delete(provider.Id);
         }
     }
 }

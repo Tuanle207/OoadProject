@@ -1,7 +1,7 @@
 ﻿
 namespace OoadProject.Core.ViewModels.Orders.Dtos
 {
-    public class SelectingProductDto : BaseViewModel
+    public class SelectingProductDto : BaseDto
     {
         public int _selectedNumber;
 

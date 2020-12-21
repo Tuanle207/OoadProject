@@ -34,7 +34,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="2*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnAddProvider" Click="btnAddProvider_Click" Foreground="Black" Background="Green" Grid.Column="0" Height="40" Width="150"  HorizontalContentAlignment="Center" Margin="10" Content="Thêm mới" HorizontalAlignment="Center"></Button>
+                <Button x:Name="btnAddProvider" Click="btnAddProvider_Click" Command="{Binding PrepareAddProvider}" Foreground="Black" Background="Green" Grid.Column="0" Height="40" Width="150"  HorizontalContentAlignment="Center" Margin="10" Content="Thêm mới" HorizontalAlignment="Center"></Button>
                 <Button Command="{Binding DeleteProvider}" Foreground="Black" Background="Red" Grid.Column="2" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Xóa" HorizontalAlignment="Center"></Button>
             </Grid>
         </Grid>

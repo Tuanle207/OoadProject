@@ -1,5 +1,7 @@
 ﻿
 using AutoMapper;
+using OoadProject.Core.AppSession;
+using OoadProject.Data.Entity.AppUser;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -24,6 +26,19 @@ namespace OoadProject.Core.ViewModels
                     _mapper = AutoMapper.Config.CreateMapper();
                 }
                 return _mapper;
+            }
+        }
+
+        protected User _currentUser;
+        protected User CurrentUser
+        {
+            get
+            {
+                if (_currentUser == null)
+                {
+                    _currentUser = Session.CurrentUser;
+                }
+                return _currentUser;
             }
         }
     }

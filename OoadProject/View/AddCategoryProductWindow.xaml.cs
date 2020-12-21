@@ -23,5 +23,10 @@ namespace OoadProject.View
         {
             InitializeComponent();
         }
+
+        private void btnAddCategory_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

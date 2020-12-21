@@ -1,5 +1,5 @@
 ﻿using OoadProject.Core.Services.AppProduct;
-using OoadProject.Core.ViewModels.Providers.Dtos;
+using OoadProject.Core.ViewModels.Settings.Dtos;
 using OoadProject.Data.Entity.AppProduct;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace OoadProject.Core.ViewModels.Providers
+namespace OoadProject.Core.ViewModels.Settings
 {
     public class ProviderViewModel : BaseViewModel
     {
@@ -56,6 +56,7 @@ namespace OoadProject.Core.ViewModels.Providers
         // public command properties
         public ICommand DeleteProvider { get; set; }
         public ICommand AddProvider { get; set; }
+        public ICommand PrepareAddProvider { get; set; }
 
         public ProviderViewModel()
         {
@@ -74,6 +75,16 @@ namespace OoadProject.Core.ViewModels.Providers
                     MessageBox.Show("Xóa nhà cung cấp thành công");
                 }
             );
+
+            PrepareAddProvider = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    NewProvider = new ProviderForCreationDto { };
+                }
+             );
+
             AddProvider = new RelayCommand<object>
             (
                 p =>

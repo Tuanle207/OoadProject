@@ -18,13 +18,13 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnDatHang" Grid.Row="0" Grid.Column="0" Click="btnDatHang_Click" GotFocus="btnDatHang_GotFocus" Foreground="Black" FontWeight="Bold" Background="#808080" BorderThickness="0" Content="DS đặt hàng" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
+            <Button x:Name="btnDatHang" Grid.Row="0" Grid.Column="0" Click="btnDatHang_Click" GotFocus="btnDatHang_GotFocus" Foreground="Black" FontWeight="Bold" Background="#808080" BorderThickness="0" Content="Đơn đặt hàng" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
             </Button>
             <Button x:Name="btnNhapHang" Grid.Row="0" Grid.Column="1" Click="btnNhapHang_Click" GotFocus="btnNhapHang_GotFocus" Foreground="Black" FontWeight="Bold" Background="#C0C0C0" BorderThickness="0" Content="Nhập hàng" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
             </Button>
-            <Button x:Name="btnDSNhapHang" Grid.Row="0" Grid.Column="2" Click="btnDSNhapHang_Click" GotFocus="btnDSNhapHang_GotFocus" Foreground="Black" FontWeight="Bold" Background="#C0C0C0" BorderThickness="0" Content="DS nhập hàng" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
+            <Button x:Name="btnDSNhapHang" Grid.Row="0" Grid.Column="2" Click="btnDSNhapHang_Click" GotFocus="btnDSNhapHang_GotFocus" Foreground="Black" FontWeight="Bold" Background="#C0C0C0" BorderThickness="0" Content="Đơn nhập hàng" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
             </Button>
         </Grid>
         <UserControl x:Name="viewControl" Grid.Row="1"/>

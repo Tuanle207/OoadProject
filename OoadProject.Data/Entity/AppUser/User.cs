@@ -5,6 +5,8 @@ namespace OoadProject.Data.Entity.AppUser
     public class User : AppEntity
     {
         public string Name { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
         public int RoleId { get; set; }
         public DateTime Dob { get; set; }
         public string PhoneNumber { get; set; }

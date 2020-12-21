@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OoadProject.Data.Repository
 {
-    public class UserRepository
+    public class UserRepository : BaseRepository<User>
     {
         public IEnumerable<User> GetAllUsers()
         {
@@ -19,35 +19,29 @@ namespace OoadProject.Data.Repository
             }
         }
 
-        public User CreateUser(User user)
+        public User GetUserByEmail(string email)
         {
             using (var ctx = new AppDbContext())
             {
-                var storedUser = ctx.Users.Add(user);
-                ctx.SaveChanges();
-                return storedUser;
+                return ctx.Users
+                    .Where(u => u.Email == email)
+                    .Include(u => u.Role)
+                    .FirstOrDefault();
             }
         }
 
-        public bool UpdateUser(User user)
+        public void UpdateUserPassword(int userId, string hashedPassword)
         {
             using (var ctx = new AppDbContext())
             {
-                var storedUser = ctx.Users.Where(u => u.Id == user.Id).FirstOrDefault();
-                ctx.Entry(storedUser).CurrentValues.SetValues(user);
-                ctx.SaveChanges();
-                return true;
-            }
-        }
-
-        public bool DeleteUser(int id)
-        {
-            using (var ctx = new AppDbContext())
-            {
-                var storedUser = ctx.Users.Where(u => u.Id == id).FirstOrDefault();
-                ctx.Users.Remove(storedUser);
-                ctx.SaveChanges();
-                return true;
+                var user = ctx.Users.Where(u => u.Id == userId).FirstOrDefault();
+                if (user != null)
+                {
+                    user.Password = hashedPassword;
+                    ctx.SaveChanges();
+                }
+                else
+                    throw new Exception("Người dùng này không tồn tại!");
             }
         }
     }
