@@ -33,9 +33,9 @@
                     <ColumnDefinition Width="2*"></ColumnDefinition>
                     <ColumnDefinition Width="2*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Command="{Binding PrepareAddCategory}" x:Name="btnAddCategoryProduct" Foreground="Black" Background="Green" Grid.Column="0" Height="40" Width="150" Click="btnAddCategoryProduct_Click"  HorizontalContentAlignment="Center" Margin="10" Content="Thêm mới" HorizontalAlignment="Center"></Button>
-                <Button x:Name="btnDelete" Command="{Binding DeleteCategory}" Click="btnDelete_Click" Foreground="Black" Background="Red" Grid.Column="2" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Xóa" HorizontalAlignment="Center"></Button>
-                <Button x:Name="btnEdit" Command="{Binding PrepareUpdateCategory}" Click="btnEdit_Click"  Foreground="Black" Background="#F5DA81" Grid.Column="1" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Sửa" HorizontalAlignment="Center"></Button>
+                <Button Command="{Binding PrepareAddCategory}" x:Name="btnAddCategoryProduct" Foreground="Black" Background="#596FB5" BorderThickness="0" Grid.Column="0" Height="40" Width="150" Click="btnAddCategoryProduct_Click"  HorizontalContentAlignment="Center" Margin="10" Content="Thêm mới" HorizontalAlignment="Center"></Button>
+                <Button x:Name="btnDelete" Command="{Binding DeleteCategory}" Click="btnDelete_Click" Foreground="Black" Background="#FE7139" BorderThickness="0" Grid.Column="2" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Xóa" HorizontalAlignment="Center"></Button>
+                <Button x:Name="btnEdit" Command="{Binding PrepareUpdateCategory}" Click="btnEdit_Click"  Foreground="Black" Background="#928A99" BorderThickness="0" Grid.Column="1" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Sửa" HorizontalAlignment="Center"></Button>
             </Grid>
         </Grid>
         <Button x:Name="btnAfter" DataContext="{StaticResource ProductViewModel}" Command="{Binding UpdateData}" Visibility="Hidden" />

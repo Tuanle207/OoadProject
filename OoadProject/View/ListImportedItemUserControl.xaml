@@ -72,8 +72,23 @@
             <materialDesign:Card Grid.Row="1" Grid.Column="1" Background="#FFE3F0FF"  Margin="10 5 2 0" BorderThickness="0" VerticalAlignment="Stretch" Grid.ColumnSpan="3">
             <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
                 <ListView x:Name="ListDetailOrder" ItemsSource="{Binding ReceiptProducts}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Margin" Value="0 0 0 0"/>
+                            <Setter Property="Padding" Value="0"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.View >
                         <GridView>
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Margin" Value="0"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Background" Value="#FFE3F0FF"/>
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
                             <GridViewColumn Header="Mã SP" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
                             <GridViewColumn Header="Tên SP" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
                             <GridViewColumn Header="Loại SP" DisplayMemberBinding="{Binding CategoryName}" ></GridViewColumn>

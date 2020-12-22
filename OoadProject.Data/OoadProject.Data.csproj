@@ -59,9 +59,9 @@
     <Compile Include="Entity\AppUser\Role.cs" />
     <Compile Include="Entity\AppUser\User.cs" />
     <Compile Include="Entity\Others\Parameter.cs" />
-    <Compile Include="Migrations\202012220814482_Finalization.cs" />
-    <Compile Include="Migrations\202012220814482_Finalization.designer.cs">
-      <DependentUpon>202012220814482_Finalization.cs</DependentUpon>
+    <Compile Include="Migrations\202012221210523_Initial.cs" />
+    <Compile Include="Migrations\202012221210523_Initial.designer.cs">
+      <DependentUpon>202012221210523_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,20 +82,20 @@
     <Compile Include="Repository\RoleRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\WarrantyOrderRepository.cs" />
+    <Compile Include="Seedings\CategorySeeder.cs" />
+    <Compile Include="Seedings\ManufactureSeeder.cs" />
     <Compile Include="Seedings\ParameterSeeder.cs" />
     <Compile Include="Seedings\ProductSeeder.cs" />
     <Compile Include="Seedings\ProviderSeeder.cs" />
-    <Compile Include="Seedings\UserSeeder.cs" />
-    <Compile Include="Seedings\CategorySeeder.cs" />
     <Compile Include="Seedings\SeederManager.cs" />
-    <Compile Include="Seedings\ManufactureSeeder.cs" />
+    <Compile Include="Seedings\UserSeeder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="obj\**\*.cs" />
     <Compile Remove="obj\**\*.cs" />
     <EmbeddedResource Remove="obj\**\*.cs" />
-    <EmbeddedResource Include="Migrations\202012220814482_Finalization.resx">
-      <DependentUpon>202012220814482_Finalization.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202012221210523_Initial.resx">
+      <DependentUpon>202012221210523_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <None Remove="obj\**\*.cs" />
   </ItemGroup>

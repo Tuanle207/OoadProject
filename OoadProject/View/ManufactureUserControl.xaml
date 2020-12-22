@@ -32,8 +32,8 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="2*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Name="btnAddManufacture" Command="{Binding PrepareAddManufacturer}" Foreground="Black" Background="Green" Grid.Column="0" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Thêm mới" Click="btnAddManufacture_Click" HorizontalAlignment="Center"></Button>
-                <Button x:Name="btnDeleteManufacturer" Click="btnDeleteManufacturer_Click" Command="{Binding DeleteManufacturer}" Foreground="Black" Background="Red" Grid.Column="2" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Xóa" HorizontalAlignment="Center"></Button>
+                <Button Name="btnAddManufacture" Command="{Binding PrepareAddManufacturer}" Foreground="Black" Background="#596FB5" BorderThickness="0" Grid.Column="0" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Thêm mới" Click="btnAddManufacture_Click" HorizontalAlignment="Center"></Button>
+                <Button x:Name="btnDeleteManufacturer" Click="btnDeleteManufacturer_Click" Command="{Binding DeleteManufacturer}" Foreground="Black" Background="#FE7139" BorderThickness="0" Grid.Column="2" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Xóa" HorizontalAlignment="Center"></Button>
                 <Button x:Name="btnAfter" DataContext="{StaticResource ProductViewModel}" Command="{Binding UpdateData}" Visibility="Hidden" />
             </Grid>
         </Grid>

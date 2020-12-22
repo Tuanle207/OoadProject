@@ -19,9 +19,9 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
 
             <Menu Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                <MenuItem Height="40" Header="Lọc" Background="#70af85" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                <MenuItem Height="40" Header="Lọc" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Background="#695D85" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                     <MenuItem.Icon>
-                        <materialDesign:PackIcon Kind="Cog" />
+                        <materialDesign:PackIcon Kind="FilterMenu" />
                     </MenuItem.Icon>
                     <MenuItem Header="Đơn hàng đang chờ gửi" x:Name="itemWaitForSent" Click="itemWaitForSent_Click" Command="{Binding ToggleCheckOption}">
                         <MenuItem.Icon>
@@ -89,6 +89,14 @@
             <materialDesign:Card Grid.Row="0" Background="#FFE3F0FF"  Margin="0,5,2,0" BorderThickness="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
                 <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
                     <ListView x:Name="ListOrder" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Margin" Value="0"/>
+                                <Setter Property="Padding" Value="0"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                         <ListView.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Sửa thông tin đơn đặt hàng" x:Name="menuItemUpdate" Click="menuItemUpdate_Click" DataContext="{StaticResource OrderCreationViewModel}" Command="{Binding LoadDataForUpdation}">
@@ -145,7 +153,14 @@
                         </ListView.ContextMenu>
                         <ListView.View >
                             <GridView>
-                                <GridViewColumn Header="Mã ĐH" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                                <GridView.ColumnHeaderContainerStyle>
+                                    <Style TargetType="GridViewColumnHeader">
+                                        <Setter Property="Margin" Value="0"/>
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="Background" Value="#FFE3F0FF"/>
+                                    </Style>
+                                </GridView.ColumnHeaderContainerStyle>
+                                <GridViewColumn x:Name="id" Header="Mã ĐH" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
                                 <GridViewColumn Header="Tạo lúc" DisplayMemberBinding="{Binding CreationTime}"></GridViewColumn>
                                 <GridViewColumn Header="Người tạo" DisplayMemberBinding="{Binding CreationUser}"></GridViewColumn>
                                 <GridViewColumn Header="Nhà cung cấp" DisplayMemberBinding="{Binding ProviderName}"></GridViewColumn>
@@ -189,8 +204,23 @@
             <materialDesign:Card Background="#FFE3F0FF"  Margin="10 5 2 0" BorderThickness="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
                 <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
                     <ListView x:Name="ListDetailOrder" ItemsSource="{Binding OrderProducts}" >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Margin" Value="0 0 0 0"/>
+                                <Setter Property="Padding" Value="0"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                         <ListView.View >
                             <GridView>
+                                <GridView.ColumnHeaderContainerStyle>
+                                    <Style TargetType="GridViewColumnHeader">
+                                        <Setter Property="Margin" Value="0"/>
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="Background" Value="#FFE3F0FF"/>
+                                    </Style>
+                                </GridView.ColumnHeaderContainerStyle>
                                 <GridViewColumn Header="Mã SP" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
                                 <GridViewColumn Header="Tên SP" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
                                 <GridViewColumn Header="Loại SP" DisplayMemberBinding="{Binding CategoryName}"></GridViewColumn>
@@ -200,7 +230,7 @@
                     </ListView>
                 </ScrollViewer>
             </materialDesign:Card>
-            <Button Grid.Row="1" HorizontalAlignment="Right" Name="btnAddOrder" DataContext="{StaticResource OrderCreationViewModel}" Click="btnAddOrder_Click" Command="{Binding LoadDataForCreation}" Width="200" Height="Auto" BorderThickness="0" Background="Green" Margin="2 2 2 2">
+            <Button Grid.Row="1" HorizontalAlignment="Right" Name="btnAddOrder" DataContext="{StaticResource OrderCreationViewModel}" Click="btnAddOrder_Click" Command="{Binding LoadDataForCreation}" Width="200" Height="Auto" BorderThickness="0" Background="#596FB5" Margin="2 2 2 2">
                 <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="-5 0 -5 0">
                     <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 10 0" Width="20" Height="20"/>
                     <Label Content="Tạo đơn hàng mới" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 -8 0"/>
