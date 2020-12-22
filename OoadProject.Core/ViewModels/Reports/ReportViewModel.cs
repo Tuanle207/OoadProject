@@ -92,7 +92,7 @@ namespace OoadProject.Core.ViewModels.Reports
         {
             var reportByDay = _invoiceService.GetReportByDay(SelectedDate);
             Products = new ObservableCollection<ProductReportByDayDto>(reportByDay.Products);
-            TotalRevenue = reportByDay.TotalRevenue;
+            TotalDayRevenue = reportByDay.TotalRevenue;
         }
 
         private void LoadReportByMonth()

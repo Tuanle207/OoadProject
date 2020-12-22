@@ -20,13 +20,13 @@
             <ColumnDefinition Width="200"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-            <TextBlock Text="Tháng:" FontSize="15" Margin="33 33 0 0"></TextBlock>
+            <TextBlock Text="Tháng:" FontSize="15" Margin="33 40 0 0"></TextBlock>
             <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Width="170" Height="40" Margin="20 20 0 0">
-                <DatePicker SelectedDate="{Binding SelectedMonth, Mode=TwoWay}" materialDesign:HintAssist.Hint="Tháng" BorderThickness="0" Margin="4 0 0 0" FontSize="14" Height="35.2" />
+                <DatePicker SelectedDate="{Binding SelectedMonth, Mode=TwoWay}" materialDesign:HintAssist.Hint="Chọn tháng" BorderThickness="0" Margin="4 0 0 0" FontSize="14" Height="35.2" />
             </Border>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin=" 30 0 0 0">
-            <TextBlock Text="Tổng doanh thu:" FontSize="15" Margin="0 35 0 0"></TextBlock>
+            <TextBlock Text="Tổng doanh thu:" FontSize="15" Margin="0 45 0 0"></TextBlock>
             <TextBox
                   Text="{Binding TotalRevenue}"
                   Margin="20 0 0 0"
@@ -35,7 +35,7 @@
                   VerticalAlignment="Center" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
-            <TextBlock Text="Tổng lợi nhuận:" FontSize="15" Margin="0 35 0 0"></TextBlock>
+            <TextBlock Text="Tổng lợi nhuận:" FontSize="15" Margin="0 45 0 0"></TextBlock>
             <TextBox
                   Text="{Binding TotalProfit}"
                   Margin="20 0 0 0"

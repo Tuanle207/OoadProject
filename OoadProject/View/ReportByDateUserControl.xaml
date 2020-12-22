@@ -19,13 +19,13 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-            <TextBlock Text="Ngày:" FontSize="15" Margin="33 33 0 0"></TextBlock>
+            <TextBlock Text="Ngày:" FontSize="15" Margin="33 40 0 0"></TextBlock>
             <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Width="170" Height="40" Margin="20 20 0 0">
-                <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" materialDesign:HintAssist.Hint="Ngày" BorderThickness="0" Margin="4 0 0 0" FontSize="14" Height="35.2" />
+                <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" materialDesign:HintAssist.Hint="Chọn ngày" BorderThickness="0" Margin="4 0 0 0" FontSize="14" Height="35.2" />
             </Border>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-            <TextBlock Text="Doanh thu:" FontSize="15" Margin="0 35 0 0"></TextBlock>
+            <TextBlock Text="Doanh thu:" FontSize="15" Margin="0 45 0 0"></TextBlock>
             <TextBox
                   Text="{Binding TotalDayRevenue}"
                   Margin="20 0 0 0"

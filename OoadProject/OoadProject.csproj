@@ -142,8 +142,8 @@
     <Compile Include="View\ManagementOrderUserControl.xaml.cs">
       <DependentUpon>ManagementOrderUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ManagementReportUserControl.xaml.cs">
-      <DependentUpon>ManagementReportUserControl.xaml</DependentUpon>
+    <Compile Include="View\ReportManagementUserControl.xaml.cs">
+      <DependentUpon>ReportManagementUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManufactureUserControl.xaml.cs">
       <DependentUpon>ManufactureUserControl.xaml</DependentUpon>
@@ -278,7 +278,7 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="View\ManagementReportUserControl.xaml">
+    <Page Include="View\ReportManagementUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
