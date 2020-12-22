@@ -31,7 +31,7 @@ namespace OoadProject.View
         private ManagementOrderUserControl _orderManagementScreen;
         private ListWarrantyOrderUserControl _warrantyOrderScreen;
         private StaffUserControl _userScreen;
-        private ReportUserControl _reportScreen;
+        private ReportManagementUserControl _reportScreen;
         private SettingUserControl _settingScreen;
 
         public MainWindow()
@@ -46,7 +46,7 @@ namespace OoadProject.View
             _orderManagementScreen = new ManagementOrderUserControl();
             _warrantyOrderScreen = new ListWarrantyOrderUserControl();
             _userScreen = new StaffUserControl();
-            _reportScreen = new ReportUserControl();
+            _reportScreen = new ReportManagementUserControl();
             _settingScreen = new SettingUserControl();
         }
 

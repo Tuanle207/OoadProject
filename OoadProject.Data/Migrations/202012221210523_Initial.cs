@@ -72,6 +72,7 @@
                         PhoneNumber = c.String(),
                         Address = c.String(),
                         CreationTime = c.DateTime(nullable: false),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Roles", t => t.RoleId, cascadeDelete: true)

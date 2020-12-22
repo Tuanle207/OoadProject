@@ -47,7 +47,7 @@
                 <RowDefinition Height="10*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <materialDesign:Card Grid.Row="0" Background="#FFE3F0FF"  Margin="0,5,2,0" BorderThickness="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
+            <materialDesign:Card Grid.Row="0" Background="#FFE3F0FF"  Margin="0,5,2,0" BorderThickness="0" VerticalAlignment="Stretch" Grid.ColumnSpan="2" Grid.RowSpan="2">
                 <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
                     <ListView x:Name="ListOrder" ItemsSource="{Binding Receipts}" SelectedItem="{Binding SelectedReceipt}">
                         <ListView.View >
@@ -62,28 +62,6 @@
                     </ListView>
                 </ScrollViewer>
             </materialDesign:Card>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="1">
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        <Button Command="{Binding GoPrevPage}" x:Name="btnPrev" Width="30" Height="30" Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                Foreground="Black" Background="#FF47608E" Margin="0 0 20 0" >
-                            <materialDesign:PackIcon Kind="ArrowLeft" Width="20" Height="20" />
-                        </Button>
-                        <TextBlock Height="20" Text="1"></TextBlock>
-                        <TextBlock Height="20">/</TextBlock>
-                        <TextBlock Height="20" Text="2"></TextBlock>
-                        <Button Command="{Binding GoNextPage}" x:Name="btnNext" Width="30" Height="30" Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                 Foreground="Black" Background="#FF47608E" Margin="20 0 0 0">
-                            <materialDesign:PackIcon Kind="ArrowRight" Width="20" Height="20" />
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </Grid>
         </Grid>
 
         <TextBlock Grid.Row="0" Grid.Column="1" Margin="10 0 0 0" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center">
