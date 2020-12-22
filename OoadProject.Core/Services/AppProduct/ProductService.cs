@@ -45,7 +45,7 @@ namespace OoadProject.Core.Services.AppProduct
 
         public PaginatedList<ProductForOrderCreationDto> GetProductsForOrderCreation(int page = 1, int limit = 4)
         {
-            var rawProducts = _productRepository.GetProducts(null, page, limit);
+            var rawProducts = _productRepository.GetProductsForImport(null, page, limit);
 
             var productsForReturn = new PaginatedList<ProductForOrderCreationDto>
             (
@@ -61,7 +61,7 @@ namespace OoadProject.Core.Services.AppProduct
         {
             if (page == null || page == 0) page = 1;
             if (limit == null) limit = 4;
-            var rawProducts = _productRepository.GetProducts(keyword, (int)page, (int)limit);
+            var rawProducts = _productRepository.GetProductsForImport(keyword, (int)page, (int)limit);
 
             var productsForReturn = new PaginatedList<ProductForSellDto>
             (
