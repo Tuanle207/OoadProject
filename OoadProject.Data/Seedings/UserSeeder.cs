@@ -10,7 +10,7 @@ namespace OoadProject.Data.Seedings
 {
     public class UserSeeder 
     {
-        public static void CreateAdminUser(AppDbContext context)
+        public static void Seed(AppDbContext context)
         {
             var quanTriVienRole = context.Roles.Add(new Role
             {
@@ -28,6 +28,7 @@ namespace OoadProject.Data.Seedings
 
             var quantrivienUser = context.Users.Add(new User
             {
+                Id = 1,
                 Name = "Lê Anh Tuấn",
                 Email = "letgo237@gmail.com",
                 Password = HashPassword("test1234"),
@@ -40,6 +41,7 @@ namespace OoadProject.Data.Seedings
             });
             var nhanVien1User = context.Users.Add(new User
             {
+                Id = 2,
                 Name = "Nguyễn Xuân Tú",
                 Email = "nguyenxuantu@gmail.com",
                 Password = HashPassword("test1234"),
@@ -52,6 +54,7 @@ namespace OoadProject.Data.Seedings
             });
             var nhanVien2User = context.Users.Add(new User
             {
+                Id = 3,
                 Name = "Nguyễn Thanh Tuấn",
                 Email = "nguyenthanhtuan@gmail.com",
                 Password = HashPassword("test1234"),
@@ -64,6 +67,7 @@ namespace OoadProject.Data.Seedings
             });
             var nhanVien3User = context.Users.Add(new User
             {
+                Id = 4,
                 Name = "Lê Xuân Tùng",
                 Email = "lexuantung@gmail.com",
                 Password = HashPassword("test1234"),
