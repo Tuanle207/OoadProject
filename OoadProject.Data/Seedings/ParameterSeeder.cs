@@ -9,28 +9,45 @@ namespace OoadProject.Data.Seedings
 {
     public class ParameterSeeder
     {
+        private static List<Parameter> Data
+        {
+            get {
+                return new List<Parameter>()
+                {
+                    new Parameter
+                    {
+                        Id = 1,
+                        Key = "MinInputProductNumber",
+                        Value = 5
+                    },
+                    new Parameter
+                    {
+                        Id = 2,
+                        Key = "MaxInputProductNumber",
+                        Value = 100
+                    },
+                    new Parameter
+                    {
+                        Id = 3,
+                        Key = "MinAge",
+                        Value = 18
+                    },
+                    new Parameter
+                    {
+                        Id = 4,
+                        Key = "MaxAge",
+                        Value = 35
+                    }
+                };
+            }
+        }
         public static void Seed(AppDbContext context)
         {
-            context.Parameters.Add(new Parameter
+            foreach (var item in Data)
             {
-                Key = "MinInputProductNumber",
-                Value = 5
-            });
-            context.Parameters.Add(new Parameter
-            {
-                Key = "MaxInputProductNumber",
-                Value = 100
-            });
-            context.Parameters.Add(new Parameter
-            {
-                Key = "MinAge",
-                Value = 18
-            });
-            context.Parameters.Add(new Parameter
-            {
-                Key = "MaxAge",
-                Value = 35
-            });
+                context.Parameters.Add(item);
+            }
+            
             context.SaveChanges();
         }
     }
