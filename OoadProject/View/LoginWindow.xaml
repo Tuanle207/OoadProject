@@ -10,7 +10,7 @@
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None" 
-        DataContext="{StaticResource LoginViewModel}">
+        DataContext="{StaticResource SessionViewModel}">
     <Grid>
         <Rectangle Height="280" VerticalAlignment="Top">
             <Rectangle.Fill>
