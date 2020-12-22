@@ -48,7 +48,20 @@ namespace OoadProject.Data.Repository
             }
         }
 
-        public PaginatedList<Product> GetProducts( int page, int limit, ProductFilterDto Filter)
+        public void UpdateSaleProperty(int id, int number, int priceIn)
+        {
+            using (var ctx = new AppDbContext())
+            {
+                var product = ctx.Products.Where(p => p.Id == id).FirstOrDefault();
+                product.Number += number;
+                product.PriceIn = priceIn;
+                // recalculate the priceOut
+                product.PriceOut = 10 * priceIn;
+                ctx.SaveChanges();
+            }
+        }
+
+       public PaginatedList<Product> GetProducts( int page, int limit, ProductFilterDto Filter = null)
         {
             using (var ctx = new AppDbContext())
             {

@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace OoadProject.Core.ViewModels.Orders.Dtos
 {
-    public class ProductForOrderCreationDto : BaseDto
+    public class ProductForOrderListDto
     {
-        private int _number;
-
         public int Id { get; set; }
         public string Name { get; set; }
         public string CategoryName { get; set; }
-        public string ManufacturerName { get; set; }
-        public int PriceOut { get; set; }
-        public int Number { get => _number; set { _number = value; OnPropertyChanged(); } }
+        public int Number { get; set; }
     }
 }

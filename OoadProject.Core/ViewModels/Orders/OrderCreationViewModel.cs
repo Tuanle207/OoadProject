@@ -1,8 +1,6 @@
 ﻿using OoadProject.Core.Services.AppProduct;
-using OoadProject.Core.Services.AppUser;
 using OoadProject.Core.ViewModels.Orders.Dtos;
 using OoadProject.Data.Entity.AppProduct;
-using OoadProject.Data.Entity.AppUser;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,7 +14,6 @@ namespace OoadProject.Core.ViewModels.Orders
         // private service fields
         private readonly ProductService _productService;
         private readonly OrderService _orderService;
-        private readonly UserService _userService;
         private readonly ProviderService _providerService;
 
         // private data fields
@@ -30,8 +27,6 @@ namespace OoadProject.Core.ViewModels.Orders
         private ObservableCollection<SelectingProductDto> _selectedProducts;
         private OrderForCreationDto _order;
         
-        private ObservableCollection<User> _users;
-        private User _selectingUser;
         private ObservableCollection<Provider> _providers;
         private Provider _selectingProvider;
 
@@ -61,16 +56,6 @@ namespace OoadProject.Core.ViewModels.Orders
 
         public OrderForCreationDto Order { get => _order; set { _order = value; OnPropertyChanged(); }}
 
-        public ObservableCollection<User> Users
-        {
-            get => _users;
-            set
-            {
-                _users = value;
-                OnPropertyChanged();
-            }
-        }
-        public User SelectingUser { get => _selectingUser; set { _selectingUser = value; OnPropertyChanged(); } }
         public ObservableCollection<Provider> Providers
         {
             get => _providers;
@@ -87,10 +72,16 @@ namespace OoadProject.Core.ViewModels.Orders
         public ICommand GoNextPage { get; set; }
         public ICommand GoPrevPage { get; set; }
         public ICommand AddItem { get; set; }
+        public ICommand AddMulItems { get; set; }
         public ICommand RemoveItem { get; set; }
+        public ICommand RemoveMulItems { get; set; }
         public ICommand SaveOrderInfo { get; set; }
-
-
+        public ICommand UpdateOrderInfo { get; set; }
+        public ICommand LoadDataForCreation { get; set; }
+        public ICommand LoadDataForUpdation { get; set; }
+        public ICommand ResetData { get; set; }
+        public ICommand RestoreUpdationData { get; set; }
+       
 
 
         public OrderCreationViewModel()
@@ -98,30 +89,17 @@ namespace OoadProject.Core.ViewModels.Orders
             // service
             _productService = new ProductService();
             _orderService = new OrderService();
-            _userService = new UserService();
             _providerService = new ProviderService();
 
 
             // data
-            var pagedList = _productService.GetProductsForOrderCreation();
-            CurrentPage = pagedList.CurrentPage;
-            TotalPages = pagedList.TotalPages;
-            _pageSize = pagedList.PageRecords;
-            Products = new ObservableCollection<ProductForOrderCreationDto>(pagedList.Data);
-            
-            _loadedProducts = new List<ProductForOrderCreationDto>();
-            _loadedProducts.AddRange(pagedList.Data);
-            _loaded = new List<bool>();
-            for (int i = 0; i < TotalPages; i++) _loaded.Add(false);
-            _loaded[0] = true;
+            InitialData();
 
             SelectedProducts = new ObservableCollection<SelectingProductDto>();
 
-            Users = new ObservableCollection<User>(_userService.GetUsers());
             Providers = new ObservableCollection<Provider>(_providerService.GetProviders());
-            SelectingUser = Users.Count > 0 ? Users[0] : null;
             SelectingProvider = Providers.Count > 0 ? Providers[0] : null;
-            Order = new OrderForCreationDto { CreationTime = DateTime.Now };
+            Order = new OrderForCreationDto { CreationTime = DateTime.Now.Date };
 
 
 
@@ -166,63 +144,27 @@ namespace OoadProject.Core.ViewModels.Orders
             });
 
             AddItem = new RelayCommand<object>(
-            p => {
-                if (p != null)
-                {
-                    var type = p.GetType();
-                    if (type == typeof(ProductForOrderCreationDto))
-                        return ((ProductForOrderCreationDto)p).Number > 0;
-                    else if (type == typeof(SelectingProductDto))
-                    {
-                        var actualProduct = _loadedProducts.Where(sp => sp.Id == ((SelectingProductDto)p).Id).FirstOrDefault();
-                        return actualProduct.Number > 0;
-                    }
-                }
-                return true;
-            },
-            p => {
-                
-                var type = p.GetType();
-
-                if (p != null)
-                {
-                    // get product id
-                    int productId = -1;
-                    if (type == typeof(ProductForOrderCreationDto))
-                        productId = ((ProductForOrderCreationDto)p).Id;
-                    else if (type == typeof(SelectingProductDto))
-                        productId = ((SelectingProductDto)p).Id;
-
-                    // change no. product in 2 lists
-                    var product = _loadedProducts.Where(sp => sp.Id == productId).FirstOrDefault();
-
-                    var selectedProduct = SelectedProducts.Where(sp => sp.Id == productId).FirstOrDefault();
-                    if (selectedProduct != null)
-                        selectedProduct.SelectedNumber++;
-                    else
-                        SelectedProducts.Add(_orderService.SelectProduct(product));
-
-                    //product.Number--;
-
-                }
-            });
-
+                p => true,
+                p => AddItems(p, 1)
+            );
+            AddMulItems = new RelayCommand<object>(
+                p => true,
+                p => AddItems(p, 10)
+            );
             RemoveItem = new RelayCommand<object>(
-            p => true,
-            p => {
-                var selectedProduct = (SelectingProductDto) p;
-                selectedProduct.SelectedNumber--;
-                if (selectedProduct.SelectedNumber == 0)
-                    SelectedProducts.Remove(selectedProduct);
-
-                //_loadedProducts.Where(sp => sp.Id == selectedProduct.Id).FirstOrDefault().Number++;
-            });
+                p => true,
+                p => RemoveItems(p, 1)
+            );
+            RemoveMulItems = new RelayCommand<object>(
+                p => true,
+                p => RemoveItems(p, 10)
+            );
 
 
             SaveOrderInfo = new RelayCommand<object>(
             p => 
             {
-                if (SelectingUser == null || SelectingProvider == null || SelectedProducts.Count == 0)
+                if (SelectingProvider == null || SelectedProducts.Count == 0)
                     return false;
                 return true;
             },
@@ -231,11 +173,135 @@ namespace OoadProject.Core.ViewModels.Orders
                 if (p != null && (bool)p)
                 {
                     Order.ProviderId = SelectingProvider.Id;
-                    Order.UserId = SelectingUser.Id;
+                    Order.UserId = CurrentUser.Id;
                     _orderService.AddNewOrder(Order, SelectedProducts);
                 }
                
             });
+
+            LoadDataForUpdation = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    if (p != null)
+                    {
+                        InitialData();
+                        LoadDataForUpdate((int)p);
+                    }
+
+                }
+            );
+
+            LoadDataForCreation = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    if (p != null && (bool)p)
+                    {
+                        InitialData();
+                        SelectedProducts = new ObservableCollection<SelectingProductDto>();
+                        Order = new OrderForCreationDto { CreationTime = DateTime.Now.Date };
+                    }
+                }
+            );
+
+            UpdateOrderInfo = new RelayCommand<object>
+            (
+                p =>
+                {
+                    if (SelectingProvider == null || SelectedProducts.Count == 0)
+                        return false;
+                    return true;
+                },
+                p =>
+                {
+                    if (p != null && (bool)p == true)
+                    {
+                        Order.ProviderId = SelectingProvider.Id;
+                        _orderService.UpdateOrderInfo(Order, SelectedProducts);
+                    }
+                }
+            );
+
+            ResetData = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    if (p != null && (bool)p == true)
+                        SelectedProducts = new ObservableCollection<SelectingProductDto>();
+                }
+            );
+
+            RestoreUpdationData = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    if (p != null && (bool)p == true)
+                        LoadDataForUpdate(Order.Id);
+                }
+            );
+        }
+
+        private void AddItems(object p, int number)
+        {
+            var type = p.GetType();
+
+            if (p != null)
+            {
+                // get product id
+                int productId = -1;
+                if (type == typeof(ProductForOrderCreationDto))
+                    productId = ((ProductForOrderCreationDto)p).Id;
+                else if (type == typeof(SelectingProductDto))
+                    productId = ((SelectingProductDto)p).Id;
+
+                // change no. product in 2 lists
+                var product = _loadedProducts.Where(sp => sp.Id == productId).FirstOrDefault();
+
+                var selectedProduct = SelectedProducts.Where(sp => sp.Id == productId).FirstOrDefault();
+                if (selectedProduct != null)
+                    selectedProduct.SelectedNumber += number;
+                else
+                    SelectedProducts.Add(_orderService.SelectProduct(product));
+
+            }
+        }
+        private void RemoveItems(object p, int number)
+        {
+            var selectedProduct = (SelectingProductDto)p;
+            selectedProduct.SelectedNumber -= number;
+            if (selectedProduct.SelectedNumber <= 0)
+                SelectedProducts.Remove(selectedProduct);
+        }
+
+        private void LoadDataForUpdate(int orderId)
+        {
+            Order = _orderService.GetOrderById<OrderForCreationDto>(orderId);
+            if (Order.Status == (int)OrderStatus.Sent || Order.Status == (int)OrderStatus.Done)
+                throw new Exception("Không thể thay đổi phiếu đặt hàng đã gửi hoặc đã hoàn thành!");
+
+            Order.Id = orderId;
+            SelectedProducts = new ObservableCollection<SelectingProductDto>(_orderService.GetOrderProducts<SelectingProductDto>(orderId));
+            SelectingProvider = Providers.Where(p => p.Id == Order.ProviderId).FirstOrDefault();
+        }
+
+        private void InitialData()
+        {
+            var pagedList = _productService.GetProductsForOrderCreation();
+            CurrentPage = pagedList.CurrentPage;
+            TotalPages = pagedList.TotalPages;
+            _pageSize = pagedList.PageRecords;
+            Products = new ObservableCollection<ProductForOrderCreationDto>(pagedList.Data);
+
+            _loadedProducts = new List<ProductForOrderCreationDto>();
+            _loadedProducts.AddRange(pagedList.Data);
+            _loaded = new List<bool>();
+            for (int i = 0; i < TotalPages; i++) _loaded.Add(false);
+            if (TotalPages > 0) _loaded[0] = true;
         }
     }
 }

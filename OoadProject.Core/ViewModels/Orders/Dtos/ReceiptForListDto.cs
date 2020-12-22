@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace OoadProject.Core.ViewModels.Orders.Dtos
 {
-    public class OrderForCreationDto
+    public class ReceiptForListDto
     {
         public int Id { get; set; }
-        public DateTime CreationTime { get; set; }
-        public int UserId { get; set; }
-        public int ProviderId { get; set; }
-        public int Status { get; set; }
+        public string CreationTime { get; set; }
+        public string CreationUser { get; set; }
+        public string ProviderName { get; set; }
+        public int Total { get; set; }
     }
 }

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Dtos\ProductFilterDto.cs" />
     <Compile Include="Helpers\Helper.cs" />
+    <Compile Include="Dtos\DateRangeDto.cs" />
     <Compile Include="Pagination\PaginatedList.cs" />
     <Compile Include="Parameters\ParameterType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
