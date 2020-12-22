@@ -24,7 +24,7 @@
             <Grid Grid.Row="0">
                 <TextBox
                     x:Name="tbKeyword"
-                    Text="{Binding ProductNameKeyword}"
+                    Text="{Binding ProductNameKeyword, UpdateSourceTrigger=PropertyChanged}"
                     Height="40"
                     VerticalContentAlignment="Center"
                     Padding="15 0 0 0"

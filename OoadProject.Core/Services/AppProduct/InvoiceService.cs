@@ -16,12 +16,14 @@ namespace OoadProject.Core.Services.AppProduct
         private readonly InvoiceRepository _invoiceRepository;
         private readonly CustomerRepository _customerRepository;
         private readonly InvoiceProductRepository _invoiceProductRepository;
+        private readonly ProductRepository _productRepository;
 
         public InvoiceService()
         {
             _invoiceRepository = new InvoiceRepository();
             _customerRepository = new CustomerRepository();
             _invoiceProductRepository = new InvoiceProductRepository();
+            _productRepository = new ProductRepository();
         }
 
         /// <summary>
@@ -82,7 +84,7 @@ namespace OoadProject.Core.Services.AppProduct
                 Total = invoice.Total
             }); ;
 
-            // 3. add invoice's products
+            // 3. add invoice's products and decrease no. each product
             foreach (var product in products)
             {
                 var invoiceProduct = new InvoiceProduct
@@ -93,6 +95,7 @@ namespace OoadProject.Core.Services.AppProduct
                 };
 
                 _invoiceProductRepository.Create(invoiceProduct);
+                _productRepository.UpdateNumberById(product.Id, product.SelectedNumber);
             }
         }
 

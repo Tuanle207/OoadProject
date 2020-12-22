@@ -60,18 +60,33 @@ namespace OoadProject.Data.Repository
             }
         }
 
-        public PaginatedList<Product> GetProducts(int page, int limit)
+        public PaginatedList<Product> GetProducts(string keyword, int page, int limit)
         {
             using (var ctx = new AppDbContext())
             {
-                var query = ctx.Products
-                    .Include(p => p.Category)
+                var query = ctx.Products.AsQueryable();
+                
+                if (keyword != null && keyword.ToLower().Trim() != "")
+                    query = query.Where(p => p.Name.ToLower().Contains(keyword.ToLower().Trim()));
+                
+                query = query.Include(p => p.Category)
                     .Include(p => p.Manufacturer)
                     .OrderBy(p => p.Name);
                 
                 var products = PaginatedList<Product>.Create(query, page, limit);
                 
                 return products;
+            }
+        }
+
+        public void UpdateNumberById(int id, int selectedNumber)
+        {
+            using (var ctx = new AppDbContext())
+            {
+                var product = ctx.Products.Where(p => p.Id == id).FirstOrDefault();
+                if (product != null)
+                    product.Number -= selectedNumber;
+                ctx.SaveChanges();
             }
         }
     }
