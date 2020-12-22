@@ -10,7 +10,7 @@ namespace OoadProject.Shared.Parameters
     {
         public static string MinInputProductNumber { get => "MinInputProductNumber"; }
         public static string MaxInputProductNumber { get => "MaxInputProductNumber"; }
-        public static string MinAge { get => "MinxAge"; }
+        public static string MinAge { get => "MinAge"; }
         public static string MaxAge { get => "MaxAge"; }
     }
 }
