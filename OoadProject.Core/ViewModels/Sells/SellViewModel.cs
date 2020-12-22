@@ -159,7 +159,7 @@ namespace OoadProject.Core.ViewModels.Sells
 
             SaveInvoice = new RelayCommand<object>
             (
-                p => true,
+                p => SelectedProducts.Count > 0 && Invoice != null && Invoice.CustomerName?.Trim() != "" && Invoice.PhoneNumber?.Trim() != "",
                 p =>
                 {
                     if (p != null && (bool)p)
@@ -245,7 +245,7 @@ namespace OoadProject.Core.ViewModels.Sells
             }
             else
             {
-                numberCanBeAdded = number <= product.Number ? number : storedSelectedProduct.Number;
+                numberCanBeAdded = number <= storedSelectedProduct.Number ? number : storedSelectedProduct.Number;
             }
 
             // add items to cart
