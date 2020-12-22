@@ -56,7 +56,7 @@
             ToolTip="MaterialDesignRaisedButton with Round Corners"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
-            Margin="0 0 27 0">
+            Margin="0 0 27 0" Background="#596FB5" BorderThickness="0">
             <TextBlock Text="Bảo hành" FontSize="15"/>
         </Button>
         <Button x:Name="btnReloaWarrantyOrderList" DataContext="{StaticResource WarrantyOrderListViewModel}" Command="{Binding ReloadData}" Visibility="Hidden" />

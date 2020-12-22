@@ -366,7 +366,7 @@ namespace OoadProject.Core.ViewModels.Products
                 }
             }
             
-            var pagedList = _productService.GetProductsForDisplayProduct(1, 9, filter);
+            var pagedList = _productService.GetProductsForDisplayProduct(1, 13, filter);
             Products = new ObservableCollection<ProductDisplayDto>(pagedList.Data);
             CurrentPage = pagedList.CurrentPage;
             TotalPages = pagedList.TotalPages;
