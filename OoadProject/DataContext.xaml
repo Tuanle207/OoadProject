@@ -6,7 +6,8 @@
                     xmlns:Settings="clr-namespace:OoadProject.Core.ViewModels.Settings;assembly=OoadProject.Core" 
                     xmlns:Sells="clr-namespace:OoadProject.Core.ViewModels.Sells;assembly=OoadProject.Core"
                     xmlns:Users="clr-namespace:OoadProject.Core.ViewModels.Users;assembly=OoadProject.Core" 
-                    xmlns:Warranties="clr-namespace:OoadProject.Core.ViewModels.Warranties;assembly=OoadProject.Core">
+                    xmlns:Warranties="clr-namespace:OoadProject.Core.ViewModels.Warranties;assembly=OoadProject.Core" 
+                    xmlns:Reports="clr-namespace:OoadProject.Core.ViewModels.Reports;assembly=OoadProject.Core">
     <!-- ViewModels -->
     <Users:UserViewModel x:Key="UserViewModel" />
     <Users:LoginViewModel x:Key="LoginViewModel" />
@@ -21,6 +22,7 @@
     <Settings:ProviderViewModel x:Key="ProviderViewModel" />
     <Settings:ManufacturerViewModel x:Key="ManufacturerViewModel" />
     <Settings:CategoryViewModel x:Key="CategoryViewModel" />
+    <Reports:ReportViewModel x:Key="ReportViewModel" />
 
 
     <!-- Converters -->

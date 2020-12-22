@@ -142,8 +142,17 @@
     <Compile Include="View\ManagementOrderUserControl.xaml.cs">
       <DependentUpon>ManagementOrderUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ManagementReportUserControl.xaml.cs">
+      <DependentUpon>ManagementReportUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ManufactureUserControl.xaml.cs">
       <DependentUpon>ManufactureUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportByDateUserControl.xaml.cs">
+      <DependentUpon>ReportByDateUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportByMonthUserControl.xaml.cs">
+      <DependentUpon>ReportByMonthUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StaffUserControl.xaml.cs">
       <DependentUpon>StaffUserControl.xaml</DependentUpon>
@@ -153,9 +162,6 @@
     </Compile>
     <Compile Include="View\ProviderUserControl.xaml.cs">
       <DependentUpon>ProviderUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ReportUserControl.xaml.cs">
-      <DependentUpon>ReportUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SellUserControl.xaml.cs">
       <DependentUpon>SellUserControl.xaml</DependentUpon>
@@ -272,9 +278,21 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
+    <Page Include="View\ManagementReportUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\ManufactureUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="View\ReportByDateUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ReportByMonthUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\StaffUserControl.xaml">
       <SubType>Designer</SubType>
@@ -285,10 +303,6 @@
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="View\ProviderUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="View\ReportUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>

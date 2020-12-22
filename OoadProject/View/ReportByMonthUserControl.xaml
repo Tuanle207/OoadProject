@@ -6,7 +6,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:OoadProject.View"
              mc:Ignorable="d" 
-             d:DesignHeight="590" d:DesignWidth="1100" Background="#fff">
+             d:DesignHeight="590" d:DesignWidth="1100" Background="#fff"
+             DataContext="{StaticResource ReportViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -16,39 +17,45 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <WrapPanel Grid.Row="0" Grid.Column="0">
-            <TextBlock Text="Thời gian:" FontSize="15" Margin="33 33 0 0"></TextBlock>
-            <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Width="150" Margin="15 25 0 0">
-                <DatePicker SelectedDate="{Binding EditingUser.Dob, Mode=TwoWay}" materialDesign:HintAssist.Hint="Thời gian" BorderThickness="0" Margin="4 0 0 0" FontSize="14" Height="35.2" />
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+            <TextBlock Text="Tháng:" FontSize="15" Margin="33 33 0 0"></TextBlock>
+            <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Width="170" Height="40" Margin="20 20 0 0">
+                <DatePicker SelectedDate="{Binding SelectedMonth, Mode=TwoWay}" materialDesign:HintAssist.Hint="Tháng" BorderThickness="0" Margin="4 0 0 0" FontSize="14" Height="35.2" />
             </Border>
-        </WrapPanel>
-        <WrapPanel Grid.Row="0" Grid.Column="1">
-            <TextBlock Text="Doanh thu:" FontSize="15" Margin="0 33 0 0"></TextBlock>
-            <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Width="170" Margin="15 25 0 0">
-                <TextBox  BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Doanh thu" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2" TextChanged="TextBox_TextChanged"></TextBox>
-            </Border>
-        </WrapPanel>
-        <WrapPanel Grid.Row="0" Grid.Column="2">
-            <TextBlock Text="Lợi nhuận:" FontSize="15" Margin="0 33 0 0"></TextBlock>
-            <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Width="170" Margin="15 25 0 0">
-                <TextBox  BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Lợi nhuận" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2" TextChanged="TextBox_TextChanged"></TextBox>
-            </Border>
-        </WrapPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin=" 30 0 0 0">
+            <TextBlock Text="Tổng doanh thu:" FontSize="15" Margin="0 35 0 0"></TextBlock>
+            <TextBox
+                  Text="{Binding TotalRevenue}"
+                  Margin="20 0 0 0"
+                  Padding="10 0 10 0"
+                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
+            <TextBlock Text="Tổng lợi nhuận:" FontSize="15" Margin="0 35 0 0"></TextBlock>
+            <TextBox
+                  Text="{Binding TotalProfit}"
+                  Margin="20 0 0 0"
+                  Padding="10 0 10 0"
+                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  VerticalAlignment="Center" />
+        </StackPanel>
         <WrapPanel Grid.Row="0" Grid.Column="3" HorizontalAlignment="Right" Margin="0 0 20 0">
             <TextBlock Text="Xuất file" FontSize="15" Margin="0 33 0 0"></TextBlock>
             <Button BorderThickness="0" Margin="10 20 0 0" Height="50" Padding="0" Background="Transparent">
                 <materialDesign:PackIcon Kind="FileExport" Foreground="#000" Height="50" Width="50"/>
             </Button>
         </WrapPanel>
-        <ListView Grid.Row="1" Grid.ColumnSpan="4" Margin="200 0 200 33" >
+        <ListView ItemsSource="{Binding DayStatistics}" Grid.Row="1" Grid.ColumnSpan="4" Margin="200 0 200 33" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="STT" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="Ngày" Width="200" ></GridViewColumn>
-                    <GridViewColumn Header="Doanh thu" Width="250"></GridViewColumn>
-                    <GridViewColumn Header="Lợi nhuận" Width="150"></GridViewColumn>
+                    <GridViewColumn Header="STT" DisplayMemberBinding="{Binding Index}"></GridViewColumn>
+                    <GridViewColumn Header="Ngày" DisplayMemberBinding="{Binding Day}"></GridViewColumn>
+                    <GridViewColumn Header="Doanh thu" DisplayMemberBinding="{Binding TotalRevenue}"></GridViewColumn>
+                    <GridViewColumn Header="Lợi nhuận" DisplayMemberBinding="{Binding TotalProfit}"></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -42,6 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dtos\DateRangeDto.cs" />
+    <Compile Include="Dtos\ItemReportByMonthDto.cs" />
+    <Compile Include="Dtos\ReportByDayDto.cs" />
+    <Compile Include="Dtos\ProductReportByDayDto.cs" />
+    <Compile Include="Dtos\ReportByMonthDto.cs" />
     <Compile Include="Pagination\PaginatedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

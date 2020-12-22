@@ -3,6 +3,7 @@ using OoadProject.Core.ViewModels.Home.Dtos;
 using OoadProject.Core.ViewModels.Sells.Dtos;
 using OoadProject.Data.Entity.AppCustomer;
 using OoadProject.Data.Repository;
+using OoadProject.Shared.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,16 @@ namespace OoadProject.Core.Services.AppProduct
             _customerRepository = new CustomerRepository();
             _invoiceProductRepository = new InvoiceProductRepository();
             _productRepository = new ProductRepository();
+        }
+
+        public ReportByDayDto GetReportByDay(DateTime day)
+        {
+            return _invoiceRepository.GetReportByDay(day);
+        }
+
+        public ReportByMonthDto GetReportByMonth(DateTime selectedMonth)
+        {
+            return _invoiceRepository.GetReportByMonth(selectedMonth);
         }
 
         /// <summary>
@@ -98,6 +109,5 @@ namespace OoadProject.Core.Services.AppProduct
                 _productRepository.UpdateNumberById(product.Id, product.SelectedNumber);
             }
         }
-
     }
 }

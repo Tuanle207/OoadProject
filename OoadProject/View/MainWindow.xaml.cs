@@ -30,7 +30,7 @@ namespace OoadProject.View
         private ManagementOrderUserControl _orderManagementScreen;
         private ListWarrantyOrderUserControl _warrantyOrderScreen;
         private StaffUserControl _userScreen;
-        private ReportUserControl _reportScreen;
+        //private ReportUserControl _reportScreen;
         private SettingUserControl _settingScreen;
 
         public MainWindow()
@@ -45,7 +45,7 @@ namespace OoadProject.View
             _orderManagementScreen = new ManagementOrderUserControl();
             _warrantyOrderScreen = new ListWarrantyOrderUserControl();
             _userScreen = new StaffUserControl();
-            _reportScreen = new ReportUserControl();
+            //_reportScreen = new ReportUserControl();
             _settingScreen = new SettingUserControl();
         }
 
@@ -92,10 +92,10 @@ namespace OoadProject.View
                     this.lbTitle.Content = "QUẢN LÝ NHÂN VIÊN";
                     mainControl.Content = _userScreen;
                     break;
-                case "ItemReport":
-                    this.lbTitle.Content = "BÁO CÁO THỐNG KÊ";
-                    mainControl.Content = _reportScreen;
-                    break;
+                //case "ItemReport":
+                //    this.lbTitle.Content = "BÁO CÁO THỐNG KÊ";
+                //    mainControl.Content = _reportScreen;
+                //    break;
                 case "ItemSetting":
                     this.lbTitle.Content = "THAY ĐỔI CÁC THAM SỐ";
                     mainControl.Content = _settingScreen;

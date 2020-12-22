@@ -6,7 +6,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:OoadProject.View"
              mc:Ignorable="d" 
-             d:DesignHeight="590" d:DesignWidth="1100" Background="#fff">
+             d:DesignHeight="590" d:DesignWidth="1100" Background="#fff"
+             DataContext="{StaticResource ReportViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -15,34 +16,39 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <WrapPanel Grid.Row="0" Grid.Column="0">
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
             <TextBlock Text="Ngày:" FontSize="15" Margin="33 33 0 0"></TextBlock>
-            <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Width="170" Margin="15 25 0 0">
-                <DatePicker SelectedDate="{Binding EditingUser.Dob, Mode=TwoWay}" materialDesign:HintAssist.Hint="Ngày" BorderThickness="0" Margin="4 0 0 0" FontSize="14" Height="35.2" />
+            <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Width="170" Height="40" Margin="20 20 0 0">
+                <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" materialDesign:HintAssist.Hint="Ngày" BorderThickness="0" Margin="4 0 0 0" FontSize="14" Height="35.2" />
             </Border>
-        </WrapPanel>
-        <WrapPanel Grid.Row="0" Grid.Column="1">
-            <TextBlock Text="Doanh thu:" FontSize="15" Margin="0 33 0 0"></TextBlock>
-            <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Width="170" Margin="15 25 0 0">
-                <TextBox  BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Doanh thu" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2" TextChanged="TextBox_TextChanged"></TextBox>
-            </Border>
-        </WrapPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+            <TextBlock Text="Doanh thu:" FontSize="15" Margin="0 35 0 0"></TextBlock>
+            <TextBox
+                  Text="{Binding TotalDayRevenue}"
+                  Margin="20 0 0 0"
+                  Padding="10 0 10 0"
+                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  VerticalAlignment="Center" /> 
+        </StackPanel>
         <WrapPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Margin="0 0 20 0">
             <TextBlock Text="Xuất file" FontSize="15" Margin="0 33 0 0"></TextBlock>
             <Button BorderThickness="0" Margin="10 20 0 0" Height="50" Padding="0" Background="Transparent">
                 <materialDesign:PackIcon Kind="FileExport" Foreground="#000" Height="50" Width="50"/>
-            </Button>    
+            </Button>
         </WrapPanel>
-        <ListView Grid.Row="1" Grid.ColumnSpan="3" Margin="33 0 27 33" >
+        <ListView ItemsSource="{Binding Products}" Grid.Row="1" Grid.ColumnSpan="3" Margin="33 0 27 33" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="STT" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="Tên mặt hàng" Width="300" ></GridViewColumn>
-                    <GridViewColumn Header="Số lượng" Width="200"></GridViewColumn>
-                    <GridViewColumn Header="Đơn giá" Width="200"></GridViewColumn>
-                    <GridViewColumn Header="Thành tiền" Width="240"></GridViewColumn>
+                    <GridViewColumn Header="STT" DisplayMemberBinding="{Binding Index}"></GridViewColumn>
+                    <GridViewColumn Header="Mã sản phẩm" DisplayMemberBinding="{Binding Id}" ></GridViewColumn>
+                    <GridViewColumn Header="Tên mặt hàng" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                    <GridViewColumn Header="Loại mặt hàng" DisplayMemberBinding="{Binding CategoryName}"></GridViewColumn>
+                    <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding Number}"></GridViewColumn>
+                    <GridViewColumn Header="Đơn giá" DisplayMemberBinding="{Binding PriceOut}"></GridViewColumn>
+                    <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding Total}"></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
