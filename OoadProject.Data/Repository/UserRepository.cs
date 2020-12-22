@@ -14,7 +14,10 @@ namespace OoadProject.Data.Repository
         {
             using (var ctx = new AppDbContext())
             {
-                var users = ctx.Users.Include(u => u.Role).ToList();
+                var users = ctx.Users
+                    .FilterDeleted()
+                    .Include(u => u.Role)
+                    .ToList();
                 return users;
             }
         }
@@ -24,6 +27,7 @@ namespace OoadProject.Data.Repository
             using (var ctx = new AppDbContext())
             {
                 return ctx.Users
+                    .FilterDeleted()
                     .Where(u => u.Email == email)
                     .Include(u => u.Role)
                     .FirstOrDefault();
@@ -43,6 +47,14 @@ namespace OoadProject.Data.Repository
                 else
                     throw new Exception("Người dùng này không tồn tại!");
             }
+        }
+    }
+
+    static class Extension
+    {
+        public static IQueryable<User> FilterDeleted(this IQueryable<User> query)
+        {
+            return query.Where(u => u.IsDeleted != true);
         }
     }
 }

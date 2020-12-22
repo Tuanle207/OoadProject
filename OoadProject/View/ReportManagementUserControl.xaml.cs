@@ -18,11 +18,22 @@ namespace OoadProject.View
     /// <summary>
     /// Interaction logic for ManagementReportUserControl.xaml
     /// </summary>
-    public partial class ManagementReportUserControl : UserControl
+    public partial class ReportManagementUserControl : UserControl
     {
-        public ManagementReportUserControl()
+        public ReportManagementUserControl()
         {
             InitializeComponent();
+            viewControl.Content = new ReportByDateUserControl();
+        }
+
+        private void btnReportByDay_Click(object sender, RoutedEventArgs e)
+        {
+            viewControl.Content = new ReportByDateUserControl();
+        }
+
+        private void btnReportByMonth_Click(object sender, RoutedEventArgs e)
+        {
+            viewControl.Content = new ReportByMonthUserControl();
         }
     }
 }

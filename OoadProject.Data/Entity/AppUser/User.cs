@@ -12,7 +12,13 @@ namespace OoadProject.Data.Entity.AppUser
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public DateTime CreationTime { get; set; }
+        public bool IsDeleted { get; set; }
 
         public Role Role { get; set; }
+
+        public User()
+        {
+            IsDeleted = false;
+        }
     }
 }

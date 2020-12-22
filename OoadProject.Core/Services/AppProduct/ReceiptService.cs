@@ -39,7 +39,7 @@ namespace OoadProject.Core.Services.AppProduct
                 UserId = Session.CurrentUser.Id,
                 Total = total
             };
-            receipt.OrderId = order.Id;
+
             var storedReceipt = _receipRepository.Create(receipt);
 
             // Add Receipt product and update product's information (priceIn, priceOut, Number)
