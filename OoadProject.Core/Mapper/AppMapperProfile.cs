@@ -82,6 +82,8 @@ namespace OoadProject.Core
 
             //Category
             CreateMap<CategoryForCreationDto, Category>();
+            CreateMap<CategoryForDisplayDto, Category>();
+            CreateMap<Category, CategoryForDisplayDto>();
 
             //Product
             CreateMap<Product, ProductDisplayDto>()

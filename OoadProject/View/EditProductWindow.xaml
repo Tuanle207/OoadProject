@@ -5,7 +5,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"        xmlns:vm="clr-namespace:OoadProject.Core.ViewModels.Products;assembly=OoadProject.Core"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-
         xmlns:local="clr-namespace:OoadProject.View"
         mc:Ignorable="d"
         Title="EditProductWindow" Height="500" Width="600"
@@ -28,7 +27,7 @@
         <StackPanel Grid.Column="0" Grid.Row="1">
             <TextBlock Text="Tên sản phẩm" FontWeight="Bold" Margin="10 0 0 8" FontSize="15"></TextBlock>
             <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="10 0 10 0">
-                <TextBox BorderBrush="#00B1AEAE" Text="{Binding SelectedProduct.Name}"  materialDesign:HintAssist.Hint="Tên sản phẩm" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
+                <TextBox x:Name="nameProduct" BorderBrush="#00B1AEAE" Text="{Binding SelectedProduct.Name}"  materialDesign:HintAssist.Hint="Tên sản phẩm" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
                     
                 </TextBox>
             </Border>
@@ -48,7 +47,7 @@
         <StackPanel Grid.Column="1" Grid.Row="2">
             <TextBlock Text="Số lượng" FontWeight="Bold" Margin="10 0 0 8" FontSize="15"></TextBlock>
             <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="10 0 10 0">
-                <TextBox BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Số lượng" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
+                <TextBox x:Name="count" BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Số lượng" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
                     <TextBox.Text>
                         <Binding Path="SelectedProduct.Number" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -62,7 +61,7 @@
         <StackPanel Grid.Column="0" Grid.Row="3">
             <TextBlock Text="Giá nhập" FontWeight="Bold" Margin="10 0 0 8" FontSize="15"></TextBlock>
             <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="10 0 10 0">
-                <TextBox BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Giá nhập" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
+                <TextBox x:Name="priceIn" BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Giá nhập" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
                     <TextBox.Text>
                         <Binding Path="SelectedProduct.PriceIn" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -76,7 +75,7 @@
         <StackPanel Grid.Column="1" Grid.Row="3">
             <TextBlock Text="Thời hạn bảo hành (tháng)" FontWeight="Bold" Margin="10 0 0 8" FontSize="15"></TextBlock>
             <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="10 0 10 0">
-                <TextBox BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Thời hạn bảo hành" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
+                <TextBox x:Name="waranty"  BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Thời hạn bảo hành" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
                     <TextBox.Text>
                         <Binding Path="SelectedProduct.WarrantyPeriod" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -89,17 +88,24 @@
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="4">
             <TextBlock Text="Tỉ suất lợi nhuận(%)" FontWeight="Bold" Margin="10 0 0 8" FontSize="15"></TextBlock>
-            <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="10 0 10 0">
-                <TextBox x:Name="ReTurnRate" TextChanged="ReTurnRate_TextChanged"  BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Tỉ suất lợi nhuận" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
-                    <TextBox.Text>
-                        <Binding Path="SelectedProduct.ReturnRate" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <vm:ReturnRateValidation></vm:ReturnRateValidation>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="10 0 10 0">
+                    <TextBox x:Name="returnRate" BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Tỉ suất lợi nhuận" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
+                        <TextBox.Text>
+                            <Binding Path="SelectedProduct.ReturnRate" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <vm:ReturnRateValidation></vm:ReturnRateValidation>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </Border>
+                <Button Grid.Column="1" Foreground="Black" Margin="5" Content="Reset" FontSize="10" Command="{Binding ResetReturnRateEdit}"></Button>
+            </Grid>
         </StackPanel>
         <TextBox x:Name="tbCheckReturnRateChange" Visibility="Hidden" Text="{Binding SelectedProduct.CheckReturnRateChange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Button Visibility="Hidden" />
@@ -109,14 +115,25 @@
                 <TextBox Text="Đang kinh doanh" IsReadOnly="True" BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Tên sản phẩm" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2"></TextBox>
             </Border>
         </StackPanel>
-        <!--Button thêm-->
-        <Button
-            x:Name="btnEdit" Click="btnEdit_Click"
-            Grid.Column="1" Grid.Row="5" Width="150" Height="40"
-            materialDesign:ButtonAssist.CornerRadius="10"
-            ToolTip="MaterialDesignRaisedButton with Round Corners" Margin="104.4,4.6,9.6,0" VerticalAlignment="Top" 
-            Command="{Binding UpdateProduct}">
-            <TextBlock Text="Sửa sản phẩm" FontSize="15"/>
+        <!--Button sửa-->
+        <Button x:Name="btnEdit" Click="btnEdit_Click" Command="{Binding UpdateProduct}" Grid.Column="1" Grid.Row="5" Margin="65 8 65 8" FontSize="15" FontWeight="Black" Content="Sửa sản phẩm" Background="Green" BorderThickness="0">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="IsEnabled" Value="False" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=nameProduct}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=count}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=priceIn}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=waranty}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=returnRate}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
         </Button>
         <Button x:Name="btnAfterEdit" Command="{Binding ReloadProducts}" Visibility="Hidden" />
     </Grid>

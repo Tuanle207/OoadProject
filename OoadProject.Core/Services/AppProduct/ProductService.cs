@@ -6,6 +6,7 @@ using OoadProject.Data;
 using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Repository;
 using OoadProject.Shared.Dtos;
+using OoadProject.Shared.Helpers;
 using OoadProject.Shared.Pagination;
 using System;
 using System.Collections.Generic;
@@ -88,11 +89,11 @@ namespace OoadProject.Core.Services.AppProduct
         {
             var newProduct = Mapper.Map<Product>(product);
             if (newProduct.ReturnRate != null)
-                newProduct.PriceOut = (int)Math.Round(newProduct.PriceIn * (1 + (float)newProduct.ReturnRate/100)/1000)*1000;
+                newProduct.PriceOut = Helper.CalculatePriceout(newProduct.PriceIn, (float)newProduct.ReturnRate);
             else
             {
                 var category = _categoryRepository.Get(product.CategoryId);
-                newProduct.PriceOut = (int)Math.Round(newProduct.PriceIn * (1 + (float)category.ReturnRate / 100) / 1000) * 1000;
+                newProduct.PriceOut = Helper.CalculatePriceout(newProduct.PriceIn, (float)category.ReturnRate);
             }    
                 
 

@@ -15,16 +15,16 @@ namespace OoadProject.Core.ViewModels.Settings
     public class CategoryViewModel : BaseViewModel
     {
         // private service fields
-        private readonly CategoryService _categoryService;
+        private CategoryService _categoryService;
 
         // private data fields
-        private ObservableCollection<Category> _categories;
-        private Category _chosenCategory;
+        private ObservableCollection<CategoryForDisplayDto> _categories;
+        private CategoryForDisplayDto _chosenCategory;
         private CategoryForCreationDto _newCategory;
 
 
         // public data properties
-        public ObservableCollection<Category> Categories
+        public ObservableCollection<CategoryForDisplayDto> Categories
         {
             get => _categories;
             set
@@ -33,7 +33,7 @@ namespace OoadProject.Core.ViewModels.Settings
                 OnPropertyChanged();
             }
         }
-        public Category ChosenCategory
+        public CategoryForDisplayDto ChosenCategory
         {
             get => _chosenCategory;
             set
@@ -57,12 +57,14 @@ namespace OoadProject.Core.ViewModels.Settings
         public ICommand DeleteCategory { get; set; }
         public ICommand AddCategory { get; set; }
         public ICommand PrepareAddCategory { get; set; }
+        public ICommand UpdateCategory { get; set; }
+        public ICommand PrepareUpdateCategory { get; set; }
 
         public CategoryViewModel()
         {
             _categoryService = new CategoryService();
 
-            Categories = new ObservableCollection<Category>(_categoryService.GetCategories());
+            Categories = new ObservableCollection<CategoryForDisplayDto>(_categoryService.GetDisplayCategories());
             NewCategory = new CategoryForCreationDto { };
 
             DeleteCategory = new RelayCommand<object>
@@ -70,9 +72,12 @@ namespace OoadProject.Core.ViewModels.Settings
                 p => ChosenCategory == null ? false : true,
                 p =>
                 {
-                    _categoryService.DeleteCategory(ChosenCategory);
-                    Categories = new ObservableCollection<Category>(_categoryService.GetCategories());
-                    MessageBox.Show("Xóa loại mặt hàng thành công");
+                    if (p != null && (bool)p == true)
+                    {
+                        _categoryService.DeleteCategory(ChosenCategory);
+                        Categories = new ObservableCollection<CategoryForDisplayDto>(_categoryService.GetDisplayCategories());
+                        MessageBox.Show("Xóa loại mặt hàng thành công");
+                    }
                 }
             );
 
@@ -89,18 +94,40 @@ namespace OoadProject.Core.ViewModels.Settings
             (
                 p =>
                 {
-                    if (NewCategory.Name == null || NewCategory.Description == null || NewCategory.ReturnRate == null )
+                    if (NewCategory.Name == null || NewCategory.Description == null || NewCategory.ReturnRate == null)
                         return false;
                     return true;
-                }
-                    ,
+                },
                 p =>
                 {
-                    _categoryService.AddCategory(NewCategory);
-                    Categories = new ObservableCollection<Category>(_categoryService.GetCategories());
-                    MessageBox.Show("Thêm loại mặt hàng thành công");
+                    if (p != null && (bool)p == true)
+                    {
+                        _categoryService.AddCategory(NewCategory);
+                        Categories = new ObservableCollection<CategoryForDisplayDto>(_categoryService.GetDisplayCategories());
+                        MessageBox.Show("Thêm loại mặt hàng thành công");
+                    }
                 }
             );
+            PrepareUpdateCategory = new RelayCommand<object>
+            (
+                p => ChosenCategory == null ? false : true,
+                p =>
+                {
+                }
+             );
+            UpdateCategory = new RelayCommand<object>
+            (
+                p => ChosenCategory == null ? false : true,
+                p =>
+                {
+                    if (p != null && (bool)p == true)
+                    {
+                        _categoryService.UpdateCategory(ChosenCategory);
+                        Categories = new ObservableCollection<CategoryForDisplayDto>(_categoryService.GetDisplayCategories());
+                        MessageBox.Show("Cập nhật loại mặt hàng thành công");
+                    }
+                }
+             );
         }
     }
 }

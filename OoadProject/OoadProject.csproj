@@ -109,8 +109,8 @@
     <Compile Include="View\CategoryProductUserControl.xaml.cs">
       <DependentUpon>CategoryProductUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditItemScreen.xaml.cs">
-      <DependentUpon>EditItemScreen.xaml</DependentUpon>
+    <Compile Include="View\EditCategoryProductWindow.xaml.cs">
+      <DependentUpon>EditCategoryProductWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditOrderWindow.xaml.cs">
       <DependentUpon>EditOrderWindow.xaml</DependentUpon>
@@ -231,9 +231,9 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="View\EditItemScreen.xaml">
+    <Page Include="View\EditCategoryProductWindow.xaml">
       <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EditOrderWindow.xaml">
       <SubType>Designer</SubType>

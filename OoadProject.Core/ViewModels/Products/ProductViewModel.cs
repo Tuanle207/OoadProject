@@ -147,6 +147,8 @@ namespace OoadProject.Core.ViewModels.Products
         public ICommand PrepareUpdateProduct { get; set; }
         public ICommand HideProduct { get; set; }
         public ICommand UpdateData { get; set; }
+        public ICommand ResetReturnRateAdd { get; set; }
+        public ICommand ResetReturnRateEdit { get; set; }
 
         public ProductViewModel()
         {
@@ -318,6 +320,25 @@ namespace OoadProject.Core.ViewModels.Products
                 {
                     Manufacturers = new ObservableCollection<Manufacturer>(_manufacturerService.GetManufacturers());
                     Categories = new ObservableCollection<Category>(_categoryService.GetCategories());
+                }
+            );
+            ResetReturnRateAdd = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    NewProduct.ReturnRate = null;
+                }
+            );
+            ResetReturnRateEdit = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    MessageBox.Show("Đã thực hiện");
+                    SelectedProduct.ReturnRate = 2;
+                    SelectedProduct.Number = 100;
+                    SelectedProduct.CheckReturnRateChange = "";
                 }
             );
         }

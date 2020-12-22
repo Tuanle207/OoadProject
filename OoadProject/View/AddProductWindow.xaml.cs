@@ -24,7 +24,7 @@ namespace OoadProject.View
             InitializeComponent();
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        private void btnAddProduct_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Xác nhận thêm sản phẩm?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
             var command = ((Button)sender).Command;
