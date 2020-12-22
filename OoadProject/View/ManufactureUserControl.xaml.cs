@@ -37,5 +37,21 @@ namespace OoadProject.View
             AddManufactureWindow w = new AddManufactureWindow();
             w.ShowDialog();
         }
+
+        private void btnDeleteManufacturer_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Xác nhận xóa nhà sản xuất?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var command = ((Button)sender).Command;
+
+            if (result == MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(true);
+                if (btnAfter.Command.CanExecute(null) == true) btnAfter.Command.Execute(null);
+            }
+            else if (result != MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(false);
+            }
+        }
     }
 }

@@ -15,5 +15,10 @@ namespace OoadProject.Data.Entity.AppUser
         public bool IsDeleted { get; set; }
 
         public Role Role { get; set; }
+
+        public User()
+        {
+            IsDeleted = false;
+        }
     }
 }

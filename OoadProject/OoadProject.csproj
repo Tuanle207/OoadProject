@@ -91,14 +91,14 @@
     <Compile Include="View\AddCategoryProductWindow.xaml.cs">
       <DependentUpon>AddCategoryProductWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AddItemScreen.xaml.cs">
-      <DependentUpon>AddItemScreen.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\AddManufactureWindow.xaml.cs">
       <DependentUpon>AddManufactureWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AddOrderWindow.xaml.cs">
       <DependentUpon>AddOrderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddProductWindow.xaml.cs">
+      <DependentUpon>AddProductWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AddProviderWindow.xaml.cs">
       <DependentUpon>AddProviderWindow.xaml</DependentUpon>
@@ -109,11 +109,14 @@
     <Compile Include="View\CategoryProductUserControl.xaml.cs">
       <DependentUpon>CategoryProductUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditItemScreen.xaml.cs">
-      <DependentUpon>EditItemScreen.xaml</DependentUpon>
+    <Compile Include="View\EditCategoryProductWindow.xaml.cs">
+      <DependentUpon>EditCategoryProductWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditOrderWindow.xaml.cs">
       <DependentUpon>EditOrderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditProductWindow.xaml.cs">
+      <DependentUpon>EditProductWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HomeScreen.xaml.cs">
       <DependentUpon>HomeScreen.xaml</DependentUpon>
@@ -121,8 +124,8 @@
     <Compile Include="View\ImportItemsUserControl.xaml.cs">
       <DependentUpon>ImportItemsUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ItemManagerScreen.xaml.cs">
-      <DependentUpon>ItemManagerScreen.xaml</DependentUpon>
+    <Compile Include="View\ProductUserControl.xaml.cs">
+      <DependentUpon>ProductUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ListImportedItemUserControl.xaml.cs">
       <DependentUpon>ListImportedItemUserControl.xaml</DependentUpon>
@@ -210,10 +213,6 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="View\AddItemScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
     <Page Include="View\AddManufactureWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
@@ -221,6 +220,10 @@
     <Page Include="View\AddOrderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="View\AddProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddProviderWindow.xaml">
       <SubType>Designer</SubType>
@@ -234,13 +237,17 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="View\EditItemScreen.xaml">
+    <Page Include="View\EditCategoryProductWindow.xaml">
       <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EditOrderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="View\EditProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\HomeScreen.xaml">
       <SubType>Designer</SubType>
@@ -250,7 +257,7 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="View\ItemManagerScreen.xaml">
+    <Page Include="View\ProductUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>

@@ -15,18 +15,18 @@ using System.Windows.Shapes;
 namespace OoadProject.View
 {
     /// <summary>
-    /// Interaction logic for AddManufactureWindow.xaml
+    /// Interaction logic for EditCategoryProductWindow.xaml
     /// </summary>
-    public partial class AddManufactureWindow : Window
+    public partial class EditCategoryProductWindow : Window
     {
-        public AddManufactureWindow()
+        public EditCategoryProductWindow()
         {
             InitializeComponent();
         }
 
-        private void btnAddManufacturer_Click(object sender, RoutedEventArgs e)
+        private void btnAddCategory_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("Xác nhận thêm nhà sản xuất?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var result = MessageBox.Show("Xác nhận cập nhật loại sản phẩm?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
             var command = ((Button)sender).Command;
 
             if (result == MessageBoxResult.OK && command.CanExecute(null))

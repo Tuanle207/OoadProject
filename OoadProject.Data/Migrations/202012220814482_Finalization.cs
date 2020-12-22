@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class Finalization : DbMigration
     {
         public override void Up()
         {
@@ -72,6 +72,7 @@
                         PhoneNumber = c.String(),
                         Address = c.String(),
                         CreationTime = c.DateTime(nullable: false),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Roles", t => t.RoleId, cascadeDelete: true)
@@ -110,6 +111,7 @@
                         WarrantyPeriod = c.Int(),
                         ReturnRate = c.Single(),
                         Status = c.Int(nullable: false),
+                        isDelete = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)

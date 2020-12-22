@@ -41,12 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\ProductFilterDto.cs" />
+    <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Dtos\DateRangeDto.cs" />
     <Compile Include="Dtos\ItemReportByMonthDto.cs" />
     <Compile Include="Dtos\ReportByDayDto.cs" />
     <Compile Include="Dtos\ProductReportByDayDto.cs" />
     <Compile Include="Dtos\ReportByMonthDto.cs" />
     <Compile Include="Pagination\PaginatedList.cs" />
+    <Compile Include="Parameters\ParameterType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

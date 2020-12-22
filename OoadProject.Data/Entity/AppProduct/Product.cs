@@ -11,6 +11,7 @@
         public int? WarrantyPeriod { get; set; }
         public float? ReturnRate { get; set; }
         public int Status { get; set; }
+        public int isDelete { get; set; }
 
 
         public Category Category { get; set; }

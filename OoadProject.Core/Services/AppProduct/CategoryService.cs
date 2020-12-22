@@ -22,6 +22,12 @@ namespace OoadProject.Core.Services.AppProduct
         {
             return _categoryRepository.GetCategories();
         }
+        public IEnumerable<CategoryForDisplayDto> GetDisplayCategories()
+        {
+            var listCategory = _categoryRepository.GetCategories();
+            var listCategoryForReturn = Mapper.Map<List<CategoryForDisplayDto>>(listCategory);
+            return listCategoryForReturn;
+        }
 
         public Category AddCategory(CategoryForCreationDto category)
         {
@@ -30,9 +36,15 @@ namespace OoadProject.Core.Services.AppProduct
             return _categoryRepository.Create(newCategory);
         }
 
-        public bool DeleteCategory(Category category)
+        public bool DeleteCategory(CategoryForDisplayDto category)
         {
-            return _categoryRepository.Delete(category.Id);
+            var deleteCategory = Mapper.Map<Category>(category);
+            return _categoryRepository.Delete(deleteCategory.Id);
+        }
+        public bool UpdateCategory(CategoryForDisplayDto category)
+        {
+            var editCategory = Mapper.Map<Category>(category);
+            return _categoryRepository.Update(editCategory);
         }
     }
 }

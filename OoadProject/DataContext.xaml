@@ -21,8 +21,12 @@
     <Warranties:WarrantyOrderListViewModel x:Key="WarrantyOrderListViewModel" />
     <Settings:ProviderViewModel x:Key="ProviderViewModel" />
     <Settings:ManufacturerViewModel x:Key="ManufacturerViewModel" />
+    <Settings:ParameterViewModel x:Key="ParameterViewModel" />
     <Settings:CategoryViewModel x:Key="CategoryViewModel" />
     <Reports:ReportViewModel x:Key="ReportViewModel" />
+    <Products:ProductViewModel x:Key="ProductViewModel"/>
+    
+    
 
 
     <!-- Converters -->
@@ -30,6 +34,7 @@
     <Warranties:WarrantyOrderStatusConverter x:Key="WarrantyOrderStatusConverter" />
     <Warranties:ContextMenuItemVisibilityConverter x:Key="ContextMenuItemVisibilityConverter" />
     <Warranties:CheckMenuItemVisibilityConverter x:Key="CheckMenuItemVisibilityConverter" />
+    <Products:ProductStatusConverter x:Key="ProductStatusConverter" />
     <Orders:OrderStatusConverter x:Key="OrderStatusConverter" />
     <Orders:CheckOrderOptionsVisibilityConverter x:Key="CheckOrderOptionsVisibilityConverter" />
     <Orders:OrderCheckMenuItemVisibilityConverter x:Key="OrderCheckMenuItemVisibilityConverter" />

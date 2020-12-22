@@ -37,5 +37,27 @@ namespace OoadProject.View
             AddCategoryProductWindow w = new AddCategoryProductWindow();
             w.ShowDialog();
         }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            EditCategoryProductWindow w = new EditCategoryProductWindow();
+            w.ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Xác nhận xóa loại sản phẩm?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var command = ((Button)sender).Command;
+
+            if (result == MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(true);
+                if (btnAfter.Command.CanExecute(null) == true) btnAfter.Command.Execute(null);
+            }
+            else if (result != MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(false);
+            }
+        }
     }
 }

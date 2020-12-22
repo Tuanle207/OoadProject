@@ -70,9 +70,12 @@ namespace OoadProject.Core.ViewModels.Settings
                 p => ChosenManufacturer == null ? false : true,
                 p =>
                 {
-                    _manufacturerService.DeleteManufacturer(ChosenManufacturer);
-                    Manufacturers = new ObservableCollection<Manufacturer>(_manufacturerService.GetManufacturers());
-                    MessageBox.Show("Xóa hãng sản xuất thành công");
+                    if (p != null && (bool)p == true)
+                    {
+                        _manufacturerService.DeleteManufacturer(ChosenManufacturer);
+                        Manufacturers = new ObservableCollection<Manufacturer>(_manufacturerService.GetManufacturers());
+                        MessageBox.Show("Xóa hãng sản xuất thành công");
+                    }
                 }
             );
 
@@ -81,7 +84,8 @@ namespace OoadProject.Core.ViewModels.Settings
                 p => true,
                 p =>
                 {
-                    NewManufacturer = new ManufacturerForCreationDto { };
+                    NewManufacturer = new ManufacturerForCreationDto { Name = null, Description = null };
+
                 }
              );
 
@@ -96,9 +100,12 @@ namespace OoadProject.Core.ViewModels.Settings
                     ,
                 p =>
                 {
-                    _manufacturerService.AddManufacturer(NewManufacturer);
-                    Manufacturers = new ObservableCollection<Manufacturer>(_manufacturerService.GetManufacturers());
-                    MessageBox.Show("Thêm hãng sản xuất thành công");
+                    if (p != null && (bool)p == true)
+                    {
+                        _manufacturerService.AddManufacturer(NewManufacturer);
+                        Manufacturers = new ObservableCollection<Manufacturer>(_manufacturerService.GetManufacturers());
+                        MessageBox.Show("Thêm hãng sản xuất thành công");
+                    }
                 }
             );
         }
