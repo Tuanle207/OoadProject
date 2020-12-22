@@ -10,7 +10,7 @@
                     xmlns:Reports="clr-namespace:OoadProject.Core.ViewModels.Reports;assembly=OoadProject.Core" xmlns:Products="clr-namespace:OoadProject.Core.ViewModels.Products;assembly=OoadProject.Core">
     <!-- ViewModels -->
     <Users:UserViewModel x:Key="UserViewModel" />
-    <Users:LoginViewModel x:Key="LoginViewModel" />
+    <Users:SessionViewModel x:Key="SessionViewModel" />
     <Orders:OrderCreationViewModel x:Key="OrderCreationViewModel" />
     <Orders:OrderViewModel x:Key="OrderViewModel" />
     <Orders:ReceiptViewModel x:Key="ReceiptViewModel" />
@@ -38,6 +38,7 @@
     <Orders:OrderStatusConverter x:Key="OrderStatusConverter" />
     <Orders:CheckOrderOptionsVisibilityConverter x:Key="CheckOrderOptionsVisibilityConverter" />
     <Orders:OrderCheckMenuItemVisibilityConverter x:Key="OrderCheckMenuItemVisibilityConverter" />
+    <Users:FeaturePermissionConverter x:Key="FeaturePermissionConverter" />
 
 
 </ResourceDictionary>

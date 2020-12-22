@@ -1,5 +1,6 @@
 ﻿using OoadProject.Data.Entity.AppUser;
 using OoadProject.Data.Repository;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -27,6 +28,11 @@ namespace OoadProject.Core.Services.AppUser
         public IEnumerable<string> GetAllRolesNames()
         {
             return _roleRepository.GetAllRolesName();
+        }
+
+        public IEnumerable<Permission> GetRolePermissions(int roleId)
+        {
+            return _roleRepository.GetRolePermissions(roleId);
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OoadProject.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="Chỉnh sửa đơn hàng" Height="600" Width="1000"
+        Title="Chỉnh sửa đơn đặt hàng" Height="600" Width="1000"
         DataContext="{StaticResource OrderCreationViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>

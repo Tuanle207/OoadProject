@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:OoadProject.View" 
         xmlns:Users="clr-namespace:OoadProject.Core.ViewModels.Users;assembly=OoadProject.Core"
         mc:Ignorable="d"
-        Title="Thêm nhân viên" Height="400" Width="800"
+        Title="Thêm nhân viên mới" Height="400" Width="800"
         WindowStartupLocation="CenterScreen"
         DataContext="{StaticResource UserViewModel}">
     <Grid>

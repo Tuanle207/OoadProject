@@ -7,35 +7,47 @@
              mc:Ignorable="d" 
              d:DesignHeight="590" d:DesignWidth="1100"
              DataContext="{StaticResource ManufacturerViewModel}">
-    <Grid Width="450" Height="400">
-        <Grid.RowDefinitions>
-            <RowDefinition Height=" 4*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <materialDesign:Card Grid.Row="0" Margin="10">
-            <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                <ListView ItemsSource="{Binding Manufacturers}" SelectedItem="{Binding ChosenManufacturer}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Mã NSX" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
-                            <GridViewColumn Header="Tên nhà sản xuất" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
-                            <GridViewColumn Header="Mô tả" DisplayMemberBinding="{Binding Description}"></GridViewColumn>                            
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </ScrollViewer>
-        </materialDesign:Card>
-        <Grid Grid.Row="1">
+    <Grid>
+        <Grid Width="450" Height="400">
+            <Grid.RowDefinitions>
+                <RowDefinition Height=" 4*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <materialDesign:Card Grid.Row="0" Margin="10">
+                <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                    <ListView ItemsSource="{Binding Manufacturers}" SelectedItem="{Binding ChosenManufacturer}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Mã NSX" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                                <GridViewColumn Header="Tên nhà sản xuất" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                                <GridViewColumn Header="Mô tả" DisplayMemberBinding="{Binding Description}"></GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </materialDesign:Card>
             <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="2*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Button Name="btnAddManufacture" Command="{Binding PrepareAddManufacturer}" Foreground="Black" Background="#596FB5" BorderThickness="0" Grid.Column="0" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Thêm mới" Click="btnAddManufacture_Click" HorizontalAlignment="Center"></Button>
-                <Button x:Name="btnDeleteManufacturer" Click="btnDeleteManufacturer_Click" Command="{Binding DeleteManufacturer}" Foreground="Black" Background="#FE7139" BorderThickness="0" Grid.Column="2" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Xóa" HorizontalAlignment="Center"></Button>
-                <Button x:Name="btnAfter" DataContext="{StaticResource ProductViewModel}" Command="{Binding UpdateData}" Visibility="Hidden" />
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Name="btnAddManufacture" Command="{Binding PrepareAddManufacturer}" Foreground="Black" Background="#596FB5" BorderThickness="0" Grid.Column="0" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Thêm mới" Click="btnAddManufacture_Click" HorizontalAlignment="Center"></Button>
+                    <Button x:Name="btnDeleteManufacturer" Click="btnDeleteManufacturer_Click" Command="{Binding DeleteManufacturer}" Foreground="Black" Background="#FE7139" BorderThickness="0" Grid.Column="2" Height="40" Width="150" HorizontalContentAlignment="Center" Margin="10" Content="Xóa" HorizontalAlignment="Center"></Button>
+                    <Button x:Name="btnAfter" DataContext="{StaticResource ProductViewModel}" Command="{Binding UpdateData}" Visibility="Hidden" />
+                </Grid>
             </Grid>
+        </Grid>
+
+        <Grid DataContext="{StaticResource SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="../Assets/unauthorized.png" Width="200" Height="200" />
+                <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">Bạn không có quyền truy cập màn hình này! Vui lòng đăng nhập với tài khoản thích hợp!</TextBlock>
+            </StackPanel>
+            <Grid.Visibility>
+                <Binding Path="UserPerrmissions" Converter="{StaticResource FeaturePermissionConverter}" ConverterParameter="BasicSetting,FullSetting" />
+            </Grid.Visibility>
         </Grid>
     </Grid>
 </UserControl>

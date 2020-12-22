@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:OoadProject.View"
         mc:Ignorable="d"
-        Title="EditProductWindow" Height="500" Width="600"
+        Title="Cập nhật thông tin sản phẩm" Height="500" Width="600"
         DataContext="{StaticResource ProductViewModel}"
          WindowStartupLocation="CenterScreen">
     <Grid>
