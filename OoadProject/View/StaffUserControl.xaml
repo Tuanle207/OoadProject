@@ -81,6 +81,7 @@
                     <GridViewColumn Header="STT" DisplayMemberBinding="{Binding Id}" Width="100"></GridViewColumn>
                     <GridViewColumn Header="Tên nhân viên" DisplayMemberBinding="{Binding Name}" Width="222"></GridViewColumn>
                     <GridViewColumn Header="Chức vụ" DisplayMemberBinding="{Binding Role.Name}" Width="148"></GridViewColumn>
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" Width="148"></GridViewColumn>
                     <GridViewColumn Header="Ngày vào làm" DisplayMemberBinding="{Binding CreationTime}" Width="148"></GridViewColumn>
                     <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding PhoneNumber}" Width="148"></GridViewColumn>
                     <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding Dob}" Width="148"></GridViewColumn>
@@ -98,5 +99,6 @@
                 <Binding Path="UserPerrmissions" Converter="{StaticResource FeaturePermissionConverter}" ConverterParameter="User" />
             </Grid.Visibility>
         </Grid>
+        <Button x:Name="btnCheckPermission" Command="{Binding CheckModificationPermission}" Visibility="Hidden" />
     </Grid>
 </UserControl>

@@ -12,6 +12,7 @@ namespace OoadProject.Core.AppSession
     public static class Session
     {
         private static User _currentUser;
+        private static bool _isMasterAdmin;
 
         public static User CurrentUser
         {
@@ -23,6 +24,15 @@ namespace OoadProject.Core.AppSession
                 throw new Exception("Người dùng phải đăng nhập trước tiên!");
             }
         }
+        public static bool IsMasterAdmin
+        {
+            get
+            {
+                if (_currentUser == null)
+                    return false;
+                return _isMasterAdmin;
+            }
+        }
 
         public static bool IsLoggedIn()
         {
@@ -32,6 +42,11 @@ namespace OoadProject.Core.AppSession
         public static void SetSessionUser(User user)
         {
             _currentUser = user;
+        }
+
+        public static void SetIsMasterAdmin(bool value)
+        {
+            _isMasterAdmin = value;
         }
 
         public static string HashPassword(string password)
