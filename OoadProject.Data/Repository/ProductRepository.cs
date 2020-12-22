@@ -1,5 +1,6 @@
 ﻿using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Repository.AggregateDto;
+using OoadProject.Shared.Dtos;
 using OoadProject.Shared.Pagination;
 using System;
 using System.Collections.Generic;
@@ -60,15 +61,32 @@ namespace OoadProject.Data.Repository
             }
         }
 
-        public PaginatedList<Product> GetProducts(int page, int limit)
+       public PaginatedList<Product> GetProducts( int page, int limit, ProductFilterDto Filter = null)
         {
             using (var ctx = new AppDbContext())
             {
-                var query = ctx.Products
-                    .Include(p => p.Category)
+                var query = ctx.Products.AsQueryable();
+                query = query.Where(p => p.isDelete == 0);
+                if(Filter!=null)
+                {
+                    if (Filter.NameProductKeyWord != null && Filter.NameProductKeyWord != "")
+                    {
+                        query = query.Where(p => p.Name.ToLower().Contains((Filter.NameProductKeyWord).ToLower()));
+                    }
+                    if (Filter.ListCategory != null)
+                    {
+                        query = query.Where(p => Filter.ListCategory.Contains(p.Category.Name));
+                    }
+                    if (Filter.ListManufacturer != null)
+                    {
+                        query = query.Where(p => Filter.ListManufacturer.Contains(p.Manufacturer.Name));
+                    }
+                }                
+
+                query = query.Include(p => p.Category)
                     .Include(p => p.Manufacturer)
                     .OrderBy(p => p.Name);
-                
+
                 var products = PaginatedList<Product>.Create(query, page, limit);
                 
                 return products;

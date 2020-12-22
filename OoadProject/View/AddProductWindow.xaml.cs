@@ -15,24 +15,24 @@ using System.Windows.Shapes;
 namespace OoadProject.View
 {
     /// <summary>
-    /// Interaction logic for AddManufactureWindow.xaml
+    /// Interaction logic for AddProductWindow.xaml
     /// </summary>
-    public partial class AddManufactureWindow : Window
+    public partial class AddProductWindow : Window
     {
-        public AddManufactureWindow()
+        public AddProductWindow()
         {
             InitializeComponent();
         }
 
-        private void btnAddManufacturer_Click(object sender, RoutedEventArgs e)
+        private void btnAddProduct_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("Xác nhận thêm nhà sản xuất?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var result = MessageBox.Show("Xác nhận thêm sản phẩm?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
             var command = ((Button)sender).Command;
 
             if (result == MessageBoxResult.OK && command.CanExecute(null))
             {
                 command.Execute(true);
-                if (btnAfter.Command.CanExecute(null) == true) btnAfter.Command.Execute(null);
+                if (btnAfterAdd.Command.CanExecute(null) == true) btnAfterAdd.Command.Execute(null);
                 this.Close();
             }
             else if (result != MessageBoxResult.OK && command.CanExecute(null))
@@ -40,5 +40,6 @@ namespace OoadProject.View
                 command.Execute(false);
             }
         }
+
     }
 }

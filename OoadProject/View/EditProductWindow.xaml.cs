@@ -15,24 +15,36 @@ using System.Windows.Shapes;
 namespace OoadProject.View
 {
     /// <summary>
-    /// Interaction logic for AddManufactureWindow.xaml
+    /// Interaction logic for EditProductWindow.xaml
     /// </summary>
-    public partial class AddManufactureWindow : Window
+    public partial class EditProductWindow : Window
     {
-        public AddManufactureWindow()
+        private bool isLoaded;
+        public EditProductWindow()
         {
+            isLoaded = true;
             InitializeComponent();
         }
 
-        private void btnAddManufacturer_Click(object sender, RoutedEventArgs e)
+        private void ReTurnRate_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var result = MessageBox.Show("Xác nhận thêm nhà sản xuất?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            if (isLoaded)
+            {
+                isLoaded = false;
+                return;
+            }
+            tbCheckReturnRateChange.Text = "changed";
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Xác nhận sửa sản phẩm?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
             var command = ((Button)sender).Command;
 
             if (result == MessageBoxResult.OK && command.CanExecute(null))
             {
                 command.Execute(true);
-                if (btnAfter.Command.CanExecute(null) == true) btnAfter.Command.Execute(null);
+                if (btnAfterEdit.Command.CanExecute(null) == true) btnAfterEdit.Command.Execute(null);
                 this.Close();
             }
             else if (result != MessageBoxResult.OK && command.CanExecute(null))

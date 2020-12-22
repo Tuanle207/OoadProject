@@ -110,6 +110,7 @@
                         WarrantyPeriod = c.Int(),
                         ReturnRate = c.Single(),
                         Status = c.Int(nullable: false),
+                        isDelete = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)

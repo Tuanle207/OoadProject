@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OoadProject.View"
         xmlns:vm="clr-namespace:OoadProject.Core.ViewModels.Settings;assembly=OoadProject.Core"
-        mc:Ignorable="d"  ShowInTaskbar="False"
+        mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow"
         Background="#FFBFD4FF"
         Title="Thêm loại mặt hàng" Height="350" Width="400"
@@ -86,5 +86,6 @@
                 </Style>
             </Button.Style>
         </Button>
+        <Button x:Name="btnAfter" DataContext="{StaticResource ProductViewModel}" Command="{Binding UpdateData}" Visibility="Hidden" />
     </Grid>
 </Window>

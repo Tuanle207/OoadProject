@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OoadProject.Core.ViewModels.Products;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace OoadProject.View
 
         private HomeScreen _homeScreen;
         private SellUserControl _sellScreen;
-        private ItemManagerScreen _itemManagementScreen;
+        private ProductUserControl _itemManagementScreen;
         private ManagementOrderUserControl _orderManagementScreen;
         private ListWarrantyOrderUserControl _warrantyOrderScreen;
         private StaffUserControl _userScreen;
@@ -41,7 +42,7 @@ namespace OoadProject.View
 
             _homeScreen = new HomeScreen();
             _sellScreen = new SellUserControl();
-            _itemManagementScreen = new ItemManagerScreen();
+            _itemManagementScreen = new ProductUserControl();
             _orderManagementScreen = new ManagementOrderUserControl();
             _warrantyOrderScreen = new ListWarrantyOrderUserControl();
             _userScreen = new StaffUserControl();

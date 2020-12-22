@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace OoadProject.Core.ViewModels.Settings
+namespace OoadProject.Core.ViewModels.Products
 {
     public class ReturnRateValidation : ValidationRule
     {
@@ -18,10 +18,6 @@ namespace OoadProject.Core.ViewModels.Settings
             {
                 if (((string)value).Length > 0)
                     returnRate = float.Parse((String)value);
-                else
-                {
-                    return new ValidationResult(false, "Vui lòng nhập tỉ suất lợi nhuận");
-                }
             }
             catch (Exception)
             {

@@ -7,6 +7,7 @@ using OoadProject.Core.ViewModels.Users.Dtos;
 using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Entity.AppUser;
 using OoadProject.Data.Repository.AggregateDto;
+using OoadProject.Core.ViewModels.Products.Dtos;
 using OoadProject.Data.Entity.AppCustomer;
 using OoadProject.Core.ViewModels.Warranties.Dtos;
 using System;
@@ -125,6 +126,20 @@ namespace OoadProject.Core
 
             // Category
             CreateMap<CategoryForCreationDto, Category>();
+            CreateMap<CategoryForDisplayDto, Category>();
+            CreateMap<Category, CategoryForDisplayDto>();
+
+            //Product
+            CreateMap<Product, ProductDisplayDto>()
+                .ForMember(dest => dest.Status, opt =>
+                    opt.MapFrom(src => src.Status))
+                .ForMember(dest => dest.ReturnRate, opt =>
+                    opt.MapFrom(src => src.ReturnRate == null ? src.Category.ReturnRate : src.ReturnRate));
+
+            CreateMap<ProductForCreationDto, Product>();
+
+            CreateMap<ProductDisplayDto, Product>();
+
 
             // Warranty
             CreateMap<InvoiceProduct, ProductForWarrantyDto>()

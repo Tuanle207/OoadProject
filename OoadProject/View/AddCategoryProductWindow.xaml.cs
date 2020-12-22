@@ -26,7 +26,19 @@ namespace OoadProject.View
 
         private void btnAddCategory_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            var result = MessageBox.Show("Xác nhận thêm loại sản phẩm?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var command = ((Button)sender).Command;
+
+            if (result == MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(true);
+                if (btnAfter.Command.CanExecute(null) == true) btnAfter.Command.Execute(null);
+                this.Close();
+            }
+            else if (result != MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(false);
+            }
         }
     }
 }
