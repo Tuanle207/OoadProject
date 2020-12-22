@@ -53,7 +53,7 @@
         <StackPanel Grid.Column="1" Grid.Row="2">
             <TextBlock Text="Số lượng" FontWeight="Bold" Margin="10 0 0 8" FontSize="15"></TextBlock>
             <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="10 0 10 0">
-                <TextBox x:Name="count"  BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Số lượng" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
+                <TextBox x:Name="count" IsEnabled="False"  BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Số lượng" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
                     <TextBox.Text>
                         <Binding Path="NewProduct.Number" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -120,7 +120,7 @@
             </Border>
         </StackPanel>
         <!--Button thêm-->
-        <Button x:Name="btnAddProduct" Click="btnAddProduct_Click" Command="{Binding AddProduct}" Grid.Column="1" Grid.Row="5" Margin="65 8 65 8" FontSize="15" FontWeight="Black" Content="Thêm mới" Background="Green" BorderThickness="0">
+        <Button x:Name="btnAddProduct" Click="btnAddProduct_Click" Command="{Binding AddProduct}" Grid.Column="1" Grid.Row="5" Margin="65 8 65 8" FontSize="15" FontWeight="Black" Content="Thêm mới" Background="#596FB5" BorderThickness="0">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="IsEnabled" Value="False" />

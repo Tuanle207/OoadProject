@@ -322,7 +322,7 @@ namespace OoadProject.Core.ViewModels.Sells
 
         private IEnumerable<ProductForSellDto> GetData()
         {
-            var pagedList = _productService.GetProductsForSell(ProductNameKeyword, CurrentPage, null);
+            var pagedList = _productService.GetProductsForSell(ProductNameKeyword, CurrentPage, 16);
             Products = new ObservableCollection<ProductForSellDto>(pagedList.Data);
             CurrentPage = pagedList.CurrentPage;
             TotalPages = pagedList.TotalPages;

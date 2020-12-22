@@ -56,28 +56,28 @@
                 <ListView x:Name="ListViewMenu" Foreground="Black"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           SelectionChanged="ListViewMenu_SelectionChanged">
-                    <ListViewItem x:Name="ItemHome" Background="#695D85" Opacity="1"  Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <ListViewItem x:Name="ItemHome" ToolTip="Trang chủ" Background="#695D85" Opacity="1"  Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="Home" Width="80" Height="50" />
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemSell" Background="#695D85" Opacity="0.8" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <ListViewItem x:Name="ItemSell" ToolTip="Bán hàng" Background="#695D85" Opacity="0.8" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="CartPlus" Width="80" Height="50" />
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemProduct" Background="#695D85" Opacity="0.8" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <ListViewItem x:Name="ItemProduct" ToolTip="Sản phẩm" Background="#695D85" Opacity="0.8" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="DesktopMac" Width="80" Height="50" />
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemImportProduct" Background="#695D85" Opacity="0.8" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <ListViewItem x:Name="ItemImportProduct" ToolTip="Quản lý nhập hàng" Background="#695D85" Opacity="0.8" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="ArrowDownBoldHexagonOutline" Width="80" Height="50" />
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemWarranty" Background="#695D85" Opacity="0.8" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <ListViewItem x:Name="ItemWarranty" ToolTip="Bảo hành" Background="#695D85" Opacity="0.8" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="Security" Width="80" Height="50" />
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemStaff" Background="#695D85" Opacity="0.8" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <ListViewItem x:Name="ItemStaff" ToolTip="Nhân viên" Background="#695D85" Opacity="0.8" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="AccountCircle" Width="80" Height="50" />
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemReport" Background="#695D85" Opacity="0.8" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <ListViewItem x:Name="ItemReport" ToolTip="Báo cáo thống kê" Background="#695D85" Opacity="0.8" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="Finance" Width="80" Height="50" />
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemSetting" Background="#695D85" Opacity="0.8" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <ListViewItem x:Name="ItemSetting" ToolTip="Thay đổi tham số" Background="#695D85" Opacity="0.8" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="Settings" Width="80" Height="50" />
                     </ListViewItem>
                 </ListView>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OoadProject.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="Thêm đơn hàng" Height="600" Width="1000"
+        Title="Thêm đơn hàng" Height="700" Width="1200"
         DataContext="{StaticResource OrderCreationViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -28,7 +28,8 @@
             <materialDesign:Card Grid.Row="1"  Margin="5 5 5 5" BorderThickness="0" VerticalAlignment="Stretch">
                 <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
                     <DataGrid ItemsSource="{Binding Products}" Background="#FFE3F0FF"  SelectionMode="Single"
-                          AutoGenerateColumns="False" IsReadOnly="True" Grid.ColumnSpan="1" BorderThickness="1">
+                          AutoGenerateColumns="False" IsReadOnly="True" Grid.ColumnSpan="1" BorderThickness="1"
+                               materialDesign:DataGridAssist.CellPadding="4" materialDesign:DataGridAssist.ColumnHeaderPadding="4">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
@@ -61,14 +62,14 @@
                 <Grid Grid.Column="1">
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                         <Button Command="{Binding GoPrevPage}" x:Name="btnPrev" Width="30" Height="30" Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                Foreground="Black" Background="#FF47608E" Margin="0 0 20 0" >
+                                Foreground="Black" Background="#FF47608E" BorderThickness="0" Margin="0 0 20 0" >
                             <materialDesign:PackIcon Kind="ArrowLeft" Width="20" Height="20" />
                         </Button>
                         <TextBlock Height="20" Text="{Binding CurrentPage}"></TextBlock>
                         <TextBlock Height="20">/</TextBlock>
                         <TextBlock Height="20" Text="{Binding TotalPages}"></TextBlock>
                         <Button Command="{Binding GoNextPage}" x:Name="btnNext" Width="30" Height="30" Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                 Foreground="Black" Background="#FF47608E" Margin="20 0 0 0">
+                                 Foreground="Black" Background="#FF47608E" BorderThickness="0" Margin="20 0 0 0">
                             <materialDesign:PackIcon Kind="ArrowRight" Width="20" Height="20" />
                         </Button>
                     </StackPanel>
@@ -87,7 +88,8 @@
             <materialDesign:Card Grid.Row="1"  Margin="5 5 5 5" BorderThickness="0" VerticalAlignment="Stretch">
                 <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
                     <DataGrid ItemsSource="{Binding SelectedProducts}" Background="#FFE3F0FF" Grid.Column="1"  SelectionMode="Single"
-                          AutoGenerateColumns="False" IsReadOnly="True" BorderThickness="1">
+                          AutoGenerateColumns="False" IsReadOnly="True" BorderThickness="1"
+                               materialDesign:DataGridAssist.CellPadding="4" materialDesign:DataGridAssist.ColumnHeaderPadding="4">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
@@ -193,9 +195,9 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="btnResetInput" Click="btnResetInput_Click" Command="{Binding}" Grid.Column="0" Foreground="Black" FontWeight="Bold" Background="#FE7139" Content="Nhập lại" VerticalAlignment="Center"  Height="40" Width="120">
+                    <Button x:Name="btnResetInput" Click="btnResetInput_Click" Command="{Binding}" Grid.Column="0" Foreground="Black" FontWeight="Bold" Background="#FE7139" BorderThickness="0" Content="Nhập lại" VerticalAlignment="Center"  Height="40" Width="120">
                     </Button>
-                    <Button x:Name="btnSave" Click="btnSave_Click" Command="{Binding SaveOrderInfo}" Grid.Column="1" Foreground="Black" FontWeight="Bold" Background="#596FB5" Content="Xác nhận" VerticalAlignment="Center"  Height="40" Width="120">
+                    <Button x:Name="btnSave" Click="btnSave_Click" Command="{Binding SaveOrderInfo}" Grid.Column="1" Foreground="Black" FontWeight="Bold" Background="#596FB5" BorderThickness="0" Content="Xác nhận" VerticalAlignment="Center"  Height="40" Width="120">
                     </Button>
                 </Grid>
             </Grid>
