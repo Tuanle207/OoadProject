@@ -63,6 +63,19 @@ namespace OoadProject.View
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             mainControl.Content = _homeScreen;
+            //ListViewMenu.SelectedIndex = 0;
+        }
+        private void changeColorUserControlItem(ListViewItem nameUserControl)
+        {
+            ItemHome.Opacity = 0.8;
+            ItemSell.Opacity = 0.8;
+            ItemProduct.Opacity = 0.8;
+            ItemImportProduct.Opacity = 0.8;
+            ItemWarranty.Opacity = 0.8;
+            ItemStaff.Opacity = 0.8;
+            ItemReport.Opacity = 0.8;
+            ItemSetting.Opacity = 0.8;
+            nameUserControl.Opacity = 1;
         }
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -72,34 +85,42 @@ namespace OoadProject.View
                 case "ItemHome":
                     lbTitle.Content = "TRANG CHỦ";
                     mainControl.Content = _homeScreen;
+                    changeColorUserControlItem(ItemHome);
                     break;
                 case "ItemSell":
                     this.lbTitle.Content = "BÁN HÀNG";
                     mainControl.Content = _sellScreen;
+                    changeColorUserControlItem(ItemSell);
                     break;
                 case "ItemProduct":
                     this.lbTitle.Content = "QUẢN LÝ SẢN PHẨM";
                     mainControl.Content = _itemManagementScreen;
+                    changeColorUserControlItem(ItemProduct);
                     break;
                 case "ItemImportProduct":
                     this.lbTitle.Content = "QUẢN LÝ ĐƠN ĐẶT HÀNG";
                     mainControl.Content = _orderManagementScreen;
+                    changeColorUserControlItem(ItemImportProduct);
                     break;
                 case "ItemWarranty":
                     this.lbTitle.Content = "BẢO HÀNH SẢN PHẨM";
                     mainControl.Content = _warrantyOrderScreen;
+                    changeColorUserControlItem(ItemWarranty);
                     break;
                 case "ItemStaff":
                     this.lbTitle.Content = "QUẢN LÝ NHÂN VIÊN";
+                    changeColorUserControlItem(ItemStaff);
                     mainControl.Content = _userScreen;
                     break;
                 case "ItemReport":
                     this.lbTitle.Content = "BÁO CÁO THỐNG KÊ";
                     mainControl.Content = _reportScreen;
+                    changeColorUserControlItem(ItemReport);
                     break;
                 case "ItemSetting":
                     this.lbTitle.Content = "THAY ĐỔI CÁC THAM SỐ";
                     mainControl.Content = _settingScreen;
+                    changeColorUserControlItem(ItemSetting);
                     break;
             }
         }

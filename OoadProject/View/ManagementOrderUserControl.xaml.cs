@@ -27,23 +27,23 @@ namespace OoadProject.View
 
         private void btnDatHang_GotFocus(object sender, RoutedEventArgs e)
         {
-            btnDatHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#808080");
-            btnNhapHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
-            btnDSNhapHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
+            btnDatHang.Opacity = 1;
+            btnNhapHang.Opacity = 0.8;
+            btnDSNhapHang.Opacity = 0.8;
         }
 
         private void btnNhapHang_GotFocus(object sender, RoutedEventArgs e)
         {
-            btnDatHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
-            btnNhapHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#808080");
-            btnDSNhapHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
+            btnDatHang.Opacity = 0.8;
+            btnNhapHang.Opacity = 1;
+            btnDSNhapHang.Opacity = 0.8;
         }
 
         private void btnDSNhapHang_GotFocus(object sender, RoutedEventArgs e)
         {
-            btnDatHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
-            btnNhapHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
-            btnDSNhapHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#808080");
+            btnDatHang.Opacity = 0.8;
+            btnNhapHang.Opacity = 0.8;
+            btnDSNhapHang.Opacity = 1;
         }
 
         private void btnDatHang_Click(object sender, RoutedEventArgs e)
@@ -58,7 +58,10 @@ namespace OoadProject.View
         private void uscListOrder_Loaded(object sender, RoutedEventArgs e)
         {
             viewControl.Name = "ListOrderUserControl";
-            viewControl.Content = new ListOrderUserControl();            
+            viewControl.Content = new ListOrderUserControl();
+            btnDatHang.Opacity = 1;
+            btnNhapHang.Opacity = 0.8;
+            btnDSNhapHang.Opacity = 0.8;
         }
 
         private void btnNhapHang_Click(object sender, RoutedEventArgs e)

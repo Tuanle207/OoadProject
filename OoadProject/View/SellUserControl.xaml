@@ -33,7 +33,8 @@
             <materialDesign:Card Grid.Row="1"  Margin="5 10 5 5" BorderThickness="0" VerticalAlignment="Stretch" FontSize="10">
                 <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
                     <DataGrid ItemsSource="{Binding Products}" Background="#FFE3F0FF"  SelectionMode="Single"
-                          AutoGenerateColumns="False" IsReadOnly="True" Grid.ColumnSpan="1" BorderThickness="1" SelectionChanged="DataGrid_SelectionChanged">
+                          AutoGenerateColumns="False" IsReadOnly="True" Grid.ColumnSpan="1" BorderThickness="1" SelectionChanged="DataGrid_SelectionChanged"
+                           materialDesign:DataGridAssist.CellPadding="4" materialDesign:DataGridAssist.ColumnHeaderPadding="10" >
                         <DataGrid.Columns>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
@@ -96,7 +97,8 @@
             <materialDesign:Card Grid.Row="1"  Margin="5 5 5 5" BorderThickness="0" VerticalAlignment="Stretch">
                 <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
                     <DataGrid ItemsSource="{Binding SelectedProducts}" Background="#FFE3F0FF" Grid.Column="1"  SelectionMode="Single"
-                          AutoGenerateColumns="False" IsReadOnly="True" BorderThickness="1">
+                          AutoGenerateColumns="False" IsReadOnly="True"
+                              materialDesign:DataGridAssist.CellPadding="4" materialDesign:DataGridAssist.ColumnHeaderPadding="10" >
                         <DataGrid.Columns>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
@@ -126,8 +128,8 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Mã" Binding="{Binding Id}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Tên" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Mã SP" Binding="{Binding Id}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Tên SP" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Giá bán" Binding="{Binding PriceOut}"/>
                             <DataGridTextColumn Header="Số lượng" Binding="{Binding SelectedNumber}"/>
                         </DataGrid.Columns>
@@ -221,7 +223,7 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="btnHuyBo" Command="{Binding ResetInput}" Click="btnHuyBo_Click" Grid.Column="0" Foreground="Black" FontWeight="Bold" Background="Red" Content="Hủy bỏ" VerticalAlignment="Center"  Width="110"  
+                    <Button x:Name="btnHuyBo" Command="{Binding ResetInput}" Click="btnHuyBo_Click" Grid.Column="0" Foreground="Black" FontWeight="Bold" Background="#FE7139" BorderThickness="0" Content="Hủy bỏ" VerticalAlignment="Center"  Width="110"  
                             Style="{StaticResource MaterialDesignRaisedDarkButton}"
                             Height="40"
                             materialDesign:ButtonAssist.CornerRadius="20">
@@ -231,7 +233,7 @@
                             </Style>
                         </Button.Resources>
                     </Button>
-                    <Button x:Name="btnThanhToan" Command="{Binding SaveInvoice}" Click="btnThanhToan_Click" Grid.Column="1" Foreground="Black" FontWeight="Bold" Background="Green" Content="Thanh toán" VerticalAlignment="Center" 
+                    <Button x:Name="btnThanhToan" Command="{Binding SaveInvoice}" Click="btnThanhToan_Click" Grid.Column="1" Foreground="Black" FontWeight="Bold" Background="#596FB5" BorderThickness="0" Content="Thanh toán" VerticalAlignment="Center" 
                             Width="110"
                              Style="{StaticResource MaterialDesignRaisedDarkButton}"
                             Height="40"

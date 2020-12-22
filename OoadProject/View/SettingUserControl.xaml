@@ -21,13 +21,13 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnThamSo" Grid.Row="0" Grid.Column="0" Click="btnThamSo_Click" GotFocus="btnThamSo_GotFocus" Foreground="Black" FontWeight="Bold" Background="#808080" BorderThickness="0" Content="DS tham số" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
+            <Button x:Name="btnThamSo" Grid.Row="0" Grid.Column="0" Click="btnThamSo_Click" GotFocus="btnThamSo_GotFocus" Foreground="White" FontWeight="Bold" Opacity="1" Background="#695D85" BorderThickness="0" Content="DS tham số" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
             </Button>
-            <Button x:Name="btnLoaiMatHang" Grid.Row="0" Grid.Column="1" Click="btnLoaiMatHang_Click" GotFocus="btnLoaiMatHang_GotFocus" Foreground="Black" FontWeight="Bold" Background="#C0C0C0" BorderThickness="0" Content="Loại mặt hàng" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
+            <Button x:Name="btnLoaiMatHang" Grid.Row="0" Grid.Column="1" Click="btnLoaiMatHang_Click" GotFocus="btnLoaiMatHang_GotFocus" Foreground="White" FontWeight="Bold" Opacity="0.8" Background="#695D85" BorderThickness="0" Content="Loại mặt hàng" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
             </Button>
-            <Button x:Name="btnHangSanXuat" Grid.Row="0" Grid.Column="2" Click="btnHangSanXuat_Click"  GotFocus="btnHangSanXuat_GotFocus"  Foreground="Black" FontWeight="Bold" Background="#C0C0C0" BorderThickness="0" Content="Hãng sản xuất" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
+            <Button x:Name="btnHangSanXuat" Grid.Row="0" Grid.Column="2" Click="btnHangSanXuat_Click"  GotFocus="btnHangSanXuat_GotFocus"  Foreground="White" FontWeight="Bold" Opacity="0.8" Background="#695D85" BorderThickness="0" Content="Hãng sản xuất" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
             </Button>
-            <Button x:Name="btnNhaCungCap" Grid.Row="0" Grid.Column="3" Click="btnNhaCungCap_Click"  GotFocus="btnNhaCungCap_GotFocus"  Foreground="Black" FontWeight="Bold" Background="#C0C0C0" BorderThickness="0" Content="Nhà cung cấp" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
+            <Button x:Name="btnNhaCungCap" Grid.Row="0" Grid.Column="3" Click="btnNhaCungCap_Click"  GotFocus="btnNhaCungCap_GotFocus"  Foreground="White" FontWeight="Bold" Opacity="0.8" Background="#695D85" BorderThickness="0" Content="Nhà cung cấp" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
             </Button>
         </Grid>
         <UserControl x:Name="viewControl" Grid.Row="1"/>

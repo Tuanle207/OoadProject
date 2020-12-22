@@ -42,10 +42,10 @@ namespace OoadProject.View
 
         private void btnThamSo_GotFocus(object sender, RoutedEventArgs e)
         {
-            btnThamSo.Background = (Brush)(new BrushConverter()).ConvertFrom("#808080");
-            btnLoaiMatHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
-            btnHangSanXuat.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
-            btnNhaCungCap.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
+            btnThamSo.Opacity = 1;
+            btnLoaiMatHang.Opacity = 0.8;
+            btnHangSanXuat.Opacity = 0.8;
+            btnNhaCungCap.Opacity = 0.8;
         }
 
         private void btnLoaiMatHang_Click(object sender, RoutedEventArgs e)
@@ -59,10 +59,10 @@ namespace OoadProject.View
 
         private void btnLoaiMatHang_GotFocus(object sender, RoutedEventArgs e)
         {
-            btnThamSo.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
-            btnLoaiMatHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#808080");
-            btnHangSanXuat.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
-            btnNhaCungCap.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
+            btnThamSo.Opacity = 0.8;
+            btnLoaiMatHang.Opacity = 1;
+            btnHangSanXuat.Opacity = 0.8;
+            btnNhaCungCap.Opacity = 0.8;
         }
 
         private void btnHangSanXuat_Click(object sender, RoutedEventArgs e)
@@ -76,10 +76,10 @@ namespace OoadProject.View
 
         private void btnHangSanXuat_GotFocus(object sender, RoutedEventArgs e)
         {
-            btnThamSo.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
-            btnLoaiMatHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
-            btnHangSanXuat.Background = (Brush)(new BrushConverter()).ConvertFrom("#808080");
-            btnNhaCungCap.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
+            btnThamSo.Opacity = 0.8;
+            btnLoaiMatHang.Opacity = 0.8;
+            btnHangSanXuat.Opacity = 1;
+            btnNhaCungCap.Opacity = 0.8;
         }
 
         private void btnNhaCungCap_Click(object sender, RoutedEventArgs e)
@@ -93,10 +93,10 @@ namespace OoadProject.View
 
         private void btnNhaCungCap_GotFocus(object sender, RoutedEventArgs e)
         {
-            btnThamSo.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
-            btnLoaiMatHang.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
-            btnHangSanXuat.Background = (Brush)(new BrushConverter()).ConvertFrom("#C0C0C0");
-            btnNhaCungCap.Background = (Brush)(new BrushConverter()).ConvertFrom("#808080");
+            btnThamSo.Opacity = 0.8;
+            btnLoaiMatHang.Opacity = 0.8;
+            btnHangSanXuat.Opacity = 0.8;
+            btnNhaCungCap.Opacity = 1;
         }
     }
 }

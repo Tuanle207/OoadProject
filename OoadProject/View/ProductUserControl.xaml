@@ -21,7 +21,7 @@
             <TextBox x:Name="tbKeyword" Grid.Column="0" Text="{Binding ProductNameKeyword, UpdateSourceTrigger=PropertyChanged}"
                     Height="40" VerticalContentAlignment="Center" Padding="15 0 0 0"
                     materialDesign:HintAssist.Hint="Tìm kiếm theo tên sản phẩm"/>
-            <Button Grid.Column="1" Name="btnAddProduct" Command="{Binding PrepareAddProduct}" Click="btnAddProduct_Click" Height="Auto" BorderThickness="0" Background="Green" Margin="10">
+            <Button Grid.Column="1" Name="btnAddProduct" Command="{Binding PrepareAddProduct}" Click="btnAddProduct_Click" Height="Auto" BorderThickness="0" Background="#596FB5" Margin="10">
                 <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="-5 0 -5 0">
                     <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 0 0" Width="20" Height="20"/>
                     <Label Content="Thêm sản phẩm" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 -8 0"/>
@@ -80,9 +80,25 @@
             </materialDesign:Card>
             <materialDesign:Card x:Name="ListProduct" Height="500" Background="#FFE3F0FF"  Margin="10,10,10,0" BorderThickness="0" VerticalAlignment="Stretch">
                 <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                    <ListView ItemsSource="{Binding Products, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedProduct, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView ItemsSource="{Binding Products, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedProduct, UpdateSourceTrigger=PropertyChanged}"
+                     >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Margin" Value="0 0 0 0"/>
+                                <Setter Property="Padding" Value="0"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                         <ListView.View >
                             <GridView>
+                                <GridView.ColumnHeaderContainerStyle>
+                                    <Style TargetType="GridViewColumnHeader">
+                                        <Setter Property="Margin" Value="0"/>
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="Background" Value="#FFE3F0FF"/>
+                                    </Style>
+                                </GridView.ColumnHeaderContainerStyle>
                                 <GridViewColumn>
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -119,7 +135,7 @@
                                 <GridViewColumn Header="Giá nhập" DisplayMemberBinding="{Binding PriceIn}"></GridViewColumn>
                                 <GridViewColumn Header="Giá bán" DisplayMemberBinding="{Binding PriceOut}"></GridViewColumn>
                                 <GridViewColumn Header="TG bảo hành" DisplayMemberBinding="{Binding WarrantyPeriod}"></GridViewColumn>
-                                <GridViewColumn Header="% lợi nhuận" DisplayMemberBinding="{Binding ReturnRate}"></GridViewColumn>
+                                <GridViewColumn Header="Tỉ lệ lợi nhuận" DisplayMemberBinding="{Binding ReturnRate}"></GridViewColumn>
                                 <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding Status, Converter={StaticResource ProductStatusConverter}}"></GridViewColumn>
                             </GridView>
                         </ListView.View>

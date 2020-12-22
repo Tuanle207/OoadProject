@@ -65,12 +65,14 @@
 
                 </StackPanel>
             </Grid>
-            <Button x:Name="btnNewWarrantyOrder" Click="btnNewWarrantyOrder_Click" Content="Thêm yêu cầu bảo hành" Grid.Column="1" />
+            <Button x:Name="btnNewWarrantyOrder" Click="btnNewWarrantyOrder_Click" Content="Thêm yêu cầu bảo hành" Grid.Column="1" Background="#596FB5" BorderThickness="0" />
         </Grid>
         <materialDesign:Card Grid.Row="1" Margin="5 10 5 5" BorderThickness="0" VerticalAlignment="Stretch" FontSize="10">
             <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
                 <DataGrid ItemsSource="{Binding WarrantyOrders}" SelectedItem="{Binding SelectedWarrantyOrder}" Background="#FFE3F0FF"  SelectionMode="Single"
-                          AutoGenerateColumns="False" IsReadOnly="True" Grid.ColumnSpan="1" BorderThickness="1">
+                          AutoGenerateColumns="False" IsReadOnly="True" Grid.ColumnSpan="1" BorderThickness="1"
+                          
+                          materialDesign:DataGridAssist.CellPadding="4" materialDesign:DataGridAssist.ColumnHeaderPadding="10">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Mã Bảo hành" Binding="{Binding Id}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Ngày yêu cầu" Binding="{Binding CreationTime}"></DataGridTextColumn>

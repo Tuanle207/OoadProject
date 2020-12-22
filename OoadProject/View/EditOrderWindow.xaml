@@ -194,9 +194,9 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="btnResetInput" Click="btnResetInput_Click" Command="{Binding RestoreUpdationData}" Grid.Column="0" Foreground="Black" FontWeight="Bold" Background="Red" Content="Hủy thay đổi" VerticalAlignment="Center"  Height="40" Width="120">
+                    <Button x:Name="btnResetInput" Click="btnResetInput_Click" Command="{Binding RestoreUpdationData}" Grid.Column="0" Foreground="Black" FontWeight="Bold" Background="#FE7139" Content="Hủy thay đổi" VerticalAlignment="Center"  Height="40" Width="120">
                     </Button>
-                    <Button x:Name="btnSave" Click="btnSave_Click" Command="{Binding UpdateOrderInfo}" Grid.Column="1" Foreground="Black" FontWeight="Bold" Background="Green" Content="Xác nhận" VerticalAlignment="Center" Height="40" Width="120">
+                    <Button x:Name="btnSave" Click="btnSave_Click" Command="{Binding UpdateOrderInfo}" Grid.Column="1" Foreground="Black" FontWeight="Bold" Background="#596FB5" Content="Xác nhận" VerticalAlignment="Center" Height="40" Width="120">
                     </Button>
                 </Grid>
             </Grid>

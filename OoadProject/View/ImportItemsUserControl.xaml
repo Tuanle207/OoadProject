@@ -45,8 +45,23 @@
         <materialDesign:Card Grid.Row="1" Background="#FFE3F0FF"  Margin="0,5,2,0" BorderThickness="0" VerticalAlignment="Stretch">
             <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
                 <ListView x:Name="ListOrder" ItemsSource="{Binding SentOrders}" SelectedItem="{Binding SelectedOrder}" >
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Margin" Value="0 0 0 0"/>
+                            <Setter Property="Padding" Value="0"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.View >
                         <GridView>
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Margin" Value="0"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Background" Value="#FFE3F0FF"/>
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
                             <GridViewColumn Header="Mã ĐH" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
                             <GridViewColumn Header="Tạo lúc" DisplayMemberBinding="{Binding CreationTime}"></GridViewColumn>
                             <GridViewColumn Header="Người tạo" DisplayMemberBinding="{Binding CreationUser}"></GridViewColumn>
@@ -76,8 +91,23 @@
             <materialDesign:Card Grid.Row="0" Background="#FFE3F0FF"  Margin="10 5 2 0" BorderThickness="0" VerticalAlignment="Stretch" Grid.ColumnSpan="3">
                 <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
                     <ListView x:Name="ListDetailOrder" ItemsSource="{Binding ReceiptProducts}" >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Margin" Value="0 0 0 0"/>
+                                <Setter Property="Padding" Value="0"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                         <ListView.View >
                             <GridView>
+                                <GridView.ColumnHeaderContainerStyle>
+                                    <Style TargetType="GridViewColumnHeader">
+                                        <Setter Property="Margin" Value="0"/>
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="Background" Value="#FFE3F0FF"/>
+                                    </Style>
+                                </GridView.ColumnHeaderContainerStyle>
                                 <GridViewColumn>
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -151,12 +181,12 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Command="{Binding RestoreData}" Grid.Column="0" HorizontalAlignment="Left" Width="150" Height="Auto" BorderThickness="0" Background="Red" Margin="15 2 2 2">
+                <Button Command="{Binding RestoreData}" Grid.Column="0" HorizontalAlignment="Left" Width="150" Height="Auto" BorderThickness="0" Background="#FE7139" Margin="15 2 2 2">
                     <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="-5 0 -5 0">
                         <Label Content="Nhập lại" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" />
                     </StackPanel>
                 </Button>
-                <Button Command="{Binding SaveReceipt}" Grid.Column="1" HorizontalAlignment="Right"  Name="btnAcceptOrder" Grid.Row="1" Width="150" Height="Auto" BorderThickness="0" Background="Green" Margin="2 2 15 2">
+                <Button Command="{Binding SaveReceipt}" Grid.Column="1" HorizontalAlignment="Right"  Name="btnAcceptOrder" Grid.Row="1" Width="150" Height="Auto" BorderThickness="0" Background="#596FB5" Margin="2 2 15 2">
                     <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="-5 0 -5 0">
                         <materialDesign:PackIcon Kind="DownloadBox"  VerticalAlignment="Center" Foreground="Black" Margin="0 2 0 0" Width="20" Height="20"/>
                         <Label Content="Nhập hàng" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" />
