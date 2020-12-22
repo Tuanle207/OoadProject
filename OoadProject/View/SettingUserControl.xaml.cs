@@ -29,6 +29,10 @@ namespace OoadProject.View
         {
             viewControl.Name = "ParameterUserControl";
             viewControl.Content = new ParameterUserControl();
+            btnThamSo.Opacity = 1;
+            btnLoaiMatHang.Opacity = 0.8;
+            btnHangSanXuat.Opacity = 0.8;
+            btnNhaCungCap.Opacity = 0.8;
         }
 
         private void btnThamSo_Click(object sender, RoutedEventArgs e)

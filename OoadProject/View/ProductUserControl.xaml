@@ -18,13 +18,13 @@
                 <ColumnDefinition Width="9*"></ColumnDefinition>
                 <ColumnDefinition Width="1.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="tbKeyword" Grid.Column="0" Text="{Binding ProductNameKeyword, UpdateSourceTrigger=PropertyChanged}"
+            <TextBox x:Name="tbKeyword"  Text="{Binding ProductNameKeyword, UpdateSourceTrigger=PropertyChanged}"
                     Height="40" VerticalContentAlignment="Center" Padding="15 0 0 0"
                     materialDesign:HintAssist.Hint="Tìm kiếm theo tên sản phẩm"/>
-            <Button Grid.Column="1" Name="btnAddProduct" Command="{Binding PrepareAddProduct}" Click="btnAddProduct_Click" Height="Auto" BorderThickness="0" Background="#596FB5" Margin="10">
-                <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="-5 0 -5 0">
-                    <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 0 0" Width="20" Height="20"/>
-                    <Label Content="Thêm sản phẩm" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 -8 0"/>
+            <Button x:Name="btnAdd" Width="120" Height="40" Grid.Column="1" Click="btnAdd_Click" BorderThickness="0" Background="#695D85" Foreground="White">
+                <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" >
+                    <materialDesign:PackIcon Kind="Filter" VerticalAlignment="Center"  Margin="-5 0 0 0" Width="20" Height="20"/>
+                    <Label Content="Tìm kiếm" VerticalAlignment="Center" Foreground="white" Margin="-5 0 -8 0"/>
                 </StackPanel>
             </Button>
         </Grid>
@@ -59,15 +59,6 @@
                                     </ListBox.ItemsPanel>
                                 </ListBox>
 
-
-                            </StackPanel>
-                            <StackPanel HorizontalAlignment="Right" Margin="0 0 100 10">
-                                <Button x:Name="btnAdd" Width="120" Click="btnAdd_Click"  Height="Auto" BorderThickness="0" Background="#F3E2A9">
-                                    <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" >
-                                        <materialDesign:PackIcon Kind="Filter" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 0 0" Width="20" Height="20"/>
-                                        <Label Content="Tìm kiếm" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 -8 0"/>
-                                    </StackPanel>
-                                </Button>
                             </StackPanel>
                         </StackPanel>
                     </Expander>
@@ -164,6 +155,12 @@
                     </Button>
                 </StackPanel>
             </Grid>
+            <Button Grid.Column="2" Width="150" HorizontalAlignment="Right" Margin="0 8 10 8" Name="btnAddProduct" Command="{Binding PrepareAddProduct}" Click="btnAddProduct_Click" Height="Auto" BorderThickness="0" Background="#596FB5" >
+                <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="-5 0 -5 0">
+                    <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 0 0" Width="20" Height="20"/>
+                    <Label Content="Thêm sản phẩm" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 -8 0"/>
+                </StackPanel>
+            </Button>
         </Grid>
         <Button x:Name="btnAfterDele" Command="{Binding ReloadProducts}" Visibility="Hidden" />
     </Grid>
