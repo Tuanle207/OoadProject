@@ -106,11 +106,17 @@ namespace OoadProject.Core.Services.AppProduct
 
         public bool UpdateProduct(ProductDisplayDto product)
         {
-            var editProduct = Mapper.Map<Product>(product);
             if (product.CheckReturnRateChange != "changed")
             {
-                editProduct.ReturnRate = null;
+                product.PriceOut = Helper.CalculatePriceout(product.PriceIn, (float)product.ReturnRate);                
             }
+            else
+            {   
+                product.ReturnRate = null;
+                product.PriceOut = Helper.CalculatePriceout(product.PriceIn, product.Category.ReturnRate);
+            }
+
+            var editProduct = Mapper.Map<Product>(product);
             return _productRepository.Update(editProduct);
         }
         public bool HidenProduct(ProductDisplayDto product)

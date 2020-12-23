@@ -335,9 +335,7 @@ namespace OoadProject.Core.ViewModels.Products
                 p => true,
                 p =>
                 {
-                    MessageBox.Show("Đã thực hiện");
-                    SelectedProduct.ReturnRate = 2;
-                    SelectedProduct.Number = 100;
+                    SelectedProduct.ReturnRate = SelectedProduct.Category.ReturnRate;
                     SelectedProduct.CheckReturnRateChange = "";
                 }
             );
