@@ -44,10 +44,7 @@
                   VerticalAlignment="Center" />
         </StackPanel>
         <WrapPanel Grid.Row="0" Grid.Column="3" HorizontalAlignment="Right" Margin="0 0 20 0">
-            <TextBlock Text="Xuất file" FontSize="15" Margin="0 33 0 0"></TextBlock>
-            <Button BorderThickness="0" Margin="10 20 0 0" Height="50" Padding="0" Background="Transparent">
-                <materialDesign:PackIcon Kind="FileExport" Foreground="#000" Height="50" Width="50"/>
-            </Button>
+            
         </WrapPanel>
         <ListView ItemsSource="{Binding DayStatistics}" Grid.Row="1" Grid.ColumnSpan="4" Margin="200 0 200 33" >
             <ListView.View>

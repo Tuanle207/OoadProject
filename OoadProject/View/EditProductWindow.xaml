@@ -112,7 +112,7 @@
         <StackPanel Grid.Column="1" Grid.Row="4">
             <TextBlock Text="Tình trạng" FontWeight="Bold" Margin="10 0 0 8" FontSize="15"></TextBlock>
             <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="10 0 10 0">
-                <ComboBox Name="cbStatus" Loaded="cbStatus_Loaded" SelectedIndex="{Binding SelectedProduct.Status, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
+                <ComboBox Name="cbStatus" Loaded="cbStatus_Loaded" SelectedValue="{Binding SelectedProduct.Status, Converter={StaticResource ProductStatusConverter}}" SelectedIndex="{Binding SelectedProduct.Status, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
             </Border>
         </StackPanel>
         <!--Button sửa-->

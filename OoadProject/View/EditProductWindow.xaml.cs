@@ -58,7 +58,6 @@ namespace OoadProject.View
             cbStatus.Items.Clear();
             cbStatus.Items.Add("Đang kinh doanh");
             cbStatus.Items.Add("Ngừng kinh doanh");
-            cbStatus.SelectedItem = "Đang kinh doanh";
         }
     }
 }

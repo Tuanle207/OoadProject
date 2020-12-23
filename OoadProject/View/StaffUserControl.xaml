@@ -74,16 +74,32 @@
             </StackPanel>
         </Button>
         <ListView ItemsSource="{Binding Users}" SelectedItem="{Binding ChosenUser}" Grid.Row="1" Grid.ColumnSpan="4" Margin="33,10.4,27,49.6" Background="#FFD43434">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Margin" Value="0 0 0 0"/>
+                    <Setter Property="Padding" Value="0"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="STT" DisplayMemberBinding="{Binding Id}" Width="100"></GridViewColumn>
-                    <GridViewColumn Header="Tên nhân viên" DisplayMemberBinding="{Binding Name}" Width="222"></GridViewColumn>
-                    <GridViewColumn Header="Chức vụ" DisplayMemberBinding="{Binding Role.Name}" Width="148"></GridViewColumn>
-                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" Width="148"></GridViewColumn>
-                    <GridViewColumn Header="Ngày vào làm" DisplayMemberBinding="{Binding CreationTime}" Width="148"></GridViewColumn>
-                    <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding PhoneNumber}" Width="148"></GridViewColumn>
-                    <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding Dob}" Width="148"></GridViewColumn>
-                    <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding Address}" Width="222"></GridViewColumn>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Background" Value="#FFE3F0FF"/>
+                            <Setter Property="Height" Value="40"/>
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
+                    <GridViewColumn Header="STT" DisplayMemberBinding="{Binding Id}" ></GridViewColumn>
+                    <GridViewColumn Header="Tên nhân viên" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                    <GridViewColumn Header="Chức vụ" DisplayMemberBinding="{Binding Role.Name}" ></GridViewColumn>
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"></GridViewColumn>
+                    <GridViewColumn Header="Ngày vào làm" DisplayMemberBinding="{Binding CreationTime}"></GridViewColumn>
+                    <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding PhoneNumber}" ></GridViewColumn>
+                    <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding Dob}"></GridViewColumn>
+                    <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding Address}"></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
