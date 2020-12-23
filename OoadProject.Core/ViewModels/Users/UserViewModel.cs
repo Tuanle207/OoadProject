@@ -1,6 +1,8 @@
-﻿using OoadProject.Core.Services.AppUser;
+﻿using OoadProject.Core.AppSession;
+using OoadProject.Core.Services.AppUser;
 using OoadProject.Core.ViewModels.Users.Dtos;
 using OoadProject.Data.Entity.AppUser;
+using OoadProject.Shared.Permissions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -70,6 +72,7 @@ namespace OoadProject.Core.ViewModels.Users
         public ICommand GrantNewPassword { get; set; }
         public ICommand PrepareForCreateUser { get; set; }
         public ICommand PrepareForUpdateUser { get; set; }
+        public ICommand CheckModificationPermission { get; set; }
 
         public UserViewModel()
         {
@@ -139,6 +142,60 @@ namespace OoadProject.Core.ViewModels.Users
                 p =>
                 {
                     EditingUser = Mapper.Map<UserForCreationDto>(ChosenUser);
+                }
+            );
+
+            CheckModificationPermission = new RelayCommand<object>
+            (
+                p => ChosenUser != null,
+                p =>
+                {
+                    if (!CurrentUser.Role.Permissions.Select(pm => pm.Name).Contains(PermissionsNames.User))
+                        throw new Exception("Bạn không có quyền thực hiện thao tác này!");
+
+                    var grantPermission = false;
+                    var chosenUserIsMasterAdmin = MasterAdmins.Emails.Contains(ChosenUser.Email);
+                    var currentUserIsMasterAdmin = Session.IsMasterAdmin;
+                    //// master admin -- current: master admin
+                    if (chosenUserIsMasterAdmin && Session.IsMasterAdmin)
+                    {
+                        if (ChosenUser.Id == CurrentUser.Id)
+                            grantPermission = true;
+                        else
+                            grantPermission = false;
+                    }
+
+                    // admin ?
+                    if (chosenUserIsMasterAdmin && currentUserIsMasterAdmin)
+                    {
+                        if (ChosenUser.Id == CurrentUser.Id)
+                            grantPermission = true;
+                        else
+                            grantPermission = false;
+                    }
+                    else if (!chosenUserIsMasterAdmin && currentUserIsMasterAdmin)
+                    {
+                        grantPermission = true;
+                    }
+                    else if (chosenUserIsMasterAdmin && !currentUserIsMasterAdmin)
+                    {
+                        grantPermission = false;
+                    }
+                    else if (ChosenUser.Role.Name == RoleNames.Admin)
+                    {
+                        if (ChosenUser.Id == CurrentUser.Id)
+                            grantPermission = true;
+                        else
+                            grantPermission = false;
+                    }
+                    else
+                    {
+                        grantPermission = true;
+                    }
+
+                    if (!grantPermission)
+                        throw new Exception("Bạn không có quyền thực hiện thao tác lên người dùng này!");
+
                 }
             );
         }

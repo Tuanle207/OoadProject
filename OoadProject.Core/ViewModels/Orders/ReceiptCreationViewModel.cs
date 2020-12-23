@@ -89,7 +89,6 @@ namespace OoadProject.Core.ViewModels.Orders
                 {
                     _receiptService.AddNewReceipt(SelectedOrder, ReceiptProducts);
                     InitialData(null);
-                    MessageBox.Show("Nhập hàng thành công!");
                 }
             );
 

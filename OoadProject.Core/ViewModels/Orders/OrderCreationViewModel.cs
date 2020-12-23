@@ -30,6 +30,8 @@ namespace OoadProject.Core.ViewModels.Orders
         private ObservableCollection<Provider> _providers;
         private Provider _selectingProvider;
 
+        private string _productNameKeyword;
+
         // public data properties
         public ObservableCollection<ProductForOrderCreationDto> Products
         { 
@@ -67,6 +69,18 @@ namespace OoadProject.Core.ViewModels.Orders
         }
         public Provider SelectingProvider { get => _selectingProvider; set { _selectingProvider = value; OnPropertyChanged(); } }
 
+        public string ProductNameKeyword
+        {
+            get => _productNameKeyword;
+            set
+            {
+                _productNameKeyword = value;
+                CurrentPage = 1;
+                OnPropertyChanged();
+                ReloadProduct();
+            }
+        }
+
         // public command properties
 
         public ICommand GoNextPage { get; set; }
@@ -93,7 +107,7 @@ namespace OoadProject.Core.ViewModels.Orders
 
 
             // data
-            InitialData();
+            ProductNameKeyword = null;
 
             SelectedProducts = new ObservableCollection<SelectingProductDto>();
 
@@ -121,9 +135,9 @@ namespace OoadProject.Core.ViewModels.Orders
                 }
                 else
                 {
-                    var loadedProduct = _productService.GetProductsForOrderCreation(CurrentPage).Data;
-                    Products = new ObservableCollection<ProductForOrderCreationDto>(loadedProduct);
-                    _loadedProducts.AddRange(loadedProduct);
+                    var pagedListNextPageData = GetData();
+
+                    _loadedProducts.AddRange(pagedListNextPageData);
                     _loaded[CurrentPage - 1] = true;
                 }
                 
@@ -133,14 +147,27 @@ namespace OoadProject.Core.ViewModels.Orders
             GoPrevPage = new RelayCommand<object>(
             p => CurrentPage > 1,
             p => {
-                CurrentPage = CurrentPage - 1;
 
-                Products = new ObservableCollection<ProductForOrderCreationDto>();
-                var start = (CurrentPage - 1) * _pageSize;
-                var end = start + _pageSize;
 
-                for (var i = start; i < end; i++)
+
+
+                CurrentPage--;
+                if (_loaded[CurrentPage - 1] == true)
+                {
+
+                    Products = new ObservableCollection<ProductForOrderCreationDto>();
+                    var start = (CurrentPage - 1) * _pageSize;
+                    var end = start + _pageSize;
+
+                    for (var i = start; i < end; i++)
                         Products.Add(_loadedProducts[i]);
+                }
+                else
+                {
+                    var pagedListPrevPageData = GetData();
+                    _loadedProducts.AddRange(pagedListPrevPageData);
+                    _loaded[CurrentPage - 1] = true;
+                }
             });
 
             AddItem = new RelayCommand<object>(
@@ -186,7 +213,7 @@ namespace OoadProject.Core.ViewModels.Orders
                 {
                     if (p != null)
                     {
-                        InitialData();
+                        ProductNameKeyword = null;
                         LoadDataForUpdate((int)p);
                     }
 
@@ -200,7 +227,7 @@ namespace OoadProject.Core.ViewModels.Orders
                 {
                     if (p != null && (bool)p)
                     {
-                        InitialData();
+                        ProductNameKeyword = null;
                         SelectedProducts = new ObservableCollection<SelectingProductDto>();
                         Order = new OrderForCreationDto { CreationTime = DateTime.Now.Date };
                     }
@@ -289,19 +316,26 @@ namespace OoadProject.Core.ViewModels.Orders
             SelectingProvider = Providers.Where(p => p.Id == Order.ProviderId).FirstOrDefault();
         }
 
-        private void InitialData()
+        private void ReloadProduct()
         {
-            var pagedList = _productService.GetProductsForOrderCreation();
+            var pagedListData = GetData();
+
+            _loadedProducts = new List<ProductForOrderCreationDto>();
+            _loadedProducts.AddRange(pagedListData);
+            _loaded = new List<bool>();
+            for (int i = 0; i < TotalPages; i++) _loaded.Add(false);
+            if (TotalPages > 0) _loaded[0] = true;
+        }
+
+        private IEnumerable<ProductForOrderCreationDto> GetData()
+        {
+            var pagedList = _productService.GetProductsForOrderCreation(ProductNameKeyword, CurrentPage, null);
             CurrentPage = pagedList.CurrentPage;
             TotalPages = pagedList.TotalPages;
             _pageSize = pagedList.PageRecords;
             Products = new ObservableCollection<ProductForOrderCreationDto>(pagedList.Data);
 
-            _loadedProducts = new List<ProductForOrderCreationDto>();
-            _loadedProducts.AddRange(pagedList.Data);
-            _loaded = new List<bool>();
-            for (int i = 0; i < TotalPages; i++) _loaded.Add(false);
-            if (TotalPages > 0) _loaded[0] = true;
+            return pagedList.Data;
         }
     }
 }

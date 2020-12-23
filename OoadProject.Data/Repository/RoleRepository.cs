@@ -1,5 +1,7 @@
 ﻿using OoadProject.Data.Entity.AppUser;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace OoadProject.Data.Repository
@@ -32,6 +34,18 @@ namespace OoadProject.Data.Repository
                 var roles = ctx.Roles.ToList();
                 var rolesNames = roles.Select(r => r.Name);
                 return rolesNames;
+            }
+        }
+
+        public IEnumerable<Permission> GetRolePermissions(int roleId)
+        {
+            using (var ctx = new AppDbContext())
+            {
+                var role = ctx.Roles
+                    .Where(r => r.Id == roleId)
+                    .Include(r => r.Permissions)
+                    .FirstOrDefault();
+                return role.Permissions;
             }
         }
 

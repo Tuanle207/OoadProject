@@ -8,9 +8,9 @@ namespace OoadProject.Shared.Parameters
 {
     public static class ParameterType
     {
-        public static string MinInputProductNumber { get => "MinInputProductNumber"; }
-        public static string MaxInputProductNumber { get => "MaxInputProductNumber"; }
-        public static string MinAge { get => "MinAge"; }
-        public static string MaxAge { get => "MaxAge"; }
+        public const string MinInputProductNumber = "MinInputProductNumber";
+        public const string MaxInputProductNumber = "MaxInputProductNumber";
+        public const string MinAge = "MinAge";
+        public const string MaxAge = "MaxAge";
     }
 }

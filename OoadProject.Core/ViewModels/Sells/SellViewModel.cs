@@ -216,7 +216,7 @@ namespace OoadProject.Core.ViewModels.Sells
                 else if (type == typeof(SelectingProductForSellDto))
                 {
                     var actualProduct = _storedSelectedProducts.Where(pr => pr.Id == ((SelectingProductForSellDto)p).Id).FirstOrDefault();
-                    return actualProduct.Number > 0;
+                    return actualProduct != null && actualProduct.Number > 0;
                 }
             }
             return false;
@@ -292,7 +292,7 @@ namespace OoadProject.Core.ViewModels.Sells
                 SelectedProducts.Remove(selectedProduct);
                 _storedSelectedProducts.Remove(storedSelectedproduct);
 
-                if (loadedProduct != null)_loadedProducts.Remove(loadedProduct);
+                //if (loadedProduct != null)_loadedProducts.Remove(loadedProduct);
             }
                
 

@@ -9,17 +9,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
+using OoadProject.Data.Entity.AppUser;
+using OoadProject.Shared.Permissions;
 
 namespace OoadProject.Core.ViewModels.Users
 {
-    public class LoginViewModel : BaseViewModel
+    public class SessionViewModel : BaseViewModel
     {
         // service
         private readonly UserService _userService;
+        private readonly RoleService _roleService;
 
         // data field
         private LoginDto _loginDto;
         private UserForPasswordUpdateDto _userForPasswordUpdate;
+        private ObservableCollection<Permission> _userPerrmissions;
 
         // data property
         public LoginDto LoginDto { get => _loginDto; set { _loginDto = value; OnPropertyChanged(); } }
@@ -44,6 +49,16 @@ namespace OoadProject.Core.ViewModels.Users
             }
         }
 
+        public ObservableCollection<Permission> UserPerrmissions
+        {
+            get => _userPerrmissions;
+            set
+            {
+                _userPerrmissions = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         // command
         public ICommand Login { get; set; }
@@ -51,12 +66,14 @@ namespace OoadProject.Core.ViewModels.Users
         public ICommand ReloadUsername { get; set; }
         public ICommand UpdatePassword { get; set; }
 
-        public LoginViewModel()
+        public SessionViewModel()
         {
             _userService = new UserService();
+            _roleService = new RoleService();
 
             LoginDto = new LoginDto { Email = "letgo237@gmail.com", Password = "1248" };
             UserForPasswordUpdate = new UserForPasswordUpdateDto();
+            UserPerrmissions = new ObservableCollection<Permission>();
 
 
             Login = new RelayCommand<object>
@@ -67,8 +84,19 @@ namespace OoadProject.Core.ViewModels.Users
                     if (p != null && (bool)p == true)
                     {
                         var authenticatedUser = _userService.Login(LoginDto);
+
+                        // setup session and permissions info
                         Session.SetSessionUser(authenticatedUser);
-                        LoginDto = new LoginDto();
+                        UserPerrmissions = new ObservableCollection<Permission>(_roleService.GetRolePermissions(authenticatedUser.RoleId));
+
+                        // check if this is a master admin?
+                        if (MasterAdmins.Emails.Contains(authenticatedUser.Email))
+                            Session.SetIsMasterAdmin(true);
+                        else
+                            Session.SetIsMasterAdmin(false);
+
+                        // reset input
+                        LoginDto.Password = "";
                     }
                 } 
             );
@@ -81,6 +109,8 @@ namespace OoadProject.Core.ViewModels.Users
                     if (p != null && (bool)p == true)
                     {
                         Session.SetSessionUser(null);
+                        UserPerrmissions = new ObservableCollection<Permission>();
+                        Session.SetIsMasterAdmin(false);
                     }
                 }
             );

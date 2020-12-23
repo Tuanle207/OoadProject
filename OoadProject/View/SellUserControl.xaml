@@ -248,9 +248,16 @@
                     <Button x:Name="btnReloadHomeScreen" Visibility="Hidden" DataContext="{StaticResource HomeViewModel}" Command="{Binding ReloadData}" />
                 </Grid>
             </Grid>
-            
 
         </Grid>
-
+        <Grid Grid.ColumnSpan="2" DataContext="{StaticResource SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="../Assets/unauthorized.png" Width="200" Height="200" />
+                <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">Bạn không có quyền truy cập màn hình này! Vui lòng đăng nhập với tài khoản thích hợp!</TextBlock>
+            </StackPanel>
+            <Grid.Visibility>
+                <Binding Path="UserPerrmissions" Converter="{StaticResource FeaturePermissionConverter}" ConverterParameter="Sale" />
+            </Grid.Visibility>
+        </Grid>
     </Grid>
 </UserControl>

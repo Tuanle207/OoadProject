@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OoadProject.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="Thêm đơn hàng" Height="700" Width="1200"
+        Title="Thêm đơn đặt hàng mới" Height="700" Width="1200"
         DataContext="{StaticResource OrderCreationViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,7 +20,7 @@
             </Grid.RowDefinitions>
             <TextBox
                     x:Name="tbKeyword"
-                    Text="{Binding ProductNameKeyword}"
+                    Text="{Binding ProductNameKeyword,UpdateSourceTrigger=PropertyChanged}"
                     Height="40"
                     VerticalContentAlignment="Center"
                     Padding="15 0 0 0"

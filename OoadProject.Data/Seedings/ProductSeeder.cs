@@ -1,4 +1,5 @@
 ﻿using OoadProject.Data.Entity.AppProduct;
+using OoadProject.Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -283,6 +284,7 @@ namespace OoadProject.Data.Seedings
         {
             foreach (var item in Data)
             {
+                item.PriceOut = Helper.CalculatePriceout(item.PriceIn, (float)item.ReturnRate);
                 context.Products.Add(item);
             }
             context.SaveChanges();

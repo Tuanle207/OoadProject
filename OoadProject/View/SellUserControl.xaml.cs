@@ -34,7 +34,7 @@ namespace OoadProject.View
 
         private void btnThanhToan_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("Xác nhận lưu?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var result = MessageBox.Show("Xác nhận thanh toán?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
             var command = ((Button)sender).Command;
 
             if (result == MessageBoxResult.OK && command.CanExecute(null))

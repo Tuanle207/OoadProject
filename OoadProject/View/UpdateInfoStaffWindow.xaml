@@ -40,7 +40,15 @@
             </Border>
             <TextBlock Text="Ngày sinh" FontWeight="Bold" Margin="0 20 0 8" FontSize="15"></TextBlock>
             <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="0 0 10 0">
-                <DatePicker SelectedDate="{Binding EditingUser.Dob, Mode=TwoWay}" materialDesign:HintAssist.Hint="Ngày sinh" BorderThickness="0" Margin="4 0 0 0" FontSize="14" Height="35.2" />
+                <DatePicker materialDesign:HintAssist.Hint="Ngày sinh" BorderThickness="0" Margin="4 0 0 0" FontSize="14" Height="35.2" >
+                    <DatePicker.SelectedDate>
+                        <Binding Path="EditingUser.Dob" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <Users:DobValidation/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DatePicker.SelectedDate>
+                </DatePicker>
             </Border>
         </StackPanel>
         <TextBox Text="{Binding EditingUser.Id}" Visibility="Hidden" />

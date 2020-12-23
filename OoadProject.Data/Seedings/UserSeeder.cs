@@ -1,4 +1,5 @@
 ﻿using OoadProject.Data.Entity.AppUser;
+using OoadProject.Shared.Permissions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,22 +11,59 @@ namespace OoadProject.Data.Seedings
 {
     public class UserSeeder 
     {
+
         public static void Seed(AppDbContext context)
         {
+            // permissions
+            var salePermission = context.Permissions.Add(new Permission { Id = 1, Name = PermissionsNames.Sale });
+            var warrantyPermission = context.Permissions.Add(new Permission { Id = 1, Name = PermissionsNames.Warranty });
+            var productPermission = context.Permissions.Add(new Permission { Id = 1, Name = PermissionsNames.Product });
+            var orderPermission = context.Permissions.Add(new Permission { Id = 1, Name = PermissionsNames.Order });
+            var reportPermission = context.Permissions.Add(new Permission { Id = 1, Name = PermissionsNames.Report });
+            var userPermission = context.Permissions.Add(new Permission { Id = 1, Name = PermissionsNames.User });
+            var basicSettingPermission = context.Permissions.Add(new Permission { Id = 1, Name = PermissionsNames.BasicSetting });
+            var fullSettingPermission = context.Permissions.Add(new Permission { Id = 1, Name = PermissionsNames.FullSetting });
+            context.SaveChanges();
+
+            // roles
             var quanTriVienRole = context.Roles.Add(new Role
             {
-                Name = "Quản trị viên"
+                Name = RoleNames.Admin,
+                Permissions = new List<Permission>()
+                {
+                    salePermission,
+                    warrantyPermission,
+                    productPermission,
+                    orderPermission,
+                    basicSettingPermission,
+                    fullSettingPermission,
+                    reportPermission,
+                    userPermission
+                }
             });
             var thuKhoRole = context.Roles.Add(new Role
             {
-                Name = "Thủ kho"
+                Name = RoleNames.Warehouseman,
+                Permissions = new List<Permission>()
+                {
+                    productPermission,
+                    orderPermission,
+                    basicSettingPermission
+                }
             });
             var nhanVienBanHangRole = context.Roles.Add(new Role
             {
-                Name = "Nhân viên bán hàng"
+                Name = RoleNames.SalesPerson,
+                Permissions = new List<Permission>()
+                {
+                    salePermission,
+                    warrantyPermission
+                }
             });
             context.SaveChanges();
 
+
+            // users
             var quantrivienUser = context.Users.Add(new User
             {
                 Id = 1,

@@ -16,7 +16,6 @@
         protected override void Seed(OoadProject.Data.AppDbContext context)
         {
             //  This method will be called after migrating to the latest version.
-
             SeederManager.Seed(context);
         }
     }

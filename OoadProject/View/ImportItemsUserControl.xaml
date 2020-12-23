@@ -186,7 +186,7 @@
                         <Label Content="Nhập lại" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" />
                     </StackPanel>
                 </Button>
-                <Button Command="{Binding SaveReceipt}" Grid.Column="1" HorizontalAlignment="Right"  Name="btnAcceptOrder" Grid.Row="1" Width="150" Height="Auto" BorderThickness="0" Background="#596FB5" Margin="2 2 15 2">
+                <Button Click="btnAddReceipt_Click" Command="{Binding SaveReceipt}" Grid.Column="1" HorizontalAlignment="Right"  Name="btnAddReceipt" Grid.Row="1" Width="150" Height="Auto" BorderThickness="0" Background="#596FB5" Margin="2 2 15 2">
                     <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="-5 0 -5 0">
                         <materialDesign:PackIcon Kind="DownloadBox"  VerticalAlignment="Center" Foreground="Black" Margin="0 2 0 0" Width="20" Height="20"/>
                         <Label Content="Nhập hàng" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" />
