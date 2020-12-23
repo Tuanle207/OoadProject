@@ -1,6 +1,7 @@
 ﻿using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Repository.AggregateDto;
 using OoadProject.Shared.Dtos;
+using OoadProject.Shared.Helpers;
 using OoadProject.Shared.Pagination;
 using System;
 using System.Collections.Generic;
@@ -52,11 +53,14 @@ namespace OoadProject.Data.Repository
         {
             using (var ctx = new AppDbContext())
             {
-                var product = ctx.Products.Where(p => p.Id == id).FirstOrDefault();
+                var product = ctx.Products.Include(p => p.Category).Where(p => p.Id == id).FirstOrDefault();
                 product.Number += number;
                 product.PriceIn = priceIn;
                 // recalculate the priceOut
-                product.PriceOut = 10 * priceIn;
+                if (product.ReturnRate == null)
+                    product.PriceOut = Helper.CalculatePriceout(product.PriceIn, product.Category.ReturnRate);
+                else
+                    product.PriceOut = Helper.CalculatePriceout(product.PriceIn, (float)product.ReturnRate);
                 ctx.SaveChanges();
             }
         }
