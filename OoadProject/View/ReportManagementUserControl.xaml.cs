@@ -29,11 +29,22 @@ namespace OoadProject.View
         private void btnReportByDay_Click(object sender, RoutedEventArgs e)
         {
             viewControl.Content = new ReportByDateUserControl();
+            btnReportByDay.Opacity = 1;
+            btnReportByMonth.Opacity = 0.8;
         }
 
         private void btnReportByMonth_Click(object sender, RoutedEventArgs e)
         {
             viewControl.Content = new ReportByMonthUserControl();
+            btnReportByDay.Opacity = 0.8;
+            btnReportByMonth.Opacity = 1;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            viewControl.Content = new ReportByDateUserControl();
+            btnReportByDay.Opacity = 1;
+            btnReportByMonth.Opacity = 0.8;
         }
     }
 }

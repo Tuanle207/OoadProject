@@ -37,7 +37,7 @@ namespace OoadProject.View
 
         private void AdvancedSearch_Expanded(object sender, RoutedEventArgs e)
         {
-            ListProduct.Height = 310;
+            ListProduct.Height = 350;
         }
 
         private void AdvancedSearch_Collapsed(object sender, RoutedEventArgs e)

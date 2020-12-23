@@ -82,7 +82,7 @@
                 </Label.Content>
             </Label>
             
-            <materialDesign:Card Grid.Column="1" x:Name="ListProcesscingProduct" Height="500" Background="#E0ECF8"  Margin="20 0 20 20" BorderThickness="0" VerticalAlignment="Stretch">
+            <materialDesign:Card Grid.Column="1" x:Name="ListProcesscingProduct" Height="500" Background="#E0ECF8"  Margin="20 0 20 10" BorderThickness="0" VerticalAlignment="Stretch">
                 <ListView ItemsSource="{Binding ProcessingOrders}" x:Name="lvDonDatHang" FontSize="14" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">

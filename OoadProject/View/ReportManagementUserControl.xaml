@@ -5,16 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OoadProject.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <Button x:Name="btnReportByDay" Click="btnReportByDay_Click" Foreground="Black" FontWeight="Bold" Background="#808080" BorderThickness="0" Content="Thống kê tình hình bán hàng theo ngày"  Height="Auto" Width="300" HorizontalAlignment="Left" Margin="2 2 2 2">
+            <Button x:Name="btnReportByDay" Click="btnReportByDay_Click" Foreground="White" FontWeight="Bold" Opacity="1" Background="#695D85" BorderThickness="0" Content="Thống kê tình hình bán hàng theo ngày"  Height="Auto" Width="300" HorizontalAlignment="Left" Margin="2 2 2 2">
             </Button>
-            <Button x:Name="btnReportByMonth" Click="btnReportByMonth_Click" Foreground="Black" FontWeight="Bold" Background="#C0C0C0" BorderThickness="0" Content="Báo cáo doanh thu theo tháng" Height="Auto" Width="300" Margin="2 2 2 2">
+            <Button x:Name="btnReportByMonth" Click="btnReportByMonth_Click" Foreground="White" FontWeight="Bold" Opacity="0.8" Background="#695D85" BorderThickness="0" Content="Báo cáo doanh thu theo tháng" Height="Auto" Width="300" Margin="2 2 2 2">
             </Button>
         </StackPanel>
         <UserControl x:Name="viewControl" Grid.Row="1"/>

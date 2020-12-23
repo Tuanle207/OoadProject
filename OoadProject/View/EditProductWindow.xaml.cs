@@ -52,5 +52,13 @@ namespace OoadProject.View
                 command.Execute(false);
             }
         }
+
+        private void cbStatus_Loaded(object sender, RoutedEventArgs e)
+        {
+            cbStatus.Items.Clear();
+            cbStatus.Items.Add("Đang kinh doanh");
+            cbStatus.Items.Add("Ngừng kinh doanh");
+            cbStatus.SelectedItem = "Đang kinh doanh";
+        }
     }
 }

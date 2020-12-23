@@ -24,7 +24,7 @@ namespace OoadProject.Data.Seedings
                     new Parameter
                     {
                         Id = 2,
-                        Key = ParameterType.MinInputProductNumber,
+                        Key = ParameterType.MaxInputProductNumber,
                         Value = 100
                     },
                     new Parameter
@@ -36,7 +36,7 @@ namespace OoadProject.Data.Seedings
                     new Parameter
                     {
                         Id = 4,
-                        Key = ParameterType.MinAge,
+                        Key = ParameterType.MaxAge,
                         Value = 35
                     }
                 };
