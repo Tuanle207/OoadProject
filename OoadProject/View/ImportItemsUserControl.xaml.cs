@@ -37,5 +37,17 @@ namespace OoadProject.View
             EditOrderWindow w = new EditOrderWindow();
             w.ShowDialog();
         }
+
+        private void btnAddReceipt_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Xác nhận nhập hàng mới?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var command = ((Button)sender).Command;
+
+            if (result == MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(true);
+                MessageBox.Show("Nhập hàng thành công!");
+            }
+        }
     }
 }

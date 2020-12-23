@@ -1,4 +1,5 @@
 ﻿using OoadProject.Data.Entity.Others;
+using OoadProject.Shared.Parameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,25 +18,25 @@ namespace OoadProject.Data.Seedings
                     new Parameter
                     {
                         Id = 1,
-                        Key = "MinInputProductNumber",
+                        Key = ParameterType.MinInputProductNumber,
                         Value = 5
                     },
                     new Parameter
                     {
                         Id = 2,
-                        Key = "MaxInputProductNumber",
+                        Key = ParameterType.MinInputProductNumber,
                         Value = 100
                     },
                     new Parameter
                     {
                         Id = 3,
-                        Key = "MinAge",
+                        Key = ParameterType.MinAge,
                         Value = 18
                     },
                     new Parameter
                     {
                         Id = 4,
-                        Key = "MaxAge",
+                        Key = ParameterType.MinAge,
                         Value = 35
                     }
                 };

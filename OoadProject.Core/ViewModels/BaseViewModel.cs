@@ -29,16 +29,11 @@ namespace OoadProject.Core.ViewModels
             }
         }
 
-        protected User _currentUser;
         protected User CurrentUser
         {
             get
             {
-                if (_currentUser == null)
-                {
-                    _currentUser = Session.CurrentUser;
-                }
-                return _currentUser;
+                return Session.CurrentUser;
             }
         }
     }

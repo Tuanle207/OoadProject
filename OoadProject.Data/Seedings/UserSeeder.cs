@@ -28,7 +28,7 @@ namespace OoadProject.Data.Seedings
             // roles
             var quanTriVienRole = context.Roles.Add(new Role
             {
-                Name = "Quản trị viên",
+                Name = RoleNames.Admin,
                 Permissions = new List<Permission>()
                 {
                     salePermission,
@@ -43,7 +43,7 @@ namespace OoadProject.Data.Seedings
             });
             var thuKhoRole = context.Roles.Add(new Role
             {
-                Name = "Thủ kho",
+                Name = RoleNames.Warehouseman,
                 Permissions = new List<Permission>()
                 {
                     productPermission,
@@ -53,7 +53,7 @@ namespace OoadProject.Data.Seedings
             });
             var nhanVienBanHangRole = context.Roles.Add(new Role
             {
-                Name = "Nhân viên bán hàng",
+                Name = RoleNames.SalesPerson,
                 Permissions = new List<Permission>()
                 {
                     salePermission,

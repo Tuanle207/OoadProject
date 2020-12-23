@@ -30,6 +30,7 @@ namespace OoadProject.Data.Repository
                     .FilterDeleted()
                     .Where(u => u.Email == email)
                     .Include(u => u.Role)
+                    .Include(u => u.Role.Permissions)
                     .FirstOrDefault();
             }
         }

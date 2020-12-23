@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using OoadProject.Data.Entity.AppUser;
+using OoadProject.Shared.Permissions;
 
 namespace OoadProject.Core.ViewModels.Users
 {
@@ -83,9 +84,19 @@ namespace OoadProject.Core.ViewModels.Users
                     if (p != null && (bool)p == true)
                     {
                         var authenticatedUser = _userService.Login(LoginDto);
+
+                        // setup session and permissions info
                         Session.SetSessionUser(authenticatedUser);
                         UserPerrmissions = new ObservableCollection<Permission>(_roleService.GetRolePermissions(authenticatedUser.RoleId));
-                        LoginDto = new LoginDto();
+
+                        // check if this is a master admin?
+                        if (MasterAdmins.Emails.Contains(authenticatedUser.Email))
+                            Session.SetIsMasterAdmin(true);
+                        else
+                            Session.SetIsMasterAdmin(false);
+
+                        // reset input
+                        LoginDto.Password = "";
                     }
                 } 
             );
@@ -99,6 +110,7 @@ namespace OoadProject.Core.ViewModels.Users
                     {
                         Session.SetSessionUser(null);
                         UserPerrmissions = new ObservableCollection<Permission>();
+                        Session.SetIsMasterAdmin(false);
                     }
                 }
             );

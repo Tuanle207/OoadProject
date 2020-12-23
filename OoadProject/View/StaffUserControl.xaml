@@ -19,9 +19,7 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid>
-            
-        </Grid>
+        
         <Button
              Background="#596FB5" BorderThickness="0"
             x:Name="btnAddUser"
@@ -42,7 +40,7 @@
             Command="{Binding PrepareForUpdateUser}"
             Grid.Column="1" Width="220" Height="60"
             materialDesign:ButtonAssist.CornerRadius="10"
-            ToolTip="MaterialDesignRaisedButton with Round Corners">
+            ToolTip="Cập nhật thông tin nhân viên">
             <StackPanel Orientation="Horizontal" >
                 <TextBlock Text="Sửa nhân viên"  VerticalAlignment="Center" FontSize="16" Margin="0 0 30 0"/>
                 <materialDesign:PackIcon VerticalAlignment="Center" Kind="AccountEdit" Width="35" Height="35"/>
@@ -54,7 +52,7 @@
             Click="btnDelete_Click"
             Grid.Column="2" Width="220" Height="60"
             materialDesign:ButtonAssist.CornerRadius="10"
-            ToolTip="MaterialDesignRaisedButton with Round Corners"
+            ToolTip="Xóa nhân viên này with Round Corners"
             Command="{Binding DeleteUser}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Xoá nhân viên" VerticalAlignment="Center" FontSize="16" Margin="0 0 30 0"/>
@@ -81,6 +79,7 @@
                     <GridViewColumn Header="STT" DisplayMemberBinding="{Binding Id}" Width="100"></GridViewColumn>
                     <GridViewColumn Header="Tên nhân viên" DisplayMemberBinding="{Binding Name}" Width="222"></GridViewColumn>
                     <GridViewColumn Header="Chức vụ" DisplayMemberBinding="{Binding Role.Name}" Width="148"></GridViewColumn>
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" Width="148"></GridViewColumn>
                     <GridViewColumn Header="Ngày vào làm" DisplayMemberBinding="{Binding CreationTime}" Width="148"></GridViewColumn>
                     <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding PhoneNumber}" Width="148"></GridViewColumn>
                     <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding Dob}" Width="148"></GridViewColumn>
@@ -98,5 +97,6 @@
                 <Binding Path="UserPerrmissions" Converter="{StaticResource FeaturePermissionConverter}" ConverterParameter="User" />
             </Grid.Visibility>
         </Grid>
+        <Button x:Name="btnCheckPermission" Command="{Binding CheckModificationPermission}" Visibility="Hidden" />
     </Grid>
 </UserControl>
