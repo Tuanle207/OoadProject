@@ -40,5 +40,19 @@
     <Orders:OrderCheckMenuItemVisibilityConverter x:Key="OrderCheckMenuItemVisibilityConverter" />
     <Users:FeaturePermissionConverter x:Key="FeaturePermissionConverter" />
 
-
+    <!--Style-->
+    <Style TargetType="GroupBox">
+        <Setter Property="BorderBrush"
+                Value="Black" />
+        <Setter Property="HeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"
+                               FontSize="15"
+                               Foreground="#FF0E2291"
+                               FontWeight="SemiBold" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
