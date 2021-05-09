@@ -10,79 +10,176 @@
         Title="Thêm nhân viên mới" Height="400" Width="800"
         WindowStartupLocation="CenterScreen"
         DataContext="{StaticResource UserViewModel}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.3*"></RowDefinition>
-            <RowDefinition Height="0.9*"></RowDefinition>
-            <RowDefinition Height="0.35*" ></RowDefinition>
-            <RowDefinition Height="0.3*" ></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Label Grid.ColumnSpan="3" Content="THÊM NHÂN VIÊN" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" ></Label>
-        <Label Grid.Column="0" Grid.Row="1" Content="Thông tin nhân viên" VerticalContentAlignment="Top" FontWeight="Bold" FontSize="15" Padding="0" Margin="10 0 0 0"></Label>
-        <StackPanel Grid.Column="1" Grid.Row="1">
-            <TextBlock Text="Họ và tên" FontWeight="Bold" Margin="0 0 0 8" FontSize="15"></TextBlock>
-            <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="0 0 10 0">
-                <TextBox x:Name="tbName" Text="{Binding EditingUser.Name, Mode=TwoWay}" BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Họ và tên" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2"></TextBox>
-            </Border>
-            <TextBlock Text="Địa chỉ" FontWeight="Bold" Margin="0 20 0 8" FontSize="15"></TextBlock>
-            <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="0 0 10 0">
-                <TextBox x:Name="tbAddress" Text="{Binding EditingUser.Address, Mode=TwoWay}" BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Địa chỉ" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2"></TextBox>
-            </Border>
-        </StackPanel>
-        <StackPanel Grid.Column="2" Grid.Row="1">
-            <TextBlock Text="Số điện thoại" FontWeight="Bold" Margin="0 0 0 8" FontSize="15"></TextBlock>
-            <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="0 0 10 0">
-                <TextBox x:Name="tbPhoneNumber" Text="{Binding EditingUser.PhoneNumber, Mode=TwoWay}" BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Số điện thoại" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2"></TextBox>
-            </Border>
-            <TextBlock Text="Ngày sinh" FontWeight="Bold" Margin="0 20 0 8" FontSize="15"></TextBlock>
-            <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="0 0 10 0">
-                <DatePicker materialDesign:HintAssist.Hint="Ngày sinh" BorderThickness="0" Margin="4 0 0 0" FontSize="14" Height="35.2" >
-                    <DatePicker.SelectedDate>
-                        <Binding Path="EditingUser.Dob" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <Users:DobValidation/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </DatePicker.SelectedDate>
-                </DatePicker>
-            </Border>
-        </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="2">
-            <TextBlock Text="Email" FontWeight="Bold" Margin="0 0 0 8" FontSize="15"></TextBlock>
-            <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="0 0 10 0">
-                <TextBox x:Name="tbEmail" BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Email" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
-                    <TextBox.Text>
-                        <Binding Path="EditingUser.Email" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <Users:UserEmailValidation />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </Border>
-        </StackPanel>
-        <StackPanel Grid.Column="2" Grid.Row="2">
-            <TextBlock Text="Chức vụ" FontWeight="Bold" Margin="0 0 0 8" FontSize="15"></TextBlock>
-            <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="0 0 10 0">
-                <ComboBox ItemsSource="{Binding Roles}" SelectedValue="{Binding EditingUser.Role, Mode=TwoWay}" materialDesign:HintAssist.Hint="Chức vụ" BorderThickness="0" Margin="4 0 0 0" FontSize="14" Height="35.2"></ComboBox>
-            </Border>
-        </StackPanel>
-        <!--Button thêm-->
-        <Button
-            x:Name="btnAdd"
-            Grid.Column="2" Grid.Row="3" Width="150" Height="40"
-            Style="{StaticResource MaterialDesignRaisedDarkButton}"
-            materialDesign:ButtonAssist.CornerRadius="10"
-            ToolTip="Lưu thông tin nhân viên mới" Margin="104.4,4.6,9.6,0" VerticalAlignment="Top" 
-            Click="btnAdd_Click" Background="#596FB5" BorderThickness="0"
-            Command="{Binding SaveEditingUser}">
-            <TextBlock Text="Lưu" FontSize="15"/>
-            <!--<Button.Style>
+    <materialDesign:Card x:Name="mdc_ThongTinDatTiec"
+                         Margin="10,10,10,5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*"></RowDefinition>
+                <RowDefinition Height="0.9*"></RowDefinition>
+                <RowDefinition Height="0.35*"></RowDefinition>
+                <RowDefinition Height="0.3*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.ColumnSpan="3"
+                   Content="THÊM NHÂN VIÊN"
+                   FontSize="20"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontWeight="Bold"></Label>
+            <Label Grid.Column="0"
+                   Grid.Row="1"
+                   Content="Thông tin nhân viên"
+                   VerticalContentAlignment="Top"
+                   FontWeight="Bold"
+                   FontSize="15"
+                   Padding="0"
+                   Margin="10 0 0 0"></Label>
+            <StackPanel Grid.Column="1"
+                        Grid.Row="1">
+                <TextBlock Text="Họ và tên"
+                           FontWeight="Bold"
+                           Margin="0 0 0 8"
+                           FontSize="15"></TextBlock>
+                <Border BorderThickness="1"
+                        BorderBrush="#FFB1AEAE"
+                        CornerRadius="5"
+                        Margin="0 0 10 0">
+                    <TextBox x:Name="tbName"
+                             Text="{Binding EditingUser.Name, Mode=TwoWay}"
+                             BorderBrush="#00B1AEAE"
+                             materialDesign:HintAssist.Hint="Họ và tên"
+                             Margin="4 0 0 0"
+                             FontSize="14"
+                             Padding="0 2 0 2"></TextBox>
+                </Border>
+                <TextBlock Text="Địa chỉ"
+                           FontWeight="Bold"
+                           Margin="0 20 0 8"
+                           FontSize="15"></TextBlock>
+                <Border BorderThickness="1"
+                        BorderBrush="#FFB1AEAE"
+                        CornerRadius="5"
+                        Margin="0 0 10 0">
+                    <TextBox x:Name="tbAddress"
+                             Text="{Binding EditingUser.Address, Mode=TwoWay}"
+                             BorderBrush="#00B1AEAE"
+                             materialDesign:HintAssist.Hint="Địa chỉ"
+                             Margin="4 0 0 0"
+                             FontSize="14"
+                             Padding="0 2 0 2"></TextBox>
+                </Border>
+            </StackPanel>
+            <StackPanel Grid.Column="2"
+                        Grid.Row="1">
+                <TextBlock Text="Số điện thoại"
+                           FontWeight="Bold"
+                           Margin="0 0 0 8"
+                           FontSize="15"></TextBlock>
+                <Border BorderThickness="1"
+                        BorderBrush="#FFB1AEAE"
+                        CornerRadius="5"
+                        Margin="0 0 10 0">
+                    <TextBox x:Name="tbPhoneNumber"
+                             Text="{Binding EditingUser.PhoneNumber, Mode=TwoWay}"
+                             BorderBrush="#00B1AEAE"
+                             materialDesign:HintAssist.Hint="Số điện thoại"
+                             Margin="4 0 0 0"
+                             FontSize="14"
+                             Padding="0 2 0 2"></TextBox>
+                </Border>
+                <TextBlock Text="Ngày sinh"
+                           FontWeight="Bold"
+                           Margin="0 20 0 8"
+                           FontSize="15"></TextBlock>
+                <Border BorderThickness="1"
+                        BorderBrush="#FFB1AEAE"
+                        CornerRadius="5"
+                        Margin="0 0 10 0">
+                    <DatePicker materialDesign:HintAssist.Hint="Ngày sinh"
+                                BorderThickness="0"
+                                Margin="4 0 0 0"
+                                FontSize="14"
+                                Height="35.2">
+                        <DatePicker.SelectedDate>
+                            <Binding Path="EditingUser.Dob"
+                                     Mode="TwoWay"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <Users:DobValidation />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </DatePicker.SelectedDate>
+                    </DatePicker>
+                </Border>
+            </StackPanel>
+            <StackPanel Grid.Column="1"
+                        Grid.Row="2">
+                <TextBlock Text="Email"
+                           FontWeight="Bold"
+                           Margin="0 0 0 8"
+                           FontSize="15"></TextBlock>
+                <Border BorderThickness="1"
+                        BorderBrush="#FFB1AEAE"
+                        CornerRadius="5"
+                        Margin="0 0 10 0">
+                    <TextBox x:Name="tbEmail"
+                             BorderBrush="#00B1AEAE"
+                             materialDesign:HintAssist.Hint="Email"
+                             Margin="4 0 0 0"
+                             FontSize="14"
+                             Padding="0 2 0 2">
+                        <TextBox.Text>
+                            <Binding Path="EditingUser.Email"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <Users:UserEmailValidation />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </Border>
+            </StackPanel>
+            <StackPanel Grid.Column="2"
+                        Grid.Row="2">
+                <TextBlock Text="Chức vụ"
+                           FontWeight="Bold"
+                           Margin="0 0 0 8"
+                           FontSize="15"></TextBlock>
+                <Border BorderThickness="1"
+                        BorderBrush="#FFB1AEAE"
+                        CornerRadius="5"
+                        Margin="0 0 10 0">
+                    <ComboBox ItemsSource="{Binding Roles}"
+                              SelectedValue="{Binding EditingUser.Role, Mode=TwoWay}"
+                              materialDesign:HintAssist.Hint="Chức vụ"
+                              BorderThickness="0"
+                              Margin="4 0 0 0"
+                              FontSize="14"
+                              Height="35.2"></ComboBox>
+                </Border>
+            </StackPanel>
+            <!--Button thêm-->
+            <Button x:Name="btnAdd"
+                    Grid.Column="2"
+                    Grid.Row="3"
+                    Width="150"
+                    Height="40"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="10"
+                    ToolTip="Lưu thông tin nhân viên mới"
+                    Margin="104.4,4.6,9.6,0"
+                    VerticalAlignment="Top"
+                    Click="btnAdd_Click"
+                    Background="#596FB5"
+                    BorderThickness="0"
+                    Command="{Binding SaveEditingUser}">
+                <TextBlock Text="Lưu"
+                           FontSize="15" />
+                <!--<Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="IsEnabled" Value="False" /> 
                     <Style.Triggers>
@@ -90,6 +187,7 @@
                     </Style.Triggers>
                 </Style>
             </Button.Style>-->
-        </Button>
-    </Grid>
+            </Button>
+        </Grid>
+    </materialDesign:Card>
 </Window>
