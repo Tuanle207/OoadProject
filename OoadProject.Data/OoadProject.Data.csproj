@@ -31,6 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Data.v19.2, Version=19.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v19.2, Version=19.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +45,7 @@
   <ItemGroup>
     <Compile Include="AppDbContext.cs" />
     <Compile Include="Entity\AppCustomer\Customer.cs" />
+    <Compile Include="Entity\AppCustomer\CustomerLevel.cs" />
     <Compile Include="Entity\AppCustomer\Invoice.cs" />
     <Compile Include="Entity\AppCustomer\InvoiceProduct.cs" />
     <Compile Include="Entity\AppCustomer\WarrantyOrder.cs" />
@@ -59,15 +62,16 @@
     <Compile Include="Entity\AppUser\Role.cs" />
     <Compile Include="Entity\AppUser\User.cs" />
     <Compile Include="Entity\Others\Parameter.cs" />
-    <Compile Include="Migrations\202012230113335_Initial.cs" />
-    <Compile Include="Migrations\202012230113335_Initial.designer.cs">
-      <DependentUpon>202012230113335_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202105130715046_Initial.cs" />
+    <Compile Include="Migrations\202105130715046_Initial.designer.cs">
+      <DependentUpon>202105130715046_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AggregateDto\ProductAggregateDto.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
+    <Compile Include="Repository\CustomerLevelRepository.cs" />
     <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Repository\InvoiceProductRepository.cs" />
     <Compile Include="Repository\InvoiceRepository.cs" />
@@ -83,6 +87,8 @@
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\WarrantyOrderRepository.cs" />
     <Compile Include="Seedings\CategorySeeder.cs" />
+    <Compile Include="Seedings\CustomerLevelSeeder.cs" />
+    <Compile Include="Seedings\CustomerSeeder.cs" />
     <Compile Include="Seedings\ManufactureSeeder.cs" />
     <Compile Include="Seedings\ParameterSeeder.cs" />
     <Compile Include="Seedings\ProductSeeder.cs" />
@@ -94,8 +100,8 @@
     <Content Remove="obj\**\*.cs" />
     <Compile Remove="obj\**\*.cs" />
     <EmbeddedResource Remove="obj\**\*.cs" />
-    <EmbeddedResource Include="Migrations\202012230113335_Initial.resx">
-      <DependentUpon>202012230113335_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105130715046_Initial.resx">
+      <DependentUpon>202105130715046_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <None Remove="obj\**\*.cs" />
   </ItemGroup>

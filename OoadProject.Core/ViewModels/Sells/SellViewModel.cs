@@ -1,4 +1,5 @@
-﻿using OoadProject.Core.Services.AppProduct;
+﻿using OoadProject.Core.Services.AppCustomer;
+using OoadProject.Core.Services.AppProduct;
 using OoadProject.Core.ViewModels.Sells.Dtos;
 using System;
 using System.Collections.Generic;
@@ -196,7 +197,7 @@ namespace OoadProject.Core.ViewModels.Sells
                 p => true,
                 p =>
                 {
-                    var customer = _customerService.GetCustomer(Invoice.PhoneNumber);
+                    var customer = _customerService.GetCustomerByPhone(Invoice.PhoneNumber);
                     if (customer != null)
                         Invoice.CustomerName = customer.Name;
                     else

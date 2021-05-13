@@ -1,4 +1,5 @@
 ﻿using OoadProject.Data.Entity.AppProduct;
+using OoadProject.Data.Entity.AppCustomer;
 using System;
 using System.Collections.Generic;
 using System.Linq;

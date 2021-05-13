@@ -45,7 +45,7 @@ namespace OoadProject.View
 
                 if (result == MessageBoxResult.OK && command.CanExecute(null))
                 {
-                    btnCheckPermission.Command.Execute(null);
+                    //btnCheckPermission.Command.Execute(null);
                     command.Execute(true);
                 }
                 else if (result != MessageBoxResult.OK && command.CanExecute(null))
@@ -70,7 +70,7 @@ namespace OoadProject.View
 
                 if (result == MessageBoxResult.OK && command.CanExecute(null))
                 {
-                    btnCheckPermission.Command.Execute(null);
+                   // btnCheckPermission.Command.Execute(null);
                     command.Execute(true);
                 }
                 else if (result != MessageBoxResult.OK && command.CanExecute(null))
@@ -92,7 +92,7 @@ namespace OoadProject.View
 
                 if (command.CanExecute(null))
                 {
-                    btnCheckPermission.Command.Execute(null);
+                    //btnCheckPermission.Command.Execute(null);
                     command.Execute(true);
                     new UpdateInfoStaffWindow().ShowDialog();
                 }
