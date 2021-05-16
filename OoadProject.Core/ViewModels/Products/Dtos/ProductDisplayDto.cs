@@ -11,6 +11,9 @@ namespace OoadProject.Core.ViewModels.Products.Dtos
     {
         private int _status;
         private float? _returnRate;
+        private string _photo;
+
+
         public int Id { get; set; }
         public string Name { get; set; }
         public int CategoryId { get; set; }
@@ -21,6 +24,7 @@ namespace OoadProject.Core.ViewModels.Products.Dtos
         public int WarrantyPeriod { get; set; }
         public float? ReturnRate { get=> _returnRate; set { _returnRate = value; OnPropertyChanged(); } }
         public int Status { get => _status; set { _status = value; OnPropertyChanged(); } }
+        public string Photo { get => _photo; set { _photo = value; OnPropertyChanged(); } }
         public Category Category { get; set; }
         public Manufacturer Manufacturer { get; set; }
         public string CheckReturnRateChange { get; set; }

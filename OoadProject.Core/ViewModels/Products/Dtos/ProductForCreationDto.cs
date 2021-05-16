@@ -16,6 +16,7 @@ namespace OoadProject.Core.ViewModels.Products.Dtos
         private int _warrantyPeriod;
         private float? _returnRate;
         private int _status;
+        private string _photo;
 
         public string Name { get => _name; set { _name = value; OnPropertyChanged(); } }
         public int CategoryId { get => _categoryId; set { _categoryId = value; OnPropertyChanged(); } }
@@ -25,5 +26,7 @@ namespace OoadProject.Core.ViewModels.Products.Dtos
         public int WarrantyPeriod { get => _warrantyPeriod; set { _warrantyPeriod = value; OnPropertyChanged(); } }
         public float? ReturnRate { get => _returnRate; set { _returnRate = value; OnPropertyChanged(); } }
         public int Status { get => _status; set { _status = 0; OnPropertyChanged(); } }
+        public string Photo { get => _photo; set { _photo = value; OnPropertyChanged(); } }
+
     }
 }

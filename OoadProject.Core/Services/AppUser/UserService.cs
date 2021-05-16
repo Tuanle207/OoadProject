@@ -78,7 +78,7 @@ namespace OoadProject.Core.Services.AppUser
             if (userForUpdate.Photo != currentUser.Photo)
             {
                 // delete old photo
-                var oldPhotoName = _userRepository.getUserPhotoById((int)userForUpdate.Id);
+                var oldPhotoName = _userRepository.GetUserPhotoById((int)userForUpdate.Id);
                 if (oldPhotoName != DefaultPhotoNames.User)
                 {
                     try
@@ -87,8 +87,7 @@ namespace OoadProject.Core.Services.AppUser
                     }
                     catch
                     {
-                        System.Windows.MessageBox.Show("Đã xảy ra lỗi khi xử lí file!");
-                        return;
+
                     }
                 }
                 
@@ -107,20 +106,31 @@ namespace OoadProject.Core.Services.AppUser
                 }
             } else
             {
-                user.Photo = _userRepository.getUserPhotoById((int)userForUpdate.Id);
+                user.Photo = _userRepository.GetUserPhotoById((int)userForUpdate.Id);
             }
 
             // save user
             var role = _roleRepository.GetRoleByName(userForUpdate.Role);
             user.Id = (int)userForUpdate.Id;
             user.RoleId = role.Id;
-            Console.WriteLine("user.Password");
-            Console.WriteLine(user.Password);
             _userRepository.Update(user);
         }
 
         public bool DeleteUser(User user)
         {
+            var oldPhotoName = _userRepository.GetUserPhotoById(user.Id);
+            if (oldPhotoName != DefaultPhotoNames.Product)
+            {
+                try
+                {
+                    File.Delete(GetFullPath(oldPhotoName));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error");
+                    Console.WriteLine(e.Message);
+                }
+            }
             return _userRepository.Delete(user.Id);
         }
 
@@ -160,8 +170,6 @@ namespace OoadProject.Core.Services.AppUser
         private string GetImageName()
         {
             var now = DateTime.Now.ToString("HHmmss_ddMMyyyy");
-            Console.WriteLine("now");
-            Console.WriteLine(now);
             return $"user_{now}.jpg";
         }   
     }

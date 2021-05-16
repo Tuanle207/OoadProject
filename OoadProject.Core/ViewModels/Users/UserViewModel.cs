@@ -44,9 +44,6 @@ namespace OoadProject.Core.ViewModels.Users
             set
             {
                 _editingUser = value;
-
-                Console.WriteLine("EditingUser.Photo");
-                Console.WriteLine($"The value is: {EditingUser.Photo}");
                 OnPropertyChanged();
             }
         }
@@ -242,9 +239,7 @@ namespace OoadProject.Core.ViewModels.Users
         private string GetPhotoPath(string fileName)
         {
             string destPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
-            Console.WriteLine(destPath);
             string destinationFile = Path.Combine(destPath, "Photos", "Users", fileName);
-            Console.WriteLine(destinationFile);
             return destinationFile;
         }
     }

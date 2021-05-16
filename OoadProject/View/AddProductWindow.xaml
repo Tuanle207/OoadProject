@@ -50,20 +50,6 @@
                 <ComboBox ItemsSource="{Binding Categories}" DisplayMemberPath="Name" SelectedValue="{Binding SelectedCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Loại mặt hàng" BorderThickness="0" Margin="4 0 0 0" FontSize="14" Height="35.2"></ComboBox>
             </Border>
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="2">
-            <TextBlock Text="Số lượng" FontWeight="Bold" Margin="10 0 0 8" FontSize="15"></TextBlock>
-            <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="10 0 10 0">
-                <TextBox x:Name="count" IsEnabled="False"  BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Số lượng" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
-                    <TextBox.Text>
-                        <Binding Path="NewProduct.Number" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <vm:IntValidation></vm:IntValidation>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </Border>
-        </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="3">
             <TextBlock Text="Giá nhập" FontWeight="Bold" Margin="10 0 0 8" FontSize="15"></TextBlock>
             <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="10 0 10 0">
@@ -78,7 +64,7 @@
                 </TextBox>
             </Border>
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="3">
+        <StackPanel Grid.Column="1" Grid.Row="2">
             <TextBlock Text="Thời hạn bảo hành (tháng)" FontWeight="Bold" Margin="10 0 0 8" FontSize="15"></TextBlock>
             <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="10 0 10 0">
                 <TextBox x:Name="waranty" BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Thời hạn bảo hành" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
@@ -113,11 +99,16 @@
                 <Button Grid.Column="1" Foreground="Black" Margin="5" Content="Reset" FontSize="10" Command="{Binding ResetReturnRateAdd}"></Button>
             </Grid>
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="4">
-            <TextBlock Text="Tình trạng" FontWeight="Bold" Margin="10 0 0 8" FontSize="15"></TextBlock>
-            <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="10 0 10 0">
-                <TextBox Text="Đang kinh doanh" IsReadOnly="True" BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Tên sản phẩm" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2"></TextBox>
-            </Border>
+        <StackPanel Grid.Column="1" Grid.Row="3" Grid.RowSpan="2">
+            <Image 
+                Source="{Binding NewProduct.Photo, Mode=OneWay}"
+                Width="200"
+                Height="120"
+                Margin="0 10 0 0"
+             />
+            <Button Grid.Row="3" Width="100" Command="{Binding SelectPhotoCreate}">
+                <TextBlock>Chọn ảnh</TextBlock>
+            </Button>
         </StackPanel>
         <!--Button thêm-->
         <Button x:Name="btnAddProduct" Click="btnAddProduct_Click" Command="{Binding AddProduct}" Grid.Column="1" Grid.Row="5" Margin="65 8 65 8" FontSize="15" FontWeight="Black" Content="Thêm mới" Background="#596FB5" BorderThickness="0">
@@ -128,10 +119,8 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Path=(Validation.HasError), ElementName=nameProduct}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=count}" Value="False"/>
                                 <Condition Binding="{Binding Path=(Validation.HasError), ElementName=priceIn}" Value="False"/>
                                 <Condition Binding="{Binding Path=(Validation.HasError), ElementName=waranty}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=returnRate}" Value="False"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="IsEnabled" Value="True"/>
                         </MultiDataTrigger>

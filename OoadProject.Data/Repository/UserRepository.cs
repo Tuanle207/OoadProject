@@ -58,7 +58,7 @@ namespace OoadProject.Data.Repository
             }
         }
 
-        public string getUserPhotoById(int id)
+        public string GetUserPhotoById(int id)
         {
             using (var ctx = new AppDbContext())
             {
