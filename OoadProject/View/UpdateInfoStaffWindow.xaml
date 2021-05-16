@@ -22,7 +22,16 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Grid.ColumnSpan="3" Content="CẬP NHẬT THÔNG TIN NHÂN VIÊN" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" ></Label>
-        <Label Grid.Column="0" Grid.Row="1" Content="Thông tin nhân viên" VerticalContentAlignment="Top" FontWeight="Bold" FontSize="15" Padding="0" Margin="10 0 0 0"></Label>
+        <!--<Label Grid.Column="0" Grid.Row="1" Content="Thông tin nhân viên" VerticalContentAlignment="Top" FontWeight="Bold" FontSize="15" Padding="0" Margin="10 0 0 0"></Label>-->
+
+        <Image Grid.Row="1"
+                Grid.RowSpan="2"
+                Margin="40 20"
+                Source="{Binding EditingUser.Photo, Mode=OneWay}"
+             />
+        <Button Grid.Row="3" Command="{Binding SelectPhoto}">
+            <TextBlock>Chọn ảnh</TextBlock>
+        </Button>
         <StackPanel Grid.Column="1" Grid.Row="1">
             <TextBlock Text="Họ và tên" FontWeight="Bold" Margin="0 0 0 8" FontSize="15"></TextBlock>
             <Border BorderThickness="1" BorderBrush="#FFB1AEAE" CornerRadius="5" Margin="0 0 10 0">

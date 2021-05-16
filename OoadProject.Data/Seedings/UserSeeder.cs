@@ -1,11 +1,10 @@
 ﻿using OoadProject.Data.Entity.AppUser;
+using OoadProject.Shared.AppConsts;
 using OoadProject.Shared.Permissions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace OoadProject.Data.Seedings
 {
@@ -75,7 +74,8 @@ namespace OoadProject.Data.Seedings
                 CreationTime = DateTime.Now,
                 IsDeleted = false,
                 Dob = new DateTime(2000, 1, 1),
-                PhoneNumber = "0369636841"
+                PhoneNumber = "0369636841",
+                Photo = DefaultPhotoNames.User
             });
             var nhanVien1User = context.Users.Add(new User
             {
@@ -88,7 +88,8 @@ namespace OoadProject.Data.Seedings
                 CreationTime = DateTime.Now,
                 IsDeleted = false,
                 Dob = new DateTime(2000, 1, 1),
-                PhoneNumber = "0378678408"
+                PhoneNumber = "0378678408",
+                Photo = DefaultPhotoNames.User
             });
             var nhanVien2User = context.Users.Add(new User
             {
@@ -101,7 +102,8 @@ namespace OoadProject.Data.Seedings
                 CreationTime = DateTime.Now,
                 IsDeleted = false,
                 Dob = new DateTime(2000, 1, 1),
-                PhoneNumber = "04378432980"
+                PhoneNumber = "04378432980",
+                Photo = DefaultPhotoNames.User
             });
             var nhanVien3User = context.Users.Add(new User
             {
@@ -114,7 +116,36 @@ namespace OoadProject.Data.Seedings
                 CreationTime = DateTime.Now,
                 IsDeleted = false,
                 Dob = new DateTime(2000, 1, 1),
-                PhoneNumber = "01224578220"
+                PhoneNumber = "01224578220",
+                Photo = DefaultPhotoNames.User
+            });
+            var nhanVien4User = context.Users.Add(new User
+            {
+                Id = 4,
+                Name = "Trần Duy Khánh",
+                Email = "tranduykhanh@gmail.com",
+                Password = HashPassword("test1234"),
+                Address = "Thành phố Hồ Chí Minh",
+                RoleId = nhanVienBanHangRole.Id,
+                CreationTime = DateTime.Now,
+                IsDeleted = false,
+                Dob = new DateTime(2000, 1, 1),
+                PhoneNumber = "01224578220",
+                Photo = DefaultPhotoNames.User
+            });
+            var nhanVien5User = context.Users.Add(new User
+            {
+                Id = 4,
+                Name = "Dương Thành Vương",
+                Email = "duongthanhvuong@gmail.com",
+                Password = HashPassword("test1234"),
+                Address = "Thành phố Hồ Chí Minh",
+                RoleId = thuKhoRole.Id,
+                CreationTime = DateTime.Now,
+                IsDeleted = false,
+                Dob = new DateTime(2000, 1, 1),
+                PhoneNumber = "01224578220",
+                Photo = DefaultPhotoNames.User
             });
             context.SaveChanges();
         }

@@ -16,6 +16,7 @@ namespace OoadProject.Core.ViewModels.Users.Dtos
         private string _address;
         private DateTime _creationTime;
         private string _email;
+        private string _photo;
 
         public int? Id { get => _id; set { _id = value; OnPropertyChanged(); } }
         public string Name { get => _name; set { _name = value; OnPropertyChanged(); } }
@@ -25,5 +26,6 @@ namespace OoadProject.Core.ViewModels.Users.Dtos
         public string Address { get => _address; set { _address = value; OnPropertyChanged(); } }
         public DateTime CreationTime { get => _creationTime; set { _creationTime = value; OnPropertyChanged(); } }
         public string Email { get => _email; set { _email = value; OnPropertyChanged(); } }
+        public string Photo { get => _photo; set { _photo = value; OnPropertyChanged(); } }
     }
 }

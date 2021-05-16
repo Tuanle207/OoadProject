@@ -49,6 +49,22 @@ namespace OoadProject.Data.Repository
                     throw new Exception("Người dùng này không tồn tại!");
             }
         }
+
+        public int CountUsers()
+        {
+            using (var ctx = new AppDbContext())
+            {
+                return ctx.Users.Count();
+            }
+        }
+
+        public string getUserPhotoById(int id)
+        {
+            using (var ctx = new AppDbContext())
+            {
+                return ctx.Users.Where(x => x.Id == id).Select(x => x.Photo).FirstOrDefault();
+            }
+        }
     }
 
     static class Extension

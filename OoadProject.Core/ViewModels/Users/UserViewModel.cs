@@ -1,14 +1,15 @@
-﻿using OoadProject.Core.AppSession;
+﻿using Microsoft.Win32;
+using OoadProject.Core.AppSession;
 using OoadProject.Core.Services.AppUser;
 using OoadProject.Core.ViewModels.Users.Dtos;
 using OoadProject.Data.Entity.AppUser;
+using OoadProject.Shared.AppConsts;
 using OoadProject.Shared.Permissions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -43,6 +44,9 @@ namespace OoadProject.Core.ViewModels.Users
             set
             {
                 _editingUser = value;
+
+                Console.WriteLine("EditingUser.Photo");
+                Console.WriteLine($"The value is: {EditingUser.Photo}");
                 OnPropertyChanged();
             }
         }
@@ -60,13 +64,17 @@ namespace OoadProject.Core.ViewModels.Users
             set
             {
                 _chosenUser = value;
+                if (value != null)
+                    _chosenUser.Photo = GetPhotoPath(value.Photo);
                 OnPropertyChanged();
             }
         }
+        public string PhotoSrc { get; set; }
 
 
         // public command properties
         public ICommand SaveEditingUser { get; set; }
+        public ICommand SelectPhoto { get; set; }
         public ICommand DeleteUser { get; set; }
         public ICommand ReloadUsers { get; set; }
         public ICommand GrantNewPassword { get; set; }
@@ -80,7 +88,13 @@ namespace OoadProject.Core.ViewModels.Users
             _roleService = new RoleService();
 
             Users = new ObservableCollection<User>(_userService.GetUsers());
-            EditingUser = new UserForCreationDto { CreationTime = DateTime.Now, Dob = new DateTime(2000, 1, 1) };
+            EditingUser = new UserForCreationDto
+            {
+                CreationTime = DateTime.Now,
+                Dob = new DateTime(2000, 1, 1),
+                Photo = GetPhotoPath(DefaultPhotoNames.User)
+            };
+
             Roles = new ObservableCollection<string>(_roleService.GetAllRolesNames());
 
             SaveEditingUser = new RelayCommand<object>
@@ -93,9 +107,31 @@ namespace OoadProject.Core.ViewModels.Users
                         if (EditingUser.Id == null)
                             _userService.AddUser(EditingUser);
                         else
-                            _userService.UpdateUser(EditingUser);
+                            _userService.UpdateUser(EditingUser, ChosenUser);
 
                         Users = new ObservableCollection<User>(_userService.GetUsers());
+                    }
+                }
+            );
+
+            SelectPhoto = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                OpenFileDialog fileDialog = new OpenFileDialog();
+                fileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+                if (fileDialog.ShowDialog() == true)
+                {
+                    EditingUser.Photo = PhotoSrc = fileDialog.FileName;
+                    Console.WriteLine(EditingUser.Photo);
+                    Console.WriteLine(PhotoSrc);
+                    Console.WriteLine(fileDialog.FileName);
+
+                    }
+                    else
+                    {
+                        PhotoSrc = null;
                     }
                 }
             );
@@ -132,7 +168,13 @@ namespace OoadProject.Core.ViewModels.Users
                 p => true,
                 p =>
                 {
-                    EditingUser = new UserForCreationDto { CreationTime = DateTime.Now, Dob = new DateTime(2000, 1, 1) };
+                    EditingUser = new UserForCreationDto 
+                    { 
+                        CreationTime = DateTime.Now, 
+                        Dob = new DateTime(2000, 1, 1),
+                        Photo = GetPhotoPath(DefaultPhotoNames.User)
+                    };
+                    if (Roles.Count > 0) EditingUser.Role = Roles.FirstOrDefault();
                 }
             );
 
@@ -142,6 +184,7 @@ namespace OoadProject.Core.ViewModels.Users
                 p =>
                 {
                     EditingUser = Mapper.Map<UserForCreationDto>(ChosenUser);
+                    EditingUser.Photo = GetPhotoPath(EditingUser.Photo != null ? EditingUser.Photo : DefaultPhotoNames.User);
                 }
             );
 
@@ -198,6 +241,15 @@ namespace OoadProject.Core.ViewModels.Users
 
                 }
             );
+        }
+
+        private string GetPhotoPath(string fileName)
+        {
+            string destPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            Console.WriteLine(destPath);
+            string destinationFile = Path.Combine(destPath, "Photos", "Users", fileName);
+            Console.WriteLine(destinationFile);
+            return destinationFile;
         }
     }
 }
