@@ -69,7 +69,6 @@ namespace OoadProject.Core.ViewModels.Users
                 OnPropertyChanged();
             }
         }
-        public string PhotoSrc { get; set; }
 
 
         // public command properties
@@ -119,19 +118,16 @@ namespace OoadProject.Core.ViewModels.Users
                 p => true,
                 p =>
                 {
-                OpenFileDialog fileDialog = new OpenFileDialog();
-                fileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
-                if (fileDialog.ShowDialog() == true)
-                {
-                    EditingUser.Photo = PhotoSrc = fileDialog.FileName;
-                    Console.WriteLine(EditingUser.Photo);
-                    Console.WriteLine(PhotoSrc);
-                    Console.WriteLine(fileDialog.FileName);
+                    OpenFileDialog fileDialog = new OpenFileDialog();
+                    fileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+                    if (fileDialog.ShowDialog() == true)
+                    {
+                        EditingUser.Photo = fileDialog.FileName;
 
                     }
                     else
                     {
-                        PhotoSrc = null;
+                        EditingUser.Photo = null;
                     }
                 }
             );

@@ -114,6 +114,8 @@ namespace OoadProject.Core.Services.AppUser
             var role = _roleRepository.GetRoleByName(userForUpdate.Role);
             user.Id = (int)userForUpdate.Id;
             user.RoleId = role.Id;
+            Console.WriteLine("user.Password");
+            Console.WriteLine(user.Password);
             _userRepository.Update(user);
         }
 
