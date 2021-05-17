@@ -138,18 +138,25 @@
             </materialDesign:Card>
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
                     <RowDefinition Height="0.5*"></RowDefinition>
                     <RowDefinition Height="2*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.4*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.4*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right">Tổng tiền:</TextBlock>
-                    <TextBox Grid.Column="2" Foreground="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5" BorderThickness="1"
+                    <TextBlock Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">Tổng tiền:</TextBlock>
+                    <TextBox Grid.Row="0" Grid.Column="3" Foreground="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5" BorderThickness="1"
                         TextAlignment="Left" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
@@ -158,6 +165,45 @@
                         </TextBox.Resources>
                         <TextBox.Text>
                             <Binding Path="Invoice.Total">
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right">Hạng TV:</TextBlock>
+                    <TextBox Grid.Row="1" Grid.Column="1" Foreground="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5" BorderThickness="1"
+                        TextAlignment="Left" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </TextBox.Resources>
+                        <TextBox.Text>
+                            <Binding Path="Invoice.CustomerLevel" UpdateSourceTrigger="PropertyChanged" >
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">Giảm giá:</TextBlock>
+                    <TextBox Grid.Row="1" Grid.Column="3" Foreground="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5" BorderThickness="1"
+                        TextAlignment="Left" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </TextBox.Resources>
+                        <TextBox.Text>
+                            <Binding Path="Invoice.Discount" UpdateSourceTrigger="PropertyChanged" >
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBlock Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">Thành tiền:</TextBlock>
+                    <TextBox Grid.Row="2" Grid.Column="3" Foreground="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5" BorderThickness="1"
+                        TextAlignment="Left" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </TextBox.Resources>
+                        <TextBox.Text>
+                            <Binding Path="Invoice.Price" UpdateSourceTrigger="PropertyChanged" >
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
@@ -250,7 +296,7 @@
             </Grid>
 
         </Grid>
-        <Grid Grid.ColumnSpan="2" DataContext="{StaticResource SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <!--<Grid Grid.ColumnSpan="2" DataContext="{StaticResource SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Source="../Assets/unauthorized.png" Width="200" Height="200" />
                 <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">Bạn không có quyền truy cập màn hình này! Vui lòng đăng nhập với tài khoản thích hợp!</TextBlock>
@@ -258,6 +304,6 @@
             <Grid.Visibility>
                 <Binding Path="UserPerrmissions" Converter="{StaticResource FeaturePermissionConverter}" ConverterParameter="Sale" />
             </Grid.Visibility>
-        </Grid>
+        </Grid>-->
     </Grid>
 </UserControl>

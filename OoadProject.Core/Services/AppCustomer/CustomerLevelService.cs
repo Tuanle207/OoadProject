@@ -30,6 +30,7 @@ namespace OoadProject.Core.Services.AppProduct
             var listCustomerLevelForReturn = Mapper.Map<List<CustomerLevelForDisplayDto>>(listCustomerLevel);
             return listCustomerLevelForReturn;
         }
+
         public bool UpdateCustomerLevel(CustomerLevelForDisplayDto customerLevel)
         {
             var editCustomerLevel = Mapper.Map<CustomerLevel>(customerLevel);

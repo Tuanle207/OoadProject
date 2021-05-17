@@ -16,7 +16,11 @@ namespace OoadProject.Data.Repository
         {
             using (var ctx = new AppDbContext())
             {
-                return ctx.Customers.Where(ctm => ctm.PhoneNumber == phoneNumber).FirstOrDefault();
+                var query = ctx.Customers.AsQueryable();
+                query = query.Where(q => q.PhoneNumber == phoneNumber);
+                query = query.Include(p => p.CustomerLevel);
+                return query.FirstOrDefault();
+                //var customer = ctx.Customers.Where(q => q.PhoneNumber == phoneNumber).FirstOrDefault();
             }
         }
         public IEnumerable<Customer> GetAllCustomers()

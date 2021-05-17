@@ -199,7 +199,12 @@ namespace OoadProject.Core.ViewModels.Sells
                 {
                     var customer = _customerService.GetCustomerByPhone(Invoice.PhoneNumber);
                     if (customer != null)
+                    {
                         Invoice.CustomerName = customer.Name;
+                        Invoice.Discount = (float)(customer.CustomerLevel.Discount * Invoice.Total/100);
+                        Invoice.Price = Invoice.Total - Invoice.Discount;
+                        Invoice.CustomerLevel = customer.CustomerLevel.Name;
+                    }
                     else
                         throw new Exception("Khách hàng với số điện thoại này không tồn tại!");
                 }
