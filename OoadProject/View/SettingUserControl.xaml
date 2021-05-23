@@ -19,7 +19,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="btnThamSo" Grid.Row="0" Grid.Column="0" Click="btnThamSo_Click" GotFocus="btnThamSo_GotFocus" Foreground="White" FontWeight="Bold" Opacity="1" Background="#695D85" BorderThickness="0" Content="DS tham số" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
             </Button>
@@ -28,6 +29,8 @@
             <Button x:Name="btnHangSanXuat" Grid.Row="0" Grid.Column="2" Click="btnHangSanXuat_Click"  GotFocus="btnHangSanXuat_GotFocus"  Foreground="White" FontWeight="Bold" Opacity="0.8" Background="#695D85" BorderThickness="0" Content="Hãng sản xuất" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
             </Button>
             <Button x:Name="btnNhaCungCap" Grid.Row="0" Grid.Column="3" Click="btnNhaCungCap_Click"  GotFocus="btnNhaCungCap_GotFocus"  Foreground="White" FontWeight="Bold" Opacity="0.8" Background="#695D85" BorderThickness="0" Content="Nhà cung cấp" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
+            </Button>
+            <Button x:Name="btnHangKhachHang" Grid.Row="0" Grid.Column="4" Click="btnHangKhachHang_Click"  GotFocus="btnHangKhachHang_GotFocus"  Foreground="White" FontWeight="Bold" Opacity="0.8" Background="#695D85" BorderThickness="0" Content="Hạng khách hàng" VerticalAlignment="Stretch"  Height="Auto" Width="Auto" Margin="2 2 2 2">
             </Button>
         </Grid>
         <UserControl x:Name="viewControl" Grid.Row="1"/>

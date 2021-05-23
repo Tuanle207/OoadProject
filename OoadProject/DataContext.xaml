@@ -6,10 +6,12 @@
                     xmlns:Settings="clr-namespace:OoadProject.Core.ViewModels.Settings;assembly=OoadProject.Core" 
                     xmlns:Sells="clr-namespace:OoadProject.Core.ViewModels.Sells;assembly=OoadProject.Core"
                     xmlns:Users="clr-namespace:OoadProject.Core.ViewModels.Users;assembly=OoadProject.Core" 
+                    xmlns:Customers="clr-namespace:OoadProject.Core.ViewModels.Customers;assembly=OoadProject.Core" 
                     xmlns:Warranties="clr-namespace:OoadProject.Core.ViewModels.Warranties;assembly=OoadProject.Core" 
                     xmlns:Reports="clr-namespace:OoadProject.Core.ViewModels.Reports;assembly=OoadProject.Core" xmlns:Products="clr-namespace:OoadProject.Core.ViewModels.Products;assembly=OoadProject.Core">
     <!-- ViewModels -->
     <Users:UserViewModel x:Key="UserViewModel" />
+    <Customers:CustomerViewModel x:Key="CustomerViewModel" />
     <Users:SessionViewModel x:Key="SessionViewModel" />
     <Orders:OrderCreationViewModel x:Key="OrderCreationViewModel" />
     <Orders:OrderViewModel x:Key="OrderViewModel" />
@@ -23,10 +25,11 @@
     <Settings:ManufacturerViewModel x:Key="ManufacturerViewModel" />
     <Settings:ParameterViewModel x:Key="ParameterViewModel" />
     <Settings:CategoryViewModel x:Key="CategoryViewModel" />
+    <Settings:CustomerLevelViewModel x:Key="CustomerLevelViewModel" />
     <Reports:ReportViewModel x:Key="ReportViewModel" />
     <Products:ProductViewModel x:Key="ProductViewModel"/>
-    
-    
+
+
 
 
     <!-- Converters -->

@@ -19,14 +19,32 @@
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.CustomerLevels",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Description = c.String(),
+                        PointLevel = c.Single(nullable: false),
+                        Discount = c.Single(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.Customers",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
+                        IsDeleted = c.Boolean(nullable: false),
+                        CustomerLevelId = c.Int(nullable: false),
                         PhoneNumber = c.String(),
+                        AccumulatedPoint = c.Single(nullable: false),
+                        CreationTime = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.CustomerLevels", t => t.CustomerLevelId, cascadeDelete: true)
+                .Index(t => t.CustomerLevelId);
             
             CreateTable(
                 "dbo.InvoiceProducts",
@@ -52,6 +70,8 @@
                         UserId = c.Int(nullable: false),
                         CreationTime = c.DateTime(nullable: false),
                         Total = c.Int(nullable: false),
+                        Discount = c.Single(nullable: false),
+                        Price = c.Single(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
@@ -270,6 +290,7 @@
             DropForeignKey("dbo.Users", "RoleId", "dbo.Roles");
             DropForeignKey("dbo.RolePermissions", "PermissionId", "dbo.Permissions");
             DropForeignKey("dbo.RolePermissions", "RoleId", "dbo.Roles");
+            DropForeignKey("dbo.Customers", "CustomerLevelId", "dbo.CustomerLevels");
             DropIndex("dbo.RolePermissions", new[] { "PermissionId" });
             DropIndex("dbo.RolePermissions", new[] { "RoleId" });
             DropIndex("dbo.WarrantyOrders", new[] { "CustomerId" });
@@ -290,6 +311,7 @@
             DropIndex("dbo.Invoices", new[] { "CustomerId" });
             DropIndex("dbo.InvoiceProducts", new[] { "InvoiceId" });
             DropIndex("dbo.InvoiceProducts", new[] { "ProductId" });
+            DropIndex("dbo.Customers", new[] { "CustomerLevelId" });
             DropTable("dbo.RolePermissions");
             DropTable("dbo.WarrantyOrders");
             DropTable("dbo.Receipts");
@@ -306,6 +328,7 @@
             DropTable("dbo.Invoices");
             DropTable("dbo.InvoiceProducts");
             DropTable("dbo.Customers");
+            DropTable("dbo.CustomerLevels");
             DropTable("dbo.Categories");
         }
     }
