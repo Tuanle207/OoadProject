@@ -70,8 +70,8 @@
                         UserId = c.Int(nullable: false),
                         CreationTime = c.DateTime(nullable: false),
                         Total = c.Int(nullable: false),
-                        Discount = c.Single(nullable: false),
-                        Price = c.Single(nullable: false),
+                        Discount = c.Int(nullable: false),
+                        Price = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
