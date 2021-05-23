@@ -97,6 +97,9 @@
     <Compile Include="View\AddCategoryProductWindow.xaml.cs">
       <DependentUpon>AddCategoryProductWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddCustomerWindow.xaml.cs">
+      <DependentUpon>AddCustomerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddManufactureWindow.xaml.cs">
       <DependentUpon>AddManufactureWindow.xaml</DependentUpon>
     </Compile>
@@ -115,8 +118,17 @@
     <Compile Include="View\CategoryProductUserControl.xaml.cs">
       <DependentUpon>CategoryProductUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CustomerLevelUserControl.xaml.cs">
+      <DependentUpon>CustomerLevelUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerUserControl.xaml.cs">
+      <DependentUpon>CustomerUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EditCategoryProductWindow.xaml.cs">
       <DependentUpon>EditCategoryProductWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditCustomerLevelWindow.xaml.cs">
+      <DependentUpon>EditCustomerLevelWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditOrderWindow.xaml.cs">
       <DependentUpon>EditOrderWindow.xaml</DependentUpon>
@@ -219,6 +231,10 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
+    <Page Include="View\AddCustomerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddManufactureWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
@@ -243,7 +259,19 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
+    <Page Include="View\CustomerLevelUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\EditCategoryProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditCustomerLevelWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

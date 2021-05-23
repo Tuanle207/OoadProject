@@ -1,4 +1,5 @@
-﻿using OoadProject.Core.Services.AppProduct;
+﻿using OoadProject.Core.Services.AppCustomer;
+using OoadProject.Core.Services.AppProduct;
 using OoadProject.Core.ViewModels.Sells.Dtos;
 using System;
 using System.Collections.Generic;
@@ -196,9 +197,14 @@ namespace OoadProject.Core.ViewModels.Sells
                 p => true,
                 p =>
                 {
-                    var customer = _customerService.GetCustomer(Invoice.PhoneNumber);
+                    var customer = _customerService.GetCustomerByPhone(Invoice.PhoneNumber);
                     if (customer != null)
+                    {
                         Invoice.CustomerName = customer.Name;
+                        Invoice.Discount = (float)(customer.CustomerLevel.Discount * Invoice.Total/100);
+                        Invoice.Price = Invoice.Total - Invoice.Discount;
+                        Invoice.CustomerLevel = customer.CustomerLevel.Name;
+                    }
                     else
                         throw new Exception("Khách hàng với số điện thoại này không tồn tại!");
                 }

@@ -45,6 +45,7 @@ namespace OoadProject.Data
 
         // AppCustomer
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<CustomerLevel> CustomerLevels { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceProduct> InvoiceProducts { get; set; }
         public DbSet<WarrantyOrder> WarrantyOrders { get; set; }

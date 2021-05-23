@@ -16,6 +16,8 @@ namespace OoadProject.Data.Seedings
             ManufactureSeeder.Seed(context);
             ProductSeeder.Seed(context);
             ProviderSeeder.Seed(context);
+            CustomerLevelSeeder.Seed(context);
+            CustomerSeeder.Seed(context);
         }
     }
 }

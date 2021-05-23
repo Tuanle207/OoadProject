@@ -33,6 +33,7 @@ namespace OoadProject.View
             btnLoaiMatHang.Opacity = 0.8;
             btnHangSanXuat.Opacity = 0.8;
             btnNhaCungCap.Opacity = 0.8;
+            btnHangKhachHang.Opacity = 0.8;
         }
 
         private void btnThamSo_Click(object sender, RoutedEventArgs e)
@@ -50,6 +51,7 @@ namespace OoadProject.View
             btnLoaiMatHang.Opacity = 0.8;
             btnHangSanXuat.Opacity = 0.8;
             btnNhaCungCap.Opacity = 0.8;
+            btnHangKhachHang.Opacity = 0.8;
         }
 
         private void btnLoaiMatHang_Click(object sender, RoutedEventArgs e)
@@ -67,6 +69,7 @@ namespace OoadProject.View
             btnLoaiMatHang.Opacity = 1;
             btnHangSanXuat.Opacity = 0.8;
             btnNhaCungCap.Opacity = 0.8;
+            btnHangKhachHang.Opacity = 0.8;
         }
 
         private void btnHangSanXuat_Click(object sender, RoutedEventArgs e)
@@ -84,6 +87,7 @@ namespace OoadProject.View
             btnLoaiMatHang.Opacity = 0.8;
             btnHangSanXuat.Opacity = 1;
             btnNhaCungCap.Opacity = 0.8;
+            btnHangKhachHang.Opacity = 0.8;
         }
 
         private void btnNhaCungCap_Click(object sender, RoutedEventArgs e)
@@ -101,6 +105,25 @@ namespace OoadProject.View
             btnLoaiMatHang.Opacity = 0.8;
             btnHangSanXuat.Opacity = 0.8;
             btnNhaCungCap.Opacity = 1;
+            btnHangKhachHang.Opacity = 0.8;
+        }
+
+        private void btnHangKhachHang_Click(object sender, RoutedEventArgs e)
+        {
+            if (viewControl.Name != "CustomerLevelUserControl")
+            {
+                viewControl.Content = new CustomerLevelUserControl();
+                viewControl.Name = "CustomerLevelUserControl";
+            }
+        }
+
+        private void btnHangKhachHang_GotFocus(object sender, RoutedEventArgs e)
+        {
+            btnThamSo.Opacity = 0.8;
+            btnLoaiMatHang.Opacity = 0.8;
+            btnHangSanXuat.Opacity = 0.8;
+            btnNhaCungCap.Opacity = 0.8;
+            btnHangKhachHang.Opacity = 1;
         }
     }
 }

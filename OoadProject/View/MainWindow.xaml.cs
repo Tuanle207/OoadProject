@@ -33,6 +33,7 @@ namespace OoadProject.View
         private StaffUserControl _userScreen;
         private ReportManagementUserControl _reportScreen;
         private SettingUserControl _settingScreen;
+        private CustomerUserControl _customerScreen;
 
         public MainWindow()
         {
@@ -48,6 +49,7 @@ namespace OoadProject.View
             _userScreen = new StaffUserControl();
             _reportScreen = new ReportManagementUserControl();
             _settingScreen = new SettingUserControl();
+            _customerScreen = new CustomerUserControl();
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -75,6 +77,7 @@ namespace OoadProject.View
             ItemStaff.Opacity = 0.8;
             ItemReport.Opacity = 0.8;
             ItemSetting.Opacity = 0.8;
+            ItemCustomer.Opacity = 0.8;
             nameUserControl.Opacity = 1;
         }
 
@@ -121,6 +124,11 @@ namespace OoadProject.View
                     this.lbTitle.Content = "THAY ĐỔI CÁC THAM SỐ";
                     mainControl.Content = _settingScreen;
                     changeColorUserControlItem(ItemSetting);
+                    break;
+                case "ItemCustomer":
+                    this.lbTitle.Content = "QUẢN LÝ KHÁCH HÀNG";
+                    mainControl.Content = _customerScreen;
+                    changeColorUserControlItem(ItemCustomer);
                     break;
             }
         }

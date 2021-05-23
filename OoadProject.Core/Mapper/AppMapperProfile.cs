@@ -11,6 +11,7 @@ using OoadProject.Data.Repository.AggregateDto;
 using OoadProject.Data.Entity.AppCustomer;
 using OoadProject.Core.ViewModels.Warranties.Dtos;
 using System;
+using OoadProject.Core.ViewModels.Customers.Dtos;
 
 namespace OoadProject.Core
 {
@@ -190,6 +191,17 @@ namespace OoadProject.Core
                     opt.MapFrom(src => src.CreationUser.Name))
                 .ForMember(dest => dest.ProviderName, opt =>
                     opt.MapFrom(src => src.Order.Provider.Name));
+
+            // CustomerLevel
+            CreateMap<CustomerLevelForDisplayDto, CustomerLevel>();
+            CreateMap<CustomerLevel, CustomerLevelForDisplayDto>();
+
+            // Customer
+            CreateMap<CustomerForCreationDto, Customer>();
+            CreateMap<Customer, CustomerForCreationDto>();
+
+            CreateMap<CustomerDisplayDto, Customer>();
+            CreateMap<Customer, CustomerDisplayDto>();
         }
     }
 }
