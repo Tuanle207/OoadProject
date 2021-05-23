@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppConsts\DefaultPhotoNames.cs" />
     <Compile Include="Dtos\CustomerFilterDto.cs" />
     <Compile Include="Dtos\ProductFilterDto.cs" />
     <Compile Include="Helpers\Helper.cs" />

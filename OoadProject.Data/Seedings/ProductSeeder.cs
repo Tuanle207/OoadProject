@@ -1,4 +1,5 @@
 ﻿using OoadProject.Data.Entity.AppProduct;
+using OoadProject.Shared.AppConsts;
 using OoadProject.Shared.Helpers;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -40,7 +42,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -53,7 +56,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -66,7 +70,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -79,7 +84,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -92,7 +98,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -105,7 +112,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -118,7 +126,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -131,7 +140,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -144,7 +154,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -157,7 +168,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -170,7 +182,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -183,7 +196,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -196,7 +210,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -209,7 +224,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -222,7 +238,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -235,7 +252,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -248,7 +266,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -261,7 +280,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                     new Product
                     {
@@ -274,7 +294,8 @@ namespace OoadProject.Data.Seedings
                         WarrantyPeriod = 24,
                         ReturnRate = 10,
                         isDelete = 0,
-                        Number = 10
+                        Number = 10,
+                        Photo = DefaultPhotoNames.Product
                     },
                 };
             }

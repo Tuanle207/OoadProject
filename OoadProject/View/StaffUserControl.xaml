@@ -111,10 +111,10 @@
                     <ColumnDefinition Width="0.4*" />
                 </Grid.ColumnDefinitions>
                 <materialDesign:Card 
-                    Grid.Column="0"
+                    Grid.Column="0 "
                     Padding="5"
                     Margin="10,10,10,5">
-                    <GroupBox Header="Thông Tin Dịch Vụ"
+                    <GroupBox Header="Danh sách nhân viên"
                               Margin="5">
                         <ListView ItemsSource="{Binding Users}"
                                   SelectedItem="{Binding ChosenUser}"
@@ -172,7 +172,7 @@
                 <materialDesign:Card Grid.Column="1"
                                      Padding="5"
                                      Margin="10,10,10,5">
-                    <GroupBox Header="Thông Tin Dịch Vụ"
+                    <GroupBox Header="Thông Tin Nhân viên"
                               Margin="5">
                         <Grid>
                             <Grid.Resources>
@@ -208,7 +208,7 @@
                             </Grid.RowDefinitions>
                             <DockPanel Grid.Row="0">
                                 <Label DockPanel.Dock="Top">Tên Nhân Viên</Label>
-                                <TextBox x:Name="tbx_TenNhanVien"/>
+                                <TextBox x:Name="tbx_TenNhanVien" Text="{Binding ChosenUser.Name, Mode=OneWay}" IsReadOnly="True"/>
                             </DockPanel>
                             <DockPanel Grid.Row="1">
                                 <Label DockPanel.Dock="Top">Chức Vụ</Label>
@@ -216,36 +216,43 @@
                                     Margin="3" 
                                     BorderThickness="1" 
                                     FontSize="15" 
+                                    FontWeight="SemiBold"
                                     Height="{Binding ElementName=tbx_TenNhanVien, Path=Height, UpdateSourceTrigger=PropertyChanged}"
-                                    FontWeight="Bold"/>
+                                    ItemsSource="{Binding Roles}"
+                                    SelectedValue="{Binding ChosenUser.Role.Name, Mode=OneWay}"
+                                    IsReadOnly="True"/>
                             </DockPanel>
                             <DockPanel Grid.Row="2">
                                 <Label DockPanel.Dock="Top">Email</Label>
-                                <TextBox />
+                                <TextBox Text="{Binding ChosenUser.Email, Mode=OneWay}" IsReadOnly="True"/>
                             </DockPanel>
                             <DockPanel Grid.Row="3">
                                 <Label DockPanel.Dock="Top">Ngày Vào Làm</Label>
                                 <DatePicker Margin="3"
                                             BorderThickness="1"
+                                            FontWeight="SemiBold"
                                             FontSize="15"
                                             Height="{Binding ElementName=tbx_TenNhanVien, Path=Height, UpdateSourceTrigger=PropertyChanged}"
-                                            FontWeight="Bold" />
+                                            SelectedDate="{Binding ChosenUser.CreationTime, Mode=OneWay}"
+                                             />
                             </DockPanel>
                             <DockPanel Grid.Row="4">
                                 <Label DockPanel.Dock="Top">Số Điện Thoại</Label>
-                                <TextBox />
+                                <TextBox Text="{Binding ChosenUser.PhoneNumber, Mode=OneWay}" IsReadOnly="True"/>
                             </DockPanel>
                             <DockPanel Grid.Row="5">
                                 <Label DockPanel.Dock="Top">Ngày Sinh</Label>
                                 <DatePicker Margin="3"
                                             Height="{Binding ElementName=tbx_TenNhanVien, Path=Height, UpdateSourceTrigger=PropertyChanged}"
                                             BorderThickness="1"
+                                            FontWeight="SemiBold"
                                             FontSize="15"
-                                            FontWeight="Bold" />
+                                            SelectedDate="{Binding ChosenUser.Dob, Mode=OneWay}"
+                                             />
                             </DockPanel>
                             <DockPanel Grid.Row="6">
                                 <Label DockPanel.Dock="Top">Địa Chỉ</Label>
-                                <TextBox />
+                                <TextBox Text="{Binding ChosenUser.Address, Mode=OneWay}" IsReadOnly="True"/>
                             </DockPanel>
                         </Grid>
                     </GroupBox>
@@ -272,9 +279,9 @@
                          Converter="{StaticResource FeaturePermissionConverter}"
                          ConverterParameter="User" />
             </Grid.Visibility>
-        </Grid>
+        </Grid>-->
         <Button x:Name="btnCheckPermission"
                 Command="{Binding CheckModificationPermission}"
-                Visibility="Hidden" />-->
+                Visibility="Hidden" />
     </Grid>
 </UserControl>

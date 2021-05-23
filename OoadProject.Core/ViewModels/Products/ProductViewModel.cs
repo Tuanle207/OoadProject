@@ -1,10 +1,13 @@
-﻿using OoadProject.Core.Services.AppProduct;
+﻿using Microsoft.Win32;
+using OoadProject.Core.Services.AppProduct;
 using OoadProject.Core.ViewModels.Products.Dtos;
 using OoadProject.Data.Entity.AppProduct;
+using OoadProject.Shared.AppConsts;
 using OoadProject.Shared.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,6 +67,8 @@ namespace OoadProject.Core.ViewModels.Products
             set
             {
                 _selectedProduct = value;
+                if (value != null)
+                    _selectedProduct.Photo = GetPhotoPath(value.Photo);
                 OnPropertyChanged();
             }
         }
@@ -140,6 +145,8 @@ namespace OoadProject.Core.ViewModels.Products
         // public command properties
         public ICommand GoNextPage { get; set; }
         public ICommand GoPrevPage { get; set; }
+        public ICommand SelectPhotoCreate { get; set; }
+        public ICommand SelectPhotoUpdate { get; set; }
         public ICommand AddProduct { get; set; }
         public ICommand UpdateProduct { get; set; }
         public ICommand ReloadProducts { get; set; }
@@ -224,6 +231,42 @@ namespace OoadProject.Core.ViewModels.Products
 
                 }
             );
+            SelectPhotoCreate = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    OpenFileDialog fileDialog = new OpenFileDialog();
+                    fileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+                    if (fileDialog.ShowDialog() == true)
+                    {
+                        NewProduct.Photo = fileDialog.FileName;
+
+                    }
+                    else
+                    {
+                        NewProduct.Photo = null;
+                    }
+                }
+            );
+            SelectPhotoUpdate = new RelayCommand<object>
+            (
+                p => true,
+                p =>
+                {
+                    OpenFileDialog fileDialog = new OpenFileDialog();
+                    fileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+                    if (fileDialog.ShowDialog() == true)
+                    {
+                        SelectedProduct.Photo = fileDialog.FileName;
+
+                    }
+                    else
+                    {
+                        SelectedProduct.Photo = null;
+                    }
+                }
+            );
             PrepareAddProduct = new RelayCommand<object>
             (
                 p => true,
@@ -232,6 +275,7 @@ namespace OoadProject.Core.ViewModels.Products
                     Manufacturers = new ObservableCollection<Manufacturer>(_manufacturerService.GetManufacturers());
                     Categories = new ObservableCollection<Category>(_categoryService.GetCategories());
                     NewProduct = new ProductForCreationDto();
+                    NewProduct.Photo = GetPhotoPath(DefaultPhotoNames.Product);
                 }
             );
             AddProduct = new RelayCommand<object>
@@ -267,7 +311,10 @@ namespace OoadProject.Core.ViewModels.Products
                     Manufacturers = new ObservableCollection<Manufacturer>(_manufacturerService.GetManufacturers());
                     Categories = new ObservableCollection<Category>(_categoryService.GetCategories());
                     SelectedManufacturer = Manufacturers.Where(m => m.Id == SelectedProduct.ManufacturerId).FirstOrDefault();
-                    SelectedCategory = Categories.Where(c => c.Id == SelectedProduct.CategoryId).FirstOrDefault();                    
+                    SelectedCategory = Categories.Where(c => c.Id == SelectedProduct.CategoryId).FirstOrDefault();
+                    Console.WriteLine("photo");
+                    Console.WriteLine(SelectedProduct.Photo);
+
                 }
             );
             UpdateProduct = new RelayCommand<object>
@@ -377,6 +424,15 @@ namespace OoadProject.Core.ViewModels.Products
             if(TotalPages != 0)
                 _loadedPages[0] = true;
             
+        }
+
+
+
+        private string GetPhotoPath(string fileName)
+        {
+            string destPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            string destinationFile = Path.Combine(destPath, "Photos", "Products", fileName);
+            return destinationFile;
         }
     }
 

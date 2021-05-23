@@ -2,8 +2,10 @@
 using OoadProject.Core.ViewModels.Users.Dtos;
 using OoadProject.Data.Entity.AppUser;
 using OoadProject.Data.Repository;
+using OoadProject.Shared.AppConsts;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,28 +48,89 @@ namespace OoadProject.Core.Services.AppUser
 
         public User AddUser(UserForCreationDto userForCreation)
         {
-            var newUser = Mapper.Map<User>(userForCreation);
+            // copy to save photo
+            string newName = GetImageName();
+            string desFile = GetFullPath(newName);
+            try
+            {
+                File.Copy(userForCreation.Photo, desFile, true);
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show("Đã xảy ra lỗi khi lưu file!");
+                return null;
+            }
 
+            // save user
+            var newUser = Mapper.Map<User>(userForCreation);
+            newUser.Photo = newName;
             var role = _roleRepository.GetRoleByName(userForCreation.Role);
             newUser.RoleId = role.Id;
 
             return _userRepository.Create(newUser);
         }
 
-        public void UpdateUser(UserForCreationDto userForUpdate)
+        public void UpdateUser(UserForCreationDto userForUpdate, User currentUser)
         {
 
-            var role = _roleRepository.GetRoleByName(userForUpdate.Role);
-
             var user = Mapper.Map<User>(userForUpdate);
+            // check if there is a photo change?
+            if (userForUpdate.Photo != currentUser.Photo)
+            {
+                // delete old photo
+                var oldPhotoName = _userRepository.GetUserPhotoById((int)userForUpdate.Id);
+                if (oldPhotoName != DefaultPhotoNames.User)
+                {
+                    try
+                    {
+                        File.Delete(GetFullPath(oldPhotoName));
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                
+                string newName = GetImageName();
+                // copy to save as new photo
+                string desFile = GetFullPath(newName);
+                try
+                {
+                    File.Copy(userForUpdate.Photo, desFile, true);
+                    user.Photo = newName;
+                }
+                catch
+                {
+                    System.Windows.MessageBox.Show("Đã xảy ra lỗi khi lưu file!");
+                    return;
+                }
+            } else
+            {
+                user.Photo = _userRepository.GetUserPhotoById((int)userForUpdate.Id);
+            }
+
+            // save user
+            var role = _roleRepository.GetRoleByName(userForUpdate.Role);
             user.Id = (int)userForUpdate.Id;
             user.RoleId = role.Id;
-
             _userRepository.Update(user);
         }
 
         public bool DeleteUser(User user)
         {
+            var oldPhotoName = _userRepository.GetUserPhotoById(user.Id);
+            if (oldPhotoName != DefaultPhotoNames.Product)
+            {
+                try
+                {
+                    File.Delete(GetFullPath(oldPhotoName));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error");
+                    Console.WriteLine(e.Message);
+                }
+            }
             return _userRepository.Delete(user.Id);
         }
 
@@ -96,5 +159,18 @@ namespace OoadProject.Core.Services.AppUser
             var hashedPassword = Session.HashPassword(userForPasswordUpdate.Password);
             _userRepository.UpdateUserPassword(userForPasswordUpdate.Id, hashedPassword);
         }
+
+        private string GetFullPath(string fileName)
+        {
+            string destPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            string destinationFile = Path.Combine(destPath, "Photos", "Users", fileName);
+            return destinationFile;
+        }
+        
+        private string GetImageName()
+        {
+            var now = DateTime.Now.ToString("HHmmss_ddMMyyyy");
+            return $"user_{now}.jpg";
+        }   
     }
 }

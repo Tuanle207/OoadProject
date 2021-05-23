@@ -126,5 +126,13 @@ namespace OoadProject.Data.Repository
                 ctx.SaveChanges();
             }
         }
+
+        public string GetProductPhotoById(int id)
+        {
+            using (var ctx = new AppDbContext())
+            {
+                return ctx.Products.Where(x => x.Id == id).Select(x => x.Photo).FirstOrDefault();
+            }
+        }
     }
 }

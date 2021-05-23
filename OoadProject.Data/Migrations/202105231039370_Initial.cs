@@ -91,6 +91,7 @@
                         Dob = c.DateTime(nullable: false),
                         PhoneNumber = c.String(),
                         Address = c.String(),
+                        Photo = c.String(),
                         CreationTime = c.DateTime(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
                     })
@@ -131,6 +132,7 @@
                         WarrantyPeriod = c.Int(),
                         ReturnRate = c.Single(),
                         Status = c.Int(nullable: false),
+                        Photo = c.String(),
                         isDelete = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)

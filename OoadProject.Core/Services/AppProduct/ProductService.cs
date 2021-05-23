@@ -5,11 +5,13 @@ using OoadProject.Core.ViewModels.Sells.Dtos;
 using OoadProject.Data;
 using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Data.Repository;
+using OoadProject.Shared.AppConsts;
 using OoadProject.Shared.Dtos;
 using OoadProject.Shared.Helpers;
 using OoadProject.Shared.Pagination;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -91,21 +93,74 @@ namespace OoadProject.Core.Services.AppProduct
 
         public Product AddProduct(ProductForCreationDto product)
         {
+            // copy to save photo
+            string newName = GetImageName();
+            string desFile = GetFullPath(newName);
+            try
+            {
+                File.Copy(product.Photo, desFile, true);
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show("Đã xảy ra lỗi khi lưu file!");
+                return null;
+            }
+
+            // save products
             var newProduct = Mapper.Map<Product>(product);
+            product.Photo = newName;
             if (newProduct.ReturnRate != null)
                 newProduct.PriceOut = Helper.CalculatePriceout(newProduct.PriceIn, (float)newProduct.ReturnRate);
             else
             {
                 var category = _categoryRepository.Get(product.CategoryId);
                 newProduct.PriceOut = Helper.CalculatePriceout(newProduct.PriceIn, (float)category.ReturnRate);
-            }    
-                
+            }   
 
             return _productRepository.Create(newProduct);
         }
 
         public bool UpdateProduct(ProductDisplayDto product)
         {
+            var editProduct = Mapper.Map<Product>(product);
+
+            var oldPhotoName = _productRepository.GetProductPhotoById(product.Id);
+            // check if there is a photo change?
+            if (product.Photo != GetFullPath(oldPhotoName))
+            {
+                // delete old photo
+                if (oldPhotoName != DefaultPhotoNames.Product)
+                {
+                    try
+                    {
+                        File.Delete(GetFullPath(oldPhotoName));
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Error");
+                        Console.WriteLine(e.Message);
+                    }
+                }
+
+                string newName = GetImageName();
+                // copy to save as new photo
+                string desFile = GetFullPath(newName);
+                try
+                {
+                    File.Copy(product.Photo, desFile, true);
+                    editProduct.Photo = newName;
+                }
+                catch
+                {
+                    System.Windows.MessageBox.Show("Đã xảy ra lỗi khi lưu file!");
+                    return false;
+                }
+            }
+            else
+            {
+                editProduct.Photo = oldPhotoName;
+            }
+
             if (product.CheckReturnRateChange != "changed")
             {
                 product.PriceOut = Helper.CalculatePriceout(product.PriceIn, (float)product.ReturnRate);                
@@ -116,7 +171,6 @@ namespace OoadProject.Core.Services.AppProduct
                 product.PriceOut = Helper.CalculatePriceout(product.PriceIn, product.Category.ReturnRate);
             }
 
-            var editProduct = Mapper.Map<Product>(product);
             return _productRepository.Update(editProduct);
         }
         public bool HidenProduct(ProductDisplayDto product)
@@ -128,7 +182,34 @@ namespace OoadProject.Core.Services.AppProduct
 
         public bool DeleteProduct(Product product)
         {
+            var oldPhotoName = _productRepository.GetProductPhotoById(product.Id);
+            if (oldPhotoName != DefaultPhotoNames.Product)
+            {
+                try
+                {
+                    File.Delete(GetFullPath(oldPhotoName));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error");
+                    Console.WriteLine(e.Message);
+                }
+            }
+
             return _productRepository.Delete(product.Id);
+        }
+
+        private string GetFullPath(string fileName)
+        {
+            string destPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            string destinationFile = Path.Combine(destPath, "Photos", "Products", fileName);
+            return destinationFile;
+        }
+
+        private string GetImageName()
+        {
+            var now = DateTime.Now.ToString("HHmmss_ddMMyyyy");
+            return $"product_{now}.jpg";
         }
     }
 }
