@@ -1,5 +1,6 @@
 ﻿using OoadProject.Core.Services.AppCustomer;
 using OoadProject.Core.Services.AppProduct;
+using OoadProject.Core.ViewModels.Reports;
 using OoadProject.Core.ViewModels.Sells.Dtos;
 using System;
 using System.Collections.Generic;
@@ -171,6 +172,7 @@ namespace OoadProject.Core.ViewModels.Sells
                         // reset data
                         SelectedProducts = new ObservableCollection<SelectingProductForSellDto>();
                         Invoice = new InvoiceForCreationDto();
+                        ReportViewModel.getInstance().Update();
                         MessageBox.Show("Thanh toán hành công");
                     }
                     
