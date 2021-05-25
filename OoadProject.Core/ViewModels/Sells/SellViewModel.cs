@@ -201,8 +201,8 @@ namespace OoadProject.Core.ViewModels.Sells
                     if (customer != null)
                     {
                         Invoice.CustomerName = customer.Name;
-                        Invoice.CustomerLevel = customer.CustomerLevel.Name;
                         CalcInvoiceDiscountAndPrice();
+                        Invoice.CustomerLevel = customer.CustomerLevel.Name;
                     }
                     else
                         throw new Exception("Khách hàng với số điện thoại này không tồn tại!");
@@ -315,7 +315,6 @@ namespace OoadProject.Core.ViewModels.Sells
             }
             Invoice.Total = total;
         }
-
         private void CalcInvoiceDiscountAndPrice()
         {
             var customer = _customerService.GetCustomerByPhone(Invoice.PhoneNumber);
@@ -327,6 +326,7 @@ namespace OoadProject.Core.ViewModels.Sells
             else
                 Invoice.Price = Invoice.Total;
         }
+
 
         private void ReloadProducts()
         {

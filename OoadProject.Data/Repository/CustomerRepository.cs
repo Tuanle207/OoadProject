@@ -20,7 +20,6 @@ namespace OoadProject.Data.Repository
                 query = query.Where(q => q.PhoneNumber == phoneNumber);
                 query = query.Include(p => p.CustomerLevel);
                 return query.FirstOrDefault();
-                //var customer = ctx.Customers.Where(q => q.PhoneNumber == phoneNumber).FirstOrDefault();
             }
         }
         public IEnumerable<Customer> GetAllCustomers()
@@ -55,7 +54,6 @@ namespace OoadProject.Data.Repository
                 return customers;
             }
         }
-
     }
 
     static class Extension1
