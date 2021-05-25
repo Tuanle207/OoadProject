@@ -77,7 +77,8 @@ namespace OoadProject.Core.Services.AppProduct
 
             if (customer == null)
             {
-                customer = new Customer { Name = invoice.CustomerName, PhoneNumber = phoneNumber };
+                customer = new Customer 
+                { Name = invoice.CustomerName, PhoneNumber = phoneNumber, CreationTime = DateTime.Now , CustomerLevelId = 1};
                 var storedCustomer = _customerRepository.Create(customer);
                 customerId = storedCustomer.Id;
             }
