@@ -77,8 +77,7 @@ namespace OoadProject.Core.Services.AppProduct
 
             if (customer == null)
             {
-                customer = new Customer 
-                { Name = invoice.CustomerName, PhoneNumber = phoneNumber, CreationTime = DateTime.Now , CustomerLevelId = 1};
+                customer = new Customer { Name = invoice.CustomerName, PhoneNumber = phoneNumber, CustomerLevelId= 1, CreationTime = DateTime.Now, AccumulatedPoint = invoice.Price / 100000};
                 var storedCustomer = _customerRepository.Create(customer);
                 customerId = storedCustomer.Id;
             }
@@ -93,7 +92,9 @@ namespace OoadProject.Core.Services.AppProduct
                 CustomerId = customerId,
                 UserId = Session.CurrentUser.Id,
                 CreationTime = DateTime.Now,
-                Total = invoice.Total
+                Total = invoice.Total,
+                Discount = invoice.Discount,
+                Price = invoice.Price
             }); ;
 
             // 3. add invoice's products and decrease no. each product

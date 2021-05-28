@@ -203,8 +203,7 @@ namespace OoadProject.Core.ViewModels.Sells
                     if (customer != null)
                     {
                         Invoice.CustomerName = customer.Name;
-                        Invoice.Discount = (float)(customer.CustomerLevel.Discount * Invoice.Total/100);
-                        Invoice.Price = Invoice.Total - Invoice.Discount;
+                        CalcInvoiceDiscountAndPrice();
                         Invoice.CustomerLevel = customer.CustomerLevel.Name;
                     }
                     else
@@ -275,6 +274,7 @@ namespace OoadProject.Core.ViewModels.Sells
             if (storedSelectedProduct != null && storedSelectedProduct != product) storedSelectedProduct.Number -= numberCanBeAdded;
 
             CalcInvoiceTotal();
+            CalcInvoiceDiscountAndPrice();
         }
 
         private void RemoveItems(object p, int number)
@@ -305,6 +305,7 @@ namespace OoadProject.Core.ViewModels.Sells
                
 
             CalcInvoiceTotal();
+            CalcInvoiceDiscountAndPrice();
         }
 
         private void CalcInvoiceTotal()
@@ -316,6 +317,18 @@ namespace OoadProject.Core.ViewModels.Sells
             }
             Invoice.Total = total;
         }
+        private void CalcInvoiceDiscountAndPrice()
+        {
+            var customer = _customerService.GetCustomerByPhone(Invoice.PhoneNumber);
+            if (customer != null)
+            {
+                Invoice.Discount = (int)customer.CustomerLevel.Discount * Invoice.Total / 100;
+                Invoice.Price = Invoice.Total - Invoice.Discount;
+            }
+            else
+                Invoice.Price = Invoice.Total;
+        }
+
 
         private void ReloadProducts()
         {

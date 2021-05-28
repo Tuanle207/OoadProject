@@ -10,8 +10,8 @@ namespace OoadProject.Data.Entity.AppCustomer
         public int UserId { get; set; }
         public DateTime CreationTime { get; set; }
         public int Total { get; set; }
-        public float Discount { get; set; }
-        public float Price { get; set; }
+        public int Discount { get; set; }
+        public int Price { get; set; }
 
 
         public User CreationUser { get; set; }

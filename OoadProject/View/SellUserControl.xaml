@@ -160,7 +160,7 @@
                         TextAlignment="Left" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
-                                <Setter Property="CornerRadius" Value="30"/>
+                                <Setter Property="CornerRadius" Value="20"/>
                             </Style>
                         </TextBox.Resources>
                         <TextBox.Text>
@@ -173,7 +173,7 @@
                         TextAlignment="Left" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
-                                <Setter Property="CornerRadius" Value="30"/>
+                                <Setter Property="CornerRadius" Value="20"/>
                             </Style>
                         </TextBox.Resources>
                         <TextBox.Text>
@@ -186,7 +186,7 @@
                         TextAlignment="Left" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
-                                <Setter Property="CornerRadius" Value="30"/>
+                                <Setter Property="CornerRadius" Value="20"/>
                             </Style>
                         </TextBox.Resources>
                         <TextBox.Text>
@@ -199,7 +199,7 @@
                         TextAlignment="Left" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
-                                <Setter Property="CornerRadius" Value="30"/>
+                                <Setter Property="CornerRadius" Value="20"/>
                             </Style>
                         </TextBox.Resources>
                         <TextBox.Text>
@@ -231,7 +231,7 @@
                         TextAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                             <TextBox.Resources>
                                 <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="30"/>
+                                    <Setter Property="CornerRadius" Value="20"/>
                                 </Style>
                             </TextBox.Resources>
                             <TextBox.Text>
@@ -250,7 +250,7 @@
                         TextAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                             <TextBox.Resources>
                                 <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="30"/>
+                                    <Setter Property="CornerRadius" Value="20"/>
                                 </Style>
                             </TextBox.Resources>
                             <TextBox.Text>
