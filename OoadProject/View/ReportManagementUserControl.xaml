@@ -81,7 +81,7 @@
                     </Grid>
                     <materialDesign:Card Grid.Row="1"
                                          Padding="5"
-                                         Margin="10,10,10,5">
+                                         Margin="10">
                         <GroupBox Header="Thống kê doanh số theo ngày"
                                   Margin="5">
                             <DataGrid ItemsSource="{Binding Products, UpdateSourceTrigger=PropertyChanged}"
@@ -193,7 +193,7 @@
                     </Grid>
                     <materialDesign:Card Grid.Row="1"
                                          Padding="5"
-                                         Margin="10,10,10,5">
+                                         Margin="10">
                         <GroupBox Header="Thống kê doanh thu theo tháng"
                                   Margin="5">
                             <DataGrid ItemsSource="{Binding DayStatistics, UpdateSourceTrigger=PropertyChanged}"
