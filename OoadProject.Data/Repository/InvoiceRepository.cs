@@ -69,8 +69,8 @@ namespace OoadProject.Data.Repository
                 report.ReportDay = day.Date;
 
                 // product sales
-                var date = day.Date.ToString("d");
-                var nextDate = day.AddDays(1).ToString("d");
+                var date = day.Date.ToString("MM/dd/yyyy");
+                var nextDate = day.AddDays(1).ToString("MM/dd/yyyy");
                 var rawQueryScript =
                     $"select f.Id, f.Name, f.CategoryName, f.PriceOut, sum(f.Number) as Number, sum(f.Total) as Total from " +
                     $"( " +
@@ -112,7 +112,7 @@ namespace OoadProject.Data.Repository
                    $"join InvoiceProducts as ip on ip.InvoiceId = i.Id " +
                    $"join Products as p on ip.ProductId = p.Id " +
                    $"join Categories as c on p.CategoryId = c.Id " +
-                   $"where '{dateStart.ToString("d")}' <= i.CreationTime and i.CreationTime  <= '{nextDate.ToString("d")}' " +
+                   $"where '{dateStart.ToString("MM/dd/yyyy")}' <= i.CreationTime and i.CreationTime  <= '{nextDate.ToString("MM/dd/yyyy")}' " +
                    $"group by ip.Id, ip.ProductId, p.Name, c.Name, p.PriceIn, p.PriceOut, ip.Number, CAST(i.CreationTime AS DATE) " +
                    $") as f " +
                    $"group by Day ";
