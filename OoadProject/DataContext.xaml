@@ -6,7 +6,8 @@
                     xmlns:Settings="clr-namespace:OoadProject.Core.ViewModels.Settings;assembly=OoadProject.Core" 
                     xmlns:Sells="clr-namespace:OoadProject.Core.ViewModels.Sells;assembly=OoadProject.Core"
                     xmlns:Users="clr-namespace:OoadProject.Core.ViewModels.Users;assembly=OoadProject.Core" 
-                    xmlns:Customers="clr-namespace:OoadProject.Core.ViewModels.Customers;assembly=OoadProject.Core" 
+                    xmlns:Customers="clr-namespace:OoadProject.Core.ViewModels.Customers;assembly=OoadProject.Core"
+                    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                     xmlns:Warranties="clr-namespace:OoadProject.Core.ViewModels.Warranties;assembly=OoadProject.Core" 
                     xmlns:Reports="clr-namespace:OoadProject.Core.ViewModels.Reports;assembly=OoadProject.Core" xmlns:Products="clr-namespace:OoadProject.Core.ViewModels.Products;assembly=OoadProject.Core">
     <!-- ViewModels -->
@@ -57,5 +58,43 @@
                 </DataTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    <!-- Tab -->
+    <Style TargetType="controls:MetroTabItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:MetroTabItem">
+                    <Border Name="Border">
+                        <ContentPresenter x:Name="ContentSite"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          ContentSource="Header"
+                                          Margin="20,2" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected"
+                                 Value="True">
+                            <Setter TargetName="Border"
+                                    Property="BorderBrush"
+                                    Value="#FF1585B5" />
+                            <Setter TargetName="Border"
+                                    Property="BorderThickness"
+                                    Value="0,0,0,3" />
+                        </Trigger>
+                        <Trigger Property="IsSelected"
+                                 Value="False">
+                            <Setter Property="Foreground"
+                                    Value="#FFAEAEBD" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontWeight"
+                Value="DemiBold" />
+        <Setter Property="Foreground"
+                Value="Black" />
+        <Setter Property="FontSize"
+                Value="15" />
     </Style>
 </ResourceDictionary>
