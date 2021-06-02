@@ -234,6 +234,7 @@ namespace OoadProject.Core.ViewModels.Customers
                     {
                         _customerService.UpdateCustomer(SelectedCustomer);
                         MessageBox.Show("Sửa thông tin khách hàng thành công");
+                        LoadListCustomers();
                     }
                 }
             );
@@ -251,6 +252,7 @@ namespace OoadProject.Core.ViewModels.Customers
                     {
                         _customerService.HidenCustomer(SelectedCustomer);
                         MessageBox.Show("Xóa khách hàng thành công");
+                        LoadListCustomers();
                     }
                 }
             );
@@ -281,7 +283,7 @@ namespace OoadProject.Core.ViewModels.Customers
                 filter.NameCustomerKeyWord = CustomerNameKeyword;
             }            
 
-            var pagedList = _customerService.GetCustomersForDisplayCustomer(1, 13, filter);
+            var pagedList = _customerService.GetCustomersForDisplayCustomer(1, 15, filter);
             Customers = new ObservableCollection<CustomerDisplayDto>(pagedList.Data);
             CurrentPage = pagedList.CurrentPage;
             TotalPages = pagedList.TotalPages;

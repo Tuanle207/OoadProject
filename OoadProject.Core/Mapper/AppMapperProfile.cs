@@ -180,6 +180,8 @@ namespace OoadProject.Core
 
             // Order
             CreateMap<Order, OrderForListDto>()
+                .ForMember(dest => dest.CreationTime, opt =>
+                    opt.MapFrom(src => src.CreationTime.ToString("dd/MM/yyyy")))
                 .ForMember(dest => dest.CreationUser, opt =>
                     opt.MapFrom(src => src.CreationUser.Name))
                 .ForMember(dest => dest.ProviderName, opt =>

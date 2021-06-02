@@ -19,13 +19,14 @@
                         <RowDefinition Height="6*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="79*"></ColumnDefinition>
+                        <ColumnDefinition Width="188*"/>
+                        <ColumnDefinition Width="267*"></ColumnDefinition>
+                        <ColumnDefinition Width="267*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal"
                                 Grid.Row="0"
-                                Grid.Column="0">
+                                Grid.Column="0" Grid.ColumnSpan="2">
                         <TextBlock Text="Ngày:"
                                    FontSize="15"
                                    Margin="33 40 0 0"></TextBlock>
@@ -45,7 +46,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"
                                 Grid.Row="0"
-                                Grid.Column="1">
+                                Grid.Column="2">
                         <TextBlock Text="Doanh thu:"
                                    FontSize="15"
                                    Margin="0 45 0 0"></TextBlock>
@@ -58,12 +59,12 @@
                     <Button Background="DarkGreen"
                             BorderThickness="0"
                             Command="{Binding CDayReportToExcel}"
-                            Grid.Column="2"
+                            Grid.Column="3"
                             Grid.Row="0"
                             Height="50"
                             Width="175"
                             materialDesign:ButtonAssist.CornerRadius="10"
-                            ToolTip="Xuất báo cáo ra file Excel">
+                            ToolTip="Xuất báo cáo ra file Excel" Margin="46,5,45.667,5">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Xuất Báo Cáo"
                                        VerticalAlignment="Center"
@@ -77,8 +78,8 @@
                     </Button>
                     <ListView ItemsSource="{Binding Products}"
                               Grid.Row="1"
-                              Grid.ColumnSpan="3"
-                              Margin="33 0 27 33">
+                              Grid.ColumnSpan="4"
+                              Margin="33,0,26.667,33">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="STT"

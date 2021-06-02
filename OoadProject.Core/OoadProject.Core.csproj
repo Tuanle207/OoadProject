@@ -70,6 +70,8 @@
     <Compile Include="ViewModels\Customers\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Customers\Dtos\CustomerForCreationDto.cs" />
     <Compile Include="ViewModels\Customers\Dtos\CustomerDisplayDto.cs" />
+    <Compile Include="ViewModels\Customers\Validations\NameValidation.cs" />
+    <Compile Include="ViewModels\Customers\Validations\PhoneValidation.cs" />
     <Compile Include="ViewModels\Home\Dtos\HotProductDto.cs" />
     <Compile Include="ViewModels\Home\Dtos\ProcessingOrderDto.cs" />
     <Compile Include="ViewModels\Home\Dtos\RevenueDto.cs" />
@@ -174,8 +176,6 @@
       <Version>15.0.4795.1000</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\Customers\Validations\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
