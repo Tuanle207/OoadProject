@@ -122,12 +122,12 @@
                     <GroupBox Header="Danh sách nhân viên"
                               Margin="5">
 
-                        <DataGrid x:Name="dtg_DanhSachDatBan"
-                                  ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}"
-                                  SelectedItem="{Binding ChosenUser, Mode=TwoWay}"
-                                  AutoGenerateColumns="False"
-                                  CanUserAddRows="False"
-                                  controls:DataGridHelper.ColumnHeaderPadding="10,0">
+                        <DataGrid
+                            ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedItem="{Binding ChosenUser, Mode=TwoWay}"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            controls:DataGridHelper.ColumnHeaderPadding="10,0">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="Ảnh">
                                     <DataGridTemplateColumn.CellTemplate>
