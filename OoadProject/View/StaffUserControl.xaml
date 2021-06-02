@@ -129,7 +129,7 @@
                                   CanUserAddRows="False"
                                   controls:DataGridHelper.ColumnHeaderPadding="10,0">
                             <DataGrid.Columns>
-                                <!--<DataGridTemplateColumn Header="Ảnh">
+                                <DataGridTemplateColumn Header="Ảnh">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <materialDesign:PopupBox HorizontalAlignment="Left"
@@ -147,7 +147,7 @@
                                             </materialDesign:PopupBox>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>-->
+                                </DataGridTemplateColumn>
                                 <DataGridTextColumn Header="STT"
                                                     IsReadOnly="True"
                                                     Binding="{Binding Id}"></DataGridTextColumn>
@@ -178,30 +178,12 @@
                 </materialDesign:Card>
                 <materialDesign:Card Grid.Column="1"
                                      Padding="5"
-                                     Margin="10,10,10,5">
+                                     Margin="0,10,10,5">
                     <GroupBox Header="Thông Tin Nhân viên"
                               Margin="5">
                         <ScrollViewer>
                             <StackPanel>
                                 <StackPanel.Resources>
-                                    <Style TargetType="TextBox">
-                                        <Setter Property="BorderBrush"
-                                                Value="#FF34268A" />
-                                        <Setter Property="BorderThickness"
-                                                Value="0,0,0,1" />
-                                        <Setter Property="Margin"
-                                                Value="3" />
-                                        <Setter Property="Padding"
-                                                Value="3" />
-                                        <Setter Property="IsReadOnly"
-                                                Value="True" />
-                                        <Setter Property="FontSize"
-                                                Value="15" />
-                                        <Setter Property="FontWeight"
-                                                Value="SemiBold" />
-                                        <Setter Property="Height"
-                                                Value="36" />
-                                    </Style>
                                     <Style TargetType="Label">
                                         <Setter Property="VerticalAlignment"
                                                 Value="Center" />
@@ -221,31 +203,38 @@
                                 </DockPanel>
                                 <DockPanel Height="73">
                                     <Label DockPanel.Dock="Top">Tên Nhân Viên</Label>
-                                    <TextBox Text="{Binding ChosenUser.Name, Mode=OneWay}"/>
+                                    <TextBox Style="{StaticResource UnderlineTextBox}" Text="{Binding ChosenUser.Name, Mode=OneWay}"/>
                                 </DockPanel>
                                 <DockPanel Height="73">
                                     <Label DockPanel.Dock="Top">Chức Vụ</Label>
-                                    <TextBox Text="{Binding ChosenUser.Role.Name, Mode=OneWay}" />
+                                    <ComboBox 
+                                        Style="{StaticResource UnderlineComboBox}"
+                                        Height="36"
+                                        BorderBrush="#FF34268A"
+                                        Margin="3"
+                                        FontSize="15"
+                                        FontWeight="Bold"
+                                        VerticalContentAlignment ="Center"/>
                                 </DockPanel>
                                 <DockPanel Height="73">
                                     <Label DockPanel.Dock="Top">Email</Label>
-                                    <TextBox Text="{Binding ChosenUser.Email, Mode=OneWay}"/>
+                                    <TextBox Style="{StaticResource UnderlineTextBox}" Text="{Binding ChosenUser.Email, Mode=OneWay}"/>
                                 </DockPanel>
                                 <DockPanel Height="73">
                                     <Label DockPanel.Dock="Top">Ngày Vào Làm</Label>
-                                    <TextBox Text="{Binding ChosenUser.CreationTime, Mode=OneWay, StringFormat='dd/MM/yyyy'}" />
+                                    <DatePicker Style="{StaticResource UnderlineDatePicker}" Text="{Binding ChosenUser.CreationTime, Mode=OneWay, StringFormat='dd/MM/yyyy'}" />
                                 </DockPanel>
                                 <DockPanel Height="73">
                                     <Label DockPanel.Dock="Top">Số Điện Thoại</Label>
-                                    <TextBox Text="{Binding ChosenUser.PhoneNumber, Mode=OneWay}"/>
+                                    <TextBox Style="{StaticResource UnderlineTextBox}" Text="{Binding ChosenUser.PhoneNumber, Mode=OneWay}"/>
                                 </DockPanel>
                                 <DockPanel Height="73">
                                     <Label DockPanel.Dock="Top">Ngày Sinh</Label>
-                                    <TextBox Text="{Binding ChosenUser.Dob, Mode=OneWay, StringFormat='dd/MM/yyyy'}" />
+                                    <DatePicker Style="{StaticResource UnderlineDatePicker}" Text="{Binding ChosenUser.Dob, Mode=OneWay, StringFormat='dd/MM/yyyy'}" />
                                 </DockPanel>
                                 <DockPanel Height="73">
                                     <Label DockPanel.Dock="Top">Địa Chỉ</Label>
-                                    <TextBox Text="{Binding ChosenUser.Address, Mode=OneWay}"/>
+                                    <TextBox Style="{StaticResource UnderlineTextBox}" Text="{Binding ChosenUser.Address, Mode=OneWay}"/>
                                 </DockPanel>
                             </StackPanel>
                         </ScrollViewer>
