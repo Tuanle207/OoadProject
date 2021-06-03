@@ -24,106 +24,69 @@ namespace OoadProject.View
         {
             InitializeComponent();
         }
-
-        private void uscSetting_Loaded(object sender, RoutedEventArgs e)
+        //catergory
+        private void btnAddCategoryProduct_Click(object sender, RoutedEventArgs e)
         {
-            viewControl.Name = "ParameterUserControl";
-            viewControl.Content = new ParameterUserControl();
-            btnThamSo.Opacity = 1;
-            btnLoaiMatHang.Opacity = 0.8;
-            btnHangSanXuat.Opacity = 0.8;
-            btnNhaCungCap.Opacity = 0.8;
-            btnHangKhachHang.Opacity = 0.8;
+            AddCategoryProductWindow w = new AddCategoryProductWindow();
+            w.ShowDialog();
         }
 
-        private void btnThamSo_Click(object sender, RoutedEventArgs e)
+        private void btnEditCategory_Click(object sender, RoutedEventArgs e)
         {
-            if (viewControl.Name != "ParameterUserControl")
+            EditCategoryProductWindow w = new EditCategoryProductWindow();
+            w.ShowDialog();
+        }
+
+        private void btnDeleteCategory_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Xác nhận xóa loại sản phẩm?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var command = ((Button)sender).Command;
+
+            if (result == MessageBoxResult.OK && command.CanExecute(null))
             {
-                viewControl.Content = new ParameterUserControl();
-                viewControl.Name = "ParameterUserControl";
+                command.Execute(true);
+                if (btnAfterCategory.Command.CanExecute(null) == true) btnAfterCategory.Command.Execute(null);
+            }
+            else if (result != MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(false);
             }
         }
 
-        private void btnThamSo_GotFocus(object sender, RoutedEventArgs e)
+        //manufacture
+        private void btnAddManufacture_Click(object sender, RoutedEventArgs e)
         {
-            btnThamSo.Opacity = 1;
-            btnLoaiMatHang.Opacity = 0.8;
-            btnHangSanXuat.Opacity = 0.8;
-            btnNhaCungCap.Opacity = 0.8;
-            btnHangKhachHang.Opacity = 0.8;
+            AddManufactureWindow w = new AddManufactureWindow();
+            w.ShowDialog();
         }
 
-        private void btnLoaiMatHang_Click(object sender, RoutedEventArgs e)
+        private void btnDeleteManufacturer_Click(object sender, RoutedEventArgs e)
         {
-            if (viewControl.Name != "CategoryProductUserControl")
+            var result = MessageBox.Show("Xác nhận xóa nhà sản xuất?", "Xác nhận", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var command = ((Button)sender).Command;
+
+            if (result == MessageBoxResult.OK && command.CanExecute(null))
             {
-                viewControl.Content = new CategoryProductUserControl();
-                viewControl.Name = "CategoryProductUserControl";
+                command.Execute(true);
+                if (btnAfterManufacturer.Command.CanExecute(null) == true) btnAfterManufacturer.Command.Execute(null);
+            }
+            else if (result != MessageBoxResult.OK && command.CanExecute(null))
+            {
+                command.Execute(false);
             }
         }
-
-        private void btnLoaiMatHang_GotFocus(object sender, RoutedEventArgs e)
+        //provider
+        private void btnAddProvider_Click(object sender, RoutedEventArgs e)
         {
-            btnThamSo.Opacity = 0.8;
-            btnLoaiMatHang.Opacity = 1;
-            btnHangSanXuat.Opacity = 0.8;
-            btnNhaCungCap.Opacity = 0.8;
-            btnHangKhachHang.Opacity = 0.8;
+            AddProviderWindow w = new AddProviderWindow();
+            w.ShowDialog();
+        }
+        //customerLevel
+        private void btnEditCustomerLevel_Click(object sender, RoutedEventArgs e)
+        {
+            EditCustomerLevel w = new EditCustomerLevel();
+            w.ShowDialog();
         }
 
-        private void btnHangSanXuat_Click(object sender, RoutedEventArgs e)
-        {
-            if (viewControl.Name != "ManufactureUserControl")
-            {
-                viewControl.Content = new ManufactureUserControl();
-                viewControl.Name = "ManufactureUserControl";
-            }
-        }
-
-        private void btnHangSanXuat_GotFocus(object sender, RoutedEventArgs e)
-        {
-            btnThamSo.Opacity = 0.8;
-            btnLoaiMatHang.Opacity = 0.8;
-            btnHangSanXuat.Opacity = 1;
-            btnNhaCungCap.Opacity = 0.8;
-            btnHangKhachHang.Opacity = 0.8;
-        }
-
-        private void btnNhaCungCap_Click(object sender, RoutedEventArgs e)
-        {
-            if (viewControl.Name != "ProviderUserControl")
-            {
-                viewControl.Content = new ProviderUserControl();
-                viewControl.Name = "ProviderUserControl";
-            }
-        }
-
-        private void btnNhaCungCap_GotFocus(object sender, RoutedEventArgs e)
-        {
-            btnThamSo.Opacity = 0.8;
-            btnLoaiMatHang.Opacity = 0.8;
-            btnHangSanXuat.Opacity = 0.8;
-            btnNhaCungCap.Opacity = 1;
-            btnHangKhachHang.Opacity = 0.8;
-        }
-
-        private void btnHangKhachHang_Click(object sender, RoutedEventArgs e)
-        {
-            if (viewControl.Name != "CustomerLevelUserControl")
-            {
-                viewControl.Content = new CustomerLevelUserControl();
-                viewControl.Name = "CustomerLevelUserControl";
-            }
-        }
-
-        private void btnHangKhachHang_GotFocus(object sender, RoutedEventArgs e)
-        {
-            btnThamSo.Opacity = 0.8;
-            btnLoaiMatHang.Opacity = 0.8;
-            btnHangSanXuat.Opacity = 0.8;
-            btnNhaCungCap.Opacity = 0.8;
-            btnHangKhachHang.Opacity = 1;
-        }
     }
 }

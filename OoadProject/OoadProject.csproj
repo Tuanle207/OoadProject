@@ -146,12 +146,6 @@
     <Compile Include="View\AddStaffWindow.xaml.cs">
       <DependentUpon>AddStaffWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CategoryProductUserControl.xaml.cs">
-      <DependentUpon>CategoryProductUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\CustomerLevelUserControl.xaml.cs">
-      <DependentUpon>CustomerLevelUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\CustomerUserControl.xaml.cs">
       <DependentUpon>CustomerUserControl.xaml</DependentUpon>
     </Compile>
@@ -188,17 +182,8 @@
     <Compile Include="View\ReportManagementUserControl.xaml.cs">
       <DependentUpon>ReportManagementUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ManufactureUserControl.xaml.cs">
-      <DependentUpon>ManufactureUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\StaffUserControl.xaml.cs">
       <DependentUpon>StaffUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ParameterUserControl.xaml.cs">
-      <DependentUpon>ParameterUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ProviderUserControl.xaml.cs">
-      <DependentUpon>ProviderUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SellUserControl.xaml.cs">
       <DependentUpon>SellUserControl.xaml</DependentUpon>
@@ -271,14 +256,6 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="View\CategoryProductUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="View\CustomerLevelUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\CustomerUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -327,19 +304,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ManufactureUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
     <Page Include="View\StaffUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="View\ParameterUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="View\ProviderUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
