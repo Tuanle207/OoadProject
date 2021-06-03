@@ -97,8 +97,7 @@ namespace OoadProject.Core.ViewModels.Orders
                 p => true,
                 p =>
                 {
-                    if (SelectedOrder == null)
-                        InitializeReceiptProduct();
+                    SelectedOrder = null;
                 }
             );
 
