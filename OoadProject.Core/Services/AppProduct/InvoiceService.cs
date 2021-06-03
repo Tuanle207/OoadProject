@@ -18,6 +18,7 @@ namespace OoadProject.Core.Services.AppProduct
         private readonly CustomerRepository _customerRepository;
         private readonly InvoiceProductRepository _invoiceProductRepository;
         private readonly ProductRepository _productRepository;
+        private readonly CustomerLevelRepository _customerLevelRepository;
 
         public InvoiceService()
         {
@@ -25,6 +26,7 @@ namespace OoadProject.Core.Services.AppProduct
             _customerRepository = new CustomerRepository();
             _invoiceProductRepository = new InvoiceProductRepository();
             _productRepository = new ProductRepository();
+            _customerLevelRepository = new CustomerLevelRepository();
         }
 
         public ReportByDayDto GetReportByDay(DateTime day)
@@ -77,7 +79,13 @@ namespace OoadProject.Core.Services.AppProduct
 
             if (customer == null)
             {
-                customer = new Customer { Name = invoice.CustomerName, PhoneNumber = phoneNumber, CustomerLevelId= 1, CreationTime = DateTime.Now, AccumulatedPoint = invoice.Price / 100000};
+                customer = new Customer { Name = invoice.CustomerName, PhoneNumber = phoneNumber, CreationTime = DateTime.Now, AccumulatedPoint = invoice.Price / 100000 };
+                if (customer.AccumulatedPoint >= _customerLevelRepository.GetCustomerLevelByName("Hạng Vàng").PointLevel)
+                    customer.CustomerLevelId = 3;
+                else if (customer.AccumulatedPoint >= _customerLevelRepository.GetCustomerLevelByName("Hạng Bạc").PointLevel)
+                    customer.CustomerLevelId = 2;
+                else
+                    customer.CustomerLevelId = 1;
                 var storedCustomer = _customerRepository.Create(customer);
                 customerId = storedCustomer.Id;
             }
