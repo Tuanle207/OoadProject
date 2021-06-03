@@ -17,6 +17,12 @@ namespace OoadProject.Core.ViewModels.Customers
 {
     public class CustomerViewModel : BaseViewModel
     {
+
+        private static CustomerViewModel _instance;
+        public static CustomerViewModel getInstance()
+        {
+            return _instance;
+        }
         // private service fields
         private readonly CustomerService _customerService;
         private readonly CustomerLevelService _customerLevelService;
@@ -275,7 +281,7 @@ namespace OoadProject.Core.ViewModels.Customers
                 }
             );
         }
-        private void LoadListCustomers()
+        public void LoadListCustomers()
         {
             CustomerFilterDto filter = new CustomerFilterDto();
             if (CustomerNameKeyword != null && CustomerNameKeyword != "")
