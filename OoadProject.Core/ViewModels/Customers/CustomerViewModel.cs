@@ -128,6 +128,8 @@ namespace OoadProject.Core.ViewModels.Customers
 
         public CustomerViewModel()
         {
+            if (_instance == null)
+                _instance = this;
             // service
             _customerService = new CustomerService();
             _customerLevelService = new CustomerLevelService();
