@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OoadProject.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1100" Background="White"
              DataContext="{StaticResource ProductViewModel}">
@@ -19,16 +20,19 @@
                 <ColumnDefinition Width="1.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBox x:Name="tbKeyword"  Text="{Binding ProductNameKeyword, UpdateSourceTrigger=PropertyChanged}"
-                    Height="40" VerticalContentAlignment="Center" Padding="15 0 0 0"
-                    materialDesign:HintAssist.Hint="Tìm kiếm theo tên sản phẩm"/>
-            <Button x:Name="btnAdd" Width="120" Height="40" Grid.Column="1" Click="btnAdd_Click" BorderThickness="0" Background="#695D85" Foreground="White">
+                    Height="40" VerticalContentAlignment="Center" Padding="10 0 0 0"
+                    materialDesign:HintAssist.Hint="Tìm kiếm theo tên sản phẩm"
+                     Style="{StaticResource UnderlineTextBox}"/>
+            <Button x:Name="btnAdd" Width="120" Height="40" Grid.Column="1" 
+                    Click="btnAdd_Click" BorderThickness="0" Background="#695D85" 
+                    Foreground="White" materialDesign:ButtonAssist.CornerRadius="10">
                 <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" >
                     <materialDesign:PackIcon Kind="Filter" VerticalAlignment="Center"  Margin="-5 0 0 0" Width="20" Height="20"/>
                     <Label Content="Tìm kiếm" VerticalAlignment="Center" Foreground="white" Margin="-5 0 -8 0"/>
                 </StackPanel>
             </Button>
         </Grid>
-        
+
         <StackPanel VerticalAlignment="Top" Grid.Row="1">
             <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}">
                 <StackPanel>
@@ -38,13 +42,13 @@
                                 Margin="24,8,24,16">
                                 <TextBlock Text="- Loại linh kiện: " VerticalAlignment="Center" Margin="20 0 5 5" FontSize="15" Foreground="DarkRed"/>
                                 <WrapPanel>
-                                <ListBox x:Name="myListCategory"  ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Style="{StaticResource MaterialDesignFilterChipAccentListBox}"  ItemsSource="{Binding Categories, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectionMode="Multiple" SelectedItem="{Binding FilterCategory,UpdateSourceTrigger=PropertyChanged}">
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Horizontal"/>
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                </ListBox>
+                                    <ListBox x:Name="myListCategory"  ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Style="{StaticResource MaterialDesignFilterChipAccentListBox}"  ItemsSource="{Binding Categories, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectionMode="Multiple" SelectedItem="{Binding FilterCategory,UpdateSourceTrigger=PropertyChanged}">
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
+                                    </ListBox>
                                 </WrapPanel>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
@@ -69,30 +73,22 @@
                      SnapsToDevicePixels="True" />
                 </StackPanel>
             </materialDesign:Card>
-            <materialDesign:Card x:Name="ListProduct" Height="500" Background="#FFE3F0FF"  Margin="10,10,10,0" BorderThickness="0" VerticalAlignment="Stretch">
-                <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                    <ListView ItemsSource="{Binding Products, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedProduct, UpdateSourceTrigger=PropertyChanged}"
-                     >
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                <Setter Property="BorderThickness" Value="0"/>
-                                <Setter Property="Margin" Value="0 0 0 0"/>
-                                <Setter Property="Padding" Value="0"/>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.View >
-                            <GridView>
-                                <GridView.ColumnHeaderContainerStyle>
-                                    <Style TargetType="GridViewColumnHeader">
-                                        <Setter Property="Margin" Value="0"/>
-                                        <Setter Property="Padding" Value="0"/>
-                                        <Setter Property="Background" Value="#FFE3F0FF"/>
-                                        <Setter Property="Height" Value="40"/>
-                                    </Style>
-                                </GridView.ColumnHeaderContainerStyle>
-                                <GridViewColumn>
-                                    <GridViewColumn.CellTemplate>
+            <materialDesign:Card
+                    x:Name="ListProduct"
+                    Padding="5"
+                    Margin="10,10,10,5">
+                <GroupBox Header="Danh sách sản phẩm"
+                              Margin="5">
+                    <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <DataGrid
+                            ItemsSource="{Binding Products, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedItem="{Binding SelectedProduct, UpdateSourceTrigger=PropertyChanged}"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            controls:DataGridHelper.ColumnHeaderPadding="10,0">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button
                                             x:Name="btnHideProduct" Click="btnHideProduct_Click"
@@ -103,10 +99,10 @@
                                                 <materialDesign:PackIcon Kind="Delete" Width="16" Height="16" />
                                             </Button>
                                         </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn>
-                                    <GridViewColumn.CellTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button
                                             x:Name="btnUpdateProduct" Click="btnUpdateProduct_Click"
@@ -117,22 +113,61 @@
                                                 <materialDesign:PackIcon Kind="Edit" Width="16" Height="16" />
                                             </Button>
                                         </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="Mã SP" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
-                                <GridViewColumn  Header="Tên SP" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
-                                <GridViewColumn Header="Phân loại" DisplayMemberBinding="{Binding Category.Name}"></GridViewColumn>
-                                <GridViewColumn Header="Nhà sản xuất" DisplayMemberBinding="{Binding Manufacturer.Name}"></GridViewColumn>
-                                <GridViewColumn Header="SL" DisplayMemberBinding="{Binding Number}"></GridViewColumn>
-                                <GridViewColumn Header="Giá nhập" DisplayMemberBinding="{Binding PriceIn}"></GridViewColumn>
-                                <GridViewColumn Header="Giá bán" DisplayMemberBinding="{Binding PriceOut}"></GridViewColumn>
-                                <GridViewColumn Header="TG bảo hành" DisplayMemberBinding="{Binding WarrantyPeriod}"></GridViewColumn>
-                                <GridViewColumn Header="Tỉ lệ lợi nhuận" DisplayMemberBinding="{Binding ReturnRate}"></GridViewColumn>
-                                <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding Status, Converter={StaticResource ProductStatusConverter}}"></GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </ScrollViewer>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Ảnh">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <materialDesign:PopupBox HorizontalAlignment="Left"
+                                                                     PlacementMode="BottomAndAlignCentres"
+                                                                     StaysOpen="False"
+                                                                     PopupMode="MouseOver">
+                                                <materialDesign:PopupBox.ToggleContent>
+                                                    <materialDesign:PackIcon Kind="Image"
+                                                                             Foreground="#FF0F5699" />
+                                                </materialDesign:PopupBox.ToggleContent>
+                                                <Image Source="{Binding Photo}"
+                                                       Width="300"
+                                                       Height="300"
+                                                       Stretch="Fill" />
+                                            </materialDesign:PopupBox>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Mã SP"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding Id}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Tên SP"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding Name}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Phân loại"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding Category.Name}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Nhà sản xuất"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding Manufacturer.Name}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="SL"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding Number}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Giá nhập"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding PriceIn}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Giá bán"
+                                                      IsReadOnly="True"
+                                                      Binding="{Binding PriceOut}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="TG bảo hành"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding WarrantyPeriod}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Tỉ lệ lợi nhuận"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding ReturnRate}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Tình trạng"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding Status, Converter={StaticResource ProductStatusConverter}}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                </GroupBox>
             </materialDesign:Card>
         </StackPanel>
         <Grid Grid.Row="2">
@@ -156,7 +191,11 @@
                     </Button>
                 </StackPanel>
             </Grid>
-            <Button Grid.Column="2" Width="150" HorizontalAlignment="Right" Margin="0 8 10 8" Name="btnAddProduct" Command="{Binding PrepareAddProduct}" Click="btnAddProduct_Click" Height="Auto" BorderThickness="0" Background="#596FB5" >
+            <Button Grid.Column="2" Width="150" HorizontalAlignment="Right" 
+                    Margin="0 8 10 8" Name="btnAddProduct"
+                    Command="{Binding PrepareAddProduct}" Click="btnAddProduct_Click" 
+                    Height="Auto" BorderThickness="0" Background="#596FB5" 
+                    materialDesign:ButtonAssist.CornerRadius="10">
                 <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="-5 0 -5 0">
                     <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 0 0" Width="20" Height="20"/>
                     <Label Content="Thêm sản phẩm" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 -8 0"/>
@@ -164,7 +203,7 @@
             </Button>
         </Grid>
         <Button x:Name="btnAfterDele" Command="{Binding ReloadProducts}" Visibility="Hidden" />
-        
+
         <!--<Grid Grid.RowSpan="3" DataContext="{StaticResource SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Source="../Assets/unauthorized.png" Width="200" Height="200" />
@@ -175,5 +214,5 @@
             </Grid.Visibility>
         </Grid>-->
     </Grid>
-    
+
 </UserControl>

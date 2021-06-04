@@ -118,5 +118,10 @@ namespace OoadProject.View
                 }
             }
         }
+
+        private void ListOrder_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

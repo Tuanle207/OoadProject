@@ -3,29 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:OoadProject.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:local="clr-namespace:OoadProject.View" 
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1100" Background="White"
              DataContext="{StaticResource HomeViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Margin="20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="8*"/>
-                <ColumnDefinition Width="7*"/>
-                <ColumnDefinition Width="7*"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Margin="20 0 0 0">
             <Label VerticalAlignment="Center" FontSize="20" Grid.Column="0" FontWeight="UltraBold">
                 <Label.Content>
                     <AccessText TextWrapping="Wrap" Text="Thông số bán hàng"/>
                 </Label.Content>
             </Label>
-            <Grid Grid.Column="1" Margin="20" Background="#E0ECF8">
+        </Grid>
+        <Grid Grid.Row="1" Margin="20 5 5 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Margin="20 0 20 0" Background="#E0ECF8">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -47,7 +54,7 @@
                 <Label Grid.Row="1" Grid.Column="1" Content="{Binding TodayRevenue.Sales}" VerticalAlignment="Center" FontFamily="Roboto" FontSize="14" Margin="10 0 0 0"/>
                 <Label Grid.Row="2" Grid.Column="1" Content="{Binding TodayRevenue.Revenue}" VerticalAlignment="Center" FontFamily="Roboto" FontSize="14" Margin="10 0 0 0"/>
             </Grid>
-            <Grid Grid.Column="2" Margin="20" Background="#E0ECF8">
+            <Grid Grid.Column="1" Margin="20 0 20 0" Background="#E0ECF8">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -70,99 +77,93 @@
                 <Label Grid.Row="2" Grid.Column="1" Content="{Binding MonthRevenue.Revenue}" VerticalAlignment="Center" FontFamily="Roboto" FontSize="14" Margin="10 0 0 0"/>
             </Grid>
         </Grid>
-        <Grid Grid.Row="1" Margin="20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="7*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Row="2" Margin="20 0 0 0">
             <Label VerticalAlignment="Center" FontSize="20" Grid.Column="0" FontWeight="UltraBold">
                 <Label.Content>
                     <AccessText TextWrapping="Wrap" Text="Đơn đặt hàng đang được xử lý"/>
                 </Label.Content>
             </Label>
-            
-            <materialDesign:Card Grid.Column="1" x:Name="ListProcesscingProduct" Height="500" Background="#E0ECF8"  Margin="20 0 20 10" BorderThickness="0" VerticalAlignment="Stretch">
-                <ListView ItemsSource="{Binding ProcessingOrders}" x:Name="lvDonDatHang" FontSize="14" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="BorderThickness" Value="0"/>
-                            <Setter Property="Margin" Value="20 0 0 0"/>
-                            <Setter Property="Padding" Value="0"/>
-                            <Setter Property="IsSelected" Value="False"/>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.View>
-                        <GridView >
-                            <GridViewColumn Header="Mã đơn" Width="120" DisplayMemberBinding="{Binding Id}"/>
-                            <GridViewColumn Header="Ngày đặt hàng" DisplayMemberBinding="{Binding CreationTime, StringFormat={}{0:dd/MM/yyyy}}"/>
-                            <GridViewColumn Header="Người đặt hàng" DisplayMemberBinding="{Binding CreatedUser}"/>
-                            <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding Status}"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </materialDesign:Card>
         </Grid>
-        <Grid Grid.Row="2" Margin="20">
+        <Grid Grid.Row="3" Margin="20 5 5 0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="14*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Label VerticalAlignment="Center" FontSize="20" Grid.Column="0" FontWeight="UltraBold">
-                    <Label.Content>
-                        <AccessText TextWrapping="Wrap" Text="Danh sách sản phẩm bán chạy theo tháng"/>
-                    </Label.Content>
-                </Label>
-                <Button Grid.Column="1" Height="32" Width="32" Background="Transparent" 
+            <materialDesign:Card Grid.Column="0" x:Name="ListProcesscingProduct" Margin="10 10 10 5" Padding="5">
+                <DataGrid
+                            ItemsSource="{Binding ProcessingOrders, UpdateSourceTrigger=PropertyChanged}"
+                            AutoGenerateColumns="False"
+                            ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                            CanUserAddRows="False"
+                            controls:DataGridHelper.ColumnHeaderPadding="10,0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã đơn" MinWidth="150"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding Id}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Ngày đặt hàng" MinWidth="200"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding CreationTime, StringFormat='dd/MM/yyyy'}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Người đặt hàng" MinWidth="200"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding CreatedUser}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Nhà cung cấp" MinWidth="200"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding ProviderName}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Trạng thái"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding Status}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </materialDesign:Card>
+        </Grid>
+        <Grid Grid.Row="4" Margin="20 0 0 0">
+            <Label VerticalAlignment="Center" FontSize="20" Grid.Column="0" FontWeight="UltraBold">
+                <Label.Content>
+                    <AccessText TextWrapping="Wrap" Text="Danh sách sản phẩm bán chạy theo tháng"/>
+                </Label.Content>
+            </Label>
+        </Grid>
+        <Grid Grid.Row="5" Margin="20 5 5 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="14*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Height="32" Width="32" Background="Transparent" 
                         BorderThickness="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                    <materialDesign:PackIcon Kind="ArrowBackCircle" VerticalAlignment="Center" Height="32" Width="32"/>
-                </Button>
-            </Grid>
-            
-            <Grid Grid.Column="1" Grid.ColumnSpan="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="7*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <ListBox ItemsSource="{Binding HotProducts}" PreviewMouseWheel="ListBox_PreviewMouseWheel" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Column="0" BorderThickness="0" Margin="0 0 -10 0" >
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Background="#E0ECF8" Margin="5" Width="135" Height="145" VerticalAlignment="Center">
-                                <Label VerticalAlignment="Center" FontSize="20" Grid.Column="0" FontWeight="UltraBold">
-                                    
-                                </Label>
-                                <Label FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#0B610B">
-                                    <Label.Content>
-                                        <AccessText TextWrapping="Wrap" Text="{Binding Name}"/>
-                                    </Label.Content>
-                                </Label>
-                                <Label FontSize="14" FontStyle="Italic" HorizontalAlignment="Center" Foreground="#FF8000">
-                                    <Label.Content>
-                                        <AccessText TextWrapping="Wrap" Text="{Binding ManufacturerName}"/>
-                                    </Label.Content>
-                                </Label>
-                                <Label Content="{Binding Sales, StringFormat={}{Doanh số: }{0}}" FontSize="16" FontWeight="Heavy" HorizontalAlignment="Center" Foreground="#8A0829"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                <Button Grid.Column="1" Height="32" Width="32" Background="Transparent" 
+                <materialDesign:PackIcon Kind="ArrowBackCircle" VerticalAlignment="Center" Height="32" Width="32"/>
+            </Button>
+            <ListBox ItemsSource="{Binding HotProducts}" PreviewMouseWheel="ListBox_PreviewMouseWheel" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Column="1" BorderThickness="0" Margin="0 0 -10 0" >
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Background="#E0ECF8" Margin="5" Width="135" Height="145" VerticalAlignment="Center">
+                            <Label VerticalAlignment="Center" FontSize="20" Grid.Column="0" FontWeight="UltraBold">
+
+                            </Label>
+                            <Label FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#0B610B">
+                                <Label.Content>
+                                    <AccessText TextWrapping="Wrap" Text="{Binding Name}"/>
+                                </Label.Content>
+                            </Label>
+                            <Label FontSize="14" FontStyle="Italic" HorizontalAlignment="Center" Foreground="#FF8000">
+                                <Label.Content>
+                                    <AccessText TextWrapping="Wrap" Text="{Binding ManufacturerName}"/>
+                                </Label.Content>
+                            </Label>
+                            <Label Content="{Binding Sales, StringFormat={}{Doanh số: }{0}}" FontSize="16" FontWeight="Heavy" HorizontalAlignment="Center" Foreground="#8A0829"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Grid.Column="2" Height="32" Width="32" Background="Transparent" 
                         BorderThickness="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                    <materialDesign:PackIcon Kind="ArrowRightCircle" VerticalAlignment="Center" Height="32" Width="32"/>
-                </Button>
-            </Grid>
+                <materialDesign:PackIcon Kind="ArrowRightCircle" VerticalAlignment="Center" Height="32" Width="32"/>
+            </Button>
         </Grid>
     </Grid>
 </UserControl>

@@ -102,5 +102,10 @@ namespace OoadProject.View
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using OoadProject.Core.Services.AppCustomer;
 using OoadProject.Core.Services.AppProduct;
+using OoadProject.Core.ViewModels.Products.Dtos;
 using OoadProject.Core.ViewModels.Reports;
 using OoadProject.Core.ViewModels.Sells.Dtos;
+using OoadProject.Data.Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,6 +19,7 @@ namespace OoadProject.Core.ViewModels.Sells
         private readonly ProductService _productService;
         private readonly InvoiceService _invoiceService;
         private readonly CustomerService _customerService;
+        private readonly CustomerLevelRepository _customerLevelRepository;
 
         // private data fields
         private List<ProductForSellDto> _loadedProducts;
@@ -32,9 +35,9 @@ namespace OoadProject.Core.ViewModels.Sells
 
         // public data properties
 
-        public ObservableCollection<ProductForSellDto> Products 
-        { 
-            get => _products; 
+        public ObservableCollection<ProductForSellDto> Products
+        {
+            get => _products;
             set
             {
                 _products = value;
@@ -43,7 +46,7 @@ namespace OoadProject.Core.ViewModels.Sells
         }
         public int CurrentPage { get => _currentPage; set { _currentPage = value; OnPropertyChanged(); } }
         public int TotalPages { get => _totalPages; set { _totalPages = value; OnPropertyChanged(); } }
-      
+
         public ObservableCollection<SelectingProductForSellDto> SelectedProducts
         {
             get => _selectedProducts;
@@ -56,15 +59,16 @@ namespace OoadProject.Core.ViewModels.Sells
 
         public InvoiceForCreationDto Invoice { get => _invoice; set { _invoice = value; OnPropertyChanged(); } }
 
-        public string ProductNameKeyword { 
-            get => _productNameKeyword; 
-            set 
-            { 
+        public string ProductNameKeyword
+        {
+            get => _productNameKeyword;
+            set
+            {
                 _productNameKeyword = value;
                 CurrentPage = 1;
                 OnPropertyChanged();
                 ReloadProducts();
-            } 
+            }
         }
 
         // public command properties
@@ -83,10 +87,13 @@ namespace OoadProject.Core.ViewModels.Sells
             _invoiceService = new InvoiceService();
             _customerService = new CustomerService();
 
+            //Repository
+            _customerLevelRepository = new CustomerLevelRepository();
+
             // data
             _storedSelectedProducts = new ObservableCollection<ProductForSellDto>();
             ProductNameKeyword = null;
-            
+
             SelectedProducts = new ObservableCollection<SelectingProductForSellDto>();
 
             Invoice = new InvoiceForCreationDto { Total = 0 };
@@ -118,7 +125,7 @@ namespace OoadProject.Core.ViewModels.Sells
                     }
                 }
 
-                    
+
             );
 
             GoPrevPage = new RelayCommand<object>
@@ -135,7 +142,7 @@ namespace OoadProject.Core.ViewModels.Sells
 
                         Products = new ObservableCollection<ProductForSellDto>();
                         for (int i = start; i < end; i++)
-                                Products.Add(_loadedProducts[i]);
+                            Products.Add(_loadedProducts[i]);
                     }
                     else
                     {
@@ -143,7 +150,7 @@ namespace OoadProject.Core.ViewModels.Sells
                         _loadedProducts.AddRange(pagedListPrevPageData);
                         _loadedPages[CurrentPage - 1] = true;
                     }
-                    
+
                 }
             );
 
@@ -169,13 +176,27 @@ namespace OoadProject.Core.ViewModels.Sells
                         // save to DB
                         _invoiceService.AddInvoice(Invoice, SelectedProducts.ToList());
 
+                        //Update AccumulatedPoint of customer
+                        var customer = _customerService.GetCustomerByPhone(Invoice.PhoneNumber);
+                        CustomerDisplayDto updatedCustomer;
+                        updatedCustomer = Mapper.Map<CustomerDisplayDto>(customer);
+                        updatedCustomer.AccumulatedPoint += Invoice.Price / 100000;
+                        //Check and Update AccumulatedPoint
+                        if (updatedCustomer.AccumulatedPoint >= _customerLevelRepository.GetCustomerLevelByName("Hạng Vàng").PointLevel)
+                            updatedCustomer.CustomerLevelId = 3;
+                        else if (updatedCustomer.AccumulatedPoint >= _customerLevelRepository.GetCustomerLevelByName("Hạng Bạc").PointLevel)
+                            updatedCustomer.CustomerLevelId = 2;
+                        else
+                            updatedCustomer.CustomerLevelId = 1;
+                        _customerService.UpdateCustomer(updatedCustomer);
+
                         // reset data
                         SelectedProducts = new ObservableCollection<SelectingProductForSellDto>();
                         Invoice = new InvoiceForCreationDto();
                         ReportViewModel.getInstance().Update();
                         MessageBox.Show("Thanh toán hành công");
                     }
-                    
+
                 }
             );
 
@@ -205,6 +226,7 @@ namespace OoadProject.Core.ViewModels.Sells
                         Invoice.CustomerName = customer.Name;
                         CalcInvoiceDiscountAndPrice();
                         Invoice.CustomerLevel = customer.CustomerLevel.Name;
+
                     }
                     else
                         throw new Exception("Khách hàng với số điện thoại này không tồn tại!");
@@ -264,13 +286,13 @@ namespace OoadProject.Core.ViewModels.Sells
                 _storedSelectedProducts.Add(product);
                 SelectedProducts.Add(Mapper.Map<SelectingProductForSellDto>(product));
             }
-            
+
             // decrease product number in products
             if (product != null)
             {
                 product.Number -= numberCanBeAdded;
             }
-            
+
             if (storedSelectedProduct != null && storedSelectedProduct != product) storedSelectedProduct.Number -= numberCanBeAdded;
 
             CalcInvoiceTotal();
@@ -283,7 +305,7 @@ namespace OoadProject.Core.ViewModels.Sells
 
             // max no.item can be removed
             var numberCanBeRemoved = number <= selectedProduct.SelectedNumber ? number : selectedProduct.SelectedNumber;
-            
+
             // remove items from cart
             selectedProduct.SelectedNumber -= numberCanBeRemoved;
 
@@ -302,7 +324,7 @@ namespace OoadProject.Core.ViewModels.Sells
 
                 //if (loadedProduct != null)_loadedProducts.Remove(loadedProduct);
             }
-               
+
 
             CalcInvoiceTotal();
             CalcInvoiceDiscountAndPrice();
