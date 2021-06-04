@@ -34,7 +34,7 @@ namespace OoadProject.Data.Repository
             }
         }
 
-        public PaginatedList<Customer> GetCustomers(int page, int limit, CustomerFilterDto Filter = null)
+        public PaginatedList<Customer> GetCustomers(int page = 1, int limit = 15, CustomerFilterDto Filter = null)
         {
             using (var ctx = new AppDbContext())
             {

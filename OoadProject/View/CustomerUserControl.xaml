@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:OoadProject.View"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignHeight="650"
              d:DesignWidth="1100"
@@ -118,15 +119,22 @@
                     <GroupBox Header="Thông Tin Khách Hàng"
                               Margin="5">
                         <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                            <DataGrid ItemsSource="{Binding Customers, UpdateSourceTrigger=PropertyChanged}" Background="#FFE3F0FF" Grid.Column="1"  IsReadOnly="True" SelectedItem="{Binding SelectedCustomer, UpdateSourceTrigger=PropertyChanged}"
-                              materialDesign:DataGridAssist.CellPadding="4" materialDesign:DataGridAssist.ColumnHeaderPadding="10" >
+                            <DataGrid 
+                                ItemsSource="{Binding Customers, UpdateSourceTrigger=PropertyChanged}" 
+                                Grid.Column="1"  IsReadOnly="True"
+                                SelectedItem="{Binding SelectedCustomer, UpdateSourceTrigger=PropertyChanged}"
+                                AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                controls:DataGridHelper.ColumnHeaderPadding="10,0"
+                              materialDesign:DataGridAssist.CellPadding="4" materialDesign:DataGridAssist.ColumnHeaderPadding="10" 
+                                >
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Mã KH" Binding="{Binding Id}"></DataGridTextColumn>
                                     <DataGridTextColumn Header="Tên KH" Binding="{Binding Name}"/>
                                     <DataGridTextColumn Header="Hạng thành viên" Binding="{Binding CustomerLevel.Name}"/>
                                     <DataGridTextColumn Header="Điểm tích lũy" Binding="{Binding AccumulatedPoint}"/>
                                     <DataGridTextColumn Header="Số điện thoại" Binding="{Binding PhoneNumber}"/>
-                                    <DataGridTextColumn Header="Thời gian tạo" Binding="{Binding CreationTime}"/>
+                                    <DataGridTextColumn Header="Thời gian tạo" Binding="{Binding CreationTime, StringFormat='dd/MM/yyyy'}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </ScrollViewer>
@@ -135,67 +143,44 @@
                 
                 <materialDesign:Card Grid.Column="1"
                                      Padding="5"
-                                     Margin="10,10,10,5">
+                                     Margin="0,10,10,5">
                     <GroupBox Header="Thông Tin Khách Hàng"
                               Margin="5">
-                        <Grid>
-                            <Grid.Resources>
-                                <Style TargetType="TextBox">
-                                    <Setter Property="BorderBrush"
-                                            Value="#FF636363" />
-                                    <Setter Property="BorderThickness"
-                                            Value="1" />
-                                    <Setter Property="Margin"
-                                            Value="3" />
-                                    <Setter Property="FontSize"
-                                            Value="15" />
-                                    <Setter Property="FontWeight"
-                                            Value="SemiBold" />
-                                </Style>
-                                <Style TargetType="Label">
-                                    <Setter Property="VerticalAlignment"
-                                            Value="Center" />
-                                    <Setter Property="FontSize"
-                                            Value="14" />
-                                    <Setter Property="FontWeight"
-                                            Value="SemiBold" />
-                                </Style>
-                            </Grid.Resources>
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <DockPanel Grid.Row="0">
-                                <Label DockPanel.Dock="Top">Tên Khách Hàng</Label>
-                                <TextBox x:Name="tbx_TenKhachHang" Text="{Binding SelectedCustomer.Name}"/>
-                            </DockPanel>
-                            <DockPanel Grid.Row="1">
-                                <Label DockPanel.Dock="Top">Hạng Thành Viên</Label>
-                                <TextBox Text="{Binding SelectedCustomer.CustomerLevel.Name}" IsReadOnly="True"/>
-                            </DockPanel>
-                            <DockPanel Grid.Row="2">
-                                <Label DockPanel.Dock="Top">Điểm tích lũy</Label>
-                                <TextBox Text="{Binding SelectedCustomer.AccumulatedPoint}" IsReadOnly="True"/>
-                            </DockPanel>
-                            <DockPanel Grid.Row="3">
-                                <Label DockPanel.Dock="Top">Số điện thoại</Label>
-                                <TextBox Text="{Binding SelectedCustomer.PhoneNumber}"/>
-                            </DockPanel>
-                            <DockPanel Grid.Row="4">
-                                <Label DockPanel.Dock="Top">Ngày tạo thẻ</Label>
-                                <DatePicker Margin="3"
-                                            BorderThickness="1"
-                                            FontSize="15"
-                                            FontWeight="Bold"
-                                            SelectedDate="{Binding SelectedCustomer.CreationTime}"/>
-                            </DockPanel>
-                            
-                        </Grid>
+                        <ScrollViewer>
+                            <StackPanel>
+                                <StackPanel.Resources>
+                                    <Style TargetType="Label">
+                                        <Setter Property="VerticalAlignment"
+                                                Value="Center" />
+                                        <Setter Property="FontSize"
+                                                Value="14" />
+                                        <Setter Property="FontWeight"
+                                                Value="SemiBold" />
+                                    </Style>
+                                </StackPanel.Resources>
+                                <DockPanel Height="73">
+                                    <Label DockPanel.Dock="Top">Tên Khách Hàng</Label>
+                                    <TextBox Style="{StaticResource UnderlineTextBox}" Text="{Binding SelectedCustomer.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                                </DockPanel>
+                                <DockPanel Height="73">
+                                    <Label DockPanel.Dock="Top">Hạng Thành Viên</Label>
+                                    <TextBox Style="{StaticResource UnderlineTextBox}" Text="{Binding SelectedCustomer.CustomerLevel.Name, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
+                                </DockPanel>
+                                <DockPanel Height="73">
+                                    <Label DockPanel.Dock="Top">Điểm tích lũy</Label>
+                                    <TextBox Style="{StaticResource UnderlineTextBox}" Text="{Binding SelectedCustomer.AccumulatedPoint, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
+                                </DockPanel>
+                                <DockPanel Height="73">
+                                    <Label DockPanel.Dock="Top">Số điện thoại</Label>
+                                    <TextBox Style="{StaticResource UnderlineTextBox}" Text="{Binding SelectedCustomer.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                                </DockPanel>
+                                <DockPanel Height="73">
+                                    <Label DockPanel.Dock="Top">Ngày tạo thẻ</Label>
+                                    <TextBox Style="{StaticResource UnderlineTextBox}" Text="{Binding  SelectedCustomer.CreationTime, StringFormat='dd/MM/yyyy', UpdateSourceTrigger=PropertyChanged}"/>
+                                </DockPanel>
+                                
+                            </StackPanel>
+                        </ScrollViewer>
                     </GroupBox>
                 </materialDesign:Card>
             </Grid>            

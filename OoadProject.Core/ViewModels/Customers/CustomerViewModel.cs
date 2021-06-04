@@ -17,6 +17,12 @@ namespace OoadProject.Core.ViewModels.Customers
 {
     public class CustomerViewModel : BaseViewModel
     {
+
+        private static CustomerViewModel _instance;
+        public static CustomerViewModel getInstance()
+        {
+            return _instance;
+        }
         // private service fields
         private readonly CustomerService _customerService;
         private readonly CustomerLevelService _customerLevelService;
@@ -234,6 +240,7 @@ namespace OoadProject.Core.ViewModels.Customers
                     {
                         _customerService.UpdateCustomer(SelectedCustomer);
                         MessageBox.Show("Sửa thông tin khách hàng thành công");
+                        LoadListCustomers();
                     }
                 }
             );
@@ -251,6 +258,7 @@ namespace OoadProject.Core.ViewModels.Customers
                     {
                         _customerService.HidenCustomer(SelectedCustomer);
                         MessageBox.Show("Xóa khách hàng thành công");
+                        LoadListCustomers();
                     }
                 }
             );
@@ -273,7 +281,7 @@ namespace OoadProject.Core.ViewModels.Customers
                 }
             );
         }
-        private void LoadListCustomers()
+        public void LoadListCustomers()
         {
             CustomerFilterDto filter = new CustomerFilterDto();
             if (CustomerNameKeyword != null && CustomerNameKeyword != "")
@@ -281,7 +289,7 @@ namespace OoadProject.Core.ViewModels.Customers
                 filter.NameCustomerKeyWord = CustomerNameKeyword;
             }            
 
-            var pagedList = _customerService.GetCustomersForDisplayCustomer(1, 13, filter);
+            var pagedList = _customerService.GetCustomersForDisplayCustomer(1, 15, filter);
             Customers = new ObservableCollection<CustomerDisplayDto>(pagedList.Data);
             CurrentPage = pagedList.CurrentPage;
             TotalPages = pagedList.TotalPages;

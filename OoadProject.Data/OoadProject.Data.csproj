@@ -65,6 +65,9 @@
     <Compile Include="Migrations\202106031518538_Initial.cs" />
     <Compile Include="Migrations\202106031518538_Initial.designer.cs">
       <DependentUpon>202106031518538_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202106021716135_Initial.cs" />
+    <Compile Include="Migrations\202106021716135_Initial.designer.cs">
+      <DependentUpon>202106021716135_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,6 +105,8 @@
     <EmbeddedResource Remove="obj\**\*.cs" />
     <EmbeddedResource Include="Migrations\202106031518538_Initial.resx">
       <DependentUpon>202106031518538_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202106021716135_Initial.resx">
+      <DependentUpon>202106021716135_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <None Remove="obj\**\*.cs" />
   </ItemGroup>

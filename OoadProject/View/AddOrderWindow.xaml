@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OoadProject.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="Thêm đơn đặt hàng mới" Height="700" Width="1200"
         DataContext="{StaticResource OrderCreationViewModel}">
@@ -25,11 +27,19 @@
                     VerticalContentAlignment="Center"
                     Padding="15 0 0 0"
                     materialDesign:HintAssist.Hint="Tìm kiếm theo tên sản phẩm"/>
-            <materialDesign:Card Grid.Row="1"  Margin="5 5 5 5" BorderThickness="0" VerticalAlignment="Stretch">
-                <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                    <DataGrid ItemsSource="{Binding Products}" Background="#FFE3F0FF"  SelectionMode="Single"
-                          AutoGenerateColumns="False" IsReadOnly="True" Grid.ColumnSpan="1" BorderThickness="1"
-                               materialDesign:DataGridAssist.CellPadding="4" materialDesign:DataGridAssist.ColumnHeaderPadding="4">
+            <materialDesign:Card 
+                Grid.Row="1"
+                Padding="5"
+                Margin="10,10,10,5">
+                <GroupBox Header="Danh sách các mặt hàng"
+                              Margin="5">
+
+                    <DataGrid x:Name="dtg_DanhSachMatHang"
+                                   ItemsSource="{Binding Products}"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  controls:DataGridHelper.ColumnHeaderPadding="10,0" 
+                                   materialDesign:DataGridAssist.CellPadding="4" materialDesign:DataGridAssist.ColumnHeaderPadding="10" >
                         <DataGrid.Columns>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
@@ -44,14 +54,21 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Mã sản phẩm" Binding="{Binding Id}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding Name}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Loại sản phẩm" Binding="{Binding CategoryName}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Nhà sản xuất" Binding="{Binding ManufacturerName}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Số lượng" Binding="{Binding Number}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Mã SP"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Tên sản phẩm"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding Name}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Loại sản phẩm"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding CategoryName, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nhà sản xuất"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding ManufacturerName, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                </ScrollViewer>
+                </GroupBox>
             </materialDesign:Card>
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
@@ -82,14 +99,19 @@
                 <RowDefinition Height="5*"></RowDefinition>
                 <RowDefinition Height="4*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Margin="20 0 0 0" Grid.Row="0" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center">
-                Chi tiết đơn đặt hàng
-            </TextBlock>
-            <materialDesign:Card Grid.Row="1"  Margin="5 5 5 5" BorderThickness="0" VerticalAlignment="Stretch">
-                <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
-                    <DataGrid ItemsSource="{Binding SelectedProducts}" Background="#FFE3F0FF" Grid.Column="1"  SelectionMode="Single"
-                          AutoGenerateColumns="False" IsReadOnly="True" BorderThickness="1"
-                               materialDesign:DataGridAssist.CellPadding="4" materialDesign:DataGridAssist.ColumnHeaderPadding="4">
+            <materialDesign:Card 
+                Grid.Row="1"
+                Padding="5"
+                Margin="10,10,10,5">
+                <GroupBox Header="Chi tiết đơn đặt hàng"
+                              Margin="5">
+
+                    <DataGrid x:Name="dtg_ChiTietDattHang"
+                                   ItemsSource="{Binding SelectedProducts}"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  controls:DataGridHelper.ColumnHeaderPadding="10,0"
+                              materialDesign:DataGridAssist.CellPadding="4" materialDesign:DataGridAssist.ColumnHeaderPadding="10" >
                         <DataGrid.Columns>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
@@ -110,11 +132,11 @@
                                     <DataTemplate>
                                         <Button
                                             Style="{StaticResource MaterialDesignIconButton}"
-                                            Background="Red" 
+                                            Background="#990000" 
                                             Width="32"
                                             Height="32"
                                             Command="{Binding Path=DataContext.RemoveMulItems, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" CommandParameter="{Binding}" BorderBrush="{x:Null}" Padding="0" Margin="0" ToolTip="Trả sản phẩm">
-                                            <materialDesign:PackIcon Kind="Numeric10" Width="16" Height="16" />
+                                            <materialDesign:PackIcon Kind="Numeric10" Foreground="White" Width="16" Height="16" />
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -124,11 +146,11 @@
                                     <DataTemplate>
                                         <Button
                                             Style="{StaticResource MaterialDesignIconButton}"
-                                            Background="Green" 
+                                            Background="#339966" 
                                             Width="32"
                                             Height="32"
                                             Command="{Binding Path=DataContext.AddMulItems, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" CommandParameter="{Binding}" BorderBrush="{x:Null}" Padding="0" Margin="0" ToolTip="Trả sản phẩm">
-                                            <materialDesign:PackIcon Kind="Numeric10" Width="16" Height="16" />
+                                            <materialDesign:PackIcon Kind="Numeric10" Foreground="White" Width="16" Height="16" />
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -147,55 +169,68 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding Name}"/>
-                            <DataGridTextColumn Header="Loại sản phẩm" Binding="{Binding CategoryName}"/>
-                            <DataGridTextColumn Header="Giá" Binding="{Binding PriceOut}"/>
-                            <DataGridTextColumn Header="Số lượng" Binding="{Binding SelectedNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                            <DataGridTextColumn Header="Tên SP"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Loại sản phẩm"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding CategoryName, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Giá"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding PriceOut, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Số lượng"
+                                                    IsReadOnly="True"
+                                                    Binding="{Binding SelectedNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                </ScrollViewer>
+                </GroupBox>
             </materialDesign:Card>
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.5*"></RowDefinition>
+                    <RowDefinition Height="0.01*"></RowDefinition>
                     <RowDefinition Height="2*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <TextBlock Margin="20 0 0 0" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center">
-                    Thông tin đơn đặt hàng
-                    </TextBlock>
-                </Grid>
-                <materialDesign:Card Grid.Row="1"  Background="#FFE3F0FF" Margin="5 0 5 0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                            <ColumnDefinition Width="2*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" HorizontalAlignment="Right">
-                            Nhà cung cấp:
-                        </TextBlock>
-                        <ComboBox ItemsSource="{Binding Providers}" SelectedItem="{Binding SelectingProvider, Mode=OneWayToSource}" DisplayMemberPath="Name" Grid.Row="0" Grid.Column="1" Foreground="Black" Margin="10 10 10 20" FontSize="16" Height="Auto" VerticalContentAlignment="Center" Padding="5 0"  Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                        </ComboBox>
-                        <TextBlock Grid.Row="0" Grid.Column="2" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,22,0,21">
-                            Ngày tạo đơn:
-                        </TextBlock>
-                        <DatePicker SelectedDate="{Binding Order.CreationTime}" Grid.Row="0" Grid.Column="3" Foreground="Black" Height="Auto" Margin="5 5 5 10" VerticalContentAlignment="Center" Padding="5 0" FontSize="16">
-                        </DatePicker>
-
-                    </Grid>
+                <materialDesign:Card 
+                            Grid.Row="1"
+                            Padding="2"
+                            Margin="10,10,10,10">
+                    <GroupBox Header="Thông tin đơn nhập hàng"
+                              Margin="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Margin="3" VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">Nhà cung cấp:</Label>
+                            <ComboBox 
+                                    Grid.Row="0" Grid.Column="1"
+                                    ItemsSource="{Binding Providers}" 
+                                    SelectedItem="{Binding SelectingProvider, Mode=OneWayToSource}" 
+                                    DisplayMemberPath="Name"
+                                    Style="{StaticResource UnderlineComboBox}"
+                                    Height="36"
+                                    BorderBrush="#FF34268A"
+                                    Margin="3"
+                                    FontSize="15"
+                                    FontWeight="Bold"
+                                    VerticalContentAlignment ="Center"/>
+                            <Label Grid.Column="2" Margin="3" VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">Ngày nhập:</Label>
+                            <DatePicker Grid.Column="3" Style="{StaticResource UnderlineDatePicker}" Text="{Binding Order.CreationTime, Mode=OneWay, StringFormat='dd/MM/yyyy'}"/>
+                        </Grid>
+                    </GroupBox>
                 </materialDesign:Card>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="btnResetInput" Click="btnResetInput_Click" Command="{Binding}" Grid.Column="0" Foreground="Black" FontWeight="Bold" Background="#FE7139" BorderThickness="0" Content="Nhập lại" VerticalAlignment="Center"  Height="40" Width="120">
+                    <Button x:Name="btnResetInput" Click="btnResetInput_Click" Command="{Binding ResetData}" Grid.Column="0" Foreground="Black" FontWeight="Bold" Background="#FE7139" BorderThickness="0" Content="Nhập lại" VerticalAlignment="Center"  Height="40" Width="120">
                     </Button>
                     <Button x:Name="btnSave" Click="btnSave_Click" Command="{Binding SaveOrderInfo}" Grid.Column="1" Foreground="Black" FontWeight="Bold" Background="#596FB5" BorderThickness="0" Content="Xác nhận" VerticalAlignment="Center"  Height="40" Width="120">
                     </Button>

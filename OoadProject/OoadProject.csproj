@@ -164,17 +164,8 @@
     <Compile Include="View\HomeScreen.xaml.cs">
       <DependentUpon>HomeScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ImportItemsUserControl.xaml.cs">
-      <DependentUpon>ImportItemsUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\ProductUserControl.xaml.cs">
       <DependentUpon>ProductUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ListImportedItemUserControl.xaml.cs">
-      <DependentUpon>ListImportedItemUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ListOrderUserControl.xaml.cs">
-      <DependentUpon>ListOrderUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ListWarrantyOrderUserControl.xaml.cs">
       <DependentUpon>ListWarrantyOrderUserControl.xaml</DependentUpon>
@@ -289,19 +280,7 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="View\ImportItemsUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
     <Page Include="View\ProductUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="View\ListImportedItemUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="View\ListOrderUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>

@@ -194,6 +194,7 @@ namespace OoadProject.Core.ViewModels.Sells
                         SelectedProducts = new ObservableCollection<SelectingProductForSellDto>();
                         Invoice = new InvoiceForCreationDto();
                         ReportViewModel.getInstance().Update();
+                        CustomerViewModel.getInstance().LoadListCustomers();
                         MessageBox.Show("Thanh toán hành công");
                     }
 
