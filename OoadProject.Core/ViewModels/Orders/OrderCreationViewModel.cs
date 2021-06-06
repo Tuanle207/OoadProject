@@ -1,4 +1,5 @@
 ﻿using OoadProject.Core.Services.AppProduct;
+using OoadProject.Core.ViewModels.Home;
 using OoadProject.Core.ViewModels.Orders.Dtos;
 using OoadProject.Data.Entity.AppProduct;
 using System;
@@ -203,7 +204,8 @@ namespace OoadProject.Core.ViewModels.Orders
                     Order.UserId = CurrentUser.Id;
                     _orderService.AddNewOrder(Order, SelectedProducts);
                 }
-               
+                HomeViewModel.getInstance().LoadData();
+
             });
 
             LoadDataForUpdation = new RelayCommand<object>
@@ -249,6 +251,7 @@ namespace OoadProject.Core.ViewModels.Orders
                         Order.ProviderId = SelectingProvider.Id;
                         _orderService.UpdateOrderInfo(Order, SelectedProducts);
                     }
+                    HomeViewModel.getInstance().LoadData();
                 }
             );
 
@@ -259,7 +262,9 @@ namespace OoadProject.Core.ViewModels.Orders
                 {
                     if (p != null && (bool)p == true)
                         SelectedProducts = new ObservableCollection<SelectingProductDto>();
+                    HomeViewModel.getInstance().LoadData();
                 }
+
             );
 
             RestoreUpdationData = new RelayCommand<object>
@@ -294,6 +299,7 @@ namespace OoadProject.Core.ViewModels.Orders
                     selectedProduct.SelectedNumber += number;
                 else
                     SelectedProducts.Add(_orderService.SelectProduct(product));
+                HomeViewModel.getInstance().LoadData();
 
             }
         }
@@ -325,6 +331,7 @@ namespace OoadProject.Core.ViewModels.Orders
             _loaded = new List<bool>();
             for (int i = 0; i < TotalPages; i++) _loaded.Add(false);
             if (TotalPages > 0) _loaded[0] = true;
+            HomeViewModel.getInstance().LoadData();
         }
 
         private IEnumerable<ProductForOrderCreationDto> GetData()

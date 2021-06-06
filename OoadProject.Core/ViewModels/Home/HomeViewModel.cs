@@ -13,6 +13,11 @@ namespace OoadProject.Core.ViewModels.Home
 {
     public class HomeViewModel : BaseViewModel
     {
+        private static HomeViewModel _instance;
+        public static HomeViewModel getInstance()
+        {
+            return _instance;
+        }
         // private service fields
         private readonly OrderService _orderService;
         private readonly InvoiceService _invoiceService;
@@ -70,12 +75,15 @@ namespace OoadProject.Core.ViewModels.Home
 
         public HomeViewModel()
         {
+            if (_instance == null)
+                _instance = this;
             // init services
             _orderService = new OrderService();
             _invoiceService = new InvoiceService();
             _productService = new ProductService();
 
             LoadData();
+
 
             ReloadData = new RelayCommand<object>
             (
@@ -84,7 +92,7 @@ namespace OoadProject.Core.ViewModels.Home
             );
         }
 
-        private void LoadData()
+        public void LoadData()
         {
             // init data
             ProcessingOrders = new ObservableCollection<ProcessingOrderDto>(_orderService.GetProcessingOrders());

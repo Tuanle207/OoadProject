@@ -21,24 +21,24 @@ namespace OoadProject.Data.Seedings
                         Id = 1,
                         Name = "Hạng Đồng",
                         Description = null,
-                        PointLevel = 10000000.0f,
-                        Discount = 2.0f
+                        PointLevel = 200.0f,
+                        Discount = 5.0f
                     },
                     new CustomerLevel
                     {
-                        Id = 1,
+                        Id = 2,
                         Name = "Hạng Bạc",
                         Description = null,
-                        PointLevel = 40000000.0f,
-                        Discount = 4.0f
+                        PointLevel = 400.0f,
+                        Discount = 10.0f
                     },
                     new CustomerLevel
                     {
-                        Id = 1,
+                        Id = 3,
                         Name = "Hạng Vàng",
                         Description = null,
-                        PointLevel = 100000000.0f,
-                        Discount = 5.0f
+                        PointLevel = 800.0f,
+                        Discount = 20.0f
                     },
                 };
             }

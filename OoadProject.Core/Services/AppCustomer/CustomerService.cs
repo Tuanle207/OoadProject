@@ -25,7 +25,7 @@ namespace OoadProject.Core.Services.AppCustomer
             _customerRepository = new CustomerRepository();
             _customerLevelRepository = new CustomerLevelRepository();
         }
-        public PaginatedList<CustomerDisplayDto> GetCustomersForDisplayCustomer(int page = 1, int limit = 9, CustomerFilterDto Filter = null)
+        public PaginatedList<CustomerDisplayDto> GetCustomersForDisplayCustomer(int page = 1, int limit = 15, CustomerFilterDto Filter = null)
         {
             var rawCustomers = _customerRepository.GetCustomers(page, limit, Filter);
 

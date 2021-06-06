@@ -7,6 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:OoadProject.View" 
         xmlns:Users="clr-namespace:OoadProject.Core.ViewModels.Users;assembly=OoadProject.Core"
+        xmlns:vm="clr-namespace:OoadProject.Core.ViewModels.Customers;assembly=OoadProject.Core"
         mc:Ignorable="d"
         Title="Thêm khách hàng mới" Height="400" Width="800"
         WindowStartupLocation="CenterScreen"
@@ -48,13 +49,15 @@
                         BorderBrush="#FFB1AEAE"
                         CornerRadius="5"
                         Margin="0 0 10 0">
-                    <TextBox x:Name="tbName"
-                             Text="{Binding NewCustomer.Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                             BorderBrush="#00B1AEAE"
-                             materialDesign:HintAssist.Hint="Họ và tên"
-                             Margin="4 0 0 0"
-                             FontSize="14"
-                             Padding="0 2 0 2"></TextBox>
+                    <TextBox x:Name="tbName" BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Họ và tên" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
+                        <TextBox.Text>
+                            <Binding Path="NewCustomer.Name" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vm:NameValidation/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </Border>
                 
             </StackPanel>
@@ -68,17 +71,18 @@
                         BorderBrush="#FFB1AEAE"
                         CornerRadius="5"
                         Margin="0 0 10 0">
-                    <TextBox x:Name="tbPhoneNumber"
-                             Text="{Binding NewCustomer.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             BorderBrush="#00B1AEAE"
-                             materialDesign:HintAssist.Hint="Số điện thoại"
-                             Margin="4 0 0 0"
-                             FontSize="14"
-                             Padding="0 2 0 2"></TextBox>
+                    <TextBox x:Name="tbPhoneNumber" BorderBrush="#00B1AEAE" materialDesign:HintAssist.Hint="Số điện thoại" Margin="4 0 0 0" FontSize="14" Padding="0 2 0 2">
+                        <TextBox.Text>
+                            <Binding Path="NewCustomer.PhoneNumber" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <vm:PhoneValidation/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </Border>
 
             </StackPanel>
-
             <!--Button thêm-->
             <Button x:Name="btnAdd"
                     Grid.Column="2"
@@ -86,7 +90,7 @@
                     Width="150"
                     Height="40"
                     Background="#596FB5"
-                    materialDesign:ButtonAssist.CornerRadius="10"
+                    materialDesign:ButtonAssist.CornerRadius="30"
                     ToolTip="Lưu thông tin khách hàng mới"
                     Margin="104.4,4.6,9.6,0"
                     VerticalAlignment="Top"
