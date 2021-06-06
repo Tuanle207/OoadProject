@@ -90,6 +90,7 @@
     <Compile Include="ViewModels\Orders\OrderViewModel.cs" />
     <Compile Include="ViewModels\Orders\ReceiptCreationViewModel.cs" />
     <Compile Include="ViewModels\Orders\ReceiptViewModel.cs" />
+    <Compile Include="ViewModels\Products\Converters\PhotoPathConverter.cs" />
     <Compile Include="ViewModels\Products\Converters\ProductStatusConverter.cs" />
     <Compile Include="ViewModels\Products\Dtos\ProductDisplayDto.cs" />
     <Compile Include="ViewModels\Products\Dtos\ProductForCreationDto.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="ViewModels\Settings\Validations\PointLevelValidation.cs" />
     <Compile Include="ViewModels\Settings\Validations\ReturnRateValidation.cs" />
     <Compile Include="ViewModels\Users\Converters\FeaturePermissionConverter.cs" />
+    <Compile Include="ViewModels\Users\Converters\PhotoPathConverter.cs" />
     <Compile Include="ViewModels\Users\Dtos\LoginDto.cs" />
     <Compile Include="ViewModels\Users\Dtos\UserForCreationDto.cs" />
     <Compile Include="ViewModels\Users\Dtos\UserForPasswordUpdateDto.cs" />

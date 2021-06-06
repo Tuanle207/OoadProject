@@ -24,7 +24,7 @@ namespace OoadProject.Core.ViewModels.Products.Dtos
         public int WarrantyPeriod { get; set; }
         public float? ReturnRate { get=> _returnRate; set { _returnRate = value; OnPropertyChanged(); } }
         public int Status { get => _status; set { _status = value; OnPropertyChanged(); } }
-        public string Photo { get => _photo; set { _photo = value; OnPropertyChanged(); } }
+        public string Photo { get => _photo; set { _photo = value; OnPropertyChanged(); Console.WriteLine("photo", _photo); } }
         public Category Category { get; set; }
         public Manufacturer Manufacturer { get; set; }
         public string CheckReturnRateChange { get; set; }

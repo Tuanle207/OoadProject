@@ -45,10 +45,12 @@
     <Warranties:ContextMenuItemVisibilityConverter x:Key="ContextMenuItemVisibilityConverter" />
     <Warranties:CheckMenuItemVisibilityConverter x:Key="CheckMenuItemVisibilityConverter" />
     <Products:ProductStatusConverter x:Key="ProductStatusConverter" />
+    <Products:PhotoPathConverter x:Key="ProductPhotoPathConverter" />
     <Orders:OrderStatusConverter x:Key="OrderStatusConverter" />
     <Orders:CheckOrderOptionsVisibilityConverter x:Key="CheckOrderOptionsVisibilityConverter" />
     <Orders:OrderCheckMenuItemVisibilityConverter x:Key="OrderCheckMenuItemVisibilityConverter" />
     <Users:FeaturePermissionConverter x:Key="FeaturePermissionConverter" />
+    <Users:PhotoPathConverter x:Key="UserPhotoPathConverter" />
 
     <!--GroupBox-->
     <Style TargetType="GroupBox">

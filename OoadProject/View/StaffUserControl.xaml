@@ -140,7 +140,7 @@
                                                     <materialDesign:PackIcon Kind="Image"
                                                                              Foreground="#FF0F5699" />
                                                 </materialDesign:PopupBox.ToggleContent>
-                                                <Image Source="{Binding Photo}"
+                                                <Image Source="{Binding Photo, Converter={StaticResource PhotoPathConverter}}"
                                                        Width="300"
                                                        Height="300"
                                                        Stretch="Fill" />
