@@ -19,16 +19,15 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
-                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Button Background="#596FB5"
                         BorderThickness="0"
                         x:Name="btnAddUser"
                         Click="btnAddCustomer_Click"
                         Command="{Binding PrepareAddCustomer}"
-                        Grid.Column="1"
+                        Grid.Column="0"
                         Height="50"
-                        Margin="15,5"
+                        Margin="30,5"
                         materialDesign:ButtonAssist.CornerRadius="10"
                         ToolTip="Thêm khách hàng mới">
                     <StackPanel Orientation="Horizontal">
@@ -47,9 +46,9 @@
                         x:Name="btnUpdateUser"
                         Click="btnUpdateCustomer_Click"
                         Command="{Binding UpdateCustomer}"
-                        Grid.Column="2"
+                        Grid.Column="1"
                         Height="50"
-                        Margin="15,5"
+                        Margin="30,5"
                         materialDesign:ButtonAssist.CornerRadius="10"
                         ToolTip="Cập nhật thông tin khách hàng">
                     <StackPanel Orientation="Horizontal">
@@ -66,9 +65,9 @@
                 <Button Background="#FE7139"
                         BorderThickness="0"
                         x:Name="btnDelete"
-                        Grid.Column="3"
+                        Grid.Column="2"
                         Height="50"
-                        Margin="15,5"
+                        Margin="30,5"
                         materialDesign:ButtonAssist.CornerRadius="10"
                         ToolTip="Xóa khách hàng"
                         Click="btnHiddenCustomer_Click"

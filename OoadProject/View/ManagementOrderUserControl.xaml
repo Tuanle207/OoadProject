@@ -25,11 +25,12 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
 
                         <Menu Height="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                            <MenuItem Height="40" Header="Lọc" VerticalAlignment="Center" HorizontalAlignment="Center" Background="#695D85" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
-                                 <MenuItem.Icon>
-                                    <materialDesign:PackIcon Kind="FilterMenu"/>
+
+                            <MenuItem Height="40" Header="Lọc" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="white" Background="#695D85" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                                <MenuItem.Icon>
+                                    <materialDesign:PackIcon Kind="FilterMenu" Foreground="white"/>
                                 </MenuItem.Icon>
-                                <MenuItem Header="Đơn hàng đang chờ gửi" x:Name="itemWaitForSent" Click="itemWaitForSent_Click" Command="{Binding ToggleCheckOption}">
+                                <MenuItem Header="Đơn hàng đang chờ gửi" Foreground="black"  x:Name="itemWaitForSent" Click="itemWaitForSent_Click" Command="{Binding ToggleCheckOption}">
                                     <MenuItem.Icon>
                                         <materialDesign:PackIcon Kind="Check">
                                             <materialDesign:PackIcon.Visibility>
@@ -38,7 +39,7 @@
                                         </materialDesign:PackIcon>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Header="Đơn hàng đã gửi"  x:Name="itemSent" Click="itemSent_Click" Command="{Binding ToggleCheckOption}">
+                                <MenuItem Header="Đơn hàng đã gửi" Foreground="black"  x:Name="itemSent" Click="itemSent_Click" Command="{Binding ToggleCheckOption}">
                                     <MenuItem.Icon>
                                         <materialDesign:PackIcon Kind="Check" >
                                             <materialDesign:PackIcon.Visibility>
@@ -47,7 +48,7 @@
                                         </materialDesign:PackIcon>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Header="Đơn hàng đã xử lí" x:Name="itemDone" Click="itemDone_Click" Command="{Binding ToggleCheckOption}">
+                                <MenuItem Header="Đơn hàng đã xử lí" Foreground="black" x:Name="itemDone" Click="itemDone_Click" Command="{Binding ToggleCheckOption}">
                                     <MenuItem.Icon>
                                         <materialDesign:PackIcon Kind="Check" >
                                             <materialDesign:PackIcon.Visibility>
@@ -84,7 +85,29 @@
                             <materialDesign:PackIcon Kind="Magnify" Width="16" Height="16"/>
                         </Button>
 
-                 </StackPanel>
+                    </StackPanel>
+                    <Button Background="#596FB5"
+                                BorderThickness="0" Name="btnAddOrder" 
+                                DataContext="{StaticResource OrderCreationViewModel}" Click="btnAddOrder_Click"
+                                 Command="{Binding LoadDataForCreation}"
+                                Grid.Row="0" Grid.Column="1"
+                                Height="46"
+                                Padding="5"
+                                Width="180"
+                                Margin="0 0 15 0"
+                                HorizontalAlignment="Right"
+                                materialDesign:ButtonAssist.CornerRadius="10"
+                                ToolTip="Tạo đơn hàng mới">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Tạo đơn hàng mới"
+                                           VerticalAlignment="Center"
+                                           Margin="0 0 5 0" />
+                            <materialDesign:PackIcon VerticalAlignment="Center"
+                                                         Kind="Add"
+                                                         Width="20"
+                                                         Height="20" />
+                        </StackPanel>
+                    </Button>
                     <Grid Grid.Row="1" Grid.Column="0">
                         <materialDesign:Card
                             Padding="5"
@@ -93,6 +116,7 @@
                               Margin="5">
 
                                 <DataGrid x:Name="dtg_DanhSachPhieuNhapHang"
+                                          FontWeight="Normal"
                                    ItemsSource="{Binding Orders}" 
                                    SelectedItem="{Binding SelectedOrder}"
                                   AutoGenerateColumns="False"
@@ -175,12 +199,8 @@
                             </GroupBox>
                         </materialDesign:Card>
                     </Grid>
-                    
+
                     <Grid Grid.Row="1" Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="10*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
                         <materialDesign:Card 
                             Grid.ColumnSpan="2"
                             Padding="5"
@@ -189,6 +209,7 @@
                               Margin="5">
 
                                 <DataGrid x:Name="dtg_ChiTietDonDatHang"
+                                          FontWeight="Normal"
                                  ItemsSource="{Binding OrderProducts}"
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="False"
@@ -210,13 +231,7 @@
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </GroupBox>
-                        </materialDesign:Card>
-                        <Button Grid.Row="1" HorizontalAlignment="Right" Name="btnAddOrder" DataContext="{StaticResource OrderCreationViewModel}" Click="btnAddOrder_Click" Command="{Binding LoadDataForCreation}" Width="200" Height="Auto" BorderThickness="0" Background="#596FB5" Margin="2 2 2 2">
-                            <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="-5 0 -5 0">
-                                <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 10 0" Width="20" Height="20"/>
-                                <Label Content="Tạo đơn hàng mới" VerticalAlignment="Center" Foreground="Black" Margin="-5 0 -8 0"/>
-                            </StackPanel>
-                        </Button>
+                        </materialDesign:Card>                        
                         <Button x:Name="btnReloadReceiptUI" DataContext="{StaticResource ReceiptCreationViewModel}" Command="{Binding ReloadData}" Visibility="Hidden" />
                         <TextBlock x:Name="tbSelectedId" Visibility="Hidden" Text="{Binding SelectedOrder.Id}" />
                     </Grid>
@@ -265,6 +280,7 @@
                               Margin="5">
                             <ScrollViewer PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
                                 <DataGrid x:Name="dtg_DonNhapHangVe"
+                                          FontWeight="Normal"
                                  ItemsSource="{Binding SentOrders}" 
                                  SelectedItem="{Binding SelectedOrder}"
                                   AutoGenerateColumns="False"
@@ -311,6 +327,7 @@
                               Margin="5">
 
                                 <DataGrid x:Name="dtg_ChiTietDonNhapHangVe"
+                                          FontWeight="Normal"
                                  ItemsSource="{Binding ReceiptProducts}"
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="False"
@@ -424,6 +441,7 @@
                               Margin="5">
 
                                 <DataGrid x:Name="dtg_DonNhapHang"
+                                          FontWeight="Normal"
                                  ItemsSource="{Binding Receipts}" SelectedItem="{Binding SelectedReceipt}"
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="False"
@@ -460,6 +478,7 @@
 
                             <DataGrid x:Name="dtg_ChiTietDonNhapHang"
                                  ItemsSource="{Binding ReceiptProducts}"
+                                      FontWeight="Normal"
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="False"
                                   controls:DataGridHelper.ColumnHeaderPadding="10,0"
@@ -489,7 +508,7 @@
             </controls:MetroTabItem>
         </controls:MetroAnimatedTabControl>
 
-        <!--<Grid Grid.RowSpan="2" Grid.ColumnSpan="2" DataContext="{StaticResource SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid Grid.RowSpan="2" Grid.ColumnSpan="2" DataContext="{StaticResource SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Source="../Assets/unauthorized.png" Width="200" Height="200" />
                 <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">Bạn không có quyền truy cập màn hình này! Vui lòng đăng nhập với tài khoản thích hợp!</TextBlock>
@@ -497,6 +516,6 @@
             <Grid.Visibility>
                 <Binding Path="UserPerrmissions" Converter="{StaticResource FeaturePermissionConverter}" ConverterParameter="Order" />
             </Grid.Visibility>
-        </Grid>-->
+        </Grid>
     </Grid>
 </UserControl>
