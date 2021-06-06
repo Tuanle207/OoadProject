@@ -1,4 +1,5 @@
 ﻿using OoadProject.Core.Services.AppProduct;
+using OoadProject.Core.ViewModels.Home;
 using OoadProject.Core.ViewModels.Orders.Dtos;
 using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Shared.Dtos;
@@ -102,6 +103,7 @@ namespace OoadProject.Core.ViewModels.Orders
                         }
 
                         LoadOrdersWithFilter();
+                        HomeViewModel.getInstance().LoadData();
                     }
                 }
             );
@@ -112,6 +114,7 @@ namespace OoadProject.Core.ViewModels.Orders
                 p =>
                 {
                     LoadOrdersWithFilter();
+                    HomeViewModel.getInstance().LoadData();
                 }
             );
 
@@ -124,6 +127,7 @@ namespace OoadProject.Core.ViewModels.Orders
                     {
                         SelectedOrder.Status = (int)OrderStatus.WaitForSent;
                         _orderService.UpdateOrderStatus(SelectedOrder.Id, OrderStatus.WaitForSent);
+                        HomeViewModel.getInstance().LoadData();
                     }
                 }
             );
@@ -137,6 +141,7 @@ namespace OoadProject.Core.ViewModels.Orders
                     {
                         SelectedOrder.Status = (int)OrderStatus.Sent;
                         _orderService.UpdateOrderStatus(SelectedOrder.Id, OrderStatus.Sent);
+                        HomeViewModel.getInstance().LoadData();
                     }
                 }
             );
@@ -150,6 +155,7 @@ namespace OoadProject.Core.ViewModels.Orders
                     {
                         SelectedOrder.Status = (int)OrderStatus.Done;
                         _orderService.UpdateOrderStatus(SelectedOrder.Id, OrderStatus.Done);
+                        HomeViewModel.getInstance().LoadData();
                     }
                 }
             );
@@ -167,6 +173,7 @@ namespace OoadProject.Core.ViewModels.Orders
                         _orderService.DeleleOrder(SelectedOrder.Id);
                         Orders.Remove(SelectedOrder);
                         SelectedOrder = null;
+                        HomeViewModel.getInstance().LoadData();
                     }
                 }
             );

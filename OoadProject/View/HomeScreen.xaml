@@ -91,7 +91,7 @@
             </Grid.ColumnDefinitions>
             <materialDesign:Card Grid.Column="0" x:Name="ListProcesscingProduct" Margin="10 10 10 5" Padding="5">
                 <DataGrid
-                            ItemsSource="{Binding ProcessingOrders, UpdateSourceTrigger=PropertyChanged}"
+                            ItemsSource="{Binding ProcessingOrders, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                             AutoGenerateColumns="False"
                             ScrollViewer.HorizontalScrollBarVisibility="Auto"
                             CanUserAddRows="False"

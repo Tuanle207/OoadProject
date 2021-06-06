@@ -1,4 +1,5 @@
 ﻿using OoadProject.Core.Services.AppProduct;
+using OoadProject.Core.ViewModels.Home;
 using OoadProject.Core.ViewModels.Orders.Dtos;
 using OoadProject.Data.Entity.AppProduct;
 using OoadProject.Shared.Dtos;
@@ -89,6 +90,7 @@ namespace OoadProject.Core.ViewModels.Orders
                 {
                     _receiptService.AddNewReceipt(SelectedOrder, ReceiptProducts);
                     InitialData(null);
+                    HomeViewModel.getInstance().LoadData();
                 }
             );
 
@@ -107,6 +109,7 @@ namespace OoadProject.Core.ViewModels.Orders
                 p =>
                 {
                     InitialData(null);
+                    HomeViewModel.getInstance().LoadData();
                 }
             );
 
@@ -133,6 +136,7 @@ namespace OoadProject.Core.ViewModels.Orders
                     var selectedProduct = (ProductForReceiptCreation)p;
                     selectedProduct.Number++;
                     Total = CalcTotal();
+                    HomeViewModel.getInstance().LoadData();
                 }
             );
 
@@ -146,6 +150,7 @@ namespace OoadProject.Core.ViewModels.Orders
                     if (selectedProduct.Number == 0)
                         ReceiptProducts.Remove(selectedProduct);
                     Total = CalcTotal();
+                    HomeViewModel.getInstance().LoadData();
                 }
             );
 
