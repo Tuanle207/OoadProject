@@ -7,7 +7,6 @@
         xmlns:vm="clr-namespace:OoadProject.Core.ViewModels.Settings;assembly=OoadProject.Core"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow"
-        Background="#FFBFD4FF"
         Title="Sửa hạng khách hàng" Height="450" Width="400"
         DataContext="{StaticResource CustomerLevelViewModel}">
     <Grid>
@@ -27,7 +26,6 @@
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>
-                    <Setter Property="Background" Value="#FFE3F0FF"/>
                 </Style>
             </TextBox.Resources>
             <TextBox.Text>
@@ -43,7 +41,6 @@
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>
-                    <Setter Property="Background" Value="#FFE3F0FF"/>
                 </Style>
             </TextBox.Resources>
             <TextBox.Text>
@@ -59,7 +56,6 @@
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>
-                    <Setter Property="Background" Value="#FFE3F0FF"/>
                 </Style>
             </TextBox.Resources>
             <TextBox.Text>
@@ -75,7 +71,6 @@
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>
-                    <Setter Property="Background" Value="#FFE3F0FF"/>
                 </Style>
             </TextBox.Resources>
             <TextBox.Text>
@@ -104,7 +99,6 @@
                 </Style>
             </Button.Style>
         </Button>
-        <!--<Button x:Name="btnAfter" DataContext="{StaticResource ProductViewModel}" Command="{Binding UpdateData}" Visibility="Hidden" />-->
     </Grid>
 </Window>
 
