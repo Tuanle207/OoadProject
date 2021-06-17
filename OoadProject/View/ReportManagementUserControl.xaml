@@ -70,12 +70,11 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Xuất Báo Cáo"
                                            VerticalAlignment="Center"
-                                           FontSize="16"
                                            Margin="0 0 5 0" />
                                 <materialDesign:PackIcon VerticalAlignment="Center"
                                                          Kind="FileExcel"
-                                                         Width="24"
-                                                         Height="24" />
+                                                         Width="20"
+                                                         Height="20" />
                             </StackPanel>
                         </Button>
                     </Grid>
@@ -86,6 +85,7 @@
                                   Margin="5">
                             <DataGrid ItemsSource="{Binding Products, UpdateSourceTrigger=PropertyChanged}"
                                       AutoGenerateColumns="False"
+                                      FontWeight="Normal"
                                       CanUserAddRows="False"
                                       controls:DataGridHelper.ColumnHeaderPadding="10,0">
                                 <DataGrid.Columns>
@@ -198,6 +198,7 @@
                                   Margin="5">
                             <DataGrid ItemsSource="{Binding DayStatistics, UpdateSourceTrigger=PropertyChanged}"
                                       AutoGenerateColumns="False"
+                                      FontWeight="Normal"
                                       CanUserAddRows="False"
                                       controls:DataGridHelper.ColumnHeaderPadding="10,0"
                                       Grid.ColumnSpan="2">
@@ -207,7 +208,7 @@
                                                         Binding="{Binding Index}" />
                                     <DataGridTextColumn Header="Ngày"
                                                         IsReadOnly="True"
-                                                        Binding="{Binding Day}" />
+                                                        Binding="{Binding Day, StringFormat='dd/MM/yyyy'}" />
                                     <DataGridTextColumn Header="Doanh thu"
                                                         IsReadOnly="True"
                                                         Binding="{Binding TotalRevenue}" />
@@ -221,7 +222,7 @@
                 </Grid>
             </controls:MetroTabItem>
         </controls:MetroAnimatedTabControl>
-        <!--<Grid Grid.RowSpan="2" DataContext="{StaticResource SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid Grid.RowSpan="2" DataContext="{StaticResource SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Source="../Assets/unauthorized.png" Width="200" Height="200" />
                 <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">Bạn không có quyền truy cập màn hình này! Vui lòng đăng nhập với tài khoản thích hợp!</TextBlock>
@@ -229,6 +230,6 @@
             <Grid.Visibility>
                 <Binding Path="UserPerrmissions" Converter="{StaticResource FeaturePermissionConverter}" ConverterParameter="Report" />
             </Grid.Visibility>
-        </Grid>-->
+        </Grid>
     </Grid>
 </UserControl>
