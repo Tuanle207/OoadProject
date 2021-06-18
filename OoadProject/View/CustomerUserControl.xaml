@@ -184,7 +184,7 @@
                 </materialDesign:Card>
             </Grid>            
         </DockPanel>
-        <!--<Grid Grid.RowSpan="2"
+        <Grid Grid.RowSpan="2"
               Grid.ColumnSpan="4"
               DataContext="{StaticResource SessionViewModel}"
               Background="#fff"
@@ -207,7 +207,7 @@
         </Grid>
         <Button x:Name="btnCheckPermission"
                 Command="{Binding CheckModificationPermission}"
-                Visibility="Hidden" />-->
+                Visibility="Hidden" />
     </Grid>
 </UserControl>
 

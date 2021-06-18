@@ -5,105 +5,184 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OoadProject.View"
         xmlns:vm="clr-namespace:OoadProject.Core.ViewModels.Settings;assembly=OoadProject.Core"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow"
-        Background="#FFBFD4FF"
-        Title="Thêm nhà cung cấp" Height="420" Width="400"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="ToolWindow"
+        Title="Thêm nhà cung cấp"
+        Height="360"
+        Width="360"
         DataContext="{StaticResource ProviderViewModel}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="1.5*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Tên NCC:" VerticalContentAlignment="Center" FontSize="15" Padding="10"/>
-        <TextBox x:Name="Name" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" FontSize="16" Padding="2" BorderThickness="1" >
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="5"/>
-                    <Setter Property="Background" Value="#FFE3F0FF"/>
-                </Style>
-            </TextBox.Resources>
-            <TextBox.Text>
-                <Binding Path="NewProvider.Name" UpdateSourceTrigger="PropertyChanged" >
-                    <Binding.ValidationRules>
-                        <vm:NameValidation></vm:NameValidation>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        <Label Grid.Row="1" Grid.Column="0" Content="Số điện thoại:" VerticalContentAlignment="Center" FontSize="15" Padding="10"/>
-        <TextBox x:Name="PhoneNumber" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" FontSize="16" Padding="2" BorderThickness="1" >
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="5"/>
-                    <Setter Property="Background" Value="#FFE3F0FF"/>
-                </Style>
-            </TextBox.Resources>
-            <TextBox.Text>
-                <Binding Path="NewProvider.PhoneNumber" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <vm:PhoneNumberValidation></vm:PhoneNumberValidation>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        <Label Grid.Row="2" Grid.Column="0" Content="Email:" VerticalContentAlignment="Center" FontSize="15" Padding="10"/>
-        <TextBox x:Name="Email" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" FontSize="16" Padding="2" BorderThickness="1" >
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="5"/>
-                    <Setter Property="Background" Value="#FFE3F0FF"/>
-                </Style>
-            </TextBox.Resources>
-            <TextBox.Text>
-                <Binding Path="NewProvider.Email" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <vm:EmailValidation></vm:EmailValidation>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        <Label Grid.Row="3" Grid.Column="0" Content="Địa chỉ:" VerticalContentAlignment="Center" FontSize="15" Padding="10"/>
-        <TextBox x:Name="Address" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" FontSize="16" Padding="2" BorderThickness="1" >
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="5"/>
-                    <Setter Property="Background" Value="#FFE3F0FF"/>
-                </Style>
-            </TextBox.Resources>
-            <TextBox.Text>
-                <Binding Path="NewProvider.Address" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <vm:AddressValidation></vm:AddressValidation>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        <Button x:Name="btnAddProvider" Command="{Binding AddProvider}" Click="btnAddProvider_Click" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Height="45" Margin="0 40 0 0" Content="Thêm mới" Background="#596FB5" BorderThickness="0">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="IsEnabled" Value="False" />
-                    <Style.Triggers>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Name}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=PhoneNumber}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Email}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Address}" Value="False"/>
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="IsEnabled" Value="True"/>
-                        </MultiDataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
-    </Grid>
+    <materialDesign:Card Margin="10">
+        <DockPanel>
+            <Button x:Name="btnAddProvider"
+                    DockPanel.Dock="Bottom"
+                    Command="{Binding AddProvider}"
+                    Click="btnAddProvider_Click"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Width="120"
+                    Height="45"
+                    Content="Thêm mới"
+                    Background="#596FB5"
+                    BorderThickness="0">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="IsEnabled"
+                                Value="False" />
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Name}"
+                                               Value="False" />
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=PhoneNumber}"
+                                               Value="False" />
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Email}"
+                                               Value="False" />
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Address}"
+                                               Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled"
+                                        Value="True" />
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Content="Tên NCC:"
+                   VerticalContentAlignment="Center"
+                   FontSize="15"
+                   Padding="10" />
+            <TextBox x:Name="Name"
+                     Grid.Row="0"
+                     Grid.Column="1"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     Margin="10"
+                     FontSize="16"
+                     Padding="2"
+                     BorderThickness="1">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius"
+                                Value="5" />
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Text>
+                    <Binding Path="NewProvider.Name"
+                             UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <vm:NameValidation></vm:NameValidation>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Content="Số điện thoại:"
+                   VerticalContentAlignment="Center"
+                   FontSize="15"
+                   Padding="10" />
+            <TextBox x:Name="PhoneNumber"
+                     Grid.Row="1"
+                     Grid.Column="1"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     Margin="10"
+                     FontSize="16"
+                     Padding="2"
+                     BorderThickness="1">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius"
+                                Value="5" />
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Text>
+                    <Binding Path="NewProvider.PhoneNumber"
+                             UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <vm:PhoneNumberValidation></vm:PhoneNumberValidation>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Label Grid.Row="2"
+                   Grid.Column="0"
+                   Content="Email:"
+                   VerticalContentAlignment="Center"
+                   FontSize="15"
+                   Padding="10" />
+            <TextBox x:Name="Email"
+                     Grid.Row="2"
+                     Grid.Column="1"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     Margin="10"
+                     FontSize="16"
+                     Padding="2"
+                     BorderThickness="1">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius"
+                                Value="5" />
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Text>
+                    <Binding Path="NewProvider.Email"
+                             UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <vm:EmailValidation></vm:EmailValidation>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Label Grid.Row="3"
+                   Grid.Column="0"
+                   Content="Địa chỉ:"
+                   VerticalContentAlignment="Center"
+                   FontSize="15"
+                   Padding="10" />
+            <TextBox x:Name="Address"
+                     Grid.Row="3"
+                     Grid.Column="1"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     Margin="10"
+                     FontSize="16"
+                     Padding="2"
+                     BorderThickness="1">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius"
+                                Value="5" />
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Text>
+                    <Binding Path="NewProvider.Address"
+                             UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <vm:AddressValidation></vm:AddressValidation>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </Grid>
+        </DockPanel>
+    </materialDesign:Card>
 </Window>
 
