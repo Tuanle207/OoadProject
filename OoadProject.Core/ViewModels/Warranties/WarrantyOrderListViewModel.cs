@@ -95,6 +95,7 @@ namespace OoadProject.Core.ViewModels.Warranties
                     _warrantyService.UpdateWarrantyOrderStatus(SelectedWarrantyOrder);
 
                     OnPropertyChanged(nameof(SelectedWarrantyOrder));
+                    LoadData();
                 }
             );
 
@@ -108,6 +109,7 @@ namespace OoadProject.Core.ViewModels.Warranties
                    // Save status into DB
                    _warrantyService.UpdateWarrantyOrderStatus(SelectedWarrantyOrder);
                    OnPropertyChanged(nameof(SelectedWarrantyOrder));
+                   LoadData();
                }
             );
             ChangeStatusToWaitForCustomer = new RelayCommand<object>
@@ -120,6 +122,7 @@ namespace OoadProject.Core.ViewModels.Warranties
                    // Save status into DB
                    _warrantyService.UpdateWarrantyOrderStatus(SelectedWarrantyOrder);
                    OnPropertyChanged(nameof(SelectedWarrantyOrder));
+                   LoadData();
                }
             );
             ChangeStatusToDone = new RelayCommand<object>
@@ -135,6 +138,7 @@ namespace OoadProject.Core.ViewModels.Warranties
                     // Remove warranty order out of the warranty order list.
                     WarrantyOrders.Remove(SelectedWarrantyOrder);
                     OnPropertyChanged(nameof(SelectedWarrantyOrder));
+                    LoadData();
                 }
             );
         }

@@ -107,7 +107,10 @@ namespace OoadProject.Core.ViewModels.Sells
                 p =>
                 {
                     CurrentPage++;
-
+                    if (CurrentPage > _loadedPages.Count)
+                    {
+                        CurrentPage = _loadedPages.Count;
+                    }
                     if (_loadedPages[CurrentPage - 1] == true)
                     {
                         var start = (CurrentPage - 1) * _pageSize;
@@ -135,6 +138,14 @@ namespace OoadProject.Core.ViewModels.Sells
                 p =>
                 {
                     CurrentPage--;
+                    if (CurrentPage < 0)
+                    {
+                        CurrentPage = 1;
+                    }
+                    if (CurrentPage > _loadedPages.Count)
+                    {
+                        CurrentPage = _loadedPages.Count;
+                    }
                     if (_loadedPages[CurrentPage - 1] == true)
                     {
 
@@ -210,7 +221,9 @@ namespace OoadProject.Core.ViewModels.Sells
                     if (p != null && (bool)p)
                     {
                         // reset input
+                        ResetProductNumbers();
                         SelectedProducts = new ObservableCollection<SelectingProductForSellDto>();
+                        _storedSelectedProducts = new ObservableCollection<ProductForSellDto>();
                         Invoice = new InvoiceForCreationDto();
                     }
 
@@ -295,6 +308,13 @@ namespace OoadProject.Core.ViewModels.Sells
                 product.Number -= numberCanBeAdded;
             }
 
+            // For SURE
+            var productInDisplayList = Products.Where(x => x.Id == product.Id).FirstOrDefault();
+            if (productInDisplayList != null && productInDisplayList.Number != product.Number)
+            {
+                productInDisplayList.Number -= numberCanBeAdded;
+            }
+
             if (storedSelectedProduct != null && storedSelectedProduct != product) storedSelectedProduct.Number -= numberCanBeAdded;
 
             CalcInvoiceTotal();
@@ -373,7 +393,7 @@ namespace OoadProject.Core.ViewModels.Sells
             TotalPages = pagedList.TotalPages;
             _pageSize = pagedList.PageRecords;
 
-            // if item exists in stored selected products, just change the no. it to the one correcspoding
+            // if item exists in stored selected products, just change the no. items to the one corressponding
             foreach (var item in Products)
             {
                 var storedSelectedProduct = _storedSelectedProducts.Where(ssp => ssp.Id == item.Id).FirstOrDefault();
@@ -381,11 +401,38 @@ namespace OoadProject.Core.ViewModels.Sells
                 {
                     item.Number = storedSelectedProduct.Number;
                 }
-
             }
+
+            // if this method is called to reload current page items, reload them in _loadItems as well
+            //var start = (CurrentPage - 1) * _pageSize;
+
+            //if (_loadedProducts != null && _loadedProducts.Count >= start)
+            //{
+            //    var end = _loadedProducts.Count >= start + _pageSize ? start + _pageSize : _loadedProducts.Count;
+            //    for (int i = start; i < end; i++)
+            //    {
+            //        var product = _loadedProducts.ElementAt(i);
+            //        if (product != null)
+            //        {
+            //            product.Number = pagedList.Data.ElementAt(i - start).Number;
+            //        }
+            //    }
+            //}
+
             return pagedList.Data;
         }
 
+        private void ResetProductNumbers()
+        {
+            foreach (var item in _selectedProducts)
+            {
+                var storedProduct = _loadedProducts.Where(x => x.Id == item.Id).FirstOrDefault();
+                //var displayedProduct = Products.Where(x => x.Id == item.Id).FirstOrDefault();
+
+                storedProduct.Number += item.SelectedNumber;
+                //displayedProduct.Number += item.Number;
+            }
+        }
 
     }
 }
