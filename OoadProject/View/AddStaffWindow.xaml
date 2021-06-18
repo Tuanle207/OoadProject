@@ -42,7 +42,7 @@
                 Margin="40 20"
                 Source="{Binding EditingUser.Photo, Mode=OneWay}"
              />
-            <Button Grid.Row="3" Command="{Binding SelectPhoto}">
+            <Button Width="150" Grid.Row="3" Command="{Binding SelectPhoto}">
                 <TextBlock>Chọn ảnh</TextBlock>
             </Button>
 
