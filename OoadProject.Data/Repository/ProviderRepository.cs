@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OoadProject.Data.Repository
 {
-    public class ProviderRepository:BaseRepository<Provider>
+    public class ProviderRepository : BaseRepository<Provider>
     {
         public IEnumerable<Provider> GetProviders()
         {

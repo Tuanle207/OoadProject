@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace OoadProject.Data.Repository
 {
-    public class RoleRepository
+    public class RoleRepository : BaseRepository<Role>
     {
-        public Role Create(Role role)
+        public override Role Create(Role role)
         {
             using (var ctx = new AppDbContext())
             {

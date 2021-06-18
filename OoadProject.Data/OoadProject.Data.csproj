@@ -89,7 +89,9 @@
     <Compile Include="Seedings\CategorySeeder.cs" />
     <Compile Include="Seedings\CustomerLevelSeeder.cs" />
     <Compile Include="Seedings\CustomerSeeder.cs" />
+    <Compile Include="Seedings\InvoiceSeeder.cs" />
     <Compile Include="Seedings\ManufactureSeeder.cs" />
+    <Compile Include="Seedings\OrderSeeder.cs" />
     <Compile Include="Seedings\ParameterSeeder.cs" />
     <Compile Include="Seedings\ProductSeeder.cs" />
     <Compile Include="Seedings\ProviderSeeder.cs" />

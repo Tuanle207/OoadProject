@@ -18,6 +18,8 @@ namespace OoadProject.Data.Seedings
             ProviderSeeder.Seed(context);
             CustomerLevelSeeder.Seed(context);
             CustomerSeeder.Seed(context);
+            OrderSeeder.Seed(context);
+            InvoiceSeeder.Seed(context);
         }
     }
 }
