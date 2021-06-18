@@ -34,5 +34,10 @@ namespace OoadProject.Core.Services.AppUser
         {
             return _roleRepository.GetRolePermissions(roleId);
         }
+
+        public bool DeleteRole(int roleId)
+        {
+            return _roleRepository.Delete(roleId);
+        }
     }
 }
