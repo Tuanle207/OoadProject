@@ -7,7 +7,6 @@
         xmlns:vm="clr-namespace:OoadProject.Core.ViewModels.Settings;assembly=OoadProject.Core"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow"
-        Background="#FFBFD4FF"
         Title="Sửa loại mặt hàng" Height="350" Width="400"
         DataContext="{StaticResource CategoryViewModel}">
     <Grid>
@@ -26,7 +25,6 @@
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>
-                    <Setter Property="Background" Value="#FFE3F0FF"/>
                 </Style>
             </TextBox.Resources>
             <TextBox.Text>
@@ -42,7 +40,6 @@
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>
-                    <Setter Property="Background" Value="#FFE3F0FF"/>
                 </Style>
             </TextBox.Resources>
             <TextBox.Text>
@@ -58,7 +55,6 @@
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>
-                    <Setter Property="Background" Value="#FFE3F0FF"/>
                 </Style>
             </TextBox.Resources>
             <TextBox.Text>
