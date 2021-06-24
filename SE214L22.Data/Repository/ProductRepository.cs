@@ -97,11 +97,14 @@ namespace SE214L22.Data.Repository
             }
         }
 
-        public PaginatedList<Product> GetProductsForImport(string keyword, int page, int limit)
+        public PaginatedList<Product> GetProductsForImport(string keyword, int page, int limit, bool filterEmpty = false)
         {
             using (var ctx = new AppDbContext())
             {
                 var query = ctx.Products.AsQueryable();
+
+                if (filterEmpty)
+                    query = query.Where(p => p.Number > 0);
 
                 if (keyword != null && keyword.ToLower().Trim() != "")
                     query = query.Where(p => p.Name.ToLower().Contains(keyword.ToLower().Trim()));

@@ -16,6 +16,17 @@ namespace SE214L22.Core.ViewModels.Orders
 {
     public class OrderViewModel : BaseViewModel
     {
+        private static OrderViewModel _instance;
+        public static OrderViewModel Instance 
+        { 
+            get 
+            {
+                if (_instance == null)
+                    _instance = new OrderViewModel();
+                return _instance;
+            } 
+        }
+
         // service
         private readonly OrderService _orderService;
 
@@ -63,17 +74,8 @@ namespace SE214L22.Core.ViewModels.Orders
             _orderService = new OrderService();
 
             // data
-            
-            DateFrom = DateTime.Now.AddMonths(-3);
-            DateTo = DateTime.Now;
 
-            WaitForSent = true;
-            Sent = false;
-            Done = false;
-
-            LoadOrdersWithFilter();
-            SelectedOrder = null;
-            OrderProducts = new ObservableCollection<ProductForOrderListDto>();
+            InitData();
 
             // command
             ToggleCheckOption = new RelayCommand<object>
@@ -177,6 +179,21 @@ namespace SE214L22.Core.ViewModels.Orders
                     }
                 }
             );
+        }
+
+        public void InitData()
+        {
+
+            DateFrom = DateTime.Now.AddMonths(-3);
+            DateTo = DateTime.Now.AddDays(1);
+
+            WaitForSent = true;
+            Sent = false;
+            Done = false;
+
+            LoadOrdersWithFilter();
+            SelectedOrder = null;
+            OrderProducts = new ObservableCollection<ProductForOrderListDto>();
         }
 
         private void LoadOrdersWithFilter()

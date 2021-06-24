@@ -20,8 +20,10 @@ namespace SE214L22.Data.Seedings
             var orderPermission = context.Permissions.Add(new Permission { Id = 1, Name = PermissionsNames.Order });
             var reportPermission = context.Permissions.Add(new Permission { Id = 1, Name = PermissionsNames.Report });
             var userPermission = context.Permissions.Add(new Permission { Id = 1, Name = PermissionsNames.User });
+            var customerPermission = context.Permissions.Add(new Permission { Id = 1, Name = PermissionsNames.Customer });
             var basicSettingPermission = context.Permissions.Add(new Permission { Id = 1, Name = PermissionsNames.BasicSetting });
             var fullSettingPermission = context.Permissions.Add(new Permission { Id = 1, Name = PermissionsNames.FullSetting });
+
             context.SaveChanges();
 
             // roles
@@ -37,7 +39,8 @@ namespace SE214L22.Data.Seedings
                     basicSettingPermission,
                     fullSettingPermission,
                     reportPermission,
-                    userPermission
+                    userPermission,
+                    customerPermission
                 }
             });
             var thuKhoRole = context.Roles.Add(new Role
@@ -56,7 +59,8 @@ namespace SE214L22.Data.Seedings
                 Permissions = new List<Permission>()
                 {
                     salePermission,
-                    warrantyPermission
+                    warrantyPermission,
+                    customerPermission
                 }
             });
             context.SaveChanges();

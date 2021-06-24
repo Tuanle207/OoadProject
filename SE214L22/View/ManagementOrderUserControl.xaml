@@ -163,7 +163,7 @@
                                                     </materialDesign:PackIcon>
                                                 </MenuItem.Icon>
                                             </MenuItem>
-                                            <MenuItem IsEnabled="{Binding SelectedOrder, Mode=OneWay, Converter={StaticResource ContextMenuItemVisibilityConverter}}" Header="Đã xử lí" Command="{Binding ChangeStatusToDone}" Click="menuItemChangeStatus">
+                                            <!--<MenuItem IsEnabled="{Binding SelectedOrder, Mode=OneWay, Converter={StaticResource ContextMenuItemVisibilityConverter}}" Header="Đã xử lí" Command="{Binding ChangeStatusToDone}" Click="menuItemChangeStatus">
                                                 <MenuItem.Icon>
                                                     <materialDesign:PackIcon Kind="Check" Width="Auto" Height="Auto">
                                                         <materialDesign:PackIcon.Visibility>
@@ -175,7 +175,7 @@
                                                         </materialDesign:PackIcon.Visibility>
                                                     </materialDesign:PackIcon>
                                                 </MenuItem.Icon>
-                                            </MenuItem>
+                                            </MenuItem>-->
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                     <DataGrid.Columns>

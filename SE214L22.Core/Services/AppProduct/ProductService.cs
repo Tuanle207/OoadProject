@@ -65,7 +65,7 @@ namespace SE214L22.Core.Services.AppProduct
         {
             if (page == null || page == 0) page = 1;
             if (limit == null) limit = 16;
-            var rawProducts = _productRepository.GetProductsForImport(keyword, (int)page, (int)limit);
+            var rawProducts = _productRepository.GetProductsForImport(keyword, (int)page, (int)limit, true);
 
             var productsForReturn = new PaginatedList<ProductForSellDto>
             (

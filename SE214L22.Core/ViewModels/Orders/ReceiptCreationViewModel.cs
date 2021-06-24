@@ -110,6 +110,7 @@ namespace SE214L22.Core.ViewModels.Orders
                 {
                     InitialData(null);
                     HomeViewModel.getInstance().LoadData();
+                    OrderViewModel.Instance.InitData();
                 }
             );
 

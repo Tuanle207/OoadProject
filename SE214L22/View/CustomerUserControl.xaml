@@ -202,7 +202,7 @@
             <Grid.Visibility>
                 <Binding Path="UserPerrmissions"
                          Converter="{StaticResource FeaturePermissionConverter}"
-                         ConverterParameter="User" />
+                         ConverterParameter="Customer" />
             </Grid.Visibility>
         </Grid>
         <Button x:Name="btnCheckPermission"

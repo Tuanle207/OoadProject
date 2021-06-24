@@ -16,7 +16,7 @@ namespace SE214L22.Data.Repository
         {
             using (var ctx = new AppDbContext())
             {
-                var query = ctx.Customers.AsQueryable();
+                var query = ctx.Customers.FilterDeleted();
                 query = query.Where(q => q.PhoneNumber == phoneNumber);
                 query = query.Include(p => p.CustomerLevel);
                 return query.FirstOrDefault();

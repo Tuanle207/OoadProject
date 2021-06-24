@@ -205,7 +205,7 @@ namespace SE214L22.Core.ViewModels.Orders
                     _orderService.AddNewOrder(Order, SelectedProducts);
                 }
                 HomeViewModel.getInstance().LoadData();
-
+                OrderViewModel.Instance.InitData();
             });
 
             LoadDataForUpdation = new RelayCommand<object>
