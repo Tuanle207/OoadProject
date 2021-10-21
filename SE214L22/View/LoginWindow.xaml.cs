@@ -48,6 +48,7 @@ namespace SE214L22.View
                 {
                     Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait; // set the cursor to loading spinner
                     command.Execute(true);
+                    MessageBox.Show("Đăng nhập thành công!");
                     _mainWindow.Show();
                     btnAfterLogin.Command.Execute(null);
                     this.Close();

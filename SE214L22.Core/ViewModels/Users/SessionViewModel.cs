@@ -71,7 +71,7 @@ namespace SE214L22.Core.ViewModels.Users
             _userService = new UserService();
             _roleService = new RoleService();
 
-            LoginDto = new LoginDto { Email = "letgo237@gmail.com", Password = "1248" };
+            LoginDto = new LoginDto { Email = "", Password = "" };
             UserForPasswordUpdate = new UserForPasswordUpdateDto();
             UserPerrmissions = new ObservableCollection<Permission>();
 
