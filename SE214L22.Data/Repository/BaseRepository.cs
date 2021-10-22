@@ -1,4 +1,5 @@
 ﻿using SE214L22.Data.Entity;
+using SE214L22.Data.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SE214L22.Data.Repository
 {
-    public class BaseRepository<T> where T : AppEntity
+    public abstract class BaseRepository<T> : IBaseRepository<T> where T : AppEntity
     {
         public virtual T Get(int id)
         {

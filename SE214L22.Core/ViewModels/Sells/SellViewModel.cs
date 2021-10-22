@@ -1,5 +1,5 @@
-﻿using SE214L22.Core.Services.AppCustomer;
-using SE214L22.Core.Services.AppProduct;
+﻿using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
 using SE214L22.Core.ViewModels.Customers;
 using SE214L22.Core.ViewModels.Products.Dtos;
 using SE214L22.Core.ViewModels.Reports;
@@ -17,10 +17,10 @@ namespace SE214L22.Core.ViewModels.Sells
     public class SellViewModel : BaseViewModel
     {
         // private service fields
-        private readonly ProductService _productService;
-        private readonly InvoiceService _invoiceService;
-        private readonly CustomerService _customerService;
-        private readonly CustomerLevelRepository _customerLevelRepository;
+        private readonly IProductService _productService;
+        private readonly IInvoiceService _invoiceService;
+        private readonly ICustomerService _customerService;
+        private readonly ICustomerLevelService _customerLevelService;
 
         // private data fields
         private List<ProductForSellDto> _loadedProducts;
@@ -81,15 +81,14 @@ namespace SE214L22.Core.ViewModels.Sells
         public ICommand ResetInput { get; set; }
         public ICommand GetCustomer { get; set; }
 
-        public SellViewModel()
+        public SellViewModel(IProductService productService, IInvoiceService invoiceService,
+            ICustomerService customerService, ICustomerLevelService customerLevelService)
         {
             // service
-            _productService = new ProductService();
-            _invoiceService = new InvoiceService();
-            _customerService = new CustomerService();
-
-            //Repository
-            _customerLevelRepository = new CustomerLevelRepository();
+            _productService = productService;
+            _invoiceService = invoiceService;
+            _customerService = customerService;
+            _customerLevelService = customerLevelService;
 
             // data
             _storedSelectedProducts = new ObservableCollection<ProductForSellDto>();
@@ -194,9 +193,9 @@ namespace SE214L22.Core.ViewModels.Sells
                         updatedCustomer = Mapper.Map<CustomerDisplayDto>(customer);
                         updatedCustomer.AccumulatedPoint += Invoice.Price / 100000;
                         //Check and Update AccumulatedPoint
-                        if (updatedCustomer.AccumulatedPoint >= _customerLevelRepository.GetCustomerLevelByName("Hạng Vàng").PointLevel)
+                        if (updatedCustomer.AccumulatedPoint >= _customerLevelService.GetCustomerLevelByName("Hạng Vàng").PointLevel)
                             updatedCustomer.CustomerLevelId = 3;
-                        else if (updatedCustomer.AccumulatedPoint >= _customerLevelRepository.GetCustomerLevelByName("Hạng Bạc").PointLevel)
+                        else if (updatedCustomer.AccumulatedPoint >= _customerLevelService.GetCustomerLevelByName("Hạng Bạc").PointLevel)
                             updatedCustomer.CustomerLevelId = 2;
                         else
                             updatedCustomer.CustomerLevelId = 1;

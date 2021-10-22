@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SE214L22.Core.AppSession;
+using SE214L22.Core.Interfaces.Services;
 using SE214L22.Data.Entity.AppUser;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SE214L22.Core.Services
 {
-    public class BaseService
+    public abstract class BaseService : IBaseService
     {
         protected IMapper _mapper;
         protected IMapper Mapper

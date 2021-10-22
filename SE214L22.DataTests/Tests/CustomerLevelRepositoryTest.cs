@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using SE214L22.Data.Entity.AppCustomer;
-using SE214L22.Data.Entity.AppProduct;
 using SE214L22.Data.Repository;
 using SE214L22.Shared.Helpers;
 using System.Collections.Generic;

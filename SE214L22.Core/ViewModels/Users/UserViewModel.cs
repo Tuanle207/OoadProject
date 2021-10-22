@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using SE214L22.Core.AppSession;
-using SE214L22.Core.Services.AppUser;
+using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
 using SE214L22.Core.ViewModels.Users.Dtos;
 using SE214L22.Data.Entity.AppUser;
 using SE214L22.Shared.AppConsts;
@@ -18,8 +19,8 @@ namespace SE214L22.Core.ViewModels.Users
     public class UserViewModel : BaseViewModel
     {
         // private service fields
-        private readonly UserService _userService;
-        private readonly RoleService _roleService;
+        private readonly IUserService _userService;
+        private readonly IRoleService _roleService;
 
         // private data fields
         private ObservableCollection<User> _users;
@@ -78,10 +79,10 @@ namespace SE214L22.Core.ViewModels.Users
         public ICommand PrepareForUpdateUser { get; set; }
         public ICommand CheckModificationPermission { get; set; }
 
-        public UserViewModel()
+        public UserViewModel(IUserService userService, IRoleService roleService)
         {
-            _userService = new UserService();
-            _roleService = new RoleService();
+            _userService = userService;
+            _roleService = roleService;
 
             Users = new ObservableCollection<User>(_userService.GetUsers());
             EditingUser = new UserForCreationDto
@@ -139,7 +140,7 @@ namespace SE214L22.Core.ViewModels.Users
                         _userService.DeleteUser(ChosenUser);
                         Users = new ObservableCollection<User>(_userService.GetUsers());
                     }
-                       
+
                 }
             );
 
@@ -161,9 +162,9 @@ namespace SE214L22.Core.ViewModels.Users
                 p => true,
                 p =>
                 {
-                    EditingUser = new UserForCreationDto 
-                    { 
-                        CreationTime = DateTime.Now, 
+                    EditingUser = new UserForCreationDto
+                    {
+                        CreationTime = DateTime.Now,
                         Dob = new DateTime(2000, 1, 1),
                         Photo = GetPhotoPath(DefaultPhotoNames.User)
                     };

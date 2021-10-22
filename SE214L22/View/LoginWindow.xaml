@@ -10,7 +10,8 @@
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None" 
-        DataContext="{StaticResource SessionViewModel}">
+        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=SessionViewModel}"
+>
     <Grid>
         <Rectangle Height="280" VerticalAlignment="Top">
             <Rectangle.Fill>

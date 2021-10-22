@@ -1,4 +1,5 @@
-﻿using SE214L22.Core.Services.AppProduct;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SE214L22.Core.Interfaces.Services;
 using SE214L22.Core.ViewModels.Home;
 using SE214L22.Core.ViewModels.Orders.Dtos;
 using SE214L22.Data.Entity.AppProduct;
@@ -12,10 +13,12 @@ namespace SE214L22.Core.ViewModels.Orders
 {
     public class OrderCreationViewModel : BaseViewModel
     {
+        private readonly IServiceProvider _serviceProvider;
+
         // private service fields
-        private readonly ProductService _productService;
-        private readonly OrderService _orderService;
-        private readonly ProviderService _providerService;
+        private readonly IProductService _productService;
+        private readonly IOrderService _orderService;
+        private readonly IProviderService _providerService;
 
         // private data fields
         private List<ProductForOrderCreationDto> _loadedProducts;
@@ -96,15 +99,17 @@ namespace SE214L22.Core.ViewModels.Orders
         public ICommand LoadDataForUpdation { get; set; }
         public ICommand ResetData { get; set; }
         public ICommand RestoreUpdationData { get; set; }
-       
 
 
-        public OrderCreationViewModel()
+
+        public OrderCreationViewModel(IProductService productService, IOrderService orderService, 
+            IProviderService providerService, IServiceProvider serviceProvider)
         {
             // service
-            _productService = new ProductService();
-            _orderService = new OrderService();
-            _providerService = new ProviderService();
+            _productService = productService;
+            _orderService = orderService;
+            _providerService = providerService;
+            _serviceProvider = serviceProvider;
 
 
             // data
@@ -121,7 +126,8 @@ namespace SE214L22.Core.ViewModels.Orders
             // Command
             GoNextPage = new RelayCommand<object>(
             p => CurrentPage < TotalPages,
-            p => {
+            p =>
+            {
 
                 CurrentPage = CurrentPage + 1;
                 if (_loaded[CurrentPage - 1] == true)
@@ -141,17 +147,14 @@ namespace SE214L22.Core.ViewModels.Orders
                     _loadedProducts.AddRange(pagedListNextPageData);
                     _loaded[CurrentPage - 1] = true;
                 }
-                
-                
-            }) ;
+
+
+            });
 
             GoPrevPage = new RelayCommand<object>(
             p => CurrentPage > 1,
-            p => {
-
-
-
-
+            p =>
+            {
                 CurrentPage--;
                 if (_loaded[CurrentPage - 1] == true)
                 {
@@ -190,7 +193,7 @@ namespace SE214L22.Core.ViewModels.Orders
 
 
             SaveOrderInfo = new RelayCommand<object>(
-            p => 
+            p =>
             {
                 if (SelectingProvider == null || SelectedProducts.Count == 0)
                     return false;
@@ -204,8 +207,8 @@ namespace SE214L22.Core.ViewModels.Orders
                     Order.UserId = CurrentUser.Id;
                     _orderService.AddNewOrder(Order, SelectedProducts);
                 }
-                HomeViewModel.getInstance().LoadData();
-                OrderViewModel.Instance.InitData();
+                _serviceProvider.GetRequiredService<HomeViewModel>().LoadData();
+                _serviceProvider.GetRequiredService<OrderViewModel>().InitData();
             });
 
             LoadDataForUpdation = new RelayCommand<object>
@@ -251,7 +254,8 @@ namespace SE214L22.Core.ViewModels.Orders
                         Order.ProviderId = SelectingProvider.Id;
                         _orderService.UpdateOrderInfo(Order, SelectedProducts);
                     }
-                    HomeViewModel.getInstance().LoadData();
+                    _serviceProvider.GetRequiredService<HomeViewModel>().LoadData();
+
                 }
             );
 
@@ -262,7 +266,8 @@ namespace SE214L22.Core.ViewModels.Orders
                 {
                     if (p != null && (bool)p == true)
                         SelectedProducts = new ObservableCollection<SelectingProductDto>();
-                    HomeViewModel.getInstance().LoadData();
+
+                    _serviceProvider.GetRequiredService<HomeViewModel>().LoadData();
                 }
 
             );
@@ -276,6 +281,7 @@ namespace SE214L22.Core.ViewModels.Orders
                         LoadDataForUpdate(Order.Id);
                 }
             );
+            
         }
 
         private void AddItems(object p, int number)
@@ -299,8 +305,8 @@ namespace SE214L22.Core.ViewModels.Orders
                     selectedProduct.SelectedNumber += number;
                 else
                     SelectedProducts.Add(_orderService.SelectProduct(product));
-                HomeViewModel.getInstance().LoadData();
 
+                _serviceProvider.GetRequiredService<HomeViewModel>().LoadData();
             }
         }
         private void RemoveItems(object p, int number)
@@ -331,7 +337,8 @@ namespace SE214L22.Core.ViewModels.Orders
             _loaded = new List<bool>();
             for (int i = 0; i < TotalPages; i++) _loaded.Add(false);
             if (TotalPages > 0) _loaded[0] = true;
-            HomeViewModel.getInstance().LoadData();
+
+            _serviceProvider.GetRequiredService<HomeViewModel>().LoadData();
         }
 
         private IEnumerable<ProductForOrderCreationDto> GetData()

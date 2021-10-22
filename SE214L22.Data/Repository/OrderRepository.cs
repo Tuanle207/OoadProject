@@ -1,4 +1,5 @@
 ﻿using SE214L22.Data.Entity.AppProduct;
+using SE214L22.Data.Interfaces.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
@@ -7,7 +8,7 @@ using SE214L22.Shared.Dtos;
 
 namespace SE214L22.Data.Repository
 {
-    public class OrderRepository : BaseRepository<Order>
+    public class OrderRepository : BaseRepository<Order>, IOrderRepository
     {
         public IEnumerable<Order> GetOrders(List<OrderStatus> status, int limit)
         {
@@ -33,7 +34,7 @@ namespace SE214L22.Data.Repository
             using (var ctx = new AppDbContext())
             {
                 var query = ctx.Orders.AsQueryable();
-                
+
                 if (dateRange != null)
                 {
                     query = query.Where(o => dateRange.StartDate <= o.CreationTime && o.CreationTime <= dateRange.EndDate);

@@ -7,10 +7,9 @@ using SE214L22.Core.ViewModels.Users.Dtos;
 using SE214L22.Core.ViewModels.Products.Dtos;
 using SE214L22.Data.Entity.AppProduct;
 using SE214L22.Data.Entity.AppUser;
-using SE214L22.Data.Repository.AggregateDto;
+using SE214L22.Data.Entity;
 using SE214L22.Data.Entity.AppCustomer;
 using SE214L22.Core.ViewModels.Warranties.Dtos;
-using System;
 using SE214L22.Core.ViewModels.Customers.Dtos;
 
 namespace SE214L22.Core

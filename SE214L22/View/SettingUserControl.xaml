@@ -13,7 +13,7 @@
     <Grid>
         <controls:MetroAnimatedTabControl x:Name="AnimatedTabControl">
             <controls:MetroTabItem Header="Quản lý tham số">
-                <Grid DataContext="{StaticResource ParameterViewModel}">
+                <Grid DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ParameterViewModel}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -139,7 +139,7 @@
 
                     <Grid Grid.RowSpan="3"
                           Grid.ColumnSpan="3"
-                          DataContext="{StaticResource SessionViewModel}"
+                          DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=SessionViewModel}"
                           Background="#fff"
                           VerticalAlignment="Stretch"
                           HorizontalAlignment="Stretch">
@@ -161,7 +161,7 @@
                 </Grid>
             </controls:MetroTabItem>
             <controls:MetroTabItem Header="Quản lý loại mặt hàng">
-                <Grid DataContext="{StaticResource CategoryViewModel}">
+                <Grid DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=CategoryViewModel}">
                     <Grid Width="600"
                           Height="400">
                         <Grid.RowDefinitions>
@@ -236,11 +236,11 @@
                             </Grid>
                         </Grid>
                         <Button x:Name="btnAfterCategory"
-                                DataContext="{StaticResource ProductViewModel}"
+                                DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ProductViewModel}"
                                 Command="{Binding UpdateData}"
                                 Visibility="Hidden" />
                     </Grid>
-                    <Grid DataContext="{StaticResource SessionViewModel}"
+                    <Grid DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=SessionViewModel}"
                           Background="#fff"
                           VerticalAlignment="Stretch"
                           HorizontalAlignment="Stretch">
@@ -262,7 +262,7 @@
                 </Grid>
             </controls:MetroTabItem>
             <controls:MetroTabItem Header="Quản lý hãng sản xuất">
-                <Grid DataContext="{StaticResource ManufacturerViewModel}">
+                <Grid DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ManufacturerViewModel}">
                     <Grid Width="450"
                           Height="400">
                         <Grid.RowDefinitions>
@@ -320,13 +320,13 @@
                                         Content="Xóa"
                                         HorizontalAlignment="Center"></Button>
                                 <Button x:Name="btnAfterManufacturer"
-                                        DataContext="{StaticResource ProductViewModel}"
+                                        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ProductViewModel}"
                                         Command="{Binding UpdateData}"
                                         Visibility="Hidden" />
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid DataContext="{StaticResource SessionViewModel}"
+                    <Grid DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=SessionViewModel}"
                           Background="#fff"
                           VerticalAlignment="Stretch"
                           HorizontalAlignment="Stretch">
@@ -352,7 +352,7 @@
                 </Grid>
             </controls:MetroTabItem>
             <controls:MetroTabItem Header="Quản lý nhà cung cấp">
-                <Grid DataContext="{StaticResource ProviderViewModel}">
+                <Grid DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ProviderViewModel}">
                     <Grid Width="650"
                           Height="400">
                         <Grid.RowDefinitions>
@@ -414,8 +414,8 @@
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid DataContext="{StaticResource SessionViewModel}"
-                          Background="#fff"
+                    <Grid DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=SessionViewModel}"
+                        Background="#fff"
                           VerticalAlignment="Stretch"
                           HorizontalAlignment="Stretch">
                         <StackPanel HorizontalAlignment="Center"
@@ -436,7 +436,7 @@
                 </Grid>
             </controls:MetroTabItem>
             <controls:MetroTabItem Header="Quản lý hạng thành viên">
-                <Grid DataContext="{StaticResource CustomerLevelViewModel}">
+                <Grid DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=CustomerLevelViewModel}">
                     <Grid Width="800"
                           Height="400">
                         <Grid.RowDefinitions>
@@ -490,7 +490,7 @@
 
                         <!--<Button x:Name="btnAfter" DataContext="{StaticResource ProductViewModel}" Command="{Binding UpdateData}" Visibility="Hidden" />-->
                     </Grid>
-                    <Grid DataContext="{StaticResource SessionViewModel}"
+                    <Grid DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=SessionViewModel}"
                           Background="#fff"
                           VerticalAlignment="Stretch"
                           HorizontalAlignment="Stretch">

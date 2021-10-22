@@ -1,4 +1,5 @@
-﻿using SE214L22.Core.Services.AppProduct;
+﻿using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
 using SE214L22.Core.ViewModels.Settings.Dtos;
 using SE214L22.Data.Entity.AppProduct;
 using System;
@@ -15,7 +16,7 @@ namespace SE214L22.Core.ViewModels.Settings
     public class ProviderViewModel : BaseViewModel
     {
         // private service fields
-        private readonly ProviderService _providerService;
+        private readonly IProviderService _providerService;
 
         // private data fields
         private ObservableCollection<Provider> _providers;
@@ -58,9 +59,9 @@ namespace SE214L22.Core.ViewModels.Settings
         public ICommand AddProvider { get; set; }
         public ICommand PrepareAddProvider { get; set; }
 
-        public ProviderViewModel()
+        public ProviderViewModel(IProviderService providerService)
         {
-            _providerService = new ProviderService();
+            _providerService = providerService;
 
             Providers = new ObservableCollection<Provider>(_providerService.GetProviders());
             NewProvider = new ProviderForCreationDto { };

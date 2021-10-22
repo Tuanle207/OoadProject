@@ -10,7 +10,7 @@
         Title="Thêm sản phẩm mới"
         Height="500"
         Width="600"
-        DataContext="{StaticResource ProductViewModel}"
+        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ProductViewModel}"
         WindowStartupLocation="CenterScreen">
     <materialDesign:Card Margin="10">
         <Grid>

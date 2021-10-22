@@ -11,7 +11,8 @@
         mc:Ignorable="d"
         Title="Thêm khách hàng mới" Height="300" Width="300"
         WindowStartupLocation="CenterScreen"
-        DataContext="{StaticResource CustomerViewModel}">
+        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=CustomerViewModel}"
+>
     <materialDesign:Card Margin="10">
         <DockPanel>
             <!--Button thêm-->

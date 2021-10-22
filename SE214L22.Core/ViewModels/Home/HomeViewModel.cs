@@ -1,6 +1,7 @@
-﻿using SE214L22.Core.Services;
-using SE214L22.Core.Services.AppProduct;
+﻿using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
 using SE214L22.Core.ViewModels.Home.Dtos;
+using SE214L22.Shared.AppConsts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,15 +14,11 @@ namespace SE214L22.Core.ViewModels.Home
 {
     public class HomeViewModel : BaseViewModel
     {
-        private static HomeViewModel _instance;
-        public static HomeViewModel getInstance()
-        {
-            return _instance;
-        }
+       
         // private service fields
-        private readonly OrderService _orderService;
-        private readonly InvoiceService _invoiceService;
-        private readonly ProductService _productService;
+        private readonly IOrderService _orderService;
+        private readonly IInvoiceService _invoiceService;
+        private readonly IProductService _productService;
 
         // private data fields
         private ObservableCollection<ProcessingOrderDto> _processingOrders;
@@ -73,14 +70,12 @@ namespace SE214L22.Core.ViewModels.Home
         public ICommand ReloadData { get; set; }
 
 
-        public HomeViewModel()
+        public HomeViewModel(IOrderService orderService, IInvoiceService invoiceService, IProductService productService)
         {
-            if (_instance == null)
-                _instance = this;
-            // init services
-            _orderService = new OrderService();
-            _invoiceService = new InvoiceService();
-            _productService = new ProductService();
+
+            _orderService = orderService;
+            _invoiceService = invoiceService;
+            _productService = productService;
 
             LoadData();
 
@@ -90,6 +85,7 @@ namespace SE214L22.Core.ViewModels.Home
                 p => true,
                 p => LoadData()
             );
+           
         }
 
         public void LoadData()

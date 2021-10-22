@@ -1,4 +1,5 @@
 ﻿using SE214L22.Data.Entity.AppUser;
+using SE214L22.Data.Interfaces.Repositories;
 using System;
 using System.Data.Entity;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SE214L22.Data.Repository
 {
-    public class UserRepository : BaseRepository<User>
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
         public IEnumerable<User> GetAllUsers()
         {

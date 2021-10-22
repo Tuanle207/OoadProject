@@ -8,7 +8,8 @@
              xmlns:local="clr-namespace:SE214L22.View" 
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1100" Background="White"
-             DataContext="{StaticResource HomeViewModel}">
+             DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=HomeViewModel}"
+>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

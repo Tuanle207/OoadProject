@@ -10,7 +10,8 @@
              d:DesignHeight="650"
              d:DesignWidth="1100"
              Background="White"
-             DataContext="{StaticResource ProductViewModel}">
+             DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ProductViewModel}"
+>
     <Grid>
         <DockPanel LastChildFill="True">
             <Grid DockPanel.Dock="Bottom">
@@ -293,7 +294,7 @@
         <Button x:Name="btnAfterDele"
                 Command="{Binding ReloadProducts}"
                 Visibility="Hidden" />
-        <Grid Grid.RowSpan="3" DataContext="{StaticResource SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid Grid.RowSpan="3" DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Source="../Assets/unauthorized.png" Width="200" Height="200" />
                 <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">Bạn không có quyền truy cập màn hình này! Vui lòng đăng nhập với tài khoản thích hợp!</TextBlock>

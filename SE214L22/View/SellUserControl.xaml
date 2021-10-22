@@ -9,7 +9,8 @@
              xmlns:Sells="clr-namespace:SE214L22.Core.ViewModels.Sells;assembly=SE214L22.Core"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1100"
-             DataContext="{StaticResource SellViewModel}">
+             DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=SellViewModel}"
+>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -386,12 +387,12 @@
                 </Button>
                 <Button x:Name="btnReloadHomeScreen"
                         Visibility="Hidden"
-                        DataContext="{StaticResource HomeViewModel}"
+                        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=HomeViewModel}"
                         Command="{Binding ReloadData}" />
             </Grid>
 
         </Grid>
-        <Grid Grid.ColumnSpan="2" DataContext="{StaticResource SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid Grid.ColumnSpan="2" DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Source="../Assets/unauthorized.png" Width="200" Height="200" />
                 <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">Bạn không có quyền truy cập màn hình này! Vui lòng đăng nhập với tài khoản thích hợp!</TextBlock>

@@ -1,23 +1,22 @@
-﻿using SE214L22.Core.Services.AppUser;
+﻿using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
+using SE214L22.Data.Repository;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace SE214L22.Core.ViewModels.Users
 {
     public class UserEmailValidation : ValidationRule
     {
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
         private readonly string EMAIL_PARTTERN = "^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$";
 
         public UserEmailValidation()
         {
-            _userService = new UserService();
+            // TODO: 
+            _userService = new UserService(new UserRepository(), new RoleRepository());
         }
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)

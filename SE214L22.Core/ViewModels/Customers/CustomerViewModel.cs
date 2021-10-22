@@ -1,5 +1,5 @@
-﻿using SE214L22.Core.Services.AppCustomer;
-using SE214L22.Core.Services.AppProduct;
+﻿using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
 using SE214L22.Core.ViewModels.Customers.Dtos;
 using SE214L22.Core.ViewModels.Products.Dtos;
 using SE214L22.Data.Entity.AppCustomer;
@@ -8,8 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -24,8 +22,8 @@ namespace SE214L22.Core.ViewModels.Customers
             return _instance;
         }
         // private service fields
-        private readonly CustomerService _customerService;
-        private readonly CustomerLevelService _customerLevelService;
+        private readonly ICustomerService _customerService;
+        private readonly ICustomerLevelService _customerLevelService;
 
         // private data fields
         private List<CustomerDisplayDto> _loadedCustomers;
@@ -126,13 +124,14 @@ namespace SE214L22.Core.ViewModels.Customers
         public ICommand ResetReturnRateAdd { get; set; }
         public ICommand ResetReturnRateEdit { get; set; }
 
-        public CustomerViewModel()
+        public CustomerViewModel(ICustomerService customerService, ICustomerLevelService customerLevelService)
         {
             if (_instance == null)
                 _instance = this;
             // service
-            _customerService = new CustomerService();
-            _customerLevelService = new CustomerLevelService();
+            _customerService = customerService;
+            _customerLevelService = customerLevelService;
+
             NewCustomer = new CustomerForCreationDto();
 
 
@@ -283,6 +282,7 @@ namespace SE214L22.Core.ViewModels.Customers
                 }
             );
         }
+
         public void LoadListCustomers()
         {
             CustomerFilterDto filter = new CustomerFilterDto();

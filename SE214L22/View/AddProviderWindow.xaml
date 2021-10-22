@@ -12,7 +12,8 @@
         Title="Thêm nhà cung cấp"
         Height="360"
         Width="360"
-        DataContext="{StaticResource ProviderViewModel}">
+        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ProviderViewModel}"
+>
     <materialDesign:Card Margin="10">
         <DockPanel>
             <Button x:Name="btnAddProvider"

@@ -13,7 +13,7 @@
     <Grid>
         <controls:MetroAnimatedTabControl x:Name="AnimatedTabControl">
             <controls:MetroTabItem Header="Đơn đặt hàng" >
-                <Grid  DataContext="{StaticResource OrderViewModel}" >
+                <Grid DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=OrderViewModel}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*"></ColumnDefinition>
                         <ColumnDefinition Width="4*"></ColumnDefinition>
@@ -88,7 +88,8 @@
                     </StackPanel>
                     <Button Background="#596FB5"
                                 BorderThickness="0" Name="btnAddOrder" 
-                                DataContext="{StaticResource OrderCreationViewModel}" Click="btnAddOrder_Click"
+                                DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=OrderCreationViewModel}"
+                                Click="btnAddOrder_Click"
                                  Command="{Binding LoadDataForCreation}"
                                 Grid.Row="0" Grid.Column="1"
                                 Height="46"
@@ -126,7 +127,7 @@
 
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Sửa thông tin đơn đặt hàng" x:Name="menuItemUpdate" Click="menuItemUpdate_Click" DataContext="{StaticResource OrderCreationViewModel}" Command="{Binding LoadDataForUpdation}">
+                                            <MenuItem Header="Sửa thông tin đơn đặt hàng" x:Name="menuItemUpdate" Click="menuItemUpdate_Click" DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=OrderCreationViewModel}" Command="{Binding LoadDataForUpdation}">
                                                 <MenuItem.Icon>
                                                     <materialDesign:PackIcon Kind="ContentDuplicate" Width="Auto" Height="Auto"/>
                                                 </MenuItem.Icon>
@@ -231,14 +232,14 @@
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </GroupBox>
-                        </materialDesign:Card>                        
-                        <Button x:Name="btnReloadReceiptUI" DataContext="{StaticResource ReceiptCreationViewModel}" Command="{Binding ReloadData}" Visibility="Hidden" />
+                        </materialDesign:Card>
+                        <Button x:Name="btnReloadReceiptUI" DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ReceiptCreationViewModel}" Command="{Binding ReloadData}" Visibility="Hidden" />
                         <TextBlock x:Name="tbSelectedId" Visibility="Hidden" Text="{Binding SelectedOrder.Id}" />
                     </Grid>
                 </Grid>
             </controls:MetroTabItem>
             <controls:MetroTabItem Header="Nhập hàng">
-                <Grid DataContext="{StaticResource ReceiptCreationViewModel}">
+                <Grid DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ReceiptCreationViewModel}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*"></ColumnDefinition>
                         <ColumnDefinition Width="5*"></ColumnDefinition>
@@ -397,7 +398,7 @@
                 </Grid>
             </controls:MetroTabItem>
             <controls:MetroTabItem Header="Đơn nhập hàng">
-                <Grid DataContext="{StaticResource ReceiptViewModel}">
+                <Grid DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ReceiptViewModel}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="68*"></ColumnDefinition>
                         <ColumnDefinition Width="543*"/>
@@ -508,7 +509,7 @@
             </controls:MetroTabItem>
         </controls:MetroAnimatedTabControl>
 
-        <Grid Grid.RowSpan="2" Grid.ColumnSpan="2" DataContext="{StaticResource SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid Grid.RowSpan="2" Grid.ColumnSpan="2" DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Source="../Assets/unauthorized.png" Width="200" Height="200" />
                 <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">Bạn không có quyền truy cập màn hình này! Vui lòng đăng nhập với tài khoản thích hợp!</TextBlock>

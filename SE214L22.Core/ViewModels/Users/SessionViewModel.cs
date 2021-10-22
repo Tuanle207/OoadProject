@@ -1,5 +1,4 @@
-﻿using SE214L22.Core.Services.AppProduct;
-using SE214L22.Core.Services.AppUser;
+﻿using SE214L22.Core.Services;
 using SE214L22.Core.AppSession;
 using SE214L22.Core.ViewModels.Users.Dtos;
 using System;
@@ -12,14 +11,15 @@ using System.Windows.Input;
 using System.Collections.ObjectModel;
 using SE214L22.Data.Entity.AppUser;
 using SE214L22.Shared.Permissions;
+using SE214L22.Core.Interfaces.Services;
 
 namespace SE214L22.Core.ViewModels.Users
 {
     public class SessionViewModel : BaseViewModel
     {
         // service
-        private readonly UserService _userService;
-        private readonly RoleService _roleService;
+        private readonly IUserService _userService;
+        private readonly IRoleService _roleService;
 
         // data field
         private LoginDto _loginDto;
@@ -66,10 +66,10 @@ namespace SE214L22.Core.ViewModels.Users
         public ICommand ReloadUsername { get; set; }
         public ICommand UpdatePassword { get; set; }
 
-        public SessionViewModel()
+        public SessionViewModel(IUserService userService, IRoleService roleService)
         {
-            _userService = new UserService();
-            _roleService = new RoleService();
+            _userService = userService;
+            _roleService = roleService;
 
             LoginDto = new LoginDto { Email = "", Password = "" };
             UserForPasswordUpdate = new UserForPasswordUpdateDto();
@@ -98,7 +98,7 @@ namespace SE214L22.Core.ViewModels.Users
                         // reset input
                         LoginDto.Password = "";
                     }
-                } 
+                }
             );
 
             Logout = new RelayCommand<object>

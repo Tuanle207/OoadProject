@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:SE214L22.View"
-            xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              WindowStartupLocation="CenterScreen"
              d:DesignHeight="650" d:DesignWidth="1100" Background="#fff"
-             DataContext="{StaticResource WarrantyOrderCreationViewModel}">
+             DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=WarrantyOrderCreationViewModel}"
+>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -87,6 +88,6 @@
             Margin="0 0 27 0" Background="#596FB5" BorderThickness="0">
             <TextBlock Text="Bảo hành" FontSize="15"/>
         </Button>
-        <Button x:Name="btnReloaWarrantyOrderList" DataContext="{StaticResource WarrantyOrderListViewModel}" Command="{Binding ReloadData}" Visibility="Hidden" />
+        <Button x:Name="btnReloaWarrantyOrderList" DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=WarrantyOrderListViewModel}" Command="{Binding ReloadData}" Visibility="Hidden" />
     </Grid>
 </Window>

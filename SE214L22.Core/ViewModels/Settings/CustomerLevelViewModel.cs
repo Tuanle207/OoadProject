@@ -1,5 +1,5 @@
-﻿using SE214L22.Core.Services.AppCustomer;
-using SE214L22.Core.Services.AppProduct;
+﻿using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
 using SE214L22.Core.ViewModels.Settings.Dtos;
 using SE214L22.Data.Entity.AppCustomer;
 using System;
@@ -16,7 +16,7 @@ namespace SE214L22.Core.ViewModels.Settings
     public class CustomerLevelViewModel : BaseViewModel
     {
         // private service fields
-        private readonly CustomerLevelService _customerLevelService;
+        private readonly ICustomerLevelService _customerLevelService;
 
         // private data fields
         private ObservableCollection<CustomerLevelForDisplayDto> _customerLevels;
@@ -48,9 +48,9 @@ namespace SE214L22.Core.ViewModels.Settings
         public ICommand UpdateCustomerLevel { get; set; }
         public ICommand PrepareUpdateCustomerLevel { get; set; }
 
-        public CustomerLevelViewModel()
+        public CustomerLevelViewModel(ICustomerLevelService customerLevelService)
         {
-            _customerLevelService = new CustomerLevelService();
+            _customerLevelService = customerLevelService;
 
             CustomerLevels = new ObservableCollection<CustomerLevelForDisplayDto>(_customerLevelService.GetDisplayCustomerLevels());
 

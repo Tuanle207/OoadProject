@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
-using SE214L22.Core.Services.AppProduct;
+using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
 using SE214L22.Core.ViewModels.Products.Dtos;
 using SE214L22.Data.Entity.AppProduct;
 using SE214L22.Shared.AppConsts;
@@ -19,9 +20,9 @@ namespace SE214L22.Core.ViewModels.Products
     public class ProductViewModel : BaseViewModel
     {
         // private service fields
-        private readonly ProductService _productService;
-        private readonly ManufacturerService _manufacturerService;
-        private readonly CategoryService _categoryService;
+        private readonly IProductService _productService;
+        private readonly IManufacturerService _manufacturerService;
+        private readonly ICategoryService _categoryService;
 
         // private data fields
         private List<ProductDisplayDto> _loadedProducts;
@@ -157,21 +158,21 @@ namespace SE214L22.Core.ViewModels.Products
         public ICommand ResetReturnRateAdd { get; set; }
         public ICommand ResetReturnRateEdit { get; set; }
 
-        public ProductViewModel()
+        public ProductViewModel(IProductService productService, IManufacturerService manufacturerService, ICategoryService categoryService)
         {
             // service
-            _productService = new ProductService();
-            _manufacturerService = new ManufacturerService();
-            _categoryService = new CategoryService();
-            NewProduct = new ProductForCreationDto();
+            _productService = productService;
+            _manufacturerService = manufacturerService;
+            _categoryService = categoryService;
 
 
             // data            
+            NewProduct = new ProductForCreationDto();
             Manufacturers = new ObservableCollection<Manufacturer>(_manufacturerService.GetManufacturers());
             Categories = new ObservableCollection<Category>(_categoryService.GetCategories());
             FilterCategory = new List<Category>();
             FilterManufacturer = new List<Manufacturer>();
-            
+
 
             LoadListProducts();
 
@@ -280,7 +281,7 @@ namespace SE214L22.Core.ViewModels.Products
             );
             AddProduct = new RelayCommand<object>
             (
-                p => 
+                p =>
                 {
                     if (SelectedCategory == null || SelectedManufacturer == null)
                         return false;
@@ -288,7 +289,7 @@ namespace SE214L22.Core.ViewModels.Products
                 },
                 p =>
                 {
-                    if (p != null && (bool)p == true)  
+                    if (p != null && (bool)p == true)
                     {
                         NewProduct.CategoryId = SelectedCategory.Id;
                         NewProduct.ManufacturerId = SelectedManufacturer.Id;

@@ -1,4 +1,6 @@
-﻿using SE214L22.Core.Services.AppProduct;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
 using SE214L22.Core.ViewModels.Home;
 using SE214L22.Core.ViewModels.Orders.Dtos;
 using SE214L22.Data.Entity.AppProduct;
@@ -17,9 +19,11 @@ namespace SE214L22.Core.ViewModels.Orders
 {
     public class ReceiptCreationViewModel : BaseViewModel
     {
+        private readonly IServiceProvider _serviceProvider;
+
         // service
-        private readonly OrderService _orderService;
-        private readonly ReceiptService _receiptService;
+        private readonly IOrderService _orderService;
+        private readonly IReceiptService _receiptService;
 
         // private fields
         private ObservableCollection<OrderForListDto> _sentOrders;
@@ -71,11 +75,12 @@ namespace SE214L22.Core.ViewModels.Orders
         public ICommand AddItem { get; set; }
         public ICommand RemoveItem { get; set; }
 
-        public ReceiptCreationViewModel()
+        public ReceiptCreationViewModel(IOrderService orderService, IReceiptService receiptService, IServiceProvider serviceProvider)
         {
             // serivce
-            _orderService = new OrderService();
-            _receiptService = new ReceiptService();
+            _orderService = orderService;
+            _receiptService = receiptService;
+            _serviceProvider = serviceProvider;
 
             // data
             InitialData(null);
@@ -90,7 +95,7 @@ namespace SE214L22.Core.ViewModels.Orders
                 {
                     _receiptService.AddNewReceipt(SelectedOrder, ReceiptProducts);
                     InitialData(null);
-                    HomeViewModel.getInstance().LoadData();
+                    _serviceProvider.GetRequiredService<HomeViewModel>().LoadData();
                 }
             );
 
@@ -109,8 +114,8 @@ namespace SE214L22.Core.ViewModels.Orders
                 p =>
                 {
                     InitialData(null);
-                    HomeViewModel.getInstance().LoadData();
-                    OrderViewModel.Instance.InitData();
+                    _serviceProvider.GetRequiredService<HomeViewModel>().LoadData();
+                    _serviceProvider.GetRequiredService<OrderViewModel>().InitData();
                 }
             );
 
@@ -137,7 +142,7 @@ namespace SE214L22.Core.ViewModels.Orders
                     var selectedProduct = (ProductForReceiptCreation)p;
                     selectedProduct.Number++;
                     Total = CalcTotal();
-                    HomeViewModel.getInstance().LoadData();
+                    _serviceProvider.GetRequiredService<HomeViewModel>().LoadData();
                 }
             );
 
@@ -151,10 +156,10 @@ namespace SE214L22.Core.ViewModels.Orders
                     if (selectedProduct.Number == 0)
                         ReceiptProducts.Remove(selectedProduct);
                     Total = CalcTotal();
-                    HomeViewModel.getInstance().LoadData();
+                    _serviceProvider.GetRequiredService<HomeViewModel>().LoadData();
+
                 }
             );
-
         }
 
         private void InitializeReceiptProduct()

@@ -1,4 +1,5 @@
-﻿using SE214L22.Core.Services.AppProduct;
+﻿using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
 using SE214L22.Core.ViewModels.Orders.Dtos;
 using SE214L22.Data.Entity.AppProduct;
 using SE214L22.Shared.Dtos;
@@ -16,7 +17,7 @@ namespace SE214L22.Core.ViewModels.Orders
     public class ReceiptViewModel : BaseViewModel
     {
         // service
-        private readonly ReceiptService _receiptService;
+        private readonly IReceiptService _receiptService;
 
         // private field
         private ObservableCollection<ReceiptForListDto> _receipts;
@@ -62,10 +63,10 @@ namespace SE214L22.Core.ViewModels.Orders
         // command
         public ICommand SearchWithFilter { get; set; }
 
-        public ReceiptViewModel()
+        public ReceiptViewModel(IReceiptService receiptService)
         {
             // serivce
-            _receiptService = new ReceiptService();
+            _receiptService = receiptService;
 
             // data
             InitialData(null);

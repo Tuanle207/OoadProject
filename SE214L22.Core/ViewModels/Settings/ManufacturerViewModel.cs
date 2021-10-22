@@ -1,4 +1,5 @@
-﻿using SE214L22.Core.Services.AppProduct;
+﻿using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
 using SE214L22.Core.ViewModels.Settings.Dtos;
 using SE214L22.Data.Entity.AppProduct;
 using System;
@@ -15,7 +16,7 @@ namespace SE214L22.Core.ViewModels.Settings
     public class ManufacturerViewModel : BaseViewModel
     {
         // private service fields
-        private readonly ManufacturerService _manufacturerService;
+        private readonly IManufacturerService _manufacturerService;
 
         // private data fields
         private ObservableCollection<Manufacturer> _manufacturers;
@@ -58,9 +59,9 @@ namespace SE214L22.Core.ViewModels.Settings
         public ICommand AddManufacturer { get; set; }
         public ICommand PrepareAddManufacturer { get; set; }
 
-        public ManufacturerViewModel()
+        public ManufacturerViewModel(IManufacturerService manufacturerService)
         {
-            _manufacturerService = new ManufacturerService();
+            _manufacturerService = manufacturerService;
 
             Manufacturers = new ObservableCollection<Manufacturer>(_manufacturerService.GetManufacturers());
             NewManufacturer = new ManufacturerForCreationDto { };
@@ -93,7 +94,7 @@ namespace SE214L22.Core.ViewModels.Settings
             (
                 p =>
                 {
-                    if (NewManufacturer.Name == null || NewManufacturer.Description == null )
+                    if (NewManufacturer.Name == null || NewManufacturer.Description == null)
                         return false;
                     return true;
                 }

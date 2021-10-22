@@ -8,7 +8,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              Background="#fff"
-             DataContext="{StaticResource ReportViewModel}"
+             DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ReportViewModel}"
              d:DesignHeight="450"
              d:DesignWidth="800">
     <Grid>
@@ -222,7 +222,7 @@
                 </Grid>
             </controls:MetroTabItem>
         </controls:MetroAnimatedTabControl>
-        <Grid Grid.RowSpan="2" DataContext="{StaticResource SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid Grid.RowSpan="2" DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=SessionViewModel}" Background="#fff" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Source="../Assets/unauthorized.png" Width="200" Height="200" />
                 <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">Bạn không có quyền truy cập màn hình này! Vui lòng đăng nhập với tài khoản thích hợp!</TextBlock>

@@ -1,5 +1,6 @@
-﻿using SE214L22.Data.Entity.AppProduct;
-using SE214L22.Data.Repository.AggregateDto;
+﻿using SE214L22.Data.Entity;
+using SE214L22.Data.Entity.AppProduct;
+using SE214L22.Data.Interfaces.Repositories;
 using SE214L22.Shared.Dtos;
 using SE214L22.Shared.Helpers;
 using SE214L22.Shared.Pagination;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace SE214L22.Data.Repository
 {
-    public class ProductRepository : BaseRepository<Product>
+    public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
         public IEnumerable<ProductAggregateDto> GetProductsOrderBySales(DateTime day, int limit = 10)
         {
@@ -39,7 +40,7 @@ namespace SE214L22.Data.Repository
 
                 // return data with sales no
                 List<ProductAggregateDto> dataForReturn = new List<ProductAggregateDto>();
-                foreach(var product in list)
+                foreach (var product in list)
                 {
                     var salesNo = hotProductIds.Where(x => x.ProductId == product.Id).FirstOrDefault().SalesNo;
                     dataForReturn.Add(new ProductAggregateDto { Product = product, SalesNo = salesNo });
@@ -65,13 +66,13 @@ namespace SE214L22.Data.Repository
             }
         }
 
-       public PaginatedList<Product> GetProducts( int page, int limit, ProductFilterDto Filter = null)
+        public PaginatedList<Product> GetProducts(int page, int limit, ProductFilterDto Filter = null)
         {
             using (var ctx = new AppDbContext())
             {
                 var query = ctx.Products.AsQueryable();
                 query = query.Where(p => p.isDelete == 0);
-                if(Filter!=null)
+                if (Filter != null)
                 {
                     if (Filter.NameProductKeyWord != null && Filter.NameProductKeyWord != "")
                     {
@@ -85,14 +86,14 @@ namespace SE214L22.Data.Repository
                     {
                         query = query.Where(p => Filter.ListManufacturer.Contains(p.Manufacturer.Name));
                     }
-                }                
+                }
 
                 query = query.Include(p => p.Category)
                     .Include(p => p.Manufacturer)
                     .OrderBy(p => p.Name);
 
                 var products = PaginatedList<Product>.Create(query, page, limit);
-                
+
                 return products;
             }
         }

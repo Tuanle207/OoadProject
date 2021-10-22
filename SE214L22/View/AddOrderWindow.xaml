@@ -8,7 +8,8 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="Thêm đơn đặt hàng mới" Height="700" Width="1200"
-        DataContext="{StaticResource OrderCreationViewModel}">
+        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=OrderCreationViewModel}"
+>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>

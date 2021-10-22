@@ -1,4 +1,5 @@
-﻿using SE214L22.Core.Services.AppProduct;
+﻿using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
 using SE214L22.Core.ViewModels.Settings.Dtos;
 using SE214L22.Data.Entity.AppProduct;
 using System;
@@ -15,7 +16,7 @@ namespace SE214L22.Core.ViewModels.Settings
     public class CategoryViewModel : BaseViewModel
     {
         // private service fields
-        private CategoryService _categoryService;
+        private ICategoryService _categoryService;
 
         // private data fields
         private ObservableCollection<CategoryForDisplayDto> _categories;
@@ -60,9 +61,9 @@ namespace SE214L22.Core.ViewModels.Settings
         public ICommand UpdateCategory { get; set; }
         public ICommand PrepareUpdateCategory { get; set; }
 
-        public CategoryViewModel()
+        public CategoryViewModel(ICategoryService categoryService)
         {
-            _categoryService = new CategoryService();
+            _categoryService = categoryService;
 
             Categories = new ObservableCollection<CategoryForDisplayDto>(_categoryService.GetDisplayCategories());
             NewCategory = new CategoryForCreationDto { };

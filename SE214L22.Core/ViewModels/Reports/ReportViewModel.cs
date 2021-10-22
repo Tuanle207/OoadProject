@@ -1,6 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.Office.Interop.Excel;
-using SE214L22.Core.Services.AppProduct;
+using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
 using SE214L22.Shared.Dtos;
 using System;
 using System.Collections.ObjectModel;
@@ -20,7 +21,7 @@ namespace SE214L22.Core.ViewModels.Reports
             return _instance;
         }
         // service
-        private readonly InvoiceService _invoiceService;
+        private readonly IInvoiceService _invoiceService;
 
         // private fields
         private DateTime _selectedDate;
@@ -92,12 +93,13 @@ namespace SE214L22.Core.ViewModels.Reports
         // command
         public ICommand CDayReportToExcel { get; set; }
         public ICommand CMonthReportToExcel { get; set; }
-        public ReportViewModel()
+        public ReportViewModel(IInvoiceService invoiceService)
         {
             if (_instance == null)
                 _instance = this;
+
             // service
-            _invoiceService = new InvoiceService();
+            _invoiceService = invoiceService;
 
             // init data
             SelectedDate = DateTime.Now;

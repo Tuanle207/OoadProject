@@ -12,7 +12,8 @@
         Title="Thêm hãng sản xuất"
         Height="250"
         Width="400"
-        DataContext="{StaticResource ManufacturerViewModel}">
+        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ManufacturerViewModel}"
+>
     <materialDesign:Card Margin="10">
         <DockPanel LastChildFill="True">
             <Button x:Name="btnAddManufacturer"
@@ -116,7 +117,7 @@
                     </TextBox.Text>
                 </TextBox>
                 <Button x:Name="btnAfter"
-                        DataContext="{StaticResource ProductViewModel}"
+                        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ProductViewModel}"
                         Command="{Binding UpdateData}"
                         Visibility="Hidden" />
             </Grid>

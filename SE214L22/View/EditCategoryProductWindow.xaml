@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow"
         Title="Sửa loại mặt hàng" Height="350" Width="400"
-        DataContext="{StaticResource CategoryViewModel}">
+        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=CategoryViewModel}"
+>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -82,7 +83,12 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="btnAfter" DataContext="{StaticResource ProductViewModel}" Command="{Binding UpdateData}" Visibility="Hidden" />
+        <Button 
+            x:Name="btnAfter" 
+            DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ProductViewModel}"
+            Command="{Binding UpdateData}" 
+            Visibility="Hidden" 
+         />
     </Grid>
 </Window>
 

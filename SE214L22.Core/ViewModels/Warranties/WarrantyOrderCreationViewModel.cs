@@ -1,4 +1,5 @@
-﻿using SE214L22.Core.Services.AppProduct;
+﻿using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
 using SE214L22.Core.ViewModels.Warranties.Dtos;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace SE214L22.Core.ViewModels.Warranties
     public class WarrantyOrderCreationViewModel : BaseViewModel
     {
         // private service
-        private readonly WarrantyService _warrantyService;
+        private readonly IWarrantyService _warrantyService;
 
         // private data field
         private ObservableCollection<ProductForWarrantyDto> _customerProducts;
@@ -49,10 +50,10 @@ namespace SE214L22.Core.ViewModels.Warranties
         public ICommand AddWarrantyOrder { get; set; }
 
 
-        public WarrantyOrderCreationViewModel()
+        public WarrantyOrderCreationViewModel(IWarrantyService warrantyService)
         {
             // service
-            _warrantyService = new WarrantyService();
+            _warrantyService = warrantyService;
 
             // data
             CustomerProducts = new ObservableCollection<ProductForWarrantyDto>();

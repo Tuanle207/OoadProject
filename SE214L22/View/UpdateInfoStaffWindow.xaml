@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Cập nhật thông tin nhân viên" Height="450" Width="800"
-        DataContext="{StaticResource UserViewModel}">
+        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=UserViewModel}"
+>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.3*"></RowDefinition>

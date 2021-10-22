@@ -1,4 +1,5 @@
-﻿using SE214L22.Core.Services.AppProduct;
+﻿using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
 using SE214L22.Core.ViewModels.Warranties.Dtos;
 using SE214L22.Data.Entity.AppCustomer;
 using System;
@@ -14,7 +15,7 @@ namespace SE214L22.Core.ViewModels.Warranties
     public class WarrantyOrderListViewModel : BaseViewModel
     {
         // service
-        private readonly WarrantyService _warrantyService;
+        private readonly IWarrantyService _warrantyService;
 
         // private field
         private ObservableCollection<ProductForListWarrantyDto> _warrantyOrders;
@@ -63,10 +64,10 @@ namespace SE214L22.Core.ViewModels.Warranties
         public ICommand ChangeStatusToDone { get; set; }
 
 
-        public WarrantyOrderListViewModel()
+        public WarrantyOrderListViewModel(IWarrantyService warrantyService)
         {
             // service
-            _warrantyService = new WarrantyService();
+            _warrantyService = warrantyService;
 
             // data
             WaitForSent = true;

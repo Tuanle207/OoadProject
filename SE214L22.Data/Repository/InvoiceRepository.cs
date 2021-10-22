@@ -1,4 +1,5 @@
 ﻿using SE214L22.Data.Entity.AppCustomer;
+using SE214L22.Data.Interfaces.Repositories;
 using SE214L22.Shared.Dtos;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SE214L22.Data.Repository
 {
-    public class InvoiceRepository : BaseRepository<Invoice>
+    public class InvoiceRepository : BaseRepository<Invoice>, IInvoiceRepository
     {
         public int GetSalesByDay(DateTime day)
         {
@@ -18,7 +19,7 @@ namespace SE214L22.Data.Repository
                 var query = ctx.InvoiceProducts
                     .Where(ip => DbFunctions.TruncateTime(ip.Invoice.CreationTime) == day.Date);
 
-                return query.Any() ? query.Sum(ip => ip.Number): 0;
+                return query.Any() ? query.Sum(ip => ip.Number) : 0;
             }
         }
 
@@ -55,7 +56,7 @@ namespace SE214L22.Data.Repository
                 return query.Any() ? query.Sum(i => i.Total) : 0;
             }
         }
-        
+
         public ReportByDayDto GetReportByDay(DateTime day)
         {
             using (var ctx = new AppDbContext())
@@ -84,7 +85,7 @@ namespace SE214L22.Data.Repository
                     $") as f " +
                     $"group by f.Id, f.Name, f.CategoryName, f.PriceOut";
 
-                    report.Products = ctx.Database.SqlQuery<ProductReportByDayDto>(rawQueryScript).ToList();
+                report.Products = ctx.Database.SqlQuery<ProductReportByDayDto>(rawQueryScript).ToList();
 
                 var count = 1;
                 foreach (var item in report.Products)

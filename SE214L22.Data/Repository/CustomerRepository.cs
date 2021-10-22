@@ -1,4 +1,5 @@
 ﻿using SE214L22.Data.Entity.AppCustomer;
+using SE214L22.Data.Interfaces.Repositories;
 using System;
 using System.Data.Entity;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using SE214L22.Shared.Dtos;
 
 namespace SE214L22.Data.Repository
 {
-    public class CustomerRepository : BaseRepository<Customer>
+    public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
     {
         public Customer GetCustomByPhoneNumber(string phoneNumber)
         {

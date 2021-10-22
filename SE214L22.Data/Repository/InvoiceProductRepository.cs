@@ -1,4 +1,5 @@
 ﻿using SE214L22.Data.Entity.AppCustomer;
+using SE214L22.Data.Interfaces.Repositories;
 using System.Data.Entity;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SE214L22.Data.Repository
 {
-    public class InvoiceProductRepository : BaseRepository<InvoiceProduct>
+    public class InvoiceProductRepository : BaseRepository<InvoiceProduct>, IInvoiceProductRepository
     {
         public IEnumerable<InvoiceProduct> GetInvoiceProductsByCustomerPhoneNumber(string phoneNumber)
         {

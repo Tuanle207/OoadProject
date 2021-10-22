@@ -1,4 +1,5 @@
 ﻿using SE214L22.Data.Entity.AppCustomer;
+using SE214L22.Data.Interfaces.Repositories;
 using SE214L22.Data.Entity.AppProduct;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SE214L22.Data.Repository
 {
-    public class CustomerLevelRepository : BaseRepository<CustomerLevel>
+    public class CustomerLevelRepository : BaseRepository<CustomerLevel>, ICustomerLevelRepository
     {
         public IEnumerable<CustomerLevel> GetCustomerLevels()
         {

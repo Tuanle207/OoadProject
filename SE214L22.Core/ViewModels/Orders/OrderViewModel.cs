@@ -1,4 +1,6 @@
-﻿using SE214L22.Core.Services.AppProduct;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
 using SE214L22.Core.ViewModels.Home;
 using SE214L22.Core.ViewModels.Orders.Dtos;
 using SE214L22.Data.Entity.AppProduct;
@@ -16,19 +18,10 @@ namespace SE214L22.Core.ViewModels.Orders
 {
     public class OrderViewModel : BaseViewModel
     {
-        private static OrderViewModel _instance;
-        public static OrderViewModel Instance 
-        { 
-            get 
-            {
-                if (_instance == null)
-                    _instance = new OrderViewModel();
-                return _instance;
-            } 
-        }
+        private readonly IServiceProvider _serviceProvider;
 
         // service
-        private readonly OrderService _orderService;
+        private readonly IOrderService _orderService;
 
         // private field
         private ObservableCollection<OrderForListDto> _orders;
@@ -67,11 +60,12 @@ namespace SE214L22.Core.ViewModels.Orders
         public ICommand ChangeStatusToDone { get; set; }
         public ICommand DeleteOrder { get; set; }
 
-        public OrderViewModel()
+        public OrderViewModel(IOrderService orderService, IServiceProvider serviceProvider)
         {
 
             // service
-            _orderService = new OrderService();
+            _orderService = orderService;
+            _serviceProvider = serviceProvider;
 
             // data
 
@@ -105,7 +99,8 @@ namespace SE214L22.Core.ViewModels.Orders
                         }
 
                         LoadOrdersWithFilter();
-                        HomeViewModel.getInstance().LoadData();
+                        
+                        _serviceProvider.GetRequiredService<HomeViewModel>().LoadData();
                     }
                 }
             );
@@ -116,7 +111,7 @@ namespace SE214L22.Core.ViewModels.Orders
                 p =>
                 {
                     LoadOrdersWithFilter();
-                    HomeViewModel.getInstance().LoadData();
+                    _serviceProvider.GetRequiredService<HomeViewModel>().LoadData();
                 }
             );
 
@@ -129,7 +124,8 @@ namespace SE214L22.Core.ViewModels.Orders
                     {
                         SelectedOrder.Status = (int)OrderStatus.WaitForSent;
                         _orderService.UpdateOrderStatus(SelectedOrder.Id, OrderStatus.WaitForSent);
-                        HomeViewModel.getInstance().LoadData();
+                        _serviceProvider.GetRequiredService<HomeViewModel>().LoadData();
+
                     }
                 }
             );
@@ -143,7 +139,7 @@ namespace SE214L22.Core.ViewModels.Orders
                     {
                         SelectedOrder.Status = (int)OrderStatus.Sent;
                         _orderService.UpdateOrderStatus(SelectedOrder.Id, OrderStatus.Sent);
-                        HomeViewModel.getInstance().LoadData();
+                        _serviceProvider.GetRequiredService<HomeViewModel>().LoadData();
                     }
                 }
             );
@@ -157,7 +153,7 @@ namespace SE214L22.Core.ViewModels.Orders
                     {
                         SelectedOrder.Status = (int)OrderStatus.Done;
                         _orderService.UpdateOrderStatus(SelectedOrder.Id, OrderStatus.Done);
-                        HomeViewModel.getInstance().LoadData();
+                        _serviceProvider.GetRequiredService<HomeViewModel>().LoadData();
                     }
                 }
             );
@@ -175,7 +171,7 @@ namespace SE214L22.Core.ViewModels.Orders
                         _orderService.DeleleOrder(SelectedOrder.Id);
                         Orders.Remove(SelectedOrder);
                         SelectedOrder = null;
-                        HomeViewModel.getInstance().LoadData();
+                        _serviceProvider.GetRequiredService<HomeViewModel>().LoadData();
                     }
                 }
             );

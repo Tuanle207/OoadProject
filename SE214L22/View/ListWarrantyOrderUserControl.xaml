@@ -10,7 +10,8 @@
              mc:Ignorable="d"
              d:DesignHeight="650"
              d:DesignWidth="1100"
-             DataContext="{StaticResource WarrantyOrderListViewModel}">
+             DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=WarrantyOrderListViewModel}"
+>
     <Grid>
         <DockPanel LastChildFill="True">
             <Grid DockPanel.Dock="Top"
@@ -218,7 +219,7 @@
         </DockPanel>
         <Grid Grid.RowSpan="2"
               DockPanel.Dock="Right"
-              DataContext="{StaticResource SessionViewModel}"
+              DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=SessionViewModel}"
               Background="#fff"
               VerticalAlignment="Stretch"
               HorizontalAlignment="Stretch">

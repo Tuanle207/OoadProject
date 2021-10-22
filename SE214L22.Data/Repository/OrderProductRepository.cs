@@ -1,4 +1,5 @@
 ﻿using SE214L22.Data.Entity.AppProduct;
+using SE214L22.Data.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SE214L22.Data.Repository
 {
-    public class OrderProductRepository : BaseRepository<OrderProduct>
+    public class OrderProductRepository : BaseRepository<OrderProduct>, IOrderProductRepository
     {
         public IEnumerable<OrderProduct> GetOrderProductsByOrderId(int orderId)
         {

@@ -1,4 +1,6 @@
-﻿using SE214L22.Core.Services.AppProduct;
+﻿using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
+using SE214L22.Data.Repository;
 using SE214L22.Shared.Parameters;
 using System;
 using System.Collections.Generic;
@@ -12,11 +14,12 @@ namespace SE214L22.Core.ViewModels.Users
 {
     public class DobValidation : ValidationRule
     {
-        private readonly ParameterService _parameterService;
+        private readonly IParameterService _parameterService;
 
         public DobValidation()
         {
-            _parameterService = new ParameterService();
+            // TODO: HANDLE THIS CONCRETE ASSIGNMENT
+            _parameterService = new ParameterService(new ParameterRepository());
         }
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)

@@ -1,4 +1,5 @@
-﻿using SE214L22.Core.Services.AppProduct;
+﻿using SE214L22.Core.Interfaces.Services;
+using SE214L22.Core.Services;
 using SE214L22.Shared.Parameters;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace SE214L22.Core.ViewModels.Settings
     public class ParameterViewModel : BaseViewModel
     {
         // private service fields
-        private readonly ParameterService _parameterService;
+        private readonly IParameterService _parameterService;
 
         // private data fields
         private int _minInputProductNumber;
@@ -61,10 +62,10 @@ namespace SE214L22.Core.ViewModels.Settings
         }
         // public command properties
         public ICommand UpdateParameter { get; set; }
-        public ParameterViewModel()
+        public ParameterViewModel(IParameterService parameterService)
         {
             // service
-            _parameterService = new ParameterService();
+            _parameterService = parameterService;
 
 
             // data            
@@ -86,8 +87,6 @@ namespace SE214L22.Core.ViewModels.Settings
                   _parameterService.UpdateParameterByName(ParameterType.MaxAge, MaxAge);
                   MessageBox.Show("Sửa tham số thành công");
               });
-
-
         }
     }
 }

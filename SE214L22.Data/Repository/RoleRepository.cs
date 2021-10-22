@@ -1,4 +1,5 @@
 ﻿using SE214L22.Data.Entity.AppUser;
+using SE214L22.Data.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,7 +7,7 @@ using System.Linq;
 
 namespace SE214L22.Data.Repository
 {
-    public class RoleRepository : BaseRepository<Role>
+    public class RoleRepository : BaseRepository<Role>, IRoleRepository
     {
         public override Role Create(Role role)
         {
