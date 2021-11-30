@@ -16,6 +16,7 @@ namespace SE214L22.Core.Services
         {
             _customerRepository = customerRepository;
         }
+
         public PaginatedList<CustomerDisplayDto> GetCustomersForDisplayCustomer(int page = 1, int limit = 15, CustomerFilterDto Filter = null)
         {
             var rawCustomers = _customerRepository.GetCustomers(page, limit, Filter);

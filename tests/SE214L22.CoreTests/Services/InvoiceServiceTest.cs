@@ -140,18 +140,20 @@ namespace SE214L22.CoreTests.Services
         }
 
         [Test]
-        [TestCase(true, false)]
-        [TestCase(false, true)]
-        public void AddInvoice_Fail_ThrowException(bool invoiceIsNull, bool detailIsNull)
+        [TestCase(true, false, false)]
+        [TestCase(false, true, false)]
+        [TestCase(false, false, true)]
+        public void AddInvoice_Fail_ThrowNullReferenceException(bool invoiceIsNull, bool productsIsNull, bool emptyProducts)
         {
             using (var mock = AutoMock.GetLoose())
             {
+                InvoiceForCreationDto invoice = invoiceIsNull ? null : GetSampleInvoiceForCreation();
+                List<InvoiceProduct> invoiceProductss = productsIsNull ? null :
+                       emptyProducts ? new List<InvoiceProduct>() : GetSampleInvoiceProducts();
 
-                var invoice = invoiceIsNull ? null : GetSampleInvoiceForCreation();
-                var detail = detailIsNull ? null : GetSampleInvoiceDetails();
+                var detail = GetSampleInvoiceDetails();
                 var customer = DataSample.GetSampleCustomer();
                 var savedInvoice = GetSampleInvoice();
-                var invoiceProducts = GetSampleInvoiceProducts();
                 User currentUser = DataSample.GetSampleCurrentUser();
 
                 mock.Mock<ICustomerRepository>()
@@ -175,17 +177,87 @@ namespace SE214L22.CoreTests.Services
 
                 var invoiceService = mock.Create<InvoiceService>();
 
-                Assert.Throws<NullReferenceException>(() => invoiceService.AddInvoice(invoice, detail));
+                Assert.Throws<Exception>(() => invoiceService.AddInvoice(invoice, detail));
             }
         }
 
         [Test]
-        public void AddInvoice_Success_NotThrowException()
+        [TestCase("", "01224578226", 100_000, 10_000, 90_000, "Thường")]
+        [TestCase(null, "01224578226", 100_000, 10_000, 90_000, "Thường")]
+        [TestCase("Lê Anh Tuấn", "", 100_000, 10_000, 90_000, "Thường")]
+        [TestCase("Lê Anh Tuấn", null, 100_000, 10_000, 90_000, "Thường")]
+        [TestCase("Lê Anh Tuấn", "01224578226", -100_000, 10_000, 90_000, "Thường")]
+        [TestCase("Lê Anh Tuấn", "01224578226", 0, 10_000, 90_000, "Thường")]
+        [TestCase("Lê Anh Tuấn", "01224578226", 100_000, -10_000, 90_000, "Thường")]
+        [TestCase("Lê Anh Tuấn", "01224578226", 100_000, 10_000, -100_000, "Thường")]
+        [TestCase("Lê Anh Tuấn", "01224578226", 100_000, 10_000, 0, "Thường")]
+        [TestCase("Lê Anh Tuấn", "01224578226", 100_000, 10_000, 90_000, "Linh tinh")]
+        [TestCase("Lê Anh Tuấn", "01224578226", 100_000, 10_000, 90_000, null)]
+        public void AddInvoice_Fail_ThrowException(string customerName, string phoneNumber,
+            int total, int discount, int price, string customerLevel)
+        {
+            using (var mock = AutoMock.GetLoose())
+            {
+                var invoice = new InvoiceForCreationDto
+                {
+                    CustomerName = customerName,
+                    PhoneNumber = phoneNumber,
+                    Total = total,
+                    Discount = discount,
+                    Price = price,
+                    CustomerLevel = customerLevel,
+                };
+                List<InvoiceProduct> invoiceProductss = GetSampleInvoiceProducts();
+
+                var detail = GetSampleInvoiceDetails();
+                var customer = DataSample.GetSampleCustomer();
+                var savedInvoice = GetSampleInvoice();
+                User currentUser = DataSample.GetSampleCurrentUser();
+
+                mock.Mock<ICustomerRepository>()
+                   .Setup(x => x.GetCustomByPhoneNumber(It.IsAny<string>()))
+                   .Returns(customer);
+
+                mock.Mock<ISession>()
+                    .Setup(x => x.CurrentUser)
+                    .Returns(currentUser);
+
+                mock.Mock<IInvoiceRepository>()
+                    .Setup(x => x.Create(It.IsAny<Invoice>()))
+                    .Returns(savedInvoice);
+
+                mock.Mock<IInvoiceProductRepository>()
+                    .Setup(x => x.Create(It.IsAny<InvoiceProduct>()))
+                    .Returns(It.IsAny<InvoiceProduct>());
+
+                mock.Mock<IProductRepository>()
+                   .Setup(x => x.UpdateNumberById(It.IsAny<int>(), It.IsAny<int>()));
+
+                var invoiceService = mock.Create<InvoiceService>();
+
+                Assert.Throws<Exception>(() => invoiceService.AddInvoice(invoice, detail));
+            }
+        }
+
+        [Test]
+        [TestCase("Lê Anh Tuấn", "01224578226", 100_000, 10_000, 90_000, "Thường")]
+        [TestCase("Lê Anh Tuấn", "01224578226", 100_000, 10_000, 90_000, "Bạc")]
+        [TestCase("Lê Anh Tuấn", "01224578226", 100_000, 10_000, 90_000, "Vàng")]
+        public void AddInvoice_Success_NotThrowException(string customerName, string phoneNumber,
+            int total, int discount, int price, string customerLevel)
         {
             using (var mock = AutoMock.GetLoose())
             {
 
-                var invoice = GetSampleInvoiceForCreation();
+                var invoice = new InvoiceForCreationDto
+                {
+                    CustomerName = customerName,
+                    PhoneNumber = phoneNumber,
+                    Total = total,
+                    Discount = discount,
+                    Price = price,
+                    CustomerLevel = customerLevel,
+                };
                 var detail = GetSampleInvoiceDetails();
                 var customer = DataSample.GetSampleCustomer();
                 var savedInvoice = GetSampleInvoice();

@@ -16,7 +16,6 @@ namespace SE214L22
     public partial class App : Application
     {
         private readonly IHost host;
-        public static IServiceProvider ServiceProvider { get; private set; }
 
         public App()
         {
