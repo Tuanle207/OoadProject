@@ -19,8 +19,9 @@ namespace SE214L22.CoreTests.Services
     public class InvoiceServiceTest
     {
 
+        #region GetReportByDay Test
         [Test]
-        public void GetReportByDay_Success_ReturnReportByDayDto()
+        public void GetReportByDay_ReturnReportByDayDto()
         {
             using (var mock = AutoMock.GetLoose())
             {
@@ -64,9 +65,11 @@ namespace SE214L22.CoreTests.Services
                 Assert.IsInstanceOf<ReportByDayDto>(actual);
             }
         }
+        #endregion
 
+        #region GetReportByMonth Test
         [Test]
-        public void GetReportByMonth_Success_ReportByMonthDto()
+        public void GetReportByMonth_ReportByMonthDto()
         {
             using (var mock = AutoMock.GetLoose())
             {
@@ -105,11 +108,13 @@ namespace SE214L22.CoreTests.Services
                 Assert.IsInstanceOf<ReportByMonthDto>(actual);
             }
         }
+        #endregion
 
+        #region GetRevenue Test
         [Test]
         [TestCase(true)]
         [TestCase(false)]
-        public void GetRevenue_Success_ReturnRevenueDto(bool timeTypeIsUndefined)
+        public void GetRevenue_ReturnRevenueDto(bool timeTypeIsUndefined)
         {
             using (var mock = AutoMock.GetLoose())
             {
@@ -138,18 +143,18 @@ namespace SE214L22.CoreTests.Services
                 Assert.IsInstanceOf<RevenueDto>(actual);
             }
         }
+        #endregion
 
+        #region AddInvoice Test
         [Test]
-        [TestCase(true, false, false)]
-        [TestCase(false, true, false)]
-        [TestCase(false, false, true)]
-        public void AddInvoice_Fail_ThrowNullReferenceException(bool invoiceIsNull, bool productsIsNull, bool emptyProducts)
+        [TestCase(true, false)]
+        [TestCase(false, true)]
+        public void AddInvoice_InvoiceOrProductsIsNull_ThrowsNullReferenceException(bool invoiceIsNull, bool productsIsNull)
         {
             using (var mock = AutoMock.GetLoose())
             {
                 InvoiceForCreationDto invoice = invoiceIsNull ? null : GetSampleInvoiceForCreation();
-                List<InvoiceProduct> invoiceProductss = productsIsNull ? null :
-                       emptyProducts ? new List<InvoiceProduct>() : GetSampleInvoiceProducts();
+                List<InvoiceProduct> invoiceProductss = productsIsNull ? null : GetSampleInvoiceProducts();
 
                 var detail = GetSampleInvoiceDetails();
                 var customer = DataSample.GetSampleCustomer();
@@ -177,7 +182,45 @@ namespace SE214L22.CoreTests.Services
 
                 var invoiceService = mock.Create<InvoiceService>();
 
-                Assert.Throws<Exception>(() => invoiceService.AddInvoice(invoice, detail));
+                Assert.Throws<NullReferenceException>(() => invoiceService.AddInvoice(invoice, detail));
+            }
+        }
+
+        [Test]
+        public void AddInvoice_ProductsIsEmpty_ThrowsException()
+        {
+            using (var mock = AutoMock.GetLoose())
+            {
+                InvoiceForCreationDto invoice = GetSampleInvoiceForCreation();
+                List<InvoiceProduct> invoiceProductss = new List<InvoiceProduct>();
+
+                var detail = GetSampleInvoiceDetails();
+                var customer = DataSample.GetSampleCustomer();
+                var savedInvoice = GetSampleInvoice();
+                User currentUser = DataSample.GetSampleCurrentUser();
+
+                mock.Mock<ICustomerRepository>()
+                   .Setup(x => x.GetCustomByPhoneNumber(It.IsAny<string>()))
+                   .Returns(customer);
+
+                mock.Mock<ISession>()
+                    .Setup(x => x.CurrentUser)
+                    .Returns(currentUser);
+
+                mock.Mock<IInvoiceRepository>()
+                    .Setup(x => x.Create(It.IsAny<Invoice>()))
+                    .Returns(savedInvoice);
+
+                mock.Mock<IInvoiceProductRepository>()
+                    .Setup(x => x.Create(It.IsAny<InvoiceProduct>()))
+                    .Returns(It.IsAny<InvoiceProduct>());
+
+                mock.Mock<IProductRepository>()
+                   .Setup(x => x.UpdateNumberById(It.IsAny<int>(), It.IsAny<int>()));
+
+                var invoiceService = mock.Create<InvoiceService>();
+
+                Assert.Throws<NullReferenceException>(() => invoiceService.AddInvoice(invoice, detail));
             }
         }
 
@@ -193,7 +236,7 @@ namespace SE214L22.CoreTests.Services
         [TestCase("Lê Anh Tuấn", "01224578226", 100_000, 10_000, 0, "Thường")]
         [TestCase("Lê Anh Tuấn", "01224578226", 100_000, 10_000, 90_000, "Linh tinh")]
         [TestCase("Lê Anh Tuấn", "01224578226", 100_000, 10_000, 90_000, null)]
-        public void AddInvoice_Fail_ThrowException(string customerName, string phoneNumber,
+        public void AddInvoice_InvoiceIsInvalid_ThrowException(string customerName, string phoneNumber,
             int total, int discount, int price, string customerLevel)
         {
             using (var mock = AutoMock.GetLoose())
@@ -243,7 +286,7 @@ namespace SE214L22.CoreTests.Services
         [TestCase("Lê Anh Tuấn", "01224578226", 100_000, 10_000, 90_000, "Thường")]
         [TestCase("Lê Anh Tuấn", "01224578226", 100_000, 10_000, 90_000, "Bạc")]
         [TestCase("Lê Anh Tuấn", "01224578226", 100_000, 10_000, 90_000, "Vàng")]
-        public void AddInvoice_Success_NotThrowException(string customerName, string phoneNumber,
+        public void AddInvoice_InvoiceIsValid_NotThrowsException(string customerName, string phoneNumber,
             int total, int discount, int price, string customerLevel)
         {
             using (var mock = AutoMock.GetLoose())
@@ -288,7 +331,9 @@ namespace SE214L22.CoreTests.Services
                 Assert.DoesNotThrow(() => invoiceService.AddInvoice(invoice, detail));
             }
         }
+        #endregion
 
+        #region Helpers
         private InvoiceForCreationDto GetSampleInvoiceForCreation()
         {
             return new InvoiceForCreationDto
@@ -355,5 +400,6 @@ namespace SE214L22.CoreTests.Services
                 }
             };
         }
+        #endregion
     }
 }

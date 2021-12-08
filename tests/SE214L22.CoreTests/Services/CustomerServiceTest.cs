@@ -17,12 +17,14 @@ namespace SE214L22.CoreTests.Services
     [TestFixture]
     public class CustomerServiceTest
     {
+        #region GetCustomersForDisplayCustomer Test
         [Test]
         [TestCase(false, false, false)]
         [TestCase(false, false, true)]
         [TestCase(false, true, true)]
         [TestCase(true, true, true)]
-        public void GetCustomersForDisplayCustomer_Success_ReturnPagedCustomerDisplayDtoList(bool isPageUndefined, bool isLimitUndefined, bool isFilterUndefined)
+        public void GetCustomersForDisplayCustomer_ReturnPagedCustomerDisplayDtoList
+            (bool isPageUndefined, bool isLimitUndefined, bool isFilterUndefined)
         {
             using (var mock = AutoMock.GetLoose())
             {
@@ -66,12 +68,14 @@ namespace SE214L22.CoreTests.Services
                 }
             }
         }
+        #endregion
 
+        #region GetCustomer Test
         [Test]
         [TestCase(1)]
         [TestCase(0)]
         [TestCase(-1)]
-        public void GetCustomer_Success_ReturnCustomerOrNull(int id)
+        public void GetCustomer_ReturnCustomerOrNull(int id)
         {
             using (var mock = AutoMock.GetLoose())
             {
@@ -94,9 +98,11 @@ namespace SE214L22.CoreTests.Services
                 }
             }
         }
+        #endregion
 
+        #region GetCustomerByPhone Test
         [Test]
-        public void GetCustomerByPhone_Success_ReturnCustomer()
+        public void GetCustomerByPhone_PhoneNumberInvalid_ReturnCustomer()
         {
             using (var mock = AutoMock.GetLoose())
             {
@@ -114,7 +120,7 @@ namespace SE214L22.CoreTests.Services
         }
 
         [Test]
-        public void GetCustomerByPhone_Success_ReturnNull()
+        public void GetCustomerByPhone_PhoneNumberIsInvalid_ReturnNull()
         {
             using (var mock = AutoMock.GetLoose())
             {
@@ -130,9 +136,11 @@ namespace SE214L22.CoreTests.Services
                 Assert.IsNull(actual);
             }
         }
+        #endregion
 
+        #region GetCustomers Test
         [Test]
-        public void GetCustomers_Success_ReturnCustomerList()
+        public void GetCustomers_ReturnCustomerList()
         {
             using (var mock = AutoMock.GetLoose())
             {
@@ -148,19 +156,24 @@ namespace SE214L22.CoreTests.Services
                 Assert.IsInstanceOf<IEnumerable<Customer>>(actual);
             }
         }
+        #endregion
 
+        #region AddCustomer Test
         [Test]
-        public void AddCustomer_Success_ReturnCustomer()
+        [TestCase("Le Anh Tuan", 1, "01224578226", 0)]
+        [TestCase("Le Anh Tuan", 1, "01224578226", 1000)]
+        public void AddCustomer_CustomerIsValid_ReturnCustomer(
+            string name, int customerLevelId, string phoneNumber, int accumulatePoint)
         {
             using (var mock = AutoMock.GetLoose())
             {
                 var customerCreation = new CustomerForCreationDto
                 {
-                    Name = "Lê Anh Tuấn",
-                    AccumulatedPoint = 0,
-                    CreationTime = DateTime.Now,
-                    CustomerLevelId = 1,
-                    PhoneNumber = "01224578226"
+                    Name = name,
+                    CustomerLevelId = customerLevelId,
+                    PhoneNumber = phoneNumber,
+                    AccumulatedPoint = accumulatePoint,
+                    CreationTime = new DateTime(2021, 1, 1),
                 };
                 var customer = DataSample.GetSampleCustomer();
 
@@ -177,7 +190,40 @@ namespace SE214L22.CoreTests.Services
         }
 
         [Test]
-        public void AddCustomer_Fail_ReturnNull()
+        [TestCase(null, 1, "01224578226", 0)]
+        [TestCase("", 1, "01224578226", 0)]
+        [TestCase("Le Anh Tuan", 0, "01224578226", 0)]
+        [TestCase("Le Anh Tuan", -1, "01224578226", 0)]
+        [TestCase("Le Anh Tuan", 1, null, 0)]
+        [TestCase("Le Anh Tuan", 1, "", 0)]
+        [TestCase("Le Anh Tuan", 1, "01224578226", -1000)]
+        public void AddCustomer_CustomerIsInvalid_ThrowsException(
+            string name, int customerLevelId, string phoneNumber, int accumulatePoint)
+        {
+            using (var mock = AutoMock.GetLoose())
+            {
+                var customerCreation = new CustomerForCreationDto
+                {
+                    Name = name,
+                    CustomerLevelId = customerLevelId,
+                    PhoneNumber = phoneNumber,
+                    AccumulatedPoint = accumulatePoint,
+                    CreationTime = new DateTime(2021, 1, 1),
+                };
+                var customer = DataSample.GetSampleCustomer();
+
+                mock.Mock<ICustomerRepository>()
+                    .Setup(x => x.Create(It.IsAny<Customer>()))
+                    .Returns(customer);
+
+                var customerService = mock.Create<CustomerService>();
+
+                Assert.Throws<Exception>(() => customerService.AddCustomer(customerCreation));
+            }
+        }
+
+        [Test]
+        public void AddCustomer_CustomerIsNull_ThrowsException()
         {
             using (var mock = AutoMock.GetLoose())
             {
@@ -188,14 +234,15 @@ namespace SE214L22.CoreTests.Services
 
                 var customerService = mock.Create<CustomerService>();
 
-                var actual = customerService.AddCustomer(customerCreation);
-                
-                Assert.IsNull(actual);
+                Assert.Throws<Exception>(() => customerService.AddCustomer(customerCreation));
             }
         }
 
+        #endregion
+
+        #region HideCustomer Test
         [Test]
-        public void HideCustomer_Success_ReturnTrue()
+        public void HideCustomer_CustomerIsValid_ReturnTrue()
         {
             using (var mock = AutoMock.GetLoose())
             {
@@ -223,7 +270,7 @@ namespace SE214L22.CoreTests.Services
         }
 
         [Test]
-        public void HideCustomer_Fail_ReturnFalse()
+        public void HideCustomer_CustomerIsInvalid_ReturnFalse()
         {
             using (var mock = AutoMock.GetLoose())
             {
@@ -251,7 +298,7 @@ namespace SE214L22.CoreTests.Services
         }
 
         [Test]
-        public void HideCustomer_Fail_ThrowException()
+        public void HideCustomer_CustomerIsNull_ThrowException()
         {
             using (var mock = AutoMock.GetLoose())
             {
@@ -266,9 +313,11 @@ namespace SE214L22.CoreTests.Services
                 Assert.Throws<NullReferenceException>(() => customerService.HideCustomer(customer));
             }
         }
+        #endregion
 
+        #region DeleteCustomer Test
         [Test]
-        public void DeleteCustomer_Success_ReturnTrue()
+        public void DeleteCustomer_CustomerIsValid_ReturnTrue()
         {
             using (var mock = AutoMock.GetLoose())
             {
@@ -287,7 +336,7 @@ namespace SE214L22.CoreTests.Services
         }
 
         [Test]
-        public void DeleteCustomer_Fail_ReturnFalse()
+        public void DeleteCustomer_CustomerIsInvalid_ReturnFalse()
         {
             using (var mock = AutoMock.GetLoose())
             {
@@ -306,7 +355,7 @@ namespace SE214L22.CoreTests.Services
         }
 
         [Test]
-        public void DeleteCustomer_Fail_ThrowException()
+        public void DeleteCustomer_CustomerIsNull_ThrowException()
         {
             using (var mock = AutoMock.GetLoose())
             {
@@ -321,5 +370,6 @@ namespace SE214L22.CoreTests.Services
                 Assert.Throws<NullReferenceException>(() => customerService.DeleteCustomer(customer));
             }
         }
+        #endregion
     }
 }
